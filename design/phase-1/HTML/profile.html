@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Starter Template - Materialize</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <!-- bootstrap css -->
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/dashboard.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/challenge.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/profile.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    
+    <!-- **
+       * ========================================
+       * Media Query
+       * ========================================
+      * -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 992px) and (max-width: 1199px) "
+              href="css/media/medium-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 768px) and (max-width: 991px)"
+              href="css/media/tablet-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 640px) and (max-width: 767px)"
+              href="css/media/mobile-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 440px) and (max-width: 639px)"
+              href="css/media/indriodt-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 350px) and (max-width: 439px)"
+              href="css/media/mini-indriod-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 1px) and (max-width: 349px)"
+              href="css/media/small-mobiles.css"/>
+    
+    <script src="js/Chart.js"></script>
+</head>
+
+<body class="dashboard_page profile_page clearfix">
+
+<!--  HEADER  -->
+<nav class="nav-bar blue-grey darken-4" role="navigation">
+    <div class="nav-wrapper">
+        <div class="onclick-open-sidebar">
+            <button id='show_sidebar' class="btn btn-default"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <div class="show_sidebar_onclick hidden">
+                <div class="left-side-nav ">
+                    <div class="btn_area">
+                        <div class="card-panel hoverable nav-bar-card deep-orange darken-4">
+                            <div class="sidebar-title text-shadow">GAMES</div>
+                        </div>
+                    </div>
+                    <div class="side-nav-row active-game">
+                        <div class="image-container"> <img src="images/dota-game.png" />
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="side-nav-row">
+                        <div class="image-container"> <img src="images/league-game.png" />
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="side-nav-row">
+                        <div class="image-container"> <img src="images/cs-game.png" />
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a id="logo-container" href="#" class="brand-logo"><img src="images/logo.png" /></a>
+        <ul class="right">
+            <li><a href="#!" class="white-text"><i class="fa fa-bell-o" aria-hidden="true"></i><!--<i class="fa fa-bell" aria-hidden="true"></i>--></a></li>
+            <li><a href="#addCoinModal" class="white-text  modal-trigger"><i class="fa fa-usd" aria-hidden="true"></i> AddCoins</a></li>
+            <li><a href="#!" class="white-text dropdown-button" data-activates="userMenu"><i class="fa fa-user-secret" aria-hidden="true"></i> Rajan Kaneria</a></li>
+        </ul>
+    </div>
+</nav>
+<ul id="userMenu" class="dropdown-content">
+    <li><a href="#!">Personal Info</a></li>
+    <li><a href="#!">Game Settings</a></li>
+    <li class="divider"></li>
+    <li><a href="#supportModal" class="modal-trigger">Support</a></li>
+    <li><a href="#!">Logout</a></li>
+</ul>
+
+<!--  CONTENT  -->
+<div class="no-pad-bot main-container" style="overflow:hidden;" > 
+    <!-- <img src="images/background-new-1.png" /> -->
+    
+    <div class="display_for_mobile">
+        <div class="left-side-nav mobile_res ">
+            <div class="btn_area">
+                <div class="card-panel hoverable nav-bar-card deep-orange darken-4">
+                    <div class="sidebar-title text-shadow">GAMES</div>
+                </div>
+            </div>
+            <div class="side-nav-row active-game">
+                <div class="image-container"> <img src="images/dota-game.png" />
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+            <div class="side-nav-row">
+                <div class="image-container"> <img src="images/league-game.png" />
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+            <div class="side-nav-row">
+                <div class="image-container"> <img src="images/cs-game.png" />
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content mob_main_conten">
+        <section>
+            <div class="game-banner z-depth-2">
+                <div class="last-login">Last Login - Aug 18, 2016 12:12 PM</div>
+                <img src="images/profile-banner.jpg" class="game-banner-image" /> 
+                
+            </div>
+        </section>
+        <section class="name-bar">
+        		
+            
+            <div class="row">
+            		<div class="col l3 s12">
+                		<div class="profile_pic">
+              <img src="images/pro_pic.jpg" alt=" " title="" class="img-pro-pic"/>
+              <div class="edit-pic">
+            		<i class="fa fa-pencil" aria-hidden="true"></i>
+              </div>
+            
+                		<div class="pro-name">
+                    		<span>Kavit Verma <img src="images/ind-flag.jpg" /></span> 
+                        <span class="level">Level-12</span>
+                    </div>
+                    </div>
+                </div>
+                <div class="col l9 s12">
+                		<div class="row">
+                    		<div class="col s12 m3">
+                        		<div class="member-img"><img src="images/member.png" /></div>
+                            <div class="member-side">
+                            		<div class="member-ttl">Member Since</div>
+                                <div class="join-date">Aug 18, 2016</div>
+                            </div>
+                        </div>
+                        <div class="col s12 m3">
+                        		<div class="member-img"><img src="images/coin.png" /></div>
+                            <div class="member-side">
+                            		<div class="member-ttl">Total Coins</div>
+                                <div class="join-date">0.00</div>
+                            </div>
+                        </div>
+                        <div class="col s12 m3">
+                        		<div class="member-img"><img src="images/achive.png" /></div>
+                            <div class="member-side">
+                            		<div class="member-ttl">Achievement</div>
+                                <div class="join-date">0</div>
+                            </div>
+                        </div>
+                        <div class="col s12 m3">
+                        		<div class="member-img"><img src="images/esport.png" /></div>
+                            <div class="member-side">
+                            		<div class="member-ttl">Esport Rank</div>
+                                <div class="join-date">421</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+            
+        <div class="profile_container">
+            <div class="section-title ">GAMES <span>PLAYING</span></div>
+            <!-- ROW 1 -->
+            <div class="row">
+              <div class="first-row">
+                <div class="col s12 m3 no-padding">
+                    <div class="dota-img">
+                        <img src="images/d1.jpg" class="hide-tab"/>
+                        <img src="images/d1-tab.jpg" class="show-tab"/>
+                        <div class="dota-img-ttl">Dota 2</div>
+                    </div>
+                </div>
+                <div class="col s12 m9 no-padding">
+                    <div class="col s12 m6 no-padding br-5">
+                        <div class="statistics">Tournament Statistics</div>
+                       
+                            <div class="row canvas-block">
+                                <div class="col s12 m5 no-padding">
+                                    <div class="darkblue-panel pn">
+                                                    <canvas id="serverstatus01" height="150" width="150"></canvas>
+                                                    <div class="can-ttl">Total <span>20</span></div>
+                                                    <script>
+                                                      var doughnutData = [
+                                                          {
+                                                            value: 80,
+                                                            color:"#1f77b4"
+                                                          },
+                                                          {
+                                                            value : 40,
+                                                            color : "#ff5f21"
+                                                          }
+                                                        ];
+                                                        var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
+                                                    </script>
+                                    </div>
+                                </div>
+                                <div class="col s12 m7 no-padding">
+                                    <div class="matches-win">
+                                        <div class="win-match">Won Matches <span>15</span></div>
+                                        <div class="loose-match">Loose Matches <span>05</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                                70%
+                              </div>
+                              30%
+                            </div>
+                            <div class="match-result">
+                            <div class="match-ttl">Last 10 Matches Result</div>
+                            <ul class="no_match">
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div class="col s12 m6 no-padding">
+                        <div class="statistics">Team Blue Sky</div>
+                             <div class="row canvas-block">
+                                <div class="col s12 m5 no-padding">
+                                    <div class="darkblue-panel pn">
+                                                    <canvas id="serverstatus02" height="150" width="150"></canvas>
+                                                    <div class="can-ttl">Total <span>20</span></div>
+                                                    <script>
+                                                      var doughnutData = [
+                                                          {
+                                                            value: 80,
+                                                            color:"#1f77b4"
+                                                          },
+                                                          {
+                                                            value : 40,
+                                                            color : "#ff5f21"
+                                                          }
+                                                        ];
+                                                        var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
+                                                    </script>
+                                    </div>
+                                </div>
+                                <div class="col s12 m7 no-padding">
+                                    <div class="matches-win">
+                                        <div class="win-match">Won Matches <span>15</span></div>
+                                        <div class="loose-match">Loose Matches <span>05</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                                70%
+                              </div>
+                              30%
+                            </div>
+                            <div class="match-result">
+                            <div class="match-ttl">Last 10 Matches Result</div>
+                            <ul class="no_match">
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                            </ul>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        		<!-- ROW 2 -->
+            <div class="row">
+              <div class="first-row">
+                <div class="col s12 m3 no-padding">
+                    <div class="dota-img">
+                        <img src="images/d2.jpg" class="hide-tab"/>
+                        <img src="images/d2-tab.jpg" class="show-tab"/>
+                        <div class="dota-img-ttl">COUNTER STRIKE : GO</div>
+                    </div>
+                </div>
+                <div class="col s12 m9 no-padding">
+                    <div class="col s12 m6 no-padding br-5">
+                        <div class="statistics">Tournament Statistics</div>
+                       
+                            <div class="row canvas-block">
+                                <div class="col s12 m5 no-padding">
+                                    <div class="darkblue-panel pn">
+                                                    <canvas id="serverstatus03" height="150" width="150"></canvas>
+                                                    <div class="can-ttl">Total <span>20</span></div>
+                                                    <script>
+                                                      var doughnutData = [
+                                                          {
+                                                            value: 80,
+                                                            color:"#1f77b4"
+                                                          },
+                                                          {
+                                                            value : 40,
+                                                            color : "#ff5f21"
+                                                          }
+                                                        ];
+                                                        var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
+                                                    </script>
+                                    </div>
+                                </div>
+                                <div class="col s12 m7 no-padding">
+                                    <div class="matches-win">
+                                        <div class="win-match">Won Matches <span>15</span></div>
+                                        <div class="loose-match">Loose Matches <span>05</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                                70%
+                              </div>
+                              30%
+                            </div>
+                            <div class="match-result">
+                            <div class="match-ttl">Last 10 Matches Result</div>
+                            <ul class="no_match">
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div class="col s12 m6 no-padding">
+                        <div class="statistics">Team Blue Sky</div>
+                             <div class="row canvas-block">
+                                <div class="col s12 m5 no-padding">
+                                    <div class="darkblue-panel pn">
+                                                    <canvas id="serverstatus04" height="150" width="150"></canvas>
+                                                    <div class="can-ttl">Total <span>20</span></div>
+                                                    <script>
+                                                      var doughnutData = [
+                                                          {
+                                                            value: 80,
+                                                            color:"#1f77b4"
+                                                          },
+                                                          {
+                                                            value : 40,
+                                                            color : "#ff5f21"
+                                                          }
+                                                        ];
+                                                        var myDoughnut = new Chart(document.getElementById("serverstatus04").getContext("2d")).Doughnut(doughnutData);
+                                                    </script>
+                                    </div>
+                                </div>
+                                <div class="col s12 m7 no-padding">
+                                    <div class="matches-win">
+                                        <div class="win-match">Won Matches <span>15</span></div>
+                                        <div class="loose-match">Loose Matches <span>05</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                                70%
+                              </div>
+                              30%
+                            </div>
+                            <div class="match-result">
+                            <div class="match-ttl">Last 10 Matches Result</div>
+                            <ul class="no_match">
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="win">W</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                                <li class="loose">L</li>
+                            </ul>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+        
+   </div>
+</div>
+
+<!--  FOOTER  -->
+<footer class="page-footer footer-black">
+    <div class="container footer-main-content">
+        <div class="row">
+            <div class="col l9 s12">
+                <h5 class="white-text">Site Links</h5>
+                <div class="row footer-row">
+                    <div class="link-row"><a  href="#!">Home</a></div>
+                    <div class="link-row"><a  href="#!">About</a></div>
+                    <div class="link-row"><a  href="#!">FAQ</a></div>
+                    <div class="link-row"><a  href="#!">Press</a></div>
+                    <div class="link-row"><a  href="#!">Contact</a></div>
+                    <div class="link-row"><a  href="#!">Careers</a></div>
+                    <div class="link-row"><a  href="#!">Privacy</a></div>
+                    <div class="link-row"><a  href="#!">Legal</a></div>
+                </div>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Contact US</h5>
+                <div class="row footer-row">
+                    <div class="contact-row">support@esportcolosseum.com</div>
+                    <div class="contact-row">+91 966-287-2090</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright black">
+        <div class="container  center-align"> Copyright © 2016 All rights reserved by <a class="orange-text text-lighten-3" href="#!">Esport Colosseum</a> </div>
+    </div>
+</footer>
+
+<!--  Scripts  --> 
+<script type="text/javascript"  src="js/jquery.min.js"></script> <!-- main js --> 
+<script type="text/javascript" src="js/bootstrap.min.js"></script> <!-- bootstrap js --> 
+<script src="js/materialize.js"></script> 
+<script src="js/init.js"></script> 
+<script src="js/dashboard.js"></script> 
+
+
+
+<script>
+ 
+ $('ul.tabs').each(function(){
+  // For each set of tabs, we want to keep track of
+  // which tab is active and its associated content
+  var $active, $content, $links = $(this).find('a');
+
+  // If the location.hash matches one of the links, use that as the active tab.
+  // If no match is found, use the first link as the initial active tab.
+  $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+  $active.addClass('active');
+
+  $content = $($active[0].hash);
+
+  // Hide the remaining content
+  $links.not($active).each(function () {
+    $(this.hash).hide();
+  });
+
+  // Bind the click event handler
+  $(this).on('click', 'a', function(e){
+    // Make the old tab inactive.
+    $active.removeClass('active');
+    $content.hide();
+
+    // Update the variables with the new link and content
+    $active = $(this);
+    $content = $(this.hash);
+
+    // Make the tab active.
+    $active.addClass('active');
+    $content.show();
+
+    // Prevent the anchor's default click action
+    e.preventDefault();
+  });
+});
+  </script> 
+<script>
+	jQuery(document).ready(function(){
+		$("#show_sidebar").click(function(){
+		 jQuery('.show_sidebar_onclick').toggleClass('hidden');
+		});
+	});
+</script> 
+<script>
+    $( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
+ 
+   var $target = $( event.currentTarget );
+ 
+   $target.closest( '.btn-group' )
+      .find( '[data-bind="label"]' ).text( $target.text() )
+         .end()
+      .children( '.dropdown-toggle' ).dropdown( 'toggle' );
+ 
+   return false;
+ 
+});
+    </script> 
+<script>
+  /*
+function leaveChange() {
+    if (document.getElementById("leave").value != "2"){
+        document.getElementById("message").innerHTML = "Common message";
+    }     
+    else{
+        document.getElementById("message").innerHTML = "Having a Baby!!";
+    }        
+}
+*/
+
+$('#leave').on('change', function() {
+    var tab=$(this).find(":checked").val();
+	
+	if(tab=="tab1"){
+		
+		$("#tab1").css("display", "block");
+		
+		$("#tab2").css("display", "none");
+		
+	}else{
+		$("#tab1").css("display", "none");
+		
+		$("#tab2").css("display", "block");
+	}
+	
+});
+</script>
+</body>
+</html>

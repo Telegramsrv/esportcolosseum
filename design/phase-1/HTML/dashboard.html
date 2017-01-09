@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/dashboard.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="nav-bar blue-grey darken-4" role="navigation">
+    <div class="nav-wrapper">
+        <a id="logo-container" href="#" class="brand-logo"><img src="images/logo.png" /></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#!" class="white-text"><i class="fa fa-bell-o" aria-hidden="true"></i><!--<i class="fa fa-bell" aria-hidden="true"></i>--></a></li>
+            <li><a href="#addCoinModal" class="white-text  modal-trigger"><i class="fa fa-usd" aria-hidden="true"></i> AddCoins</a></li>
+            <li><a href="#!" class="white-text dropdown-button" data-activates="userMenu"><i class="fa fa-user-secret" aria-hidden="true"></i> Rajan Kaneria</a></li>
+      </ul>
+    </div>
+  </nav>
+<ul id="userMenu" class="dropdown-content">
+    <li><a href="#!">Personal Info</a></li>
+    <li><a href="#!">Game Settings</a></li>
+    <li class="divider"></li>
+    <li><a href="#supportModal" class="modal-trigger">Support</a></li>
+    <li><a href="#!">Logout</a></li>
+</ul>
+
+
+
+<div class="no-pad-bot main-container" style="overflow:hidden;" >
+    <!-- <img src="images/background-new-1.png" /> -->
+
+    <div class="left-side-nav">
+
+      <div class="card-panel hoverable nav-bar-card deep-orange darken-4">
+        <div class="sidebar-title text-shadow">GAMES</div>
+      </div>
+
+      <div class="side-nav-row active-game">
+        <div class="image-container">
+          <img src="images/dota-game.png" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+
+      <div class="side-nav-row">
+        <div class="image-container">
+          <img src="images/league-game.png" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+
+      <div class="side-nav-row">
+        <div class="image-container">
+          <img src="images/cs-game.png" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="main-content">
+        
+        <section>
+            <div class="game-banner z-depth-2">
+                <div class="game-banner-title text-shadow">Dota 2</div>
+                <img src="images/dota-banner-1.jpg" class="game-banner-image" />
+            </div>
+        </section>
+
+        <section class="challenge-types">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="challenge-type-container valign-wrapper">
+                        <div class="challenge-title valign">
+                            <div class="title text-shadow">ESC</div>
+                            <div class="subtitle text-shadow">CHALLENGES</div>
+                        </div>
+                        <img src="images/tournament-bg.jpg" />
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="challenge-type-container valign-wrapper">
+                        <div class="challenge-title valign">
+                            <div class="title text-shadow">OPEN</div>
+                            <div class="subtitle text-shadow">CHALLENGES</div>
+                        </div>
+                        <img src="images/chalange-bg.jpg" />
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+          <div class="section-title">Match <span>History</span></div>
+            <div class="row card-panel table-container  blue-grey darken-4">
+              
+                <table class="responsive-table ">
+                    <thead>
+                    <tr>
+                        <th data-field="srno">Sr.No</th>
+                        <th data-field="gameid">GameID</th>
+                        <th data-field="opponent">Opponent</th>
+                        <th data-field="type">Game Type</th>
+                        <th data-field="result">Result</th>
+                        <th data-field="price" class="center-align">Game Coins</th>
+                        <th data-field="viewDetails" class="right-align" width="10%">View Details</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>123234456</td>
+                        <td>Kavit Varma</td>
+                        <td>Solo</td>
+                        <td>Won</td>
+                        <td class="center-align">100</td>
+                        <td class="center-align"><a class="orange-link" href="#"><i class="material-icons">launch</i></a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>123432457</td>
+                        <td>Sanket Vaghasia</td>
+                        <td>Team (Captian's Pick)</td>
+                        <td>Loss</td>
+                        <td class="center-align">250</td>
+                        <td class="center-align"><a class="orange-link" href="#"><i class="material-icons">launch</i></a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>123534458</td>
+                        <td>Rajan Kaneria</td>
+                        <td>Team (Team Pick)</td>
+                        <td>Won</td>
+                        <td class="center-align">800</td>
+                        <td class="center-align"><a class="orange-link" href="#"><i class="material-icons">launch</i></a></td>
+                    </tr>
+                    </tbody>
+                </table>                                   
+
+
+
+            </div>
+                <center>
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active  blue-grey darken-4"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+                </center>
+          <hr/>
+        </section>
+
+
+
+    </div>
+</div>
+<!-- Modal Structure -->
+  <div id="loginModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
+    <div class="modal-content">
+      <h5 class="white-text center-align">LOGIN</h5>
+      <div id="loginForm" class="modal-form-container">
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input id="password" type="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <a class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Login</a>
+            </div>
+
+
+
+      </div>
+    </div>
+    <div class="modal-footer black">
+      <a href="#!" class="btn-flat white-text forgot-password-btn">Forgot password?</a><a href="#!" class="btn-flat white-text signup-btn" id="signupBtn">SIGNUP ></a>
+    </div>
+  </div>
+
+    <!-- Modal Structure -->
+    <div id="signUpModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
+        <div class="modal-content">
+        <h5 class="white-text center-align">SignUp</h5>
+        <div id="signupForm" class="modal-form-container">
+
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <input id="passwordConfirm" type="password" class="validate">
+                        <label for="passwordConfirm">Confirm Password</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <a class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Login</a>
+                </div>
+
+
+
+        </div>
+        </div>
+        <div class="modal-footer black">
+        <a href="#!" class="btn-flat white-text no-link-grey">Already registered?</a><a href="#!" class="btn-flat white-text login-btn" id="loginBtn">LOGIN ></a>
+        </div>
+    </div>
+
+
+
+<!-- Modal Structure -->
+  <div id="addCoinModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
+    <div class="modal-content">
+      <h5 class="white-text center-align">Add Coins</h5>
+      <div id="loginForm" class="modal-form-container">
+
+            <div class="row">
+                <div class="input-field col s12 m12">
+                    <input id="coinAmount" type="text" class="validate">
+                    <label for="coinAmount">How many coins you want to add?</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <a class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Add</a>
+            </div>
+
+
+
+      </div>
+    </div>
+    <div class="modal-footer black">
+      
+    </div>
+  </div>
+
+
+
+
+  <!-- Modal Structure -->
+    <div id="supportModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
+        <div class="modal-content">
+        <h5 class="white-text center-align">Support</h5>
+        <div id="supportForm" class="modal-form-container">
+
+                <div class="row">
+                  <form class="col s12">
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <textarea id="supportMessage" class="materialize-textarea"></textarea>
+                        <label for="supportMessage">Whats on your mind?</label>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="row">
+                    <a class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Send</a>
+                </div>
+
+
+
+        </div>
+        </div>
+        <div class="modal-footer black">
+        
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  <footer class="page-footer footer-black">
+    <div class="container footer-main-content">
+      <div class="row">
+        <div class="col l9 s12">
+          <h5 class="white-text">Site Links</h5>
+          <div class="row footer-row">
+              <div class="link-row"><a  href="#!">Home</a></div>
+              <div class="link-row"><a  href="#!">About</a></div>
+              <div class="link-row"><a  href="#!">FAQ</a></div>
+              <div class="link-row"><a  href="#!">Press</a></div>
+              <div class="link-row"><a  href="#!">Contact</a></div>
+              <div class="link-row"><a  href="#!">Careers</a></div>
+              <div class="link-row"><a  href="#!">Privacy</a></div>
+              <div class="link-row"><a  href="#!">Legal</a></div>
+          </div>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contact US</h5>
+          <div class="row footer-row">
+              <div class="contact-row">support@esportcolosseum.com</div>
+              <div class="contact-row">+91 966-287-2090</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer-copyright black">
+      <div class="container  center-align">
+      Copyright © 2016 All rights reserved by <a class="orange-text text-lighten-3" href="#!">Esport Colosseum</a>
+      </div>
+    </div>
+  </footer>
+
+
+  
+
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  </body>
+</html>

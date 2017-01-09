@@ -1,0 +1,967 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+    color: #444;
+}
+
+p {
+    line-height: 2rem;
+}
+
+.button-collapse {
+    color: #26a69a;
+}
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255, 255, 255, .9);
+}
+
+.parallax-container .section {
+    width: 100%;
+}
+
+@media only screen and (max-width: 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #index-banner .section {
+        top: 0;
+    }
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+footer.page-footer {
+    margin: 0;
+}
+
+/****************** Custom Styles ************************/
+
+nav.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.nav-bar-transparent {
+    background: none !important;
+    box-shadow: none;
+}
+
+.banner-container img {
+    width: 100%;
+}
+
+.banner-container {
+    height: 600px;
+    overflow: hidden;
+    background-image: url("../images/background-new-3.jpg");
+    background-size: 100% auto;
+}
+
+.brand-logo img {
+    width: 70%;
+    margin: 8px 0px;
+}
+
+.page-footer.footer-black {
+    background: #162025;
+}
+
+.page-footer.dark-black {
+    background: #0B0B0B;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
+
+.banner-card {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.banner-card:hover {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.banner-tagline {
+    font-weight: 100;
+}
+
+.left-side-nav {
+    width: 20%;
+    background: #000;
+    float: left;
+    padding-top: 5px;
+}
+
+.main-content {
+    width: 80%;
+    float: right;
+}
+
+.side-nav-row {
+    width: 100%;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+}
+
+.image-container img {
+    width: 100%;
+}
+
+.image-container .image-overlay {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: #FFF;
+    background: rgba(0, 0, 0, .7);
+}
+
+.image-container:hover .image-overlay {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    display: block;
+    background: rgba(0, 0, 0, .2);
+}
+
+.sidebar-title {
+    color: #fff;
+    text-align: center;
+    font-size: 21px;
+}
+
+.btn_area {
+    padding: 0px 10px;
+}
+
+.nav-bar-card {
+    width: 100%;
+
+    padding: 10px 15px;
+
+}
+
+.active-game .image-overlay {
+    background: rgba(0, 0, 0, .2) !important;
+}
+
+.section-title {
+    border-bottom: 1px solid #efebeb;
+    margin: 12px;
+    padding-bottom: 12px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #37474f;
+}
+
+hr {
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.match-detail.center-align {
+    font-size: 12px;
+}
+
+.match-type {
+    font-size: 14px !important;
+}
+
+.match-coins {
+    font-size: 30px !important;
+}
+
+.match-date-time {
+    font-size: 11px !important;
+}
+
+span.match-date {
+    margin-left: 5px;
+}
+
+.team-players {
+    width: 100%;
+    min-height: 200px;
+    position: absolute;
+    width: 96%;
+    display: block;
+    z-index: 10;
+}
+
+.team-detail {
+    margin-bottom: 0px;
+    /*position: absolute;
+    width: 96%;*/
+    z-index: 20;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 6px;
+}
+
+.left-team {
+    position: relative;
+}
+
+.player-list {
+    min-height: 200px;
+    display: none;
+    margin-bottom: 0px;
+}
+
+.team-name:hover {
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
+
+.match-list .row {
+    margin: 15px 15px;
+    padding: 10px 10px;
+}
+
+.section-title span {
+    /* color: #37474f; */
+    color: #d84c21;
+}
+
+.team-name {
+    padding-bottom: 10px;
+}
+
+.player-image {
+    float: left;
+}
+
+.player-row {
+    overflow: hidden;
+}
+
+.player-image img {
+    width: 60px;
+    height: 60px
+}
+
+.player-details {
+    float: left;
+    /* width: 70%; */
+    /* text-align: left; */
+    margin-left: 10px;
+    /* color: #444; */
+}
+
+.player-detail-row {
+    text-align: left;
+    color: #444;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.player-name {
+    font-size: 19px !important;
+    line-height: 23px;
+    color: #bf360c;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.right-team .player-name {
+    color: #37474f;
+}
+
+.player-stats {
+    float: right;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.stat-container {
+    display: inline-block;
+}
+
+.stat-value {
+    font-size: 22px !important;
+    color: #bf360c;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.right-team .stat-value {
+    color: #37474f;
+}
+
+.stat-title {
+    font-size: 12px;
+    color: #989898;
+}
+
+.stat-container {
+    margin-left: 10px;
+}
+
+.modal-form {
+    width: 30%;
+}
+
+.modal-form-container .row {
+    margin-bottom: 0px;
+}
+
+.modal-form-container .input-field {
+    margin-top: 5px;
+}
+
+/* label color */
+.input-field label {
+    color: #666f73;
+}
+
+/* label focus color */
+.input-field input[type=email]:focus + label {
+    color: #d84c21;
+}
+
+/* label underline focus color */
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #d84c21;
+    box-shadow: 0 1px 0 0 #d84c21;
+}
+
+/* valid color */
+.input-field input[type=email].valid {
+    border-bottom: 1px solid #d84c21;
+    box-shadow: 0 1px 0 0 #d84c21;
+}
+
+/* label focus color */
+.input-field input[type=password]:focus + label {
+    color: #d84c21;
+}
+
+/* label underline focus color */
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #d84c21;
+    box-shadow: 0 1px 0 0 #d84c21;
+}
+
+/* valid color */
+.input-field input[type=password].valid {
+    border-bottom: 1px solid #d84c21;
+    box-shadow: 0 1px 0 0 #d84c21;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #d84c21;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #d84c21;
+    box-shadow: 0 1px 0 0 #d84c21;
+}
+
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #d84c21;
+    box-shadow: 0 1px 0 0 #d84c21;
+}
+
+/* invalid color */
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #d84c21;
+}
+
+.input-field {
+    color: #fff;
+}
+
+div.modal-form-container {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.modal-form .modal-footer {
+    border-top: 1px solid #d84c21 !important;
+}
+
+.forgot-password-btn {
+    display: block;
+    float: left !important;
+    color: #8a8a8a !important;
+    /* font-weight: 100; */
+    font-size: 12px;
+}
+
+.no-link-grey {
+    display: block;
+    float: left !important;
+    color: #8a8a8a !important;
+    /* font-weight: 100; */
+    font-size: 12px;
+    cursor: default;
+}
+
+.forgot-password-btn:hover {
+    color: #fff !important;
+}
+
+.signup-btn {
+    display: block;
+    float: right;
+}
+
+.modal-form {
+    height: 40% !important;
+    min-height: 450px !important;
+}
+
+.btn-full {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button-full {
+    width: 100%;
+}
+
+.modal-form input:-webkit-autofill,
+.modal-form input:-webkit-autofill:hover,
+.modal-form input:-webkit-autofill:focus,
+.modal-form input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #263238 inset !important;
+    -webkit-text-fill-color: #fff !important;
+}
+
+#signUpModal {
+    min-height: 520px !important;
+}
+
+.footer-main-content {
+    width: 100%;
+    padding: 0px 5%;
+    max-width: 100% !important;
+}
+
+.link-row {
+    display: inline-block;
+    margin: 0px 20px 10px 0px;
+
+}
+
+.row.footer-row {
+    margin-left: 0px;
+}
+
+.link-row a {
+    color: #666f73;
+}
+
+.link-row:hover a {
+    color: #fff;
+}
+
+.contact-row {
+    color: #666f73;;
+}
+
+.nav-wrapper {
+    padding: 0px 100px;
+}
+
+img.game-banner-image {
+    width: 100%;
+    margin-top: -245px;
+}
+
+.game-banner {
+    height: 130px;
+    overflow: hidden;
+    position: relative;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.game-banner-expanded {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    height: auto !important;
+}
+
+.game-banner-title {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    color: #fff;
+    font-size: 30px;
+}
+
+section.challenge-types {
+    margin-top: 20px;
+}
+
+.challenge-type-container img {
+    width: 100%;
+}
+
+.challenge-type-container {
+    max-height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.challenge-title {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.challenge-title .title {
+    text-align: center;
+    color: #929292;
+    line-height: 40px;
+    font-size: 40px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.challenge-title .subtitle {
+    text-align: center;
+    color: #929292;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.challenge-type-container:hover .subtitle {
+    color: #fff !important;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.challenge-type-container:hover .title {
+    color: #d84c21 !important;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.challenge-type-container .image-overlay {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: #FFF;
+    background: rgba(0, 0, 0, .7);
+}
+
+.challenge-type-container:hover .image-overlay {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    display: block;
+    background: rgba(0, 0, 0, .4);
+}
+
+.table-container {
+    margin: 15px;
+}
+
+.table-container td {
+    color: #fff;
+}
+
+.table-container thead tr {
+    color: #d84c21;
+    text-transform: uppercase;
+}
+
+a#createChallengeBtn {
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+}
+
+#createChallengeModal {
+    height: 90% !important;
+}
+
+.game-members {
+    text-align: center;
+    color: #8e8e8e;
+}
+
+.challenge-label {
+    text-align: center;
+    font-size: 18px;
+    color: #6d6d6d;
+}
+
+.challenge-coin {
+    text-align: center;
+    font-size: 45px;
+    line-height: 40px;
+    color: #263238;
+}
+
+.challenge-currency {
+    text-align: center;
+    font-size: 17px;
+    color: #6d6d6d;
+}
+
+.challenge-member-row {
+    margin-bottom: 0px;
+    margin-top: 35px;
+}
+
+.challenge-detail-row {
+    margin-top: 30px;
+}
+
+.pagination-card {
+    padding: 5px;
+}
+
+.challenge-win {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #d84c21;
+    margin-top: 40px;
+}
+
+.challenge-pay {
+    text-align: center;
+    font-size: 18px;
+}
+
+.challenge-joined-members {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+/* ========= Home page ========== */
+
+.card .card-content .card-title {
+    line-height: normal;
+}
+ul#userMenu{
+    top:auto !important;
+}
+
+@media only screen and (max-width: 1264px) {
+    .stat-value {
+        font-size: 16px !important;
+    }
+}
+
+@media all and (max-width: 1232px) and (min-width: 767px) {
+    .player-image img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-panel {
+        padding: 20px 5px;
+    }
+
+    .player-name {
+        font-size: 12px !important;
+        line-height: 14px;
+    }
+
+    .player-detail-row {
+        font-size: 10px;
+    }
+
+    .stat-title {
+        font-size: 7px;
+        color: #989898;
+    }
+
+    .stat-value {
+        font-size: 11px !important;
+    }
+
+    .player-name, .player-stats {
+        margin-top: 0px !important;
+    }
+
+}
+
+@media only screen and (max-width: 1070px) {
+    .mobile_banner {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@media all and (max-width: 991px) and (min-width: 600px) {
+    .card .card-title {
+        font-size: 12px !important;
+
+    }
+
+    .card .card-content .card-title {
+        line-height: 4px !important;
+    }
+
+    .sm_margin_top {
+        margin-top: 50px;
+    }
+}
+
+@media all and (max-width: 991px) and (min-width: 600px) {
+    .player-stats {
+        margin-top: 0px;
+    }
+
+    .stat-container {
+        margin-left: 0px !important;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .left-side-nav.mobile_res {
+        width: 100%;
+        height: auto !important;
+    }
+
+    #index-banner.banner-container {
+        height: auto !important;
+    }
+
+    .mob_main_conten {
+        width: 100%;
+    }
+
+    .match-list .row .col.m5, .match-list .row .col.m2 {
+        width: 100% !important;
+    }
+
+    nav .brand-logo {
+       left: 10px;
+        transform: translate(0);
+    }
+
+    .hide-on-med-and-down {
+        display: block !important;
+    }
+
+    .nav-wrapper {
+        padding: 0px !important;
+    }
+
+    .modal-form {
+        width: 96% !important;
+    }
+
+    .hidden-xs {
+        display: none;
+    }
+
+    .team-name {
+        padding-top: 10px;
+    }
+
+    .mob_margin_top {
+        margin-top: 50px;
+    }
+    .row.footer-row {
+      text-align: center;
+    }
+    .contact-row{
+        text-align:left;
+    }
+    .card-panel {
+        margin-bottom: 10px;
+    }
+    hr{
+        margin:30px auto;
+    }
+    .player-list {
+        padding: 10px !important;
+    }
+    nav i,nav .hide-on-med-and-down a{
+        line-height: 58px !important;
+    }
+
+}
+
+@media all and (max-width: 991px) and (min-width: 767px) {
+    .upcomming_games .s12 {
+
+        width: 100% !important;
+    }
+
+    .left-side-nav {
+        width: 33% !important;
+    }
+
+    .main-content {
+        width: 67% !important;
+        float: right;
+    }
+
+    .hide-on-med-and-down {
+        display: inline-block !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .left-side-nav.mobile_res {
+        width: 100%;
+        height: auto !important;
+    }
+
+    .mobile_banner {
+        background-size: cover;
+        background-position: center;
+    }
+
+    #index-banner.banner-container {
+        height: auto !important;
+    }
+
+    .mob_main_conten {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 2.06rem;
+    }
+
+    .card-panel {
+        padding: 1px 0px !important;
+    }
+
+    h4.header {
+        margin-top: 50px;
+    }
+
+    .stat-value {
+        font-size: 14px !important;
+    }
+
+    .stat-title {
+        font-size: 9px !important;
+    }
+
+    .player-name {
+        font-size: 11px !important;
+        line-height: 11px !important;
+    }
+
+    .player-image img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .stat-container {
+        margin-left: 0px !important;
+    }
+
+    .player-detail-row {
+        font-size: 9px !important;
+    }
+
+}
+@media only screen and (max-width: 480px){
+  
+}
+
+@media only screen and (min-width: 768px) {
+    .mob_margin_top .card-panel {
+        height: 262px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .mob_margin_top .card-panel {
+        height: 262px;
+    }
+}
+
+@media only screen and (max-width: 407px) {
+    
+}

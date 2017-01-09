@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>  <!-- bootstrap css -->
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/dashboard.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  
+  <!-- **
+	 * ========================================
+	 * Media Query
+	 * ========================================
+	* -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 992px) and (max-width: 1199px) "
+          href="css/media/medium-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 768px) and (max-width: 991px)"
+          href="css/media/tablet-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 640px) and (max-width: 767px)"
+          href="css/media/mobile-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 440px) and (max-width: 639px)"
+          href="css/media/indriodt-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 350px) and (max-width: 439px)"
+          href="css/media/mini-indriod-devices.css"/>
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 1px) and (max-width: 349px)"
+          href="css/media/small-mobiles.css"/>
+		  
+		  
+</head>
+<body>
+  <nav class="nav-bar blue-grey darken-4" role="navigation">
+    <div class="nav-wrapper">
+	<div class="onclick-open-sidebar">
+			<button id='show_sidebar' class="btn btn-default">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<div class="show_sidebar_onclick hidden">
+			<div class="left-side-nav ">
+			  <div class="btn_area">
+				  <div class="card-panel hoverable nav-bar-card deep-orange darken-4">
+					  <div class="sidebar-title text-shadow">GAMES</div>
+				  </div>
+			  </div>
+
+
+			  <div class="side-nav-row active-game">
+				<div class="image-container">
+				  <img src="images/dota-game.png" />
+				  <div class="image-overlay"></div>
+				</div>
+			  </div>
+
+			  <div class="side-nav-row">
+				<div class="image-container">
+				  <img src="images/league-game.png" />
+				  <div class="image-overlay"></div>
+				</div>
+			  </div>
+
+			  <div class="side-nav-row">
+				<div class="image-container">
+				  <img src="images/cs-game.png" />
+				  <div class="image-overlay"></div>
+				</div>
+			  </div>
+
+
+			</div>
+			</div>
+		</div>
+        <a id="logo-container" href="#" class="brand-logo"><img src="images/logo.png" /></a>
+        <ul class="right">
+            <li><a href="#!" class="white-text"><i class="fa fa-bell-o" aria-hidden="true"></i><!--<i class="fa fa-bell" aria-hidden="true"></i>--></a></li>
+            <li><a href="#addCoinModal" class="white-text  modal-trigger"><i class="fa fa-usd" aria-hidden="true"></i> AddCoins</a></li>
+            <li><a href="#!" class="white-text dropdown-button" data-activates="userMenu"><i class="fa fa-user-secret" aria-hidden="true"></i> Rajan Kaneria</a></li>
+      </ul>
+    </div>
+  </nav>
+<ul id="userMenu" class="dropdown-content">
+    <li><a href="#!">Personal Info</a></li>
+    <li><a href="#!">Game Settings</a></li>
+    <li class="divider"></li>
+    <li><a href="#supportModal" class="modal-trigger">Support</a></li>
+    <li><a href="#!">Logout</a></li>
+</ul>
+
+
+
+<div class="no-pad-bot main-container" style="overflow:hidden;" >
+    <!-- <img src="images/background-new-1.png" /> -->
+
+    <div class="display_for_mobile">
+    <div class="left-side-nav mobile_res ">
+      <div class="btn_area">
+          <div class="card-panel hoverable nav-bar-card deep-orange darken-4">
+              <div class="sidebar-title text-shadow">GAMES</div>
+          </div>
+      </div>
+
+
+      <div class="side-nav-row active-game">
+        <div class="image-container">
+          <img src="images/dota-game.png" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+
+      <div class="side-nav-row">
+        <div class="image-container">
+          <img src="images/league-game.png" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+
+      <div class="side-nav-row">
+        <div class="image-container">
+          <img src="images/cs-game.png" />
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
+
+    <div class="main-content mob_main_conten">
+        <section>
+            <div class="game-banner z-depth-2">
+                <div class="game-banner-title text-shadow">Dota 2 ( ESC Challenge)</div>
+                <img src="images/dota-banner-1.jpg" class="game-banner-image" />
+            </div>
+        </section>
+		<section class="">
+            <div class="section-title ">My <span>Challenges</span></div>
+			<div class="inner-page-tab-back">
+				<div class="row">
+					<div class="disabled_for_mobile">
+						<ul class='tabs'>
+							<li><a class="active" href='#tab1'>CURRENT CHALLENGE</a></li>
+							<li><a href='#tab2'>PAST CHALLENGE</a></li>
+						</ul>
+					</div>
+					<div class="display_for_mobile_drop">
+						<select id="leave"  style="display: block">
+							<option value="tab1"><a href="#">CURRENT CHALLENGE </a></option>
+							<option value="tab2"><a href="#">PAST CHALLENGE</a></option>
+						</select>	
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</div>
+					<div id='tab1'>
+						<div class="first-challenge-section versus-image-one">
+							<div class="row">
+								<div class="row">
+								
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Team</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+									
+										<button class="btn btn-default">COMPLETE CHALLENGE</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog2.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog3.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog4.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog5.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+											</div>
+											<div class="firt-team-image">
+												<img src="images/person.png">
+											</div>
+										</div>
+										</div>
+										<div class="versus-image">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+										
+											<h2><span>TEAM 2 </span></h2>
+											<div class="dont-right-image">
+												<img src="images/dont.png">
+												<button class="btn btn-default">Challenge Is Not Accepted Yet</button>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="first-challenge-section versus-image-two">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Team</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">COMPLETE CHALLENGE</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog2.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog3.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog4.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog5.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+											</div>
+											<div class="second-player-person">
+												<ul>
+												<li>* Max 5 challengers can play</li>
+												<li><img src="images/person.png"></li>
+												</ul>
+											</div>
+										</div>
+										</div>
+										<div class="versus-image">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog ">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="team-two-blog">
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog2.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog3.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog4.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog5.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+												</div>
+											</div>
+											<div class="second-player-person">
+												<ul>
+												<li>* Max 5 challengers can play</li>
+												<li><img src="images/person.png"></li>
+												</ul>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="first-challenge-section versus-image-three">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Team</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">COMPLETE CHALLENGE</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="third-person-image">
+												<img src="images/red-person.png">
+											</div>
+										</div>
+										</div>
+										<div class="versus-image">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog ">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="team-two-blog">
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog2.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog3.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog4.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="third-player-bottom-red">
+												<img src="images/red-small.png">
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="first-challenge-section  versus-image-four">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Solo</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">COMPLETE CHALLENGE</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+											<div class="first_challenge_left_width">
+												<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+												<ul>
+													<li><a href="#"><img src="images/i.png"></a></li>
+													<li><a href="#"><img src="images/blog1.png"></a></li>
+													<li><a href="#"><img src="images/minus.png"></a></li>
+												</ul>
+												<h3>Lorem Ipsum<span> </span></h3>
+											</div>
+										</div>
+										<div class="versus-image">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog">
+											<div class="first_challenge_left_width">
+												<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+												<ul>
+													<li><a href="#"><img src="images/i.png"></a></li>
+													<li><a href="#"><img src="images/blog1.png"></a></li>
+													<li><a href="#"><img src="images/minus.png"></a></li>
+												</ul>
+												<h3>Lorem Ipsum<span> </span></h3>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+					<div id='tab2'>
+						<div class="first-challenge-section">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Team</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">CHALLENGE COMPLETED</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+											<div class="past_challenge_left_blog">
+												<div class="past_challenge_winner_image">
+													<img src="images/winner.png">
+												</div>
+												<div class="first_challenge_left_width">
+													<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+													<ul>
+														<li><a href="#"><img src="images/i.png"></a></li>
+														<li><a href="#"><img src="images/blog1.png"></a></li>
+														<li><a href="#"><img src="images/minus.png"></a></li>
+													</ul>
+													<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+													<div class="player-section">
+														<div class="player-image">
+															<img src="images/blog2.png">
+														</div>
+														<div class="player-informations">
+															<h2>Kavit Varma</h2>
+															<p>Remove  |  Report</p>
+														</div>
+														
+													</div>
+													<div class="player-section">
+														<div class="player-image">
+															<img src="images/blog3.png">
+														</div>
+														<div class="player-informations">
+															<h2>Kavit Varma</h2>
+															<p>Remove  |  Report</p>
+														</div>
+														
+													</div>
+													<div class="player-section">
+														<div class="player-image">
+															<img src="images/blog4.png">
+														</div>
+														<div class="player-informations">
+															<h2>Andrew Bullock</h2>
+															<p>Remove  |  Report</p>
+														</div>
+														
+													</div>
+													<div class="player-section">
+														<div class="player-image">
+															<img src="images/blog5.png">
+														</div>
+														<div class="player-informations">
+															<h2>Andrew Bullock</h2>
+															<p>Remove  |  Report</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="versus-image">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog">
+										<div class="past_challenge_right_blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="team-two-blog">
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog2.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog3.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog4.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog5.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="first-challenge-section">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Team</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">CHALLENGE COMPLETED</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog2.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog3.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog4.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog5.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+											</div>
+										</div>
+										</div>
+										<div class="versus-image ">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="team-two-blog">
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog2.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog3.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog4.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog5.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="past_challenge_winner_image_one">
+											<img src="images/winner.png">
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="first-challenge-section">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Team</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">CHALLENGE COMPLETED</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog2.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog3.png">
+												</div>
+												<div class="player-informations">
+													<h2>Kavit Varma</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog4.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+												
+											</div>
+											<div class="player-section">
+												<div class="player-image">
+													<img src="images/blog5.png">
+												</div>
+												<div class="player-informations">
+													<h2>Andrew Bullock</h2>
+													<p>Remove  |  Report</p>
+												</div>
+											</div>
+										</div>
+										</div>
+										<div class="versus-image past_versus_three">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog">
+										<div class="first_challenge_left_width">
+											<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+											<ul>
+												<li><a href="#"><img src="images/i.png"></a></li>
+												<li><a href="#"><img src="images/blog1.png"></a></li>
+												<li><a href="#"><img src="images/minus.png"></a></li>
+											</ul>
+											<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											<div class="team-two-blog">
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog2.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog3.png">
+													</div>
+													<div class="player-informations">
+														<h2>Kavit Varma</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+												<div class="player-section">
+													<div class="player-image">
+														<img src="images/blog4.png">
+													</div>
+													<div class="player-informations">
+														<h2>Andrew Bullock</h2>
+														<p>Remove  |  Report</p>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+										<div class="past_challenge_winner_image_one">
+											<img src="images/winner.png">
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="first-challenge-section">
+							<div class="row">
+								<div class="row">
+									<div class="first-challenge-header">
+										<img src="images/game-icon.png">	
+									</div>
+									<div class="first-challenge-header-ul">
+										<ul>
+											<li>Challenge Type</li>
+											<li>Playing As</li>
+											<li>Time</li>
+											<li>Coins</li>
+										</ul>
+										<ul class="data-for-order-">
+											<li>Open Challenge / ESC Challenge</li>
+											<li>Solo</li>
+											<li>12:00 to 15:00</li>
+											<li>500</li>
+										</ul>
+										
+									</div>
+									<div class="first-challenge-header-button">
+										<button class="btn btn-default">CHALLENGE COMPLETED</button>
+									</div>
+								</div>
+								<div class="vs_area">
+									<div class="row">
+										<div class="first-challenge-left-blog">
+											<div class="past_challenge_winner_image_two">
+												<img src="images/winner.png">
+											</div>
+											<div class="first_challenge_left_width">
+												<h2><span>TEAM 1 :</span> WASHINGTON REDSKINS ROADSTER</h2>
+												<ul>
+													<li><a href="#"><img src="images/i.png"></a></li>
+													<li><a href="#"><img src="images/blog1.png"></a></li>
+													<li><a href="#"><img src="images/minus.png"></a></li>
+												</ul>
+												<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+											</div>
+										</div>
+										<div class="versus-image">
+											<img src="images/vs.png">
+										</div>
+										<div class="first-challenge-left-blog">
+												<div class="first_challenge_left_width">
+													<h2><span>TEAM 2 :</span> MANCHESTER UNITED</h2>
+													<ul>
+														<li><a href="#"><img src="images/i.png"></a></li>
+														<li><a href="#"><img src="images/blog1.png"></a></li>
+														<li><a href="#"><img src="images/minus.png"></a></li>
+													</ul>
+													<h3>Lorem Ipsum<span>( Captain ) </span></h3>
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </section>
+    </div>
+</div>
+  <footer class="page-footer footer-black">
+    <div class="container footer-main-content">
+      <div class="row">
+        <div class="col l9 s12">
+          <h5 class="white-text">Site Links</h5>
+          <div class="row footer-row">
+              <div class="link-row"><a  href="#!">Home</a></div>
+              <div class="link-row"><a  href="#!">About</a></div>
+              <div class="link-row"><a  href="#!">FAQ</a></div>
+              <div class="link-row"><a  href="#!">Press</a></div>
+              <div class="link-row"><a  href="#!">Contact</a></div>
+              <div class="link-row"><a  href="#!">Careers</a></div>
+              <div class="link-row"><a  href="#!">Privacy</a></div>
+              <div class="link-row"><a  href="#!">Legal</a></div>
+          </div>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contact US</h5>
+          <div class="row footer-row">
+              <div class="contact-row">support@esportcolosseum.com</div>
+              <div class="contact-row">+91 966-287-2090</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer-copyright black">
+      <div class="container  center-align">
+      Copyright © 2016 All rights reserved by <a class="orange-text text-lighten-3" href="#!">Esport Colosseum</a>
+      </div>
+    </div>
+  </footer>
+
+
+  
+
+
+
+  <!--  Scripts-->
+ <script type="text/javascript"  src="js/jquery.min.js"></script> <!-- main js -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script> <!-- bootstrap js -->
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <script>
+ 
+ $('ul.tabs').each(function(){
+  // For each set of tabs, we want to keep track of
+  // which tab is active and its associated content
+  var $active, $content, $links = $(this).find('a');
+
+  // If the location.hash matches one of the links, use that as the active tab.
+  // If no match is found, use the first link as the initial active tab.
+  $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+  $active.addClass('active');
+
+  $content = $($active[0].hash);
+
+  // Hide the remaining content
+  $links.not($active).each(function () {
+    $(this.hash).hide();
+  });
+
+  // Bind the click event handler
+  $(this).on('click', 'a', function(e){
+    // Make the old tab inactive.
+    $active.removeClass('active');
+    $content.hide();
+
+    // Update the variables with the new link and content
+    $active = $(this);
+    $content = $(this.hash);
+
+    // Make the tab active.
+    $active.addClass('active');
+    $content.show();
+
+    // Prevent the anchor's default click action
+    e.preventDefault();
+  });
+});
+  </script>
+  
+  
+<script>
+	jQuery(document).ready(function(){
+		$("#show_sidebar").click(function(){
+		 jQuery('.show_sidebar_onclick').toggleClass('hidden');
+		});
+	});
+</script>
+
+<script>
+    $( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
+ 
+   var $target = $( event.currentTarget );
+ 
+   $target.closest( '.btn-group' )
+      .find( '[data-bind="label"]' ).text( $target.text() )
+         .end()
+      .children( '.dropdown-toggle' ).dropdown( 'toggle' );
+ 
+   return false;
+ 
+});
+    </script>
+	
+  <script>
+  /*
+function leaveChange() {
+    if (document.getElementById("leave").value != "2"){
+        document.getElementById("message").innerHTML = "Common message";
+    }     
+    else{
+        document.getElementById("message").innerHTML = "Having a Baby!!";
+    }        
+}
+*/
+
+$('#leave').on('change', function() {
+    var tab=$(this).find(":checked").val();
+	
+	if(tab=="tab1"){
+		
+		$("#tab1").css("display", "block");
+		
+		$("#tab2").css("display", "none");
+		
+	}else{
+		$("#tab1").css("display", "none");
+		
+		$("#tab2").css("display", "block");
+	}
+	
+});
+</script>
+
+  </body>
+</html>
