@@ -77,7 +77,8 @@ class RegisterController extends Controller
     	$user = User::create([
     				'email' => $data['email'],
     				'password' => bcrypt($data['password']),
-    				'ip_address' => request()->ip()
+    				'ip_address' => request()->ip(),
+    				'status' => 'Active',
     	]);
     	
     	$adminRole = Role::where("name", "=", "user")->firstOrCreate(
