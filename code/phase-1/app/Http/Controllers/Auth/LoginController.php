@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+
 
 class LoginController extends Controller
 {
@@ -35,5 +39,38 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+    
+    public function login(Request $request){
+    	// performing validations.
+    	$this->validate($request, [
+    		'email' => 'required|email', 'password' => 'required',
+    	]);
+    	
+    	$credentials = $request->only('email', 'password');
+    	
+    	if ($this->attemptLogin($request)) {
+    		$this->sendLoginResponse($request);
+    	}
+    	else{
+    		$errors = array(
+    			'email' => array(
+    				'Please provide valid credentials to login'
+    			)
+    		);
+    		
+    		return response()->json($errors, 422);
+    	}
+    	
+    	$this->incrementLoginAttempts($request);
+	    
+	    if ($request->ajax()) {
+	    		return response()->json([
+	    				'intended' => URL::to("/")
+	    				]);
+	    }
+	    else{
+	    	return redirect()->intended(URL::route('dashboard'));
+	    }
     }
 }
