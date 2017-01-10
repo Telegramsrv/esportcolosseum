@@ -25,6 +25,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+	Route::get('/user', 'Admin\UserController@index')->name('admin.user.list');
+	Route::get('/user/edit', 'Admin\UserController@edit')->name('admin.user.edit');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
@@ -35,3 +37,5 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 Auth::routes();
 
 Route::get('/home', 'User\HomeController@index')->name("user.home");
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name("logout");
