@@ -1,10 +1,7 @@
 $(document).ready(function(){
-	$("#loginBtn").click(function(){
+	$("#loginSubmit").click(function(){
 		var loginForm = $("#loginForm");
 		var formData = loginForm.serialize();
-//	    console.log(formData);
-//	    return false;
-
 	    $.ajax({
 	        url:'login',
 	        type:'POST',
@@ -31,4 +28,42 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+	
+	$("#registerSubmit").click(function(){
+		var registerForm = $("#registerForm");
+		var formData = registerForm.serialize();
+	    $.ajax({
+	        url:'register',
+	        type:'POST',
+	        data:formData,
+	        success:function(data){
+	        	if(data.success == true){
+	        		if(data.intended != undefined && data.intended != ""){
+	        			Materialize.toast(data.message, 4000,'',function(){
+	        				window.location = data.intended;
+	        			});
+		            	
+		            }
+	        	}
+	        	console.log(data); return false;
+	        	
+	        },
+	        error: function (data) {
+	        	var errors = data.responseJSON;
+	        	if(errors.email != undefined && errors.email[0] != ""){
+	        		$("#registerForm #emailLabel").attr("data-error", errors.email[0]);
+	        		$("#registerForm #emailLabel").addClass("active");
+	        		$("#registerForm #email").addClass("invalid");
+	        		$("#registerForm #email").focus();
+	        	}
+	        	else if(errors.password != undefined && errors.password[0] != ""){
+	        		$("#registerForm #passwordLabel").attr("data-error", errors.password[0]);
+	        		$("#registerForm #passwordLabel").addClass("active");
+	        		$("#registerForm #password").addClass("invalid");
+	        		$("#registerForm #password").focus();
+	        	}
+	        }
+	    });
+	});
+	
 });

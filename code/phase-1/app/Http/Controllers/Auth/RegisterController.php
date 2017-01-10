@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Models\Role;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Support\Facades\URL;
 
 class RegisterController extends Controller
 {
@@ -27,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,7 +51,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -67,5 +69,40 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    public function register(RegisterRequest $request){
+    	$data = $request->only('email', 'password');
+    	
+    	$user = User::create([
+    				'email' => $data['email'],
+    				'password' => bcrypt($data['password']),
+    				'ip_address' => request()->ip()
+    	]);
+    	
+    	$adminRole = Role::where("name", "=", "user")->firstOrCreate(
+    		array(
+    			'name' => 'user',
+    			'display_name' => 'User',
+    			'description' => 'User role for user'		
+    		)
+    	);
+    	$user->attachRole($adminRole);
+    	
+    	if($user->id){
+    		return response()->json([
+    				'success' => true,
+    				'message' => "You have been registered successfully. Kindly login to continue!",
+    				'intended' => URL::to("/")
+    				]);
+    	}
+    	else{
+    		$errors = array(
+    				'email' => array(
+    						'something went wrong!'
+    				)
+    		);
+    		return response()->json($errors, 422);
+    	}
     }
 }

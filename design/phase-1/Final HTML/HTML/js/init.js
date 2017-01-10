@@ -34,6 +34,7 @@
     });
 
     $("#loginBtn").on("click",function(data){
+    	console.log("coming in loginBtn click event");
         $('#signUpModal').closeModal();
         $('#loginModal').openModal();
     });
