@@ -1,0 +1,268 @@
+@charset "utf-8";
+/* CHALLENGE PAGE CSS */
+
+.challenge_page .inner-page-tab-back {
+    margin-bottom: 30px;
+}
+.challenge-page-tab-back {
+    margin: 0 auto;
+    padding: 0 0 15px 0;
+    width: 20%;
+}
+.challenge-page-tab-back .tabs {
+    margin: 0 auto;
+    width: 100% !important;
+    height: auto;
+}
+.challenge-page-tab-back .tabs .indicator {
+    background-color: transparent;
+}
+.challenge-page-tab-back .tabs li {
+    text-align: center;
+    width: 50%;
+    padding: 0 20px;
+}
+.challenge-page-tab-back .tabs li a {
+    outline: none;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: medium;
+    font-size: 40px;
+    opacity: 0.60;
+    color: #000;
+    padding: 0 20px 8px;
+    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+    display:block;
+}
+.challenge-page-tab-back .tabs li a span {
+    display: block;
+    font-size: 18px;
+}
+.challenge-page-tab-back .tabs li a.active {
+    color: #d84c20;
+    opacity: 1;
+    border-bottom: 3px solid #BF360C;
+}
+
+.row .s13 {
+    width: 14.2757%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+button.challengr-btn {
+    background: #fff;
+    border: 0;
+    border-radius: 3px;
+    padding: 8px 20px;
+    font-size: 18px;
+    width: 100%;
+    transition: ease 0.4s;
+}
+button.challengr-btn:hover {
+    background: #f00;
+    color:#fff;
+    transition: ease 0.4s;
+}
+.time-block {
+    background: #fff;
+    margin: 20px 0;
+    float: left;
+    width: 100%;
+}
+.timing {
+    width: 80%;
+    float: left;
+    margin:0;
+    border-right: 2px solid #ccc;
+}
+ul.timing li {
+    float: none;
+    display: inline-block;
+    color: #d84c20;
+    font-size: 18px;
+    padding: 15px 33px;
+}
+ul.timing li:hover {
+    background: #f00;
+    color: #fff;
+}
+.ist-time {
+    font-size: 18px;
+    text-align: center;
+    padding: 13px 0;
+}
+.ist-time .fa {
+    background: #263238;
+    color: #fff;
+    padding: 6px;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+}
+
+
+/* ===== MEMBERS ===== */
+
+.challenge-member {
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 1.5rem;
+}
+.ch-coin-block {
+    text-align: center;
+    font-size: 18px;
+    text-transform: capitalize;
+    padding: 30px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+.ch-coin-block span{
+    font-size:24px;
+    font-weight:bold;
+}
+.ch-coin {
+    color: #d84c20;
+}
+.ch-coin {
+    color: #d84c20;
+}
+.ch-coin-black {
+    color: #263238;
+}
+.member-block {
+    padding: 5px 10px 5px;
+}
+.members {
+    display: inline-block;
+}
+.members span {
+    display: block;
+    color: #d84c20;
+}
+.join-btn {
+    float: right;
+    display: inline-block;
+    background: #d84c20;
+    color: #fff;
+    padding: 6px 25px;
+    text-transform: uppercase;
+    margin: 6px 0;
+    border-radius: 3px;
+    transition:ease 0.4s;
+    border:0;
+}
+.join-btn:hover,.join-btn:focus {
+    background: #263238;
+    transition:ease 0.4s;
+}
+
+@media only screen and (min-width: 1200px) {
+  ul.timing li {
+    padding: 15px 22px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  
+}
+@media only screen and (max-width: 1024px) {
+  .nav-wrapper {
+    padding: 0px 15px;
+}
+  .display_for_mobile_drop{
+      display:block;
+  }
+  .disabled_for_mobile{
+      display:none;
+  }
+  .row .s13 {
+    width: auto;
+    text-align: center;
+    display: inline-block;
+    float: none;
+    margin: 0 auto;
+}
+.buttons-block {
+    display: inline-block;
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+button.challengr-btn {
+    margin-bottom: 10px;
+    font-size:14px;
+}
+.timing {
+    width: 50%;
+    position: relative;
+}
+.timing .fa.fa-caret-down {
+    color: #d84c20;
+    float: right;
+    font-size: 28px;
+    position: absolute;
+    right: 5px;
+    top: 13px;
+}
+.timing select{
+		height: 4rem;
+}
+.challenge_page .col.s12.m3 {
+    width: 50%;
+}
+
+.footer-main-content{
+    text-align:center;
+}
+.challenge-page-tab-back {
+    width: 40%;
+}
+  
+}
+@media only screen and (max-width: 992px){
+	.challenge-page-tab-back {
+    width: 60%;
+}
+}
+@media only screen and (max-width: 767px){
+.challenge-page-tab-back {
+    margin: 0 auto;
+    padding: 0 0 15px 0;
+    width: 50%;
+}
+.challenge-page-tab-back select {
+    font-size: 14px;
+    border: 1px solid #d84c20;
+}
+
+
+
+
+.contact-row {
+    display: inline-block;
+    padding: 0 10px;
+    border-right: 2px solid;
+}
+.contact-row:last-child {
+    border: 0;
+}
+
+}
+@media only screen and (max-width: 480px){
+  .challenge-page-tab-back {
+    width: 75%;
+}
+.ist-time{
+    font-size:14px;
+}
+
+}
+@media only screen and (max-width: 479px){
+  .contact-row{
+    border-right: 0px solid;
+}
+.challenge_page .col.s12.m3 {
+    width: 100%;
+}
+}

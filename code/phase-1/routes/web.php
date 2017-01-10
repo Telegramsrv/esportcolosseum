@@ -19,7 +19,6 @@ Route::get('/', function () {
 		return redirect()->route('user.dashboard');
 	}
 	else{
-		
 		return redirect("/home");
 	}
 });
@@ -29,15 +28,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
+	Route::get('/', 'User\DashboardController@index')->name('user.home');
 	Route::get('/dashboard', 'User\DashboardController@index')->name('user.dashboard');
 });
 
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index');
+Route::get('/home', 'User\HomeController@index')->name("user.home");

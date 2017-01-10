@@ -1,0 +1,199 @@
+
+
+
+.inner-page-tab-back .tabs li a{
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.first-challenge-header img {
+    margin-left: 5px;
+    width: 80%;
+}
+.first-challenge-header{
+	width: 10%;
+}
+.first-challenge-header-ul{
+	width: 65%;
+}
+.first-challenge-header-ul ul.data-for-order- li {
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 0;
+    width: 24%;
+}
+.first-challenge-header-ul ul.data-for-order- li:nth-child(2){
+	width: 31%;
+}
+.first-challenge-header-ul ul.data-for-order- li:nth-child(3){
+	width: 26%;
+}
+.first-challenge-header-ul ul.data-for-order- li:nth-child(4) {
+    text-align: right;
+    width: 10.5%;
+}
+
+.first-challenge-header-button .btn {
+    font-size: 12px;
+    width: 95%;
+}
+.first-challenge-left-blog{
+	padding: 0;
+}
+.first_challenge_left_width{
+	padding: 12px;
+}
+.first-challenge-left-blog h2{
+	font-size: 14px;
+}
+.first-challenge-left-blog ul{
+	width: 60%;
+}
+.player-section .player-informations h2 {
+    font-size: 13px;
+    margin-top: 4px;
+}
+.player-section .player-informations p {
+    font-size: 9px;
+}
+.player-section .player-image {
+    margin-right: 8px;
+}
+.dont-right-image .btn {
+    font-size: 14px;
+    font-weight: 400;
+}
+.second-player-person ul{
+	width: 70%;
+}
+.team-two-blog .player-section:nth-child(1) {
+    margin-left: 0;
+}
+.team-two-blog .player-section:nth-child(3) {
+    margin-left: 0;
+}
+.third-person-image img {
+    margin: 0 auto 87px;
+    width: 30%;
+}
+
+.player-section{
+	width: 50%;
+}
+.past_challenge_winner_image {
+    transform: translateX(-7%);
+}
+.past_challenge_winner_image_one {
+    top: 24%;
+    transform: translateX(42%);
+}
+.past_challenge_winner_image_two img {
+    width: 12%;
+}
+.past_challenge_winner_image_two{
+	top: 34%;
+}
+
+img.game-banner-image {
+    margin-top: 0;
+}
+
+
+
+/***********	Tablet		*********/
+
+
+.inner-page-tab-back .tabs {
+    display: block;
+    height: auto;
+    padding-bottom: 20px;
+}
+.inner-page-tab-back .tabs li{
+	width: 100%;
+}
+.inner-page-tab-back .tabs li a{
+	padding: 0;
+}
+.inner-page-tab-back .tabs li a.active{
+	border-color: transparent;
+}
+.first-challenge-header {
+	width: 100%;
+}
+.first-challenge-header img {
+    display: block;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 24%;
+}
+.first-challenge-header-ul {
+    margin-left: 15px;
+    width: 95%;
+}
+.first-challenge-header-ul ul.data-for-order- li {
+    width: 32%;
+}
+.first-challenge-header-ul ul.data-for-order- li:nth-child(2){
+	margin-left: 13px;
+    width: 22%;
+}
+.first-challenge-header-ul ul.data-for-order- li:nth-child(3){
+	width: 21%;
+}
+.first-challenge-header-ul ul.data-for-order- li:nth-child(4) {
+    text-align: left;
+    width: 15%;
+}
+.first-challenge-header-button {
+    margin-top: 20px;
+    width: 100%;
+}
+.first-challenge-header-button .btn {
+    width: 70%;
+}
+.first-challenge-left-blog{
+	width: 92%;
+}
+.first-challenge-left-blog ul {
+    width: 46%;
+}
+.second-player-person ul {
+    width: 54%;
+}
+.versus-image-three .versus-image {
+    top: 53%;
+}
+.past_challenge_winner_image {
+    top: 10%;
+    transform: translateX(20%);
+}
+.past_challenge_winner_image_one {
+    top: 14%;
+    transform: translateX(20%);
+}
+.past_challenge_winner_image_two {
+    top: 24%;
+    transform: translateX(20%);
+}
+.nav-bar-card {
+    margin: 5px auto 10px;
+}
+
+
+
+
+.first-challenge-header-ul ul li:nth-child(2) {
+    width: 21%;
+}
+.first-challenge-header-ul ul li:nth-child(3) {
+    width: 20%;
+}
+.first-challenge-header-ul ul li{
+	width: 34%;
+}
+.first-challenge-header-ul ul li:last-child {
+    width: 15%;
+}
+
+
+
