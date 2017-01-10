@@ -727,6 +727,32 @@ a#createChallengeBtn {
 ul#userMenu{
     top:auto !important;
 }
+.pagination li {
+    display: inline-block;
+    border-radius: 2px;
+    text-align: center;
+    vertical-align: top;
+    height: 35px;
+}
+ul.pagination li.active {
+    background-color: transparent !important;
+    border:0 !important;
+}
+ul.pagination li.active a {
+    background-color: #ee6e73 !important;
+     border:1px solid #ee6e73 !important;
+}
+ul.pagination li i {
+    font-size: inherit;
+    vertical-align: middle;
+}
+a:active, a:hover {
+    outline: 0;
+    text-decoration: none;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    vertical-align:middle;
+}
 
 @media only screen and (max-width: 1264px) {
     .stat-value {
@@ -773,6 +799,9 @@ ul#userMenu{
         background-size: cover;
         background-position: center;
     }
+    .footer-main-content ,.row.footer-row{
+    text-align: center;
+}
 }
 
 @media all and (max-width: 991px) and (min-width: 600px) {
@@ -850,9 +879,9 @@ ul#userMenu{
     .row.footer-row {
       text-align: center;
     }
-    .contact-row{
+   /* .contact-row{
         text-align:left;
-    }
+    }*/
     .card-panel {
         margin-bottom: 10px;
     }
@@ -886,6 +915,7 @@ ul#userMenu{
     .hide-on-med-and-down {
         display: inline-block !important;
     }
+    
 }
 
 @media only screen and (max-width: 600px) {
@@ -947,7 +977,9 @@ ul#userMenu{
 
 }
 @media only screen and (max-width: 480px){
-  
+  a#createChallengeBtn{
+        float:none;
+    }
 }
 
 @media only screen and (min-width: 768px) {
