@@ -29,7 +29,7 @@
 										<td>{{ $user->userDetails->last_name }}</td>
 										<td>{{ $user->userDetails->coins }}</td>
 										<td>{{ $user->status }}</td>
-										<td><a href="{{ url('admin/user/edit') }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | <a href="{{ url('admin/user/delete') }}"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></td>
+										<td><a href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | <a href="{{ url('admin/user/delete') }}"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></td>
 									</tr>
 								@endforeach
 							</tbody>

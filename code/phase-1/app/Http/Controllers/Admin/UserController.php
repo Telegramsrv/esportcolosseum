@@ -13,8 +13,8 @@ class UserController extends Controller
 		return view("admin.user.index", compact('users'));
 	}
 	
-	public function edit() {
-		$users = User::all();
-		return view("admin.user.edit", compact('users'));
+	public function edit($userId) {
+		$user = User::findOrFail($userId);
+		return view("admin.user.edit", compact('user'));
 	}
 }

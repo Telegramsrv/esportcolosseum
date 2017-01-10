@@ -9,7 +9,7 @@
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Harmony - Free responsive Bootstrap admin template by Themestruck.com</title>
+	<title>eSport - Admin</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="{!! asset('admin/css/font-awesome.min.css') !!}">

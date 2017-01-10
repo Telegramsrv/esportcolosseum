@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 	Route::get('/user', 'Admin\UserController@index')->name('admin.user.list');
-	Route::get('/user/edit', 'Admin\UserController@edit')->name('admin.user.edit');
+	Route::get('/user/edit/{userId}', 'Admin\UserController@edit')->name('admin.user.edit');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
