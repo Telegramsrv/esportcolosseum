@@ -30,7 +30,11 @@
         			<img src="{!! asset('user/images/logo.png') !!}" />
         		</a>
         		<ul class="right hide-on-med-and-down">
+        		@if (Auth::check())
+        			<li><a href="{!! route('logout') !!}" class="white-text modal-trigger">Logout<i class="material-icons right dp48">power_settings_new</i></a></li>
+          		@else
           			<li><a href="#loginModal" class="white-text modal-trigger">Login<i class="material-icons right">perm_identity</i></a></li>
+          		@endif
       			</ul>
     		</div>
   		</nav>
