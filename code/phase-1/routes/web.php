@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::post('/user/add', 'Admin\UserController@save')->name('admin.user.save');
 	Route::get('/user/edit/{userId}', 'Admin\UserController@edit')->name('admin.user.edit');
 	Route::post('/user/edit/{userId}', 'Admin\UserController@update')->name('admin.user.update');
+	Route::get('/user/delete/{userId}', 'Admin\UserController@delete')->name('admin.user.delete');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

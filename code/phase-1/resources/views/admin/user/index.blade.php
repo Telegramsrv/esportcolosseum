@@ -30,7 +30,7 @@
 										<td>{{ isset($user->userDetails->last_name) ? $user->userDetails->last_name: ''}}</td>
 										<td>{{ isset($user->userDetails->coins) ? $user->userDetails->coins : 0 }}</td>
 										<td>{{ isset($user->status) ? $user->status : '' }}</td>
-										<td><a href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | <a href="{{ url('admin/user/delete') }}"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></td>
+										<td><a href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | <a href="{{ url('admin/user/delete/'.$user->id) }}"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></td>
 									</tr>
 								@endforeach
 							</tbody>

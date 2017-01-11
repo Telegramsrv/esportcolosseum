@@ -36,7 +36,7 @@ class UserController extends Controller
 
 		$input['user_image'] = '';
 		if($request->hasFile('user_image')){
-			$destinationPath 	= public_path('storage'.DIRECTORY_SEPARATOR.'user'.DIRECTORY_SEPARATOR.'profile_pictures'.DIRECTORY_SEPARATOR);
+			$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
 			$file = $request->file('user_image');
 			$filename = time().'.'.$file->getClientOriginalExtension();
 			$file->move($destinationPath, $filename);
@@ -71,15 +71,18 @@ class UserController extends Controller
 	}
 	
 	public function update(SaveUser $request, $userId){
+		$user = User::findOrFail($userId);
 		$input 				= $request->all();
 		DB::table('users')
             ->where('id', $userId)
             ->update(['status' => $input['status']]);
 	
-        $input['user_image'] = '';
+        $input['user_image'] = $user->userDetails->user_image;
         if($request->hasFile('user_image')){
-            	$destinationPath 	= public_path('storage'.DIRECTORY_SEPARATOR.'user'.DIRECTORY_SEPARATOR.'profile_pictures'.DIRECTORY_SEPARATOR);
-            	//deleteMedia($destinationPath.$user->user_image);
+            	$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
+            	if(isset($user->userDetails->user_image)){
+            		deleteMedia($destinationPath.$user->userDetails->user_image);
+            	}
             	$file = $request->file('user_image');
             	$filename = time().'.'.$file->getClientOriginalExtension();
             	$file->move($destinationPath, $filename);
@@ -105,6 +108,21 @@ class UserController extends Controller
 			]);
                         
 		$request->session()->flash('alert-success', 'User updated successfully.');
+		return redirect()->route('admin.user.edit', $userId);
+	}
+	
+	public function delete(SaveUser $request, $userId) {
+		$user = User::findOrFail($userId);
+		
+		if(isset($user->userDetails->user_image)){
+			$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
+			deleteMedia($destinationPath.$user->userDetails->user_image);
+		}
+		
+		DB::table('users')->where('id', '=', $userId)->delete();
+		DB::table('user_details')->where('user_id', '=', $userId)->delete();
+		
+		$request->session()->flash('alert-success', 'User deleted successfully.');
 		return redirect()->route('admin.user.list');
 	}
 }

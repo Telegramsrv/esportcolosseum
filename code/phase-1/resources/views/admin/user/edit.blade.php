@@ -3,6 +3,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				@include('layouts.message')
 				<h2 class="page-title">Edit User</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -179,7 +180,7 @@
 	                            
 	                            @if (isset($user->userDetails->user_image))
 	                             <div class="col-sm-4 user_profile_wrap" >
-	                        			<img class="user_profile" src="{{ url('storage/user/profile_pictures/'.$user->userDetails->user_image) }}">
+	                        			<img class="user_profile" src="{{ url(env('PROFILE_PICTURE_PATH').$user->userDetails->user_image) }}">
 	                             </div>
 	                              @endif
                          	</div>
