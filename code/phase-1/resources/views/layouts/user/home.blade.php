@@ -85,24 +85,7 @@
 		            	<div class="sidebar-title text-shadow">GAMES</div>
 		          	</div>
 		      	</div>
-      			<div class="side-nav-row active-game">
-        			<div class="image-container">
-          				<img src="{!! asset('user/images/dota-game.png') !!}" />
-          				<div class="image-overlay"></div>
-        			</div>
-      			</div>
-      			<div class="side-nav-row">
-        			<div class="image-container">
-        				<img src="{!! asset('user/images/league-game.png') !!}" />
-          				<div class="image-overlay"></div>
-        			</div>
-      			</div>
-		      	<div class="side-nav-row">
-        			<div class="image-container">
-        				<img src="{!! asset('user/images/cs-game.png') !!}" />
-          				<div class="image-overlay"></div>
-        			</div>
-      			</div>
+      			@yield("game-section");
 		    </div>
     		<div class="main-content mob_main_conten">
        	 		<section class="">

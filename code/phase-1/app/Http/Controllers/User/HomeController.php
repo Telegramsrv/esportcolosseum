@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use App\Models\Game;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    //
+
     public function index(){
-    	return view("user.home.index");
+    	$games = Game::All();
+    	return view("user.home.index")->with(["games" => $games]);
     }
     
     /*
@@ -31,6 +33,6 @@ class HomeController extends Controller
     	$user->save();
     	
     	return view("user.home.notify-user-verification")->with(["user" => $user]);
-    	
     }
 }
+
