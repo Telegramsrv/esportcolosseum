@@ -24,8 +24,15 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-        	'email' => 'required|email|exists:users,email', 
+        	'email' => 'required|email|exists:users,email,status,Active', 
         	'password' => 'required|min:6',
         ];
+    }
+    
+    public function messages()
+    {
+    	return [
+    		'email.exists' => 'Email is either not verified or banned.',
+    	];
     }
 }
