@@ -4,6 +4,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				@include('layouts.message')
 				<h2 class="page-title">Users</h2>
 				<!-- Zero Configuration Table -->
 				<div class="panel panel-default">

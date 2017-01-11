@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Requests\User;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class SaveUser extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $validation = [];
+    	switch ($this->method()){
+    		case 'POST':
+    			$validation = [
+    				'email' 			=> 'sometimes|required|email|unique:users,email',
+    				'password' 			=> 'sometimes|required|max:255',
+    				'first_name' 		=> 'sometimes|required|max:255',
+    				'last_name' 		=> 'sometimes|required|max:255',
+    				'gamer_name' 		=> 'sometimes|required|max:100',
+    				'mobile_number' 	=> 'sometimes|required|numeric',
+    				'address_1' 		=> 'sometimes|required|max:255',
+    				'address_2' 		=> 'sometimes|required|max:255',
+    				'pincode' 			=> 'sometimes|required|numeric',
+    				'city' 				=> 'sometimes|required|max:255',
+    				'state' 			=> 'sometimes|required|max:255',
+    				'coins' 			=> 'sometimes|required|numeric',
+    				'winning_coins' 	=> 'sometimes|required|numeric',
+    				
+    			];
+    			
+    			break;
+    			
+    		case 'PUT':
+    			
+    		default: break;	
+    	}
+    	
+    	return $validation;
+    }
+}

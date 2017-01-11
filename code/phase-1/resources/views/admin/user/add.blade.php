@@ -3,14 +3,14 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="page-title">Edit User</h2>
+				<h2 class="page-title">Add User</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
-						{!! Form::model($user, ['route' => ['admin.user.update', $user->id], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+						{!! Form::model(['route' => ['admin.user.save'], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 							<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Email', 'Email:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('email', null, ['class'=>'form-control mb', 'disabled'=>'disabled'] ); !!}
+	                        		{!! Form::text('email', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('email'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('email') }}</strong>
@@ -19,10 +19,22 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Password', 'Password:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{!! Form::password('password', ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('password'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('password') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                        </div>
+	                        
 	                        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
 	                        	{!! Form::label('First Name', 'First Name:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('first_name', (isset($user->userDetails->first_name) ? $user->userDetails->first_name : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('first_name', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('first_name'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('first_name') }}</strong>
@@ -31,10 +43,10 @@
 	                            </div>
 	                        </div>
 	                        
-	                         <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+	                         <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Last Name', 'Last Name:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('last_name', (isset($user->userDetails->last_name) ? $user->userDetails->last_name : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('last_name', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('last_name'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('last_name') }}</strong>
@@ -46,7 +58,7 @@
 	                        <div class="form-group {{ $errors->has('gamer_name') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Gamer Name', 'Gamer Name:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('gamer_name', (isset($user->userDetails->gamer_name) ? $user->userDetails->gamer_name : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('gamer_name', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('gamer_name'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('gamer_name') }}</strong>
@@ -58,7 +70,7 @@
 	                        <div class="form-group {{ $errors->has('mobile_number') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Mobile Number', 'Mobile Number:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('mobile_number', (isset($user->userDetails->mobile_number) ? $user->userDetails->mobile_number : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('mobile_number', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('mobile_number'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('mobile_number') }}</strong>
@@ -70,7 +82,7 @@
 	                        <div class="form-group {{ $errors->has('address_1') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Address 1', 'Address 1:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('address_1', (isset($user->userDetails->address_1) ? $user->userDetails->address_1 : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('address_1', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('address_1'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('address_1') }}</strong>
@@ -82,7 +94,7 @@
 	                        <div class="form-group {{ $errors->has('address_2') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Address 2', 'Address 2:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('address_2', (isset($user->userDetails->address_2) ? $user->userDetails->address_2 : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('address_2', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('address_2'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('address_2') }}</strong>
@@ -94,7 +106,7 @@
 	                        <div class="form-group {{ $errors->has('pincode') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Pincode', 'Pincode:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('pincode', (isset($user->userDetails->pincode) ? $user->userDetails->pincode : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('pincode', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('pincode'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('pincode') }}</strong>
@@ -106,7 +118,7 @@
 	                        <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
 	                        	{!! Form::label('City', 'City:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('city', (isset($user->userDetails->city) ? $user->userDetails->city : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('city', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('city'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('city') }}</strong>
@@ -118,7 +130,7 @@
 	                        <div class="form-group {{ $errors->has('state') ? 'has-error' : '' }}">
 	                        	{!! Form::label('State', 'State:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('state', (isset($user->userDetails->state) ? $user->userDetails->state : null), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('state', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('state'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('state') }}</strong>
@@ -127,17 +139,17 @@
 	                            </div>
 	                        </div>
 	                        
-	                        <div class="form-group {{ $errors->has('country') ? 'has-error' : '' }}">
+	                        <div class="form-group">
 	                        	{!! Form::label('Country', 'Country:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{{ Form::select('country_id', $countries, (isset($user->userDetails->country_id) ? $user->userDetails->country_id : null), array('class' => 'form-control mb')) }}
+	                        		{{ Form::select('country_id', $countries, null, array('class' => 'form-control mb')) }}
 	                            </div>
 	                        </div>
 	                        
 	                        <div class="form-group {{ $errors->has('coins') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Coins', 'Coins:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('coins', (isset($user->userDetails->coins) ? $user->userDetails->coins : 0), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('coins', 0, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('coins'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('coins') }}</strong>
@@ -149,7 +161,7 @@
 	                        <div class="form-group {{ $errors->has('winning_coins') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Winning Coins', 'Winning Coins:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('winning_coins', (isset($user->userDetails->winning_coins) ? $user->userDetails->winning_coins : 0), ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::text('winning_coins', 0, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('winning_coins'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('winning_coins') }}</strong>
@@ -165,6 +177,7 @@
 	                        		{{ Form::select('status', array('Active' => 'Active', 'Inactive' => 'Inactive', 'Deleted' => 'Deleted', 'Locked' => 'Locked', 'Suspended' => 'Suspended'), null, array('class' => 'form-control mb')) }}
 	                            </div>
 	                        </div>
+	                        
 	                        
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">

@@ -26,7 +26,10 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 	Route::get('/user', 'Admin\UserController@index')->name('admin.user.list');
+	Route::get('/user/add', 'Admin\UserController@add')->name('admin.user.add');
+	Route::post('/user/add', 'Admin\UserController@save')->name('admin.user.save');
 	Route::get('/user/edit/{userId}', 'Admin\UserController@edit')->name('admin.user.edit');
+	Route::post('/user/edit/{userId}', 'Admin\UserController@update')->name('admin.user.update');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

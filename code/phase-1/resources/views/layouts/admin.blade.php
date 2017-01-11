@@ -55,7 +55,12 @@
 			<ul class="ts-sidebar-menu">
 				<li class="ts-label">Main</li>
 				<li class="open"><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-				<li><a href="{{ url('/admin/user') }}"><i class="fa fa-dashboard"></i> User Manager</a></li>
+				<li><a href="#"><i class="fa fa-desktop"></i> User Manager</a>
+					<ul>
+						<li><a href="{{ url('/admin/user') }}">User List</a></li>
+						<li><a href="{{ url('/admin/user/add') }}">Add New User</a></li>
+					</ul>
+				</li>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">

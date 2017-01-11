@@ -32,4 +32,17 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\UserDetails');
     }
+    
+    /* public function getAttribute($key)
+    {
+    	$profile = Models\UserDetails::where('user_id', '=', $this->attributes['id'])->first()->toArray();
+    
+    	foreach ($profile as $attr => $value) {
+    		if (!array_key_exists($attr, $this->attributes)) {
+    			$this->attributes[$attr] = $value;
+    		}
+    	}
+    
+    	return parent::getAttribute($key);
+    } */
 }
