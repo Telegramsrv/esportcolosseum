@@ -40,5 +40,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 Auth::routes();
 
 Route::get('/home', 'User\HomeController@index')->name("user.home");
+Route::get('/verify-user-account/{verificationCode}', 'User\HomeController@verifyUserAccount')->name("user.verify-user-account");
 
 Route::get('logout', 'Auth\LoginController@logout')->name("logout");

@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyUserAccount;
 
 class RegisterController extends Controller
 {
@@ -78,7 +80,7 @@ class RegisterController extends Controller
     				'email' => $data['email'],
     				'password' => bcrypt($data['password']),
     				'ip_address' => request()->ip(),
-    				'status' => 'Active',
+    				'status' => 'Inactive',
     	]);
     	
     	$adminRole = Role::where("name", "=", "user")->firstOrCreate(
@@ -89,6 +91,8 @@ class RegisterController extends Controller
     		)
     	);
     	$user->attachRole($adminRole);
+    	
+    	Mail::to($user)->send(new VerifyUserAccount($user));
     	
     	if($user->id){
     		return response()->json([
