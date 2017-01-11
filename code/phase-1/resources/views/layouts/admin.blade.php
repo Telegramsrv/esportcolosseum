@@ -95,10 +95,10 @@
 	<script src="{!! asset('admin/js/fileinput.js') !!}"></script>
 	<script src="{!! asset('admin/js/chartData.js') !!}"></script>
 	<script src="{!! asset('admin/js/main.js') !!}"></script>
-	
+	<script src="{!! asset('admin/js/custom.js') !!}"></script>
 	<script>
 		
-	window.onload = function(){
+	/* window.onload = function(){
     
 		// Line chart from swirlData for dashReport
 		var ctx = document.getElementById("dashReport").getContext("2d");
@@ -117,7 +117,7 @@
 		var doctx = document.getElementById("chart-area4").getContext("2d");
 		window.myDoughnut = new Chart(doctx).Doughnut(doughnutData, {responsive : true});
 
-	}
+	} */
 	</script>
 </body>
 </html>
