@@ -7,7 +7,7 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						{!! Form::model($user, ['route' => ['admin.user.update', $user->id], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
-							<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                         	<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Email', 'Email:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
 	                        		{!! Form::text('email', null, ['class'=>'form-control mb', 'disabled'=>'disabled'] ); !!}
@@ -166,6 +166,25 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group">
+                             	 {!! Form::label('Image', 'Image:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-6">
+	                        		{!! Form::file('user_image', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('user_image'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('user_image') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div> 
+	                            
+	                            @if (isset($user->userDetails->user_image))
+	                             <div class="col-sm-4 user_profile_wrap" >
+	                        			<img class="user_profile" src="{{ url('storage/user/profile_pictures/'.$user->userDetails->user_image) }}">
+	                             </div>
+	                              @endif
+                         	</div>
+                         	
+                         	
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
 									<button class="btn btn-default" type="submit">Cancel</button>

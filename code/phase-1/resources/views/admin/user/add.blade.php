@@ -6,8 +6,8 @@
 				<h2 class="page-title">Add User</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
-						{!! Form::model(['route' => ['admin.user.save'], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
-							<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                        {!! Form::open(['route' => ['admin.user.save'], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}	
+                         	<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Email', 'Email:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
 	                        		{!! Form::text('email', null, ['class'=>'form-control mb'] ); !!}
@@ -178,6 +178,17 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group {{ $errors->has('user_image') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Image', 'Image:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{!! Form::file('user_image', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('user_image'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('user_image') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                        </div>
 	                        
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">

@@ -27,6 +27,8 @@
 	<link rel="stylesheet" href="{!! asset('admin/css/awesome-bootstrap-checkbox.css') !!}">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="{!! asset('admin/css/style.css') !!}">
+	<!-- Admin Custom Style -->
+	<link rel="stylesheet" href="{!! asset('admin/css/custom.css') !!}">
 
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

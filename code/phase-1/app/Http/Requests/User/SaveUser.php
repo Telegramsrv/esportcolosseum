@@ -28,6 +28,7 @@ class SaveUser extends FormRequest
     		case 'POST':
     			$validation = [
     				'email' 			=> 'sometimes|required|email|unique:users,email',
+    				'user_image'		=> 'sometimes|required|image|max:2000',
     				'password' 			=> 'sometimes|required|max:255',
     				'first_name' 		=> 'sometimes|required|max:255',
     				'last_name' 		=> 'sometimes|required|max:255',
@@ -40,7 +41,6 @@ class SaveUser extends FormRequest
     				'state' 			=> 'sometimes|required|max:255',
     				'coins' 			=> 'sometimes|required|numeric',
     				'winning_coins' 	=> 'sometimes|required|numeric',
-    				
     			];
     			
     			break;

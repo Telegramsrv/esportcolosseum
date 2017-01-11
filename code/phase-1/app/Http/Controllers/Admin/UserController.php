@@ -25,12 +25,6 @@ class UserController extends Controller
 	public function save(SaveUser $request){
 		$input 				= $request->all();
 		
-		
-		/* $request->user()->fill([
-				'password' => Hash::make($request->password)
-		])->save(); */
-		
-		
 		DB::table('users')->insert([
 			'email' => $input['email'], 
 			'password' => Hash::make($input['password']), 
@@ -40,13 +34,22 @@ class UserController extends Controller
 		
 		$user_id = DB::getPdo()->lastInsertId();
 
+		$input['user_image'] = '';
+		if($request->hasFile('user_image')){
+			$destinationPath 	= public_path('storage'.DIRECTORY_SEPARATOR.'user'.DIRECTORY_SEPARATOR.'profile_pictures'.DIRECTORY_SEPARATOR);
+			$file = $request->file('user_image');
+			$filename = time().'.'.$file->getClientOriginalExtension();
+			$file->move($destinationPath, $filename);
+			$input['user_image'] = $filename;
+		}
+		
 		DB::table('user_details')->insert([
 			'user_id' => $user_id,
 			'first_name' => $input['first_name'],
 			'last_name' => $input['last_name'],
 			'gamer_name' => $input['gamer_name'],
 			'mobile_number' => $input['mobile_number'],
-			//'user_image' => $input['user_image'],
+			'user_image' => $input['user_image'],
 			'address_1' => $input['address_1'],
 			'address_2' => $input['address_2'],
 			'pincode' => $input['pincode'],
@@ -73,6 +76,16 @@ class UserController extends Controller
             ->where('id', $userId)
             ->update(['status' => $input['status']]);
 	
+        $input['user_image'] = '';
+        if($request->hasFile('user_image')){
+            	$destinationPath 	= public_path('storage'.DIRECTORY_SEPARATOR.'user'.DIRECTORY_SEPARATOR.'profile_pictures'.DIRECTORY_SEPARATOR);
+            	//deleteMedia($destinationPath.$user->user_image);
+            	$file = $request->file('user_image');
+            	$filename = time().'.'.$file->getClientOriginalExtension();
+            	$file->move($destinationPath, $filename);
+            	$input['user_image'] = $filename;
+        }
+            
         DB::table('user_details')
             ->where('user_id', $userId)
             ->update([
@@ -80,7 +93,7 @@ class UserController extends Controller
 			'last_name' => $input['last_name'],
 			'gamer_name' => $input['gamer_name'],
 			'mobile_number' => $input['mobile_number'],
-			//'user_image' => $input['user_image'],
+			'user_image' => $input['user_image'],
 			'address_1' => $input['address_1'],
 			'address_2' => $input['address_2'],
 			'pincode' => $input['pincode'],
