@@ -82,7 +82,7 @@ class RegisterController extends Controller
     				'status' => 'Active',
     	]);
     	
-    	$adminRole = Role::where("name", "=", "user")->firstOrCreate(
+    	$userRole = Role::where("name", "=", "user")->firstOrCreate(
     		array(
     			'name' => 'user',
     			'display_name' => 'User',
@@ -90,7 +90,7 @@ class RegisterController extends Controller
     		)
     	);
         
-    	$user->attachRole($adminRole);
+    	$user->attachRole($userRole);
     	
     	if($user->id){
     		return response()->json([

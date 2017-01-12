@@ -47,7 +47,7 @@ class HomeController extends Controller
                     ]);
         }
         else{
-            return redirect()->intended(URL::route('dashboard'));
+            return redirect()->intended(URL::route('/'));
         }
 
 
