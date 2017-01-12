@@ -13,6 +13,9 @@ use DB;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Password;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotPasswordMail;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -39,7 +42,7 @@ class UserController extends Controller
 		]);
 		
 		$user_id = DB::getPdo()->lastInsertId();
-
+		
 		$input['user_image'] = '';
 		if($request->hasFile('user_image')){
 			$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
@@ -65,6 +68,17 @@ class UserController extends Controller
 			'created_at' => new \DateTime(),
 			'updated_at' => new \DateTime(),
 		]);
+		
+		
+		$user = User::findOrFail($user_id);
+		$userRole = Role::where("name", "=", "user")->firstOrCreate(
+				array(
+						'name' => 'user',
+						'display_name' => 'User',
+						'description' => 'User role for user'
+				)
+		);
+		$user->attachRole($userRole);
 		
  		$request->session()->flash('alert-success', 'User added successfully.');
  		return redirect()->route('admin.user.list');
@@ -173,17 +187,22 @@ class UserController extends Controller
 	public function resetPassword(SaveUser $request, $userId){
 		$user = User::findOrFail($userId);
 		
-		$response = Password::sendResetLink(array('email' => $user->email), function (Message $message) {
+		//Password reset link through Laravel
+		/* $response = Password::sendResetLink(array('email' => $user->email), function (Message $message) {
 			$message->subject($this->getEmailSubject());
-		});
+		}); */
 		
-		if($response == 'passwords.sent'){
-			$request->session()->flash('alert-success', 'Send Reset password link successfully.');
-		}
-		else{
-			$request->session()->flash('alert-danger', 'Error while sending reset password link.');
-		}
+		$newPassword = str_random(8);
 		
+		DB::table('users')
+			->where('id', $userId)
+			->update(['password' => bcrypt($newPassword)]);
+		
+		$user->password = $newPassword;
+		
+		Mail::to($user)->send(new ForgotPasswordMail ($user));
+		
+		$request->session()->flash('alert-success', 'Send Reset password link successfully.');
 		return redirect()->route('admin.user.list');
 	}
 	
