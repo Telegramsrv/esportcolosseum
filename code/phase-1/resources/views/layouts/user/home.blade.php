@@ -370,77 +370,11 @@
       			</div>
     		</div>
   		</footer>
-  		<div id="loginModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
-  			{!! Form::open(['route' => 'login', 'method' => 'post', 'id' => 'loginForm']) !!}
-	    		<div class="modal-content">
-	      			<h5 class="white-text center-align">LOGIN</h5>
-	      			<div class="error-messages hide"></div>
-	      			<div id="loginForm" class="modal-form-container">
-	            		<div class="row">
-	                		<div class="input-field col s12 m12">
-	                			{!! Form::email('email', '', ['class' => 'validate', 'id' => 'email', 'name' => 'email']) !!}
-	                			{!! Form::label('email', 'Email', ['data-error' => '', 'id' => 'emailLabel']) !!}
-	                		</div>
-	            		</div>
-	            		<div class="row">
-	                		<div class="input-field col s12 m12">
-	                			{!! Form::password('password', ['class' => 'validate', 'id' => 'password', 'name' => 'password']) !!}
-	                			{!! Form::label('password', 'Password', ['data-error' => '', 'id' => 'passwordLabel']) !!}
-	                		</div>
-	            		</div>
-	            		<div class="row">
-	            			<a id="loginSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Login</a>
-	            		</div>
-	      			</div>
-	    		</div>
-	    		<div class="modal-footer black">
-	      			<a href="javascript:void(0);" class="btn-flat white-text forgot-password-btn">Forgot password?</a>
-	      			<a href="javascript:void(0);" class="btn-flat white-text signup-btn" id="signupBtn">SIGNUP ></a>
-	    		</div>
-	    	{!! Form::close() !!}
-  		</div>
-  		<div id="signUpModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
-  			{!! Form::open(['route' => 'login', 'method' => 'post', 'id' => 'registerForm']) !!}
-	        	<div class="modal-content">
-	        		<h5 class="white-text center-align">SignUp</h5>
-	        		<div id="signupForm" class="modal-form-container">
-		                <div class="row">
-		                    <div class="input-field col s12 m12">
-		                        {!! Form::email('email', '', ['class' => 'validate', 'id' => 'email', 'name' => 'email']) !!}
-	                			{!! Form::label('email', 'Email', ['data-error' => '', 'id' => 'emailLabel']) !!}
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="input-field col s12 m12">
-		                        {!! Form::password('password', ['class' => 'validate', 'id' => 'password', 'name' => 'password']) !!}
-	                			{!! Form::label('password', 'Password', ['data-error' => '', 'id' => 'passwordLabel']) !!}
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="input-field col s12 m12">
-		                    	{!! Form::password('password', ['class' => 'validate', 'id' => 'password_confirmation', 'name' => 'password_confirmation']) !!}
-		                    	{!! Form::label('password_confirmation', 'Confirm Password', ['data-error' => '']) !!}
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="input-field col s12 m12">
-		                    	
-		                    	{!! Form::text('CaptchaCode', '', ['class' => 'validate', 'id' => 'CaptchaCode', 'name' => 'CaptchaCode']) !!}
-		                		{!! Form::label('captcha_code', '', ['data-error' => '', 'id' => 'captchaLabel']) !!}
-		                		{!! captcha_image_html('ContactCaptcha') !!}
-		                	</div>
-		                </div>		
-		                <div class="row">
-		                    <a id="registerSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Sign Up</a>
-		                </div>
-	        		</div>
-	        	</div>
-	       		<div class="modal-footer black">
-	        		<a href="javascript:void(0);" class="btn-flat white-text no-link-grey">Already registered?</a>
-	        		<a href="javascript:void(0);" class="btn-flat white-text login-btn" id="loginBtn">LOGIN ></a>
-	        	</div>
-	        {!! Form::close() !!}	
-    	</div>
+
+  		@include('user.partials.home.login')
+  		@include('user.partials.home.register')
+  		@include('user.partials.home.forgot-password')
+  		
     	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="{!! asset('user/js/materialize.js') !!}"></script>
 		<script src="{!! asset('user/js/init.js') !!}"></script>

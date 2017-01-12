@@ -1,4 +1,24 @@
 $(document).ready(function(){
+
+	$(".signup-btn").on("click",function(data){
+        $('#loginModal').closeModal();
+        $('#forgotPasswordModal').closeModal();
+        $('#signUpModal').openModal();
+
+    });
+
+    $(".login-btn").on("click",function(data){
+        $('#signUpModal').closeModal();
+        $('#forgotPasswordModal').closeModal();
+        $('#loginModal').openModal();
+    });
+
+    $(".forgot-password-btn").on("click", function(data){
+    	$('#signUpModal').closeModal();
+        $('#loginModal').closeModal();
+        $('#forgotPasswordModal').openModal();	
+    });
+
 	$("#loginSubmit").click(function(){
 		var loginForm = $("#loginForm");
 		var formData = loginForm.serialize();
@@ -45,8 +65,6 @@ $(document).ready(function(){
 		            	
 		            }
 	        	}
-	        	console.log(data); return false;
-	        	
 	        },
 	        error: function (data) {
 	        	var errors = data.responseJSON;
@@ -67,6 +85,35 @@ $(document).ready(function(){
 	        		$("#registerForm #captchaLabel").addClass("active");
 	        		$("#registerForm #CaptchaCode").addClass("invalid");
 	        		$("#registerForm #CaptchaCode").focus();	
+	        	}
+	        }
+	    });
+	});
+
+	$("#retrievePasswordSubmit").click(function(){
+		var forgotPasswordForm = $("#forgotPasswordForm");
+		var formData = forgotPasswordForm.serialize();
+		$.ajax({
+	        url:'forgot-password',
+	        type:'POST',
+	        data:formData,
+	        success:function(data){
+	        	if(data.success == true){
+	        		if(data.intended != undefined && data.intended != ""){
+	        			Materialize.toast(data.message, 4000,'',function(){
+	        				window.location = data.intended;
+	        			});
+		            	
+		            }
+	        	}
+	        },
+	        error: function (data) {
+	        	var errors = data.responseJSON;
+	        	if(errors.email != undefined && errors.email[0] != ""){
+	        		$("#forgotPasswordForm #emailLabel").attr("data-error", errors.email[0]);
+	        		$("#forgotPasswordForm #emailLabel").addClass("active");
+	        		$("#forgotPasswordForm #email").addClass("invalid");
+	        		$("#forgotPasswordForm #email").focus();
 	        	}
 	        }
 	    });
