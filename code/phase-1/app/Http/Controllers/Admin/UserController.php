@@ -5,17 +5,19 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\SaveUser;
 use App\Http\Requests\User\SaveCoins;
+use App\Http\Requests\User\PasswordRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Country;
 use DB;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 use Password;
 
 class UserController extends Controller
 {
 	public function index() {
-		$users = User::all();
+		$users = User::with('userDetails')->get();
 		return view("admin.user.index", compact('users'));
 	}
 	
@@ -31,7 +33,9 @@ class UserController extends Controller
 			'email' => $input['email'], 
 			'password' => Hash::make($input['password']), 
 			'ip_address' => $_SERVER['REMOTE_ADDR'], 
-			'status' => $input['status']
+			'status' => $input['status'],
+			'created_at' => new \DateTime(),
+			'updated_at' => new \DateTime(),
 		]);
 		
 		$user_id = DB::getPdo()->lastInsertId();
@@ -58,6 +62,8 @@ class UserController extends Controller
 			'city' => $input['city'],
 			'state' => $input['state'],
 			'country_id' => $input['country_id'],
+			'created_at' => new \DateTime(),
+			'updated_at' => new \DateTime(),
 		]);
 		
  		$request->session()->flash('alert-success', 'User added successfully.');
@@ -76,7 +82,7 @@ class UserController extends Controller
 		$input 				= $request->all();
 		DB::table('users')
             ->where('id', $userId)
-            ->update(['status' => $input['status']]);
+            ->update(['status' => $input['status'], 'updated_at' => new \DateTime()]);
 	
             
         if($user->userDetails){
@@ -107,6 +113,7 @@ class UserController extends Controller
 				'city' => $input['city'],
 				'state' => $input['state'],
 				'country_id' => $input['country_id'],
+				'updated_at' => new \DateTime(),
 				]);
         }
         else{
@@ -121,18 +128,20 @@ class UserController extends Controller
         	}
         	
         	DB::table('user_details')->insert([
-        	'user_id' => $userId,
-        	'first_name' => $input['first_name'],
-        	'last_name' => $input['last_name'],
-        	'gamer_name' => $input['gamer_name'],
-        	'mobile_number' => $input['mobile_number'],
-        	'user_image' => $input['user_image'],
-        	'address_1' => $input['address_1'],
-        	'address_2' => $input['address_2'],
-        	'pincode' => $input['pincode'],
-        	'city' => $input['city'],
-        	'state' => $input['state'],
-        	'country_id' => $input['country_id'],
+	        	'user_id' => $userId,
+	        	'first_name' => $input['first_name'],
+	        	'last_name' => $input['last_name'],
+	        	'gamer_name' => $input['gamer_name'],
+	        	'mobile_number' => $input['mobile_number'],
+	        	'user_image' => $input['user_image'],
+	        	'address_1' => $input['address_1'],
+	        	'address_2' => $input['address_2'],
+	        	'pincode' => $input['pincode'],
+	        	'city' => $input['city'],
+	        	'state' => $input['state'],
+	        	'country_id' => $input['country_id'],
+	        	'created_at' => new \DateTime(),
+	        	'updated_at' => new \DateTime(),
         	]);
         }
                         
@@ -146,7 +155,7 @@ class UserController extends Controller
 		//SOFT DELETE
 		DB::table('users')
 			->where('id', $userId)
-			->update(['status' => 'Deleted']);
+			->update(['status' => 'Deleted', 'updated_at' => new \DateTime()]);
 		
 		//HARD DELETE
 		/* if(isset($user->userDetails->user_image)){
@@ -188,13 +197,50 @@ class UserController extends Controller
 		
 		$input 				= $request->all();
 		
+		$coins = 0;
+		if(is_null($user->userDetails->coins)){
+			$coins = $input['coins'];
+		}
+		else{
+			$coins = $user->userDetails->coins + $input['coins'];
+		}
+		
+		if($input['coins'] >= 0 ){
+			$type = 'Credit';
+		}
+		else{
+			$type = 'Debit';
+		}
+		
 		DB::table('user_details')
 			->where('user_id', $userId)
-			->increment('coins', $input['coins']);
+			->update(['coins' => $coins, 'updated_at' => new \DateTime()]);
 			
-		//TODO ADD HISTORY
+		DB::table('coin_transections')->insert([
+			'user_id' => $userId,
+			'source_id' => 7,
+			'coins' => $input['coins'],
+			'transaction_type' => $type,
+			'challenge_id' => 0,
+			'created_at' => new \DateTime(),
+			'updated_at' => new \DateTime(),
+		]);
 			
 		$request->session()->flash('alert-success', 'Coin added successfully.');
+		return redirect()->route('admin.user.list');
+	}
+	
+	public function changePassword(){
+		$user = User::findOrFail(Auth::user()->id);
+		return view("admin.user.change-password", compact('user'));
+	}
+	
+	public function savePassword(PasswordRequest $request){
+		$request->user()->fill([
+				'password' => Hash::make($request->password)
+		])->save();
+	
+		$request->session()->flash('alert-success', 'Password updated successfully.');
 		return redirect()->route('admin.user.list');
 	}
 }
