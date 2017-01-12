@@ -135,31 +135,6 @@
 	                            </div>
 	                        </div>
 	                        
-	                        <div class="form-group {{ $errors->has('coins') ? 'has-error' : '' }}">
-	                        	{!! Form::label('Coins', 'Coins:', ['class' => 'col-sm-2 control-label required']) !!}
-	                        	<div class="col-sm-10">
-	                        		{!! Form::text('coins', (isset($user->userDetails->coins) ? $user->userDetails->coins : 0), ['class'=>'form-control mb'] ); !!}
-	                        		@if ($errors->has('coins'))
-	                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('coins') }}</strong>
-	                                    </span>
-	                                @endif
-	                            </div>
-	                        </div>
-	                        
-	                        <div class="form-group {{ $errors->has('winning_coins') ? 'has-error' : '' }}">
-	                        	{!! Form::label('Winning Coins', 'Winning Coins:', ['class' => 'col-sm-2 control-label required']) !!}
-	                        	<div class="col-sm-10">
-	                        		{!! Form::text('winning_coins', (isset($user->userDetails->winning_coins) ? $user->userDetails->winning_coins : 0), ['class'=>'form-control mb'] ); !!}
-	                        		@if ($errors->has('winning_coins'))
-	                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('winning_coins') }}</strong>
-	                                    </span>
-	                                @endif
-	                            </div>
-	                        </div>
-	                       
-	                        
 	                        <div class="form-group">
 	                        	{!! Form::label('Status', 'Status:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
@@ -188,7 +163,7 @@
                          	
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
-									<button class="btn btn-default" type="submit">Cancel</button>
+									<a class="btn btn-default button" href="/admin/user">Cancel</a>
 									<button class="btn btn-primary" type="submit">Save changes</button>
 								</div>
 							</div>

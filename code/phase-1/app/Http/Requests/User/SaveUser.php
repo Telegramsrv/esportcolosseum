@@ -39,8 +39,6 @@ class SaveUser extends FormRequest
     				'pincode' 			=> 'sometimes|required|numeric',
     				'city' 				=> 'sometimes|required|max:255',
     				'state' 			=> 'sometimes|required|max:255',
-    				'coins' 			=> 'sometimes|required|numeric',
-    				'winning_coins' 	=> 'sometimes|required|numeric',
     			];
     			
     			break;

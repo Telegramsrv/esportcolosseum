@@ -9,6 +9,7 @@ use App\User;
 use App\Models\Country;
 use DB;
 use Illuminate\Support\Facades\Hash;
+use Password;
 
 class UserController extends Controller
 {
@@ -56,8 +57,6 @@ class UserController extends Controller
 			'city' => $input['city'],
 			'state' => $input['state'],
 			'country_id' => $input['country_id'],
-			'coins' => $input['coins'],
-			'winning_coins' => $input['winning_coins'],
 		]);
 		
  		$request->session()->flash('alert-success', 'User added successfully.');
@@ -72,40 +71,69 @@ class UserController extends Controller
 	
 	public function update(SaveUser $request, $userId){
 		$user = User::findOrFail($userId);
+		
 		$input 				= $request->all();
 		DB::table('users')
             ->where('id', $userId)
             ->update(['status' => $input['status']]);
 	
-        $input['user_image'] = $user->userDetails->user_image;
-        if($request->hasFile('user_image')){
-            	$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
-            	if(isset($user->userDetails->user_image)){
-            		deleteMedia($destinationPath.$user->userDetails->user_image);
-            	}
-            	$file = $request->file('user_image');
-            	$filename = time().'.'.$file->getClientOriginalExtension();
-            	$file->move($destinationPath, $filename);
-            	$input['user_image'] = $filename;
-        }
             
-        DB::table('user_details')
-            ->where('user_id', $userId)
-            ->update([
-			'first_name' => $input['first_name'],
-			'last_name' => $input['last_name'],
-			'gamer_name' => $input['gamer_name'],
-			'mobile_number' => $input['mobile_number'],
-			'user_image' => $input['user_image'],
-			'address_1' => $input['address_1'],
-			'address_2' => $input['address_2'],
-			'pincode' => $input['pincode'],
-			'city' => $input['city'],
-			'state' => $input['state'],
-			'country_id' => $input['country_id'],
-			'coins' => $input['coins'],
-			'winning_coins' => $input['winning_coins'],
-			]);
+        if($user->userDetails){
+        	//Update User Details
+	        $input['user_image'] = isset($user->userDetails->user_image) ? $user->userDetails->user_image : '';
+	        if($request->hasFile('user_image')){
+	            	$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
+	            	if(isset($user->userDetails->user_image)){
+	            		deleteMedia($destinationPath.$user->userDetails->user_image);
+	            	}
+	            	$file = $request->file('user_image');
+	            	$filename = time().'.'.$file->getClientOriginalExtension();
+	            	$file->move($destinationPath, $filename);
+	            	$input['user_image'] = $filename;
+	        }
+	            
+	        DB::table('user_details')
+	            ->where('user_id', $userId)
+	            ->update([
+				'first_name' => $input['first_name'],
+				'last_name' => $input['last_name'],
+				'gamer_name' => $input['gamer_name'],
+				'mobile_number' => $input['mobile_number'],
+				'user_image' => $input['user_image'],
+				'address_1' => $input['address_1'],
+				'address_2' => $input['address_2'],
+				'pincode' => $input['pincode'],
+				'city' => $input['city'],
+				'state' => $input['state'],
+				'country_id' => $input['country_id'],
+				]);
+        }
+        else{
+        	//Insert User Details
+        	$input['user_image'] = '';
+        	if($request->hasFile('user_image')){
+        		$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
+        		$file = $request->file('user_image');
+        		$filename = time().'.'.$file->getClientOriginalExtension();
+        		$file->move($destinationPath, $filename);
+        		$input['user_image'] = $filename;
+        	}
+        	
+        	DB::table('user_details')->insert([
+        	'user_id' => $userId,
+        	'first_name' => $input['first_name'],
+        	'last_name' => $input['last_name'],
+        	'gamer_name' => $input['gamer_name'],
+        	'mobile_number' => $input['mobile_number'],
+        	'user_image' => $input['user_image'],
+        	'address_1' => $input['address_1'],
+        	'address_2' => $input['address_2'],
+        	'pincode' => $input['pincode'],
+        	'city' => $input['city'],
+        	'state' => $input['state'],
+        	'country_id' => $input['country_id'],
+        	]);
+        }
                         
 		$request->session()->flash('alert-success', 'User updated successfully.');
 		return redirect()->route('admin.user.edit', $userId);
@@ -114,15 +142,38 @@ class UserController extends Controller
 	public function delete(SaveUser $request, $userId) {
 		$user = User::findOrFail($userId);
 		
-		if(isset($user->userDetails->user_image)){
+		//SOFT DELETE
+		DB::table('users')
+			->where('id', $userId)
+			->update(['status' => 'Deleted']);
+		
+		//HARD DELETE
+		/* if(isset($user->userDetails->user_image)){
 			$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
 			deleteMedia($destinationPath.$user->userDetails->user_image);
 		}
 		
 		DB::table('users')->where('id', '=', $userId)->delete();
-		DB::table('user_details')->where('user_id', '=', $userId)->delete();
+		DB::table('user_details')->where('user_id', '=', $userId)->delete(); */
 		
 		$request->session()->flash('alert-success', 'User deleted successfully.');
+		return redirect()->route('admin.user.list');
+	}
+	
+	public function resetPassword(SaveUser $request, $userId){
+		$user = User::findOrFail($userId);
+		
+		$response = Password::sendResetLink(array('email' => $user->email), function (Message $message) {
+			$message->subject($this->getEmailSubject());
+		});
+		
+		if($response == 'passwords.sent'){
+			$request->session()->flash('alert-success', 'Send Reset password link successfully.');
+		}
+		else{
+			$request->session()->flash('alert-danger', 'Error while sending reset password link.');
+		}
+		
 		return redirect()->route('admin.user.list');
 	}
 }

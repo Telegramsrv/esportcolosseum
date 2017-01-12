@@ -30,7 +30,12 @@
 										<td>{{ isset($user->userDetails->last_name) ? $user->userDetails->last_name: ''}}</td>
 										<td>{{ isset($user->userDetails->coins) ? $user->userDetails->coins : 0 }}</td>
 										<td>{{ isset($user->status) ? $user->status : '' }}</td>
-										<td><a href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | <a href="#" onClick="return deleteUser({{ $user->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></td>
+										<td>
+											<a title="Edit" href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
+											<a title="Reset Password" href="#" onClick="return resetPassword({{ $user->id }});" ><i class="fa fa-key fa-lg" aria-hidden="true"></i></a> |
+											<a title="Add Coins" href="#"><i class="fa fa-money fa-lg" aria-hidden="true"></i></a> |
+											<a title="Delete" href="#" onClick="return deleteUser({{ $user->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+										</td>
 									</tr>
 								@endforeach
 							</tbody>
