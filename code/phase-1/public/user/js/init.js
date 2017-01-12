@@ -26,19 +26,6 @@
         
     });
 
-
-    $("#signupBtn").on("click",function(data){
-        $('#loginModal').closeModal();
-        $('#signUpModal').openModal();
-
-    });
-
-    $("#loginBtn").on("click",function(data){
-        $('#signUpModal').closeModal();
-        $('#loginModal').openModal();
-    });
-
-
   }); // end of document ready
 
 
