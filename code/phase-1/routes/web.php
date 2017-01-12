@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::post('/user/edit/{userId}', 'Admin\UserController@update')->name('admin.user.update');
 	Route::get('/user/delete/{userId}', 'Admin\UserController@delete')->name('admin.user.delete');
 	Route::get('/user/resetpassword/{userId}', 'Admin\UserController@resetPassword')->name('admin.user.resetpassword');
+	Route::get('/user/addcoins/{userId}', 'Admin\UserController@addCoins')->name('admin.user.addcoins');
+	Route::post('/user/addcoins/{userId}', 'Admin\UserController@saveCoins')->name('admin.user.savecoins');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

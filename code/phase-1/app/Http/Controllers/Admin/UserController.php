@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\User\SaveUser;
+use App\Http\Requests\User\SaveCoins;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Country;
@@ -174,6 +175,26 @@ class UserController extends Controller
 			$request->session()->flash('alert-danger', 'Error while sending reset password link.');
 		}
 		
+		return redirect()->route('admin.user.list');
+	}
+	
+	public function addCoins($userId){
+		$user = User::findOrFail($userId);
+		return view("admin.user.add-coins", compact('user'));
+	}
+	
+	public function saveCoins(SaveCoins $request, $userId){
+		$user = User::findOrFail($userId);
+		
+		$input 				= $request->all();
+		
+		DB::table('user_details')
+			->where('user_id', $userId)
+			->increment('coins', $input['coins']);
+			
+		//TODO ADD HISTORY
+			
+		$request->session()->flash('alert-success', 'Coin added successfully.');
 		return redirect()->route('admin.user.list');
 	}
 }
