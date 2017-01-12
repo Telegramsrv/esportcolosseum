@@ -169,6 +169,7 @@ return [
 
 		Zizaco\Entrust\EntrustServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
+        LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...

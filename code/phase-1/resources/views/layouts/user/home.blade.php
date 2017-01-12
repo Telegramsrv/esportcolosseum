@@ -15,6 +15,7 @@
   		<link href="{!! asset('user/css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
   		<link href="{!! asset('user/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet" />
   		<link href="{!! asset('user/css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
+  		<link href="{!! asset('user/css/esportcolosseum.css') !!}" type="text/css" rel="stylesheet" />
 	
 	    <!-- Scripts -->
 	    <script>
@@ -421,6 +422,14 @@
 		                    	{!! Form::label('password_confirmation', 'Confirm Password', ['data-error' => '']) !!}
 		                    </div>
 		                </div>
+		                <div class="row">
+		                    <div class="input-field col s12 m12">
+		                    	
+		                    	{!! Form::text('CaptchaCode', '', ['class' => 'validate', 'id' => 'CaptchaCode', 'name' => 'CaptchaCode']) !!}
+		                		{!! Form::label('captcha_code', '', ['data-error' => '', 'id' => 'captchaLabel']) !!}
+		                		{!! captcha_image_html('ContactCaptcha') !!}
+		                	</div>
+		                </div>		
 		                <div class="row">
 		                    <a id="registerSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Sign Up</a>
 		                </div>

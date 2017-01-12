@@ -62,6 +62,12 @@ $(document).ready(function(){
 	        		$("#registerForm #password").addClass("invalid");
 	        		$("#registerForm #password").focus();
 	        	}
+	        	else if(errors.CaptchaCode != undefined && errors.CaptchaCode[0] != ""){
+	        		$("#registerForm #captchaLabel").attr("data-error", errors.CaptchaCode[0]);
+	        		$("#registerForm #captchaLabel").addClass("active");
+	        		$("#registerForm #CaptchaCode").addClass("invalid");
+	        		$("#registerForm #CaptchaCode").focus();	
+	        	}
 	        }
 	    });
 	});

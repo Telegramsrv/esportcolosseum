@@ -26,6 +26,16 @@ class RegisterRequest extends FormRequest
         return [
             'email' => 'required|email|unique:users,email', 
         	'password' => 'required|min:6|confirmed',
+            'CaptchaCode' => 'required|valid_captcha'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'CaptchaCode.required' => 'Captcha field is required.',
+            'CaptchaCode.valid_captcha' => 'Captcha field is invalid.',
         ];
     }
 }
+
