@@ -34,7 +34,7 @@ class User extends Authenticatable
     }
 
     public function blogs(){
-        return $this->hasMAny('App\Models\Bog');   
+        return $this->hasMAny('App\Models\Blog');   
     }
     
     public function Transactions(){

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('/blog/add', 'Admin\BlogController@add')->name('admin.blog.add');
 	Route::post('/blog/add', 'Admin\BlogController@save')->name('admin.blog.save');
 	Route::get('/blog/edit/{blogId}', 'Admin\BlogController@edit')->name('admin.blog.edit');
-	Route::post('/blog/edit/{blogId}', 'Admin\BlogController@update')->name('admin.blog.update');
+	Route::put('/blog/edit/{blogId}', 'Admin\BlogController@update')->name('admin.blog.update');
 	Route::get('/blog/delete/{blogId}', 'Admin\BlogController@delete')->name('admin.blog.delete');
 	//  ----------------------------------------------------------  blog routes  End ----------------------------------------------------------------//
 });

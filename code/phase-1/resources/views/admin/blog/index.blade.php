@@ -15,7 +15,7 @@
 							<thead>
 								<tr>
 									<th>Title</th>
-									<th>User</th>
+									<th>Slug</th>
 									<th>Description</th>
 									<th>Display Image</th>
 									<th>Action</th>
@@ -25,12 +25,12 @@
 								@foreach ($blogs as $blog)
 									<tr>
 										<td>{{ $blog->title }}</td>
-										<td>{{ $blog->user->email }}</td>
+										<td>{{ $blog->slug }}</td>
 										<td>{{ $blog->description}}</td>
-										<td>{{ '' }}</td>
+										<td><img class="blog-disply-image" src="{{ url(env('UPLOAD_BLOG_THUMBNAIL').$blog->display_image) }}"></td>
 										<td>
-											<a title="Edit" href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
-											<a title="Delete" href="#" onClick="return deleteUser({{ $user->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+											<a title="Edit" href="{{ url('admin/blog/edit/'.$blog->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
+											<a title="Delete" href="#" onClick="return deleteBlog({{ $blog->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 										</td>
 									</tr>
 								@endforeach

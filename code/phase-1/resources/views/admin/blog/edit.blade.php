@@ -3,12 +3,10 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="page-title">Add Blog</h2>
+				<h2 class="page-title">Edit Blog</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
-                        {!! Form::open(['route' => ['admin.blog.save'], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}	
-                         	
-	                        
+					{!! Form::model($blog, ['route' => ['admin.blog.update', $blog->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 	                        <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Title', 'Title:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
@@ -47,7 +45,7 @@
 	                        
 	                        <div class="form-group {{ $errors->has('display_image') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Display Image', 'Display Image:', ['class' => 'col-sm-2 control-label required']) !!}
-	                        	<div class="col-sm-10">
+	                        	<div class="col-sm-3">
 	                        		{!! Form::file('display_image', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('display_image'))
 	                                    <span class="help-block">
@@ -55,11 +53,16 @@
 	                                    </span>
 	                                @endif
 	                            </div>
+	                            @if (isset($blog->display_image))
+	                            	<div class="col-sm-4 user_profile_wrap" >
+	                        			<img class="blog-disply-image" src="{{ url(env('UPLOAD_BLOG_THUMBNAIL').$blog->display_image) }}">
+	                             	</div>
+	                            @endif
 	                        </div>
 	                        
 	                        <div class="form-group {{ $errors->has('banner_image') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Banner Image', 'Banner Image:', ['class' => 'col-sm-2 control-label required']) !!}
-	                        	<div class="col-sm-10">
+	                        	<div class="col-sm-3">
 	                        		{!! Form::file('banner_image', null, ['class'=>'form-control mb'] ); !!}
 	                        		@if ($errors->has('banner_image'))
 	                                    <span class="help-block">
@@ -67,6 +70,11 @@
 	                                    </span>
 	                                @endif
 	                            </div>
+	                            @if (isset($blog->banner_image))
+	                            	<div class="col-sm-4 user_profile_wrap" >
+	                        			<img class="blog-banner-image" src="{{ url(env('UPLOAD_BLOG_BANNER').$blog->banner_image) }}">
+	                             	</div>
+	                            @endif
 	                        </div>
 	                        
 							<div class="form-group">

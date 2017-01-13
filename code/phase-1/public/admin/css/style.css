@@ -745,3 +745,7 @@ li {
   height: 100%;
   width: 100%;
 }
+
+.blog-disply-image, .blog-banner-image {
+	height: 50px;
+}

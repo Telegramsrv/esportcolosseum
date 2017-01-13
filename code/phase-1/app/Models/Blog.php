@@ -26,7 +26,7 @@ class Blog extends Model
 	 * Blog belongs to only one user.
 	 */
     public function user(){
-    	return $this->belongsTo('App\Models\User');
+    	return $this->belongsTo('App\User');
     }
 
 }

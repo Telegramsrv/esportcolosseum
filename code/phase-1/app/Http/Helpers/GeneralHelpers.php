@@ -45,6 +45,23 @@ function saveMedia($file, $destinationENVPath) {
 }
 
 /**
+ * This function is used to upload file.
+ *
+ * @param file - remove Filename
+ * @param string - Destination ENV Variable
+ *
+ *
+ */
+
+function removeMedia($file, $destinationENVPath) {
+	$destinationPath = public_path(env($destinationENVPath));
+	$mediaPath = $destinationPath.$file;
+	if (file_exists ( $mediaPath )) {
+		unlink ( $mediaPath );
+	}
+}
+
+/**
  * This function is used to return classname based on URL patterns provided.
  * 
  * @param string - URL path or pattenr to match
