@@ -26,7 +26,8 @@ class UserController extends Controller
 	
 	public function add() {
 		$countries = Country::orderBy('name')->pluck('name', 'id');
-		return view("admin.user.add", compact('countries'));
+		$roles = Role::orderBy('name')->pluck('name', 'id');
+		return view("admin.user.add", compact('countries', 'roles'));
 	}
 	
 	public function save(SaveUser $request){
@@ -71,14 +72,14 @@ class UserController extends Controller
 		
 		
 		$user = User::findOrFail($user_id);
-		$userRole = Role::where("name", "=", "user")->firstOrCreate(
-				array(
-						'name' => 'user',
-						'display_name' => 'User',
-						'description' => 'User role for user'
-				)
-		);
-		$user->attachRole($userRole);
+// 		$userRole = Role::where("name", "=", "user")->firstOrCreate(
+// 				array(
+// 						'name' => 'user',
+// 						'display_name' => 'User',
+// 						'description' => 'User role for user'
+// 				)
+// 		);
+		$user->attachRole($input['role']);
 		
  		$request->session()->flash('alert-success', 'User added successfully.');
  		return redirect()->route('admin.user.list');

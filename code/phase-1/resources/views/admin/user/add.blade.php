@@ -153,6 +153,13 @@
 	                            </div>
 	                        </div>
 	                        
+	                         <div class="form-group">
+	                        	{!! Form::label('Role', 'Role:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{{ Form::select('role', $roles, null, array('class' => 'form-control mb')) }}
+	                            </div>
+	                        </div>
+	                        
 	                        <div class="form-group {{ $errors->has('user_image') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Image', 'Image:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">

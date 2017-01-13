@@ -38,13 +38,13 @@ class SaveBlog extends FormRequest {
 						'slug' => 'sometimes|required|unique:blogs,id,'. $this->route()->getParameter('blogId'),
 				];
 				
-// 				if($this->request->hasFile('display_image')) {
-// 					$validation["display_image"] = 'sometimes|required|image|max:2000';
-// 				}
+				if($this->hasFile('display_image')) {
+					$validation["display_image"] = 'sometimes|required|image|max:2000';
+				}
 				
-// 				if($this->request->hasFile('banner_image')) {
-// 					$validation["banner_image"] = 'sometimes|required|image|max:5000';
-// 				}
+				if($this->hasFile('banner_image')) {
+					$validation["banner_image"] = 'sometimes|required|image|max:5000';
+				}
 			
 			default :
 				break;
