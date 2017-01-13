@@ -10,7 +10,8 @@ class BlogController extends Controller
 {
     
     public function index(){
-    	dd("Listing goes here!!");
+    	$blogs = Blog::orderBy("created_at", 'desc')->get();
+    	return view("user.blog.index")->with(['blogs' => $blogs]);
     }
 
     public function detail(Blog $blog){
