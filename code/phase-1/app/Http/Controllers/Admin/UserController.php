@@ -262,4 +262,11 @@ class UserController extends Controller
 		$request->session()->flash('alert-success', 'Password updated successfully.');
 		return redirect()->route('admin.user.list');
 	}
+	
+	public function transactionHistory($userId){
+		$user = User::findOrFail($userId);
+		$coinTransactions = $user->Transactions()->with('sourceTypes')->get();
+		return view("admin.user.transaction-history", compact('coinTransactions'));
+	}
+	
 }

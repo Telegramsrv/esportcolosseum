@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasMAny('App\Models\Bog');   
     }
     
+    public function Transactions(){
+    	return $this->hasMAny('App\Models\CoinTransections');
+    }
+    
+    
     /* public function getAttribute($key)
     {
     	$profile = Models\UserDetails::where('user_id', '=', $this->attributes['id'])->first()->toArray();
