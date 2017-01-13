@@ -63,6 +63,13 @@
 						<li><a href="{{ url('/admin/user/add') }}">Add New User</a></li>
 					</ul>
 				</li>
+				
+				<li><a href="#"><i class="fa fa-desktop"></i> Blog Managment</a>
+					<ul>
+						<li><a href="{{ url('/admin/blog') }}"> Blogs </a></li>
+						<li><a href="{{ url('/admin/blog/add') }}">Add New Blog	</a></li>
+					</ul>
+				</li>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">

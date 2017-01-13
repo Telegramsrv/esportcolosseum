@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('/user/transactionhistory/{userId}', 'Admin\UserController@transactionHistory')->name('admin.user.transactionhistory');
 	
 	//  ----------------------------------------------------------  blog routes  Start ----------------------------------------------------------------//
+	Route::get('/blog', 'Admin\BlogController@index')->name('admin.blog.list');
 	Route::get('/blog/add', 'Admin\BlogController@add')->name('admin.blog.add');
 	Route::post('/blog/add', 'Admin\BlogController@save')->name('admin.blog.save');
 	Route::get('/blog/edit/{blogId}', 'Admin\BlogController@edit')->name('admin.blog.edit');
