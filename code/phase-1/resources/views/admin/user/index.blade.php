@@ -34,6 +34,7 @@
 											<a title="Edit" href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
 											<a title="Reset Password" href="#" onClick="return resetPassword({{ $user->id }});" ><i class="fa fa-key fa-lg" aria-hidden="true"></i></a> |
 											<a title="Add Coins" href="{{ url('admin/user/addcoins/'.$user->id) }}"><i class="fa fa-money fa-lg" aria-hidden="true"></i></a> |
+											<a title="Transaction History" href="{{ url('admin/user/transactionhistory/'.$user->id) }}"><i class="fa fa-history fa-lg" aria-hidden="true"></i></a> |
 											<a title="Delete" href="#" onClick="return deleteUser({{ $user->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 										</td>
 									</tr>
