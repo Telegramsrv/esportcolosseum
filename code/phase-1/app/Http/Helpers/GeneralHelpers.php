@@ -24,6 +24,16 @@ function deleteMedia($mediaPath) {
 	}
 	/* } */
 }
+
+/**
+ * This function is used to upload file.
+ *
+ * @param file -Upload File
+ * @param string - Destination ENV Variable
+ *
+ * @return string - Uploaded Filename
+ *
+ */
 function saveMedia($file, $destinationENVPath) {
 	$destinationPath = public_path ( env ( $destinationENVPath ) );
 	$filename = time () . '.' . $file->getClientOriginalExtension ();
@@ -32,4 +42,18 @@ function saveMedia($file, $destinationENVPath) {
 	} else {
 		return "";
 	}
+}
+
+/**
+ * This function is used to return classname based on URL patterns provided.
+ * 
+ * @param string - URL path or pattenr to match
+ * @param string - Active class to be returned if path matches
+ * @param string - Inactive class to be returned if path does not match
+ *
+ * @return string - Class name (Active/Inactive) based on 
+ * 
+ */
+function setActive($path, $active = 'active', $inactive = '') {
+	 return call_user_func_array('Request::is', (array)$path) ? $active : $inactive;
 }
