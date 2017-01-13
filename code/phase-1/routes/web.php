@@ -46,6 +46,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 Auth::routes();
 
 Route::get('/home', 'User\HomeController@index')->name("user.home");
+Route::get('/blogs/{blogSlug}', 'User\BlogController@detail')->name("blog-detail");
 Route::post('/forgot-password', 'User\HomeController@forgotPassword')->name("forgot-password");
 
 Route::get('logout', 'Auth\LoginController@logout')->name("logout");

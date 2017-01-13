@@ -275,68 +275,7 @@
                 	</div>
             		<hr/>
         		</section>
-        		<section>
-          			<div class="section-title">Latest <span>Blogs</span></div>
-            		<div class="row">
-		                <div class="col s12 m3">
-		                    <div class="card hoverable">
-		                      <div class="card-image waves-effect waves-block waves-light">
-		                        <img src="{!! asset('user/images/user1.png') !!}" alt="" class="circle responsive-img">
-		                      </div>
-		                      <div class="card-content blue-grey darken-4">
-		                        <span class="card-title activator white-text text-darken-4">Blog Title<i class="material-icons right">more_vert</i></span>
-		                      </div>
-		                      <div class="card-reveal blue-grey darken-4">
-		                        <span class="card-title white-text text-darken-4">Blog Title<i class="material-icons right">close</i></span>
-		                        <p class="grey-text">Here is some more information about this product that is only revealed once clicked on.</p>
-		                      </div>
-		                    </div>
-		                </div>
-		                <div class="col s12 m3">
-		                    <div class="card hoverable">
-		                      <div class="card-image waves-effect waves-block waves-light">
-		                        <img class="activator" src="{!! asset('user/images/user2.png') !!}">
-		                      </div>
-		                      <div class="card-content blue-grey darken-4">
-		                        <span class="card-title activator white-text text-darken-4">Blog Title<i class="material-icons right">more_vert</i></span>
-		                      </div>
-		                      <div class="card-reveal blue-grey darken-4">
-		                        <span class="card-title white-text text-darken-4">Blog Title<i class="material-icons right">close</i></span>
-		                        <p class="grey-text">Here is some more information about this product that is only revealed once clicked on.</p>
-		                      </div>
-		                    </div>
-		                </div>
-		                <div class="col s12 m3">
-		                    <div class="card hoverable">
-		                      <div class="card-image waves-effect waves-block waves-light">
-		                        <img class="activator" src="{!! asset('user/images/user2.png') !!}">
-		                      </div>
-		                      <div class="card-content blue-grey darken-4">
-		                        <span class="card-title activator white-text text-darken-4">Blog Title<i class="material-icons right">more_vert</i></span>
-		                      </div>
-		                      <div class="card-reveal blue-grey darken-4">
-		                        <span class="card-title white-text text-darken-4">Blog Title<i class="material-icons right">close</i></span>
-		                        <p class="grey-text">Here is some more information about this product that is only revealed once clicked on.</p>
-		                      </div>
-		                    </div>
-		                </div>
-		                <div class="col s12 m3">
-		                    <div class="card hoverable">
-		                      <div class="card-image waves-effect waves-block waves-light">
-		                        <img class="activator" src="{!! asset('user/images/user1.png') !!}">
-		                      </div>
-		                      <div class="card-content blue-grey darken-4">
-		                        <span class="card-title activator white-text text-darken-4">Blog Title<i class="material-icons right">more_vert</i></span>
-		                      </div>
-		                      <div class="card-reveal blue-grey darken-4">
-		                        <span class="card-title white-text text-darken-4">Blog Title<i class="material-icons right">close</i></span>
-		                        <p class="grey-text">Here is some more information about this product that is only revealed once clicked on.</p>
-		                      </div>
-		                    </div>
-		                </div>                                    
-            		</div>
-          			<hr/>
-        		</section>
+        		@yield("blog-section");
     		</div>
 		</div>
 		<footer class="page-footer footer-black">

@@ -32,6 +32,10 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\UserDetails');
     }
+
+    public function blogs(){
+        return $this->hasMAny('App\Models\Bog');   
+    }
     
     /* public function getAttribute($key)
     {
