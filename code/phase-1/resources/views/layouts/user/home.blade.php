@@ -281,6 +281,5 @@
 		<script type="text/javascript" src="{!! asset('user/js/init.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/index.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/esportcolosseum.js') !!}"></script>
-		
 	</body>
 </html>

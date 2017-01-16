@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Game;
+use Route;
 
 class PassDataToLayoutsProvider extends ServiceProvider
 {
@@ -18,7 +19,7 @@ class PassDataToLayoutsProvider extends ServiceProvider
         view()->composer(['layouts.user.home', 'layouts.user.gamer-layout'], function($view)
         {
             $games = Game::All();
-            $view->with('games', $games);
+            $view->with(['games' => $games]);
         });
     }
 
