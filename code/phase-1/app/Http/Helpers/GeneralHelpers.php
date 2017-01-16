@@ -87,6 +87,5 @@ function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass =
 		'url' => route($route->getName(), ['gameSlug' => $gameSlug]),
 		'class' => ($currentParameter == $gameSlug ? $activeClass : $inactiveClass)
 	);		
-	die("hii");
 	return $navigation;
 }
