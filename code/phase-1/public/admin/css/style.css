@@ -746,6 +746,6 @@ li {
   width: 100%;
 }
 
-.blog-disply-image, .blog-banner-image {
+.blog-disply-image, .blog-banner-image, .game-disply-image, .game-banner-image {
 	height: 50px;
 }

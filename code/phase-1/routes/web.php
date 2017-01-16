@@ -48,15 +48,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	//  ----------------------------------------------------------  blog routes  End ----------------------------------------------------------------//
 	
 	//  ----------------------------------------------------------  Esc Challenge Template routes  Start ----------------------------------------------------------------//
-	
 	Route::get('/esc-challenge-template', 'Admin\EscChallengeTemplateController@index')->name('admin.esc-challenge-template.list');
 	Route::get('/esc-challenge-template/add', 'Admin\EscChallengeTemplateController@add')->name('admin.esc-challenge-template.add');
 	Route::post('/esc-challenge-template/add', 'Admin\EscChallengeTemplateController@save')->name('admin.esc-challenge-template.save');
 	Route::get('/esc-challenge-template/edit/{challengeId}', 'Admin\EscChallengeTemplateController@edit')->name('admin.esc-challenge-template.edit');
 	Route::put('/esc-challenge-template/edit/{challengeId}', 'Admin\EscChallengeTemplateController@update')->name('admin.esc-challenge-template.update');
 	Route::get('/esc-challenge-template/delete/{challengeId}', 'Admin\EscChallengeTemplateController@delete')->name('admin.esc-challenge-template.delete');
-	
 	//  ----------------------------------------------------------  Esc Challenge Template routes  End ----------------------------------------------------------------//
+	
+	//  ----------------------------------------------------------  Game routes Start ----------------------------------------------------------------//
+	Route::get('/game', 'Admin\GameController@index')->name('admin.game.list');
+	Route::get('/game/add', 'Admin\GameController@add')->name('admin.game.add');
+	Route::post('/game/add', 'Admin\GameController@save')->name('admin.game.save');
+	Route::get('/game/edit/{gameId}', 'Admin\GameController@edit')->name('admin.game.edit');
+	Route::put('/game/edit/{gameId}', 'Admin\GameController@update')->name('admin.game.update');
+	Route::get('/game/delete/{gameId}', 'Admin\GameController@delete')->name('admin.game.delete');
+	//  ----------------------------------------------------------  Game routes End ----------------------------------------------------------------//
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

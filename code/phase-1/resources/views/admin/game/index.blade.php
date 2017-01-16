@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('layouts.message')
-				<h2 class="page-title">Blogs</h2>
+				<h2 class="page-title">Games</h2>
 				<!-- Zero Configuration Table -->
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -15,24 +15,24 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Title</th>
+									<th>Name</th>
 									<th>Slug</th>
-									<th>Description</th>
-									<th>Display Image</th>
+									<th>Image</th>
+									<th>Status</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach ($blogs as $key => $blog)
+								@foreach ($games as $key => $game)
 									<tr>
 										<td>{{$key+1}}</td>
-										<td>{{ $blog->title }}</td>
-										<td>{{ $blog->slug }}</td>
-										<td>{{ $blog->description}}</td>
-										<td><img class="blog-disply-image" src="{{ url(env('UPLOAD_BLOG_THUMBNAIL').$blog->display_image) }}"></td>
+										<td>{{ $game->name }}</td>
+										<td>{{ $game->slug }}</td>
+										<td><img class="game-disply-image" src="{{ url(env('UPLOAD_GAME_THUMBNAIL').$game->image) }}"></td>
+										<td>{{ $game->status }}</td>
 										<td>
-											<a title="Edit" href="{{ url('admin/blog/edit/'.$blog->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
-											<a title="Delete" href="#" onClick="return deleteBlog({{ $blog->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+											<a title="Edit" href="{{ url('admin/game/edit/'.$game->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
+											<a title="Delete" href="#" onClick="return deleteGame({{ $game->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 										</td>
 									</tr>
 								@endforeach

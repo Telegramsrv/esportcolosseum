@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('layouts.message')
-				<h2 class="page-title">Blogs</h2>
+				<h2 class="page-title">Esc challenge Templates</h2>
 				<!-- Zero Configuration Table -->
 				<div class="panel panel-default">
 					<div class="panel-body">
