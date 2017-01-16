@@ -1,4 +1,14 @@
 @extends('layouts.user.gamer-layout')
+
+@section('game-info')
+    <section>
+        <div class="game-banner z-depth-2">
+            <div class="game-banner-title text-shadow">{!! $selectedGame->name !!}</div>
+            <img src="{!! url(env('UPLOAD_GAME_BANNER', 'storage/games/large/').$selectedGame->banner_image) !!}" />
+        </div>
+    </section>
+@endsection
+
 @section('gamer-content')
 <section>
 	<div class="section-title">Match <span>History</span></div>

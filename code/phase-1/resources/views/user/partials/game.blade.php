@@ -12,7 +12,7 @@
 		<div class="side-nav-row {!! $navigation['class'] !!}">
 			<div class="image-container">
 				<a href="{!! $navigation['url'] !!}">
-					<img src="{!! url(env('UPLOAD_GAME_PATH', 'storage/games/').$game->image) !!}" />
+					<img src="{!! url(env('UPLOAD_GAME_THUMBNAIL', 'storage/games/small/').$game->image) !!}" />
 					<div class="image-overlay"></div>
 				</a>
 			</div>

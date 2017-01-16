@@ -48,7 +48,9 @@
 						@include("user.partials.game", ['games' => $games]);
 					</div>
 				</div>
-        		<a id="logo-container" href="#" class="brand-logo"><img src="images/logo.png" /></a>
+        		<a id="logo-container" href="{!! route('user.home') !!}" class="brand-logo">
+        			<img src="{!! asset('user/images/logo.png') !!}" />
+        		</a>
         		<ul class="right">
             		<li>
             			<a href="#!" class="white-text">
@@ -80,12 +82,7 @@
 				@include("user.partials.game", ['games' => $games, 'extraClass' => 'mobile_res'])
 			</div>
 			<div class="main-content">
-				<section>
-		            <div class="game-banner z-depth-2">
-		                <div class="game-banner-title text-shadow">Dota 2</div>
-		                <img src="{!! url('user/images/dota-banner-1.jpg') !!}" class="game-banner-image" />
-		            </div>
-		        </section>
+				@yield("game-info")
 				<section class="challenge-types">
 		            <div class="row">
 		                <div class="col s12 m6">
@@ -94,7 +91,7 @@
 		                            <div class="title text-shadow">ESC</div>
 		                            <div class="subtitle text-shadow">CHALLENGES</div>
 		                        </div>
-		                        <img src="images/tournament-bg.jpg" />
+		                        <img src="{!! asset('user/images/tournament-bg.jpg') !!}" />
 		                        <div class="image-overlay"></div>
 		                    </div>
 		                </div>
@@ -104,7 +101,7 @@
 		                            <div class="title text-shadow">OPEN</div>
 		                            <div class="subtitle text-shadow">CHALLENGES</div>
 		                        </div>
-		                        <img src="images/chalange-bg.jpg" />
+		                        <img src="{!! asset('user/images/chalange-bg.jpg') !!}" />
 		                        <div class="image-overlay"></div>
 		                    </div>
 		                </div>

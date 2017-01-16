@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Models\Blog;
+use App\Models\Game;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,8 +26,12 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
         Route::bind('blogSlug', function($value) {
             return Blog::where('slug', $value)->firstOrFail();
+        });
+        Route::bind('gameSlug', function($value) {
+            return Game::where('slug', $value)->firstOrFail();
         });
     }
 

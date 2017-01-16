@@ -78,14 +78,13 @@ function setActive($path, $active = 'active', $inactive = '') {
 
 function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass = "inactive"){
 	$navigations = array();
-
 	$route = Route::current();
-	//echo "<pre>"; print_r($games); die("</pre>");
-	$currentParameter = $route->getParameter('gameSlug', env('DEFAULT_GAME_SLUG', 'counter-strike'));
+	$currentGame = $route->getParameter('gameSlug', env('DEFAULT_GAME_SLUG', 'counter-strike'));
 
 	$navigation = array(
 		'url' => route($route->getName(), ['gameSlug' => $gameSlug]),
-		'class' => ($currentParameter == $gameSlug ? $activeClass : $inactiveClass)
+		'class' => ($currentGame->slug == $gameSlug ? $activeClass : $inactiveClass)
 	);		
+	
 	return $navigation;
 }

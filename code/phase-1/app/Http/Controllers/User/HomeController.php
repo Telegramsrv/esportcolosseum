@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Models\Blog;
+use App\Models\Game;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use Illuminate\Support\Facades\URL;
@@ -15,9 +16,9 @@ use App\Mail\ForgotPasswordMail;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Game $selectedGame){
         $blogs = Blog::latestFour()->get();
-    	return view("user.home.index")->with(['blogs' => $blogs]);
+    	return view("user.home.index")->with(['blogs' => $blogs, 'selectedGame' => $selectedGame]);
     }
     
     /*
