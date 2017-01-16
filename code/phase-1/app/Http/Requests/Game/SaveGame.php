@@ -24,21 +24,22 @@ class SaveGame extends FormRequest {
 		switch ($this->method ()) {
 			case 'POST' :
 				$validation = [ 
-						'name' => 'required|unique:game_master,id|max:255',
-						'menu_image' => 'sometimes|required|image',
-						'banner_image' => 'sometimes|required|image',
+						'name' => 'required|max:255',
+						'slug' => 'required|unique:games,slug|max:255',
+						'image' => 'required|image',
+						'banner_image' => 'required|image',
 				];
 				
 				break;
 			
 			case 'PUT' :
 				$validation = [
-						'title' => 'sometimes|required|max:255',
-						'name' => 'required||max:255|unique:game_master,id,'. $this->route()->getParameter('gameId'),
+						'name' => 'required|max:255',
+						'slug' => 'sometimes|required||max:255|unique:games,id,'. $this->route()->getParameter('gameId'),
 				];
 				
-				if($this->hasFile('menu_image')) {
-					$validation["menu_image"] = 'required|image';
+				if($this->hasFile('image')) {
+					$validation["image"] = 'required|image';
 				}
 				
 				if($this->hasFile('banner_image')) {

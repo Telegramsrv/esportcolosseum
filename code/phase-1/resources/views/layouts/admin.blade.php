@@ -77,6 +77,13 @@
 						<li><a href="{{ url('/admin/esc-challenge-template/add') }}">Add New Esc Challenge Template	</a></li>
 					</ul>
 				</li>
+				
+				<li><a href="#"><i class="fa fa-desktop"></i> Game Managment</a>
+					<ul>
+						<li><a href="{{ url('/admin/game') }}"> Games </a></li>
+						<li><a href="{{ url('/admin/game/add') }}">Add New Game </a></li>
+					</ul>
+				</li>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">

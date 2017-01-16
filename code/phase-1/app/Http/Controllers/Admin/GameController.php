@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class GameController extends Controller
 {
 	public function index() {
-		$games = Game::with('user')->get();
+		$games = Game::all();
 		return view("admin.game.index", compact('games'));
 	}
 	
@@ -20,12 +20,12 @@ class GameController extends Controller
 		return view("admin.game.add");
 	}
 	
-	public function save(SaveBlog $request){
+	public function save(SaveGame $request){
 		$input = $request->all();
 		
 		//save 	display_image
-		if(!empty($request->hasFile('menu_image'))){
-			$input['display_image'] = saveMedia($request->file('menu_image'), 'UPLOAD_GAME_MENU_IMAGE');
+		if(!empty($request->hasFile('image'))){
+			$input['image'] = saveMedia($request->file('image'), 'UPLOAD_GAME_THUMBNAIL');
 		}
 		//save	banner_image
 		if(!empty($request->hasFile('banner_image'))){
@@ -43,20 +43,20 @@ class GameController extends Controller
 		return view("admin.game.edit", compact('game'));
 	}
 	
-	public function update(SaveBlog $request, $gameId){
+	public function update(SaveGame $request, $gameId){
 		$game = Game::findOrFail($gameId);
 		$input = $request->all();
 		//update display_image
-		if(!empty($request->hasFile('menu_image'))){
-			if(!empty($blog->menu_image)){
-				removeMedia($blog->menu_image, 'UPLOAD_GAME_MENU_IMAGE');
+		if(!empty($request->hasFile('image'))){
+			if(!empty($game->image)){
+				removeMedia($game->image, 'UPLOAD_GAME_THUMBNAIL');
 			}
-			$input['menu_image'] = saveMedia($request->file('menu_image'), 'UPLOAD_GAME_MENU_IMAGE');
+			$input['image'] = saveMedia($request->file('image'), 'UPLOAD_GAME_THUMBNAIL');
 		}
 		//update banner_image
 		if(!empty($request->hasFile('banner_image'))){
-			if(!empty($blog->banner_image)){
-				removeMedia($blog->banner_image, 'UPLOAD_BLOG_BANNER');
+			if(!empty($game->banner_image)){
+				removeMedia($game->banner_image, 'UPLOAD_GAME_BANNER');
 			}
 			$input['banner_image'] = saveMedia($request->file('banner_image'), 'UPLOAD_GAME_BANNER');
 		}
@@ -65,9 +65,10 @@ class GameController extends Controller
 		return redirect()->route('admin.game.list');
 	}
 	
-	public function delete(SaveBlog $request, $gameId) {
-		$blog = Game::findOrFail($gameId);
-		$blog->delete();
+	public function delete(SaveGame $request, $gameId) {
+		$game = Game::findOrFail($gameId);
+		$game->status = "Deleted";
+		$game->save();
 		return redirect()->route('admin.game.list');
 	}
 	
