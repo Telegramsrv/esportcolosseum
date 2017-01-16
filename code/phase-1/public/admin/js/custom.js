@@ -35,6 +35,13 @@
 	 return false;
  }
  
+ function deleteGame(gameId){
+	 var r = confirm("Are you sure that you want to delete this game?");
+	 if (r == true) {
+		window.location ='/admin/game/delete/'+gameId;
+	 }
+	 return false;
+ }
  
  
  
