@@ -70,6 +70,13 @@
 						<li><a href="{{ url('/admin/blog/add') }}">Add New Blog	</a></li>
 					</ul>
 				</li>
+				
+				<li><a href="#"><i class="fa fa-desktop"></i> Esc Challenge Template Managment</a>
+					<ul>
+						<li><a href="{{ url('/admin/esc-challenge-template') }}"> Esc Challenge Templates </a></li>
+						<li><a href="{{ url('/admin/esc-challenge-template/add') }}">Add New Esc Challenge Template	</a></li>
+					</ul>
+				</li>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">

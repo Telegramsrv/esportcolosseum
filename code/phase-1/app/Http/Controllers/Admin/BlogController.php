@@ -61,8 +61,8 @@ class BlogController extends Controller
 			$input['banner_image'] = saveMedia($request->file('banner_image'), 'UPLOAD_BLOG_BANNER');
 		}
 		$blog->update($input);
-		$request->session()->flash('alert-success', 'BLog updated successfully.');
-		return redirect()->route('admin.blog.edit', $blog->id);
+		$request->session()->flash('alert-success', 'Blog updated successfully.');
+		return redirect()->route('admin.blog.list');
 	}
 	
 	public function delete(SaveBlog $request, $blogId) {
@@ -70,6 +70,5 @@ class BlogController extends Controller
 		$blog->delete();
 		return redirect()->route('admin.blog.list');
 	}
-	
 	
 }
