@@ -5,11 +5,16 @@
 	  	</div>
 	</div>
 	@php ($i = 1)
+	@php ($navigation = [])
+	
 	@foreach ($games as $game)
-		<div class="side-nav-row {{ $i%3 == 1 ? 'active-game' : '' }}">
+		@php($navigation = setNavigationForGame($game->slug), 'active-game', ''))
+		<div class="side-nav-row {!! $navigation['class'] !!}">
 			<div class="image-container">
-				<img src="{!! url(env('UPLOAD_GAME_PATH', 'storage/games/').$game->image) !!}" />
-				<div class="image-overlay"></div>
+				<a href="{!! $navigation['url'] !!}">
+					<img src="{!! url(env('UPLOAD_GAME_PATH', 'storage/games/').$game->image) !!}" />
+					<div class="image-overlay"></div>
+				</a>
 			</div>
 		</div>
 		@php ($i++)	
