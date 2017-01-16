@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserDetails extends Model
 {
-	protected $guarded = array();
+	protected $guarded = ['id', 'user_id'];
 	
 	public function user()
 	{
