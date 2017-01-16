@@ -8,7 +8,7 @@
 	@php ($navigation = [])
 	
 	@foreach ($games as $game)
-		@php($navigation = setNavigationForGame($game->slug), 'active-game', ''))
+		@php($navigation = setNavigationForGame($game->slug, 'active-game', ''))
 		<div class="side-nav-row {!! $navigation['class'] !!}">
 			<div class="image-container">
 				<a href="{!! $navigation['url'] !!}">
