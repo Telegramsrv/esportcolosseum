@@ -46,6 +46,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::put('/blog/edit/{blogId}', 'Admin\BlogController@update')->name('admin.blog.update');
 	Route::get('/blog/delete/{blogId}', 'Admin\BlogController@delete')->name('admin.blog.delete');
 	//  ----------------------------------------------------------  blog routes  End ----------------------------------------------------------------//
+	
+	//  ----------------------------------------------------------  Esc Challenge Template routes  Start ----------------------------------------------------------------//
+	
+	Route::get('/esc-challenge-template', 'Admin\EscChallengeTemplateController@index')->name('admin.esc-challenge-template.list');
+	Route::get('/esc-challenge-template/add', 'Admin\EscChallengeTemplateController@add')->name('admin.esc-challenge-template.add');
+	Route::post('/esc-challenge-template/add', 'Admin\EscChallengeTemplateController@save')->name('admin.esc-challenge-template.save');
+	Route::get('/esc-challenge-template/edit/{challengeId}', 'Admin\EscChallengeTemplateController@edit')->name('admin.esc-challenge-template.edit');
+	Route::put('/esc-challenge-template/edit/{challengeId}', 'Admin\EscChallengeTemplateController@update')->name('admin.esc-challenge-template.update');
+	Route::get('/esc-challenge-template/delete/{challengeId}', 'Admin\EscChallengeTemplateController@delete')->name('admin.esc-challenge-template.delete');
+	
+	//  ----------------------------------------------------------  Esc Challenge Template routes  End ----------------------------------------------------------------//
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

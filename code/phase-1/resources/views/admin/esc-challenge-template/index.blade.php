@@ -14,25 +14,21 @@
 							cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<th>Title</th>
-									<th>Slug</th>
-									<th>Description</th>
-									<th>Display Image</th>
+									<th>#</th>
+									<th>Joining Coins</th>
+									<th>Winning Coins</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach ($blogs as $key => $blog)
+								@foreach ($escChallengeTemplates as $key => $escChallengeTemplate)
 									<tr>
-										<th>#</th>
 										<td>{{$key+1}}</td>
-										<td>{{ $blog->title }}</td>
-										<td>{{ $blog->slug }}</td>
-										<td>{{ $blog->description}}</td>
-										<td><img class="blog-disply-image" src="{{ url(env('UPLOAD_BLOG_THUMBNAIL').$blog->display_image) }}"></td>
+										<td>{{ $escChallengeTemplate->joining_coins }}</td>
+										<td>{{ $escChallengeTemplate->winning_coins }}</td>
 										<td>
-											<a title="Edit" href="{{ url('admin/blog/edit/'.$blog->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
-											<a title="Delete" href="#" onClick="return deleteBlog({{ $blog->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+											<a title="Edit" href="{{ url('admin/esc-challenge-template/edit/'.$escChallengeTemplate->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
+											<a title="Delete" href="#" onClick="return deleteEscChallengeTemplate({{ $escChallengeTemplate->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 										</td>
 									</tr>
 								@endforeach
