@@ -80,14 +80,7 @@
     		</div>
 		</div>
 		<div class="no-pad-bot main-container" style="overflow:hidden;" >
-		    <div class="left-side-nav mobile_res">
-		      	<div class="btn_area">
-		          	<div class="card-panel hoverable nav-bar-card deep-orange darken-4">
-		            	<div class="sidebar-title text-shadow">GAMES</div>
-		          	</div>
-		      	</div>
-      			@yield("game-section");
-		    </div>
+      		@include("user.partials.game", ['games' => $games]);
     		<div class="main-content mob_main_conten">
        	 		<section class="">
             		<div class="section-title ">Upcoming <span>Games</span></div>
@@ -279,9 +272,9 @@
     		</div>
 		</div>
 		@include('layouts.user.partials.footer')
-  		@include('user.partials.home.login')
-  		@include('user.partials.home.register')
-  		@include('user.partials.home.forgot-password')
+  		@include('layouts.user.partials.login')
+  		@include('layouts.user.partials.register')
+  		@include('layouts.user.partials.forgot-password')
   		
     	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="{!! asset('user/js/materialize.js') !!}"></script>
