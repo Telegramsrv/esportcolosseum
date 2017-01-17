@@ -83,41 +83,21 @@
 			</div>
 			<div class="main-content">
 				@yield("game-info")
-				<section class="challenge-types">
-		            <div class="row">
-		                <div class="col s12 m6">
-		                    <div class="challenge-type-container valign-wrapper">
-		                        <div class="challenge-title valign">
-		                            <div class="title text-shadow">ESC</div>
-		                            <div class="subtitle text-shadow">CHALLENGES</div>
-		                        </div>
-		                        <img src="{!! asset('user/images/tournament-bg.jpg') !!}" />
-		                        <div class="image-overlay"></div>
-		                    </div>
-		                </div>
-		                <div class="col s12 m6">
-		                    <div class="challenge-type-container valign-wrapper">
-		                        <div class="challenge-title valign">
-		                            <div class="title text-shadow">OPEN</div>
-		                            <div class="subtitle text-shadow">CHALLENGES</div>
-		                        </div>
-		                        <img src="{!! asset('user/images/chalange-bg.jpg') !!}" />
-		                        <div class="image-overlay"></div>
-		                    </div>
-		                </div>
-		            </div>
-		        </section>
+				@yield("game-challenge")
 		        @yield("gamer-content")
 			</div>
 		</div>
 		@include('layouts.user.partials.footer')
 		@include('layouts.user.partials.add-coin')
+		@yield('create-game-challenge')
+		
 		
 		<script type="text/javascript" src="{!! asset('user/js/jquery.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/bootstrap.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/materialize.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/init.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/dashboard.js') !!}"></script>
+		<script type="text/javascript" src="{!! asset('user/js/challenge-list.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/esportcolosseum.js') !!}"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){

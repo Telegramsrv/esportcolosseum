@@ -4,3 +4,7 @@
 	display: block;
 	float: left;
 }
+
+.challenge-team-field{
+	display: none;
+}

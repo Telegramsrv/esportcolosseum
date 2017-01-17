@@ -40,6 +40,15 @@ class User extends Authenticatable
     public function Transactions(){
     	return $this->hasMAny('App\Models\CoinTransections');
     }
+
+    /**
+     * User can have many challenges
+     * @return App\Models\Challenge set of challenges created by User.
+     */
+    public function challenges(){
+        return $this->hasMany('App\Models\Challenge');
+    }
+
     
     
     /* public function getAttribute($key)

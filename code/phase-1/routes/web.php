@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
 	Route::get('/', 'User\DashboardController@index')->name('user.home');
 	Route::get('/dashboard/{gameSlug?}', 'User\DashboardController@index')->name('user.dashboard')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
+	Route::get('/open-challenge/{gameSlug}', 'User\ChallengeController@listOpenChallenges')->name('user.open-challenge.list');
+	Route::post('/save-challenge', 'User\ChallengeController@saveOpenChallenge')->name('user.open-challenge.save');
+	Route::get('/esc-challenge/{gameSlug?}', 'User\ChallengeController@listESCChallenges')->name('user.esc-challenge.list');
 });
 
 Auth::routes();

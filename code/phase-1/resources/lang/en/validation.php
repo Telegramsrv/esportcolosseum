@@ -94,7 +94,8 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    'check_coins_balance' => 'You don\'t have enough coins.',
+    'is_multiple_of_five' => 'Coins are not mutliple of 5.' ,
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
