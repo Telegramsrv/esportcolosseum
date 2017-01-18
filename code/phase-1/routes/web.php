@@ -80,7 +80,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/open-challenge/{gameSlug}', 'User\ChallengeController@listOpenChallenges')->name('user.open-challenge.list');
 	Route::post('/save-challenge/{gameSlug}', 'User\ChallengeController@saveOpenChallenge')->name('user.open-challenge.save');
 	Route::get('/esc-challenge/{gameSlug?}', 'User\ChallengeController@listESCChallenges')->name('user.esc-challenge.list');
-	Route::get('/my-challenge/{gameSlug}', 'User\ChallengeController@myChallengelist')->name('user.my-challenge.list');
+	Route::get('/my-challenge/{gameSlug}/{name?}', 'User\ChallengeController@myChallengelist')->name('user.my-challenge.list');
 });
 
 Auth::routes();

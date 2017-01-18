@@ -18,10 +18,10 @@ class ChallengeController extends Controller
 		$regions = Region::all()->pluck('name', 'id');	
 		$regions->prepend("Select Region", '');
 		$challengeModes = ['' => 'Select Mode', 'captain-pick' => 'Captain\'s Pick', 'team' => 'Team'];
-		return view("user.challenge.create-open-challenge")->with(['selectedGame' => $selectedGame, 'regions' => $regions, 'challengeModes' => $challengeModes]);
+		return view("user.challenge.challenge-list")->with(['selectedGame' => $selectedGame, 'regions' => $regions, 'challengeModes' => $challengeModes]);
 	}
 
-	public function saveOpenChallenge(createOpenChallengeRequest $request){
+	public function saveOpenChallenge(createOpenChallengeRequest $request, Game $selectedGame){
 		$input = $request->all();
 		$team = Team::Create(['name' => $input['team_name']]);
 		unset($input['team_name']);
@@ -36,11 +36,14 @@ class ChallengeController extends Controller
 	    	return response()->json([
 	    		'success' => true,
 	    		'message' => 'You have created challenge successfully.',
+	    		'intended' => route('user.my-challenge.list', ['gameSlug' => $selectedGame->slug, 'name' => $challenge->name])
 	    	]);
 	    }
 	}
 
-	public function myChallengelist(Game $selectedGame){
-		dd($selectedGame);
+	public function myChallengelist(Game $selectedGame, $name){
+		$user = Auth::user();
+		$myChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $name)->get();
+		return view("user.challenge.my-challenge-list")->with(['selectedGame' => $selectedGame, 'myChallenges' => $myChallenges]);
 	}
 }

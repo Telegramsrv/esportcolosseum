@@ -1,6 +1,7 @@
 <div id="createChallengeModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
-    {!! Form::open(['route' => 'user.open-challenge.save', 'method' => 'post', 'id' => 'createChallengeForm']) !!}
+    {!! Form::open(['route' => ['user.open-challenge.save', $selectedGame->slug], 'method' => 'post', 'id' => 'createChallengeForm']) !!}
         {!! Form::hidden('game_id', $selectedGame->id) !!}
+        {!! Form::hidden('name', $challengeName) !!}
         <div class="modal-content">
             <h5 class="white-text center-align">Create Challenge</h5>
             <div id="signupForm" class="modal-form-container">

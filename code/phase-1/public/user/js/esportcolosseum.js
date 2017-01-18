@@ -141,7 +141,7 @@ $(document).ready(function(){
 	        success:function(data){
 	        	if(data.success == true){
 	        		Materialize.toast(data.message, 4000,'',function(){
-        				window.location.reload();
+        				window.location = data.intended;
         			});
 	        	}
 	        },
