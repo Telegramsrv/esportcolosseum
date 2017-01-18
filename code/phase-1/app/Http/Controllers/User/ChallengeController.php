@@ -39,4 +39,8 @@ class ChallengeController extends Controller
 	    	]);
 	    }
 	}
+
+	public function myChallengelist(Game $selectedGame){
+		dd($selectedGame);
+	}
 }
