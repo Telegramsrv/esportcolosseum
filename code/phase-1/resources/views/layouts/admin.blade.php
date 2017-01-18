@@ -84,6 +84,8 @@
 						<li><a href="{{ url('/admin/game/add') }}">Add New Game </a></li>
 					</ul>
 				</li>
+				
+				<li><a  href="{{ url('/admin/tickets') }}"><i class="fa fa-desktop"></i> Tickets</a></li>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">

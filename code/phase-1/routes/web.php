@@ -64,6 +64,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::put('/game/edit/{gameId}', 'Admin\GameController@update')->name('admin.game.update');
 	Route::get('/game/delete/{gameId}', 'Admin\GameController@delete')->name('admin.game.delete');
 	//  ----------------------------------------------------------  Game routes End ----------------------------------------------------------------//
+	
+	//  ---------------------------------------------------------- Ticket routes  Start ----------------------------------------------------------------//
+	Route::get('/tickets', 'Admin\TicketController@index')->name('admin.ticket.list');
+	Route::get('/ticket/view/{ticketId}', 'Admin\TicketController@view')->name('admin.ticket.view');
+	Route::post('/ticket/view/{ticketId}', 'Admin\TicketController@update')->name('admin.ticket.update');
+	Route::get('/ticket/conversation/{ticketId}', 'Admin\TicketController@conversation')->name('admin.ticket.conversation');
+	Route::post('/ticket/conversation/{ticketId}', 'Admin\TicketController@conversationUpdate')->name('admin.ticket.conversation.update');
+	//  ----------------------------------------------------------  Ticket routes  End ----------------------------------------------------------------//
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
