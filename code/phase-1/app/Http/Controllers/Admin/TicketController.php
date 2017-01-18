@@ -10,11 +10,12 @@ use App\Http\Requests\Ticket\SaveTicket;
 use App\Http\Requests\Ticket\Conversation;
 use Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TicketReplayMail;
 
 class TicketController extends Controller
 {
 	public function index() {
-		$tickets = Ticket::orderBy('id', 'desc')->get();
+		$tickets = Ticket::with("user")->orderBy('id', 'desc')->get();
 		return view("admin.ticket.index", compact('tickets'));
 	}
 	
@@ -33,24 +34,24 @@ class TicketController extends Controller
 	
 	public function conversation($ticketId) {
 		$ticket = Ticket::findOrFail($ticketId);
-		$conversations = TicketConversation::where('ticket_id', $ticketId)->get();
+		$conversations = $ticket->ticketConversation;
 		return view("admin.ticket.conversations", compact('conversations', 'ticket'));
 	}
 	
 	public function conversationUpdate($ticketId, Conversation $request) {
 		$ticket = Ticket::findOrFail($ticketId);
-		$conversations = TicketConversation::find($ticketId);
 		$input = $request->all();
-		$input['ticket_id'] = $ticketId;
-		$input['reply_by'] = Auth::user()->id;
+		$ticketConversation = new TicketConversation($input);
+		$ticketConversation->reply_by = Auth::user()->id;
 		
-		$obj = new TicketConversation($input);
-		$obj->save();
+		//Save Ticket Conversion
+		$ticket->ticketConversation()->save($ticketConversation);
 		
-		//Mail::to($ticket->user->email)->send(new ForgotPasswordMail ($user));
+		//send Conversion Mali to User
+		Mail::to($ticket->user->email)->send(new TicketReplayMail($ticketConversation));
 		
 		$request->session()->flash('alert-success', 'Conversation updated successfully.');
-		return redirect()->route('admin.ticket.list');
+		return redirect()->route('admin.ticket.conversation', $ticket->id);
 		
 	}
 	

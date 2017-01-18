@@ -15,4 +15,9 @@ class Ticket extends Model
     public function user(){
     	return $this->belongsTo('App\User');
     }
+    
+    public function ticketConversation(){
+    	return $this->hasMAny('App\Models\TicketConversation');
+    }
+    
 }

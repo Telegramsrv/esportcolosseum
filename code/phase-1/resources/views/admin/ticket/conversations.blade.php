@@ -10,7 +10,7 @@
 					@foreach ($conversations as $conversation)
 						<b>From : </b> {{ $conversation->reply_by }}  <br>
 						<b>Subject : </b> {{ $conversation->subject }}  <br>
-						<b>Description : </b> {{ $conversation->description }}  <br>
+						<b>Description : </b> {!! $conversation->description !!}  <br>
 						<b>Date : </b> {{ $conversation->created_at }}  <br>
 						<hr>
 					@endforeach
@@ -39,7 +39,7 @@
 	                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Description', 'Description:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::textarea('description', '', ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::textarea('description', '', ['class'=>'form-control mb', 'id' => 'ticket-description'] ); !!}
 	                        		@if ($errors->has('description'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('description') }}</strong>
@@ -62,4 +62,18 @@
 	</div>
 </div>
 
-@endsection @section('footer') @endsection
+@endsection @section('footer') 
+<style>
+<!--
+ul, ul li, ol li {
+	list-style: inherit;
+	margin: inherit;
+	padding: inherit;
+}
+
+ol {
+	padding: 0px 15px;
+}
+-->
+</style>
+@endsection

@@ -117,6 +117,7 @@
 	<script src="{!! asset('admin/js/Chart.min.js') !!}"></script>
 	<script src="{!! asset('admin/js/fileinput.js') !!}"></script>
 	<script src="{!! asset('admin/js/chartData.js') !!}"></script>
+	<script src="{!! asset('admin/js/ckeditor/ckeditor.js') !!}"></script>
 	<script src="{!! asset('admin/js/main.js') !!}"></script>
 	<script src="{!! asset('admin/js/custom.js') !!}"></script>
 	<script>

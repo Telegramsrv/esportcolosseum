@@ -9,9 +9,7 @@
 				<!-- Zero Configuration Table -->
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<table id="zctb"
-							class="display table table-striped table-bordered table-hover"
-							cellspacing="0" width="100%">
+						<table id="ticket-table"class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th>ID</th>

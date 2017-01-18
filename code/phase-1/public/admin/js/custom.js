@@ -1,6 +1,20 @@
  $(document).ready(function () {
 	 
-
+	 $("table#ticket-table").dataTable({
+			"aaSorting": [[4,'desc']]
+	});
+	 
+	 $(document).ready(function () {
+		 CKEDITOR.replace( 'ticket-description' ,{
+		       toolbar :
+		    		[
+		 			{ name: 'basicstyles', items : [ 'Bold','Italic' ] },
+		 			{ name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+		 			{ name: 'colors', items : [ 'TextColor','BGColor' ] }
+		 		],
+		        uiColor : '#9AB8F3'
+		    });
+	 });
  });
  
  function deleteUser(uid){
