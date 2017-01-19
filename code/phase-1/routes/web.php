@@ -25,6 +25,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
 	Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+	
+	//  ----------------------------------------------------------  Blog routes  Start ----------------------------------------------------------------//
 	Route::get('/user', 'Admin\UserController@index')->name('admin.user.list');
 	Route::get('/user/add', 'Admin\UserController@add')->name('admin.user.add');
 	Route::post('/user/add', 'Admin\UserController@save')->name('admin.user.save');
@@ -37,15 +39,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('/user/changepassword', 'Admin\UserController@changePassword')->name('admin.user.changepassword');
 	Route::post('/user/changepassword', 'Admin\UserController@savePassword')->name('admin.user.savepassword');
 	Route::get('/user/transactionhistory/{userId}', 'Admin\UserController@transactionHistory')->name('admin.user.transactionhistory');
+	//  ----------------------------------------------------------  Blog routes  End ----------------------------------------------------------------//
 	
-	//  ----------------------------------------------------------  blog routes  Start ----------------------------------------------------------------//
+	//  ----------------------------------------------------------  Blog routes  Start ----------------------------------------------------------------//
 	Route::get('/blog', 'Admin\BlogController@index')->name('admin.blog.list');
 	Route::get('/blog/add', 'Admin\BlogController@add')->name('admin.blog.add');
 	Route::post('/blog/add', 'Admin\BlogController@save')->name('admin.blog.save');
 	Route::get('/blog/edit/{blogId}', 'Admin\BlogController@edit')->name('admin.blog.edit');
 	Route::put('/blog/edit/{blogId}', 'Admin\BlogController@update')->name('admin.blog.update');
 	Route::get('/blog/delete/{blogId}', 'Admin\BlogController@delete')->name('admin.blog.delete');
-	//  ----------------------------------------------------------  blog routes  End ----------------------------------------------------------------//
+	//  ----------------------------------------------------------  Blog routes  End ----------------------------------------------------------------//
 	
 	//  ----------------------------------------------------------  Esc Challenge Template routes  Start ----------------------------------------------------------------//
 	Route::get('/esc-challenge-template', 'Admin\EscChallengeTemplateController@index')->name('admin.esc-challenge-template.list');
