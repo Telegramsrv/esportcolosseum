@@ -27,13 +27,13 @@
 		<div class="row">
 			<div class="first-challenge-left-blog">
 				<div class="first_challenge_left_width">
-					<h2><span>TEAM 1 :</span> {!! $challenge->team()->name!!}</h2>
+					<h2><span>TEAM 1 :</span> Static Team 1</h2>
 					<ul>
 						<li><a href="#"><img src="images/i.png"></a></li>
 						<li><a href="#"><img src="images/blog1.png"></a></li>
 						<li><a href="#"><img src="images/minus.png"></a></li>
 					</ul>
-					<h3>{!! $challange->captain()->userDetails()->first_name !!} {!! $challange->captain()->userDetails()->last_name !!}<span>( Captain ) </span></h3>
+					<h3>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}<span>( Captain ) </span></h3>
 					<div class="player-section">
 						<div class="player-image">
 							<img src="images/blog2.png">

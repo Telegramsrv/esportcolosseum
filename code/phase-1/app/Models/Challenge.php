@@ -31,7 +31,7 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeMyChallengesPerGamePerName($query, User $user, Game $game, $name){
-        return $query->where('user_id', $user->id)->where('name', $name)->where('game_id', $game->id);
+        return $query->with(["captainDetails"])->where('user_id', $user->id)->where('name', $name)->where('game_id', $game->id);
     }
     
     /**
@@ -61,7 +61,7 @@ class Challenge extends Model
 	 * @return App\User User model who has created challenge.
 	 */
     public function captain(){
-    	return $this->belongsTo("App\User");
+    	return $this->belongsTo("App\User", "user_id", "id");
     }
 
     /**
@@ -80,4 +80,11 @@ class Challenge extends Model
     	return $this->belongsTo("App\Region");	
     }
 
+    /**
+     * User can create challenge for only one region at a time.
+     * @return App\Models\Region Region model associated with this challenge.
+     */
+    public function captainDetails(){
+        return $this->belongsTo("App\Models\UserDetails", "user_id", "user_id");  
+    }    
 }
