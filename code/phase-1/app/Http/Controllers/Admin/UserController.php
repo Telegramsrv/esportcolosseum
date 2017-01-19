@@ -12,7 +12,7 @@ use App\Models\Country;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Hash;
-use Password;
+//use Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgotPasswordMail;
 use App\Models\Role;

@@ -31,6 +31,23 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
+	                        	{!! Form::label('logo', 'Logo:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-3">
+	                        		{!! Form::file('logo', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('logo'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('logo') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                            @if (isset($game->logo))
+	                            	<div class="col-sm-4 user_profile_wrap" >
+	                        			<img class="game-disply-image" src="{{ url(env('UPLOAD_GAME_LOGO').$game->logo) }}">
+	                             	</div>
+	                            @endif
+	                        </div>
+	                        
 	                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Menu Image', 'Menu Image:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-3">

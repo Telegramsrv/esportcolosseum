@@ -33,6 +33,18 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Logo', 'Logo:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{!! Form::file('logo', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('logo'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('logo') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                        </div>
+	                        
 	                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Menu Image', 'Menu Image:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">

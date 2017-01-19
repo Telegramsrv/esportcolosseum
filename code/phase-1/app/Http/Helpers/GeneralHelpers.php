@@ -150,7 +150,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'blog-manager',
 			'name' => 'Blog Manager',
-			'icon' => 'fa fa-video-camera',
+			'icon' => 'fa fa-rss-square',
 			'url' => "#",
 			'path' => "admin/blog",
 			'order' => 2,
@@ -159,7 +159,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'esc-challenge-template-manager',
 			'name' => 'Esc Challenge Template Manager',
-			'icon' => 'fa fa-video-camera',
+			'icon' => 'fa fa-trophy',
 			'url' => "#",
 			'path' => "admin/esc-challenge-template",
 			'order' => 3,
@@ -168,7 +168,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'game-manager',
 			'name' => 'Game Manager',
-			'icon' => 'fa fa-video-camera',
+			'icon' => 'fa fa-gamepad',
 			'url' => "#",
 			'path' => "admin/game",
 			'order' => 4,
@@ -177,7 +177,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'tickets',
 			'name' => 'Tickets',
-			'icon' => 'fa fa-video-camera',
+			'icon' => 'fa fa-ticket',
 			'url' => "admin/tickets",
 			'path' => "admin/tickets",
 			'order' => 5,
@@ -186,7 +186,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'page-manager',
 			'name' => 'Page Manager',
-			'icon' => 'fa fa-video-camera',
+			'icon' => 'fa fa-file',
 			'url' => "#",
 			'path' => "admin/page",
 			'order' => 6,

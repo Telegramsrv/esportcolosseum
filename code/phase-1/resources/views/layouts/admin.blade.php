@@ -56,23 +56,19 @@
 		<nav class="ts-sidebar">
 			<ul class="ts-sidebar-menu">
 				<li class="ts-label">Main</li>
-				<ul>
-				@php $menu =  getMenu(); @endphp
+					@php $menu =  getMenu(); @endphp
 					@foreach($menu as $item)
 						<li class="{{setParentActive($item['path'], 'open')}}"><a href="/{{$item['url']}}"><i class="fa {{$item['icon']}}"></i> {{$item['name']}}</a>
 						@php $subMenu =  getSubMenu($item['id']); @endphp
-						
-						 @if (count($subMenu)) 
+						 	@if (count($subMenu)) 
 					            <ul>
 						            @foreach ($subMenu as $subitem)
 						                <li class="{{setActive($subitem['url'], 'open')}}"><a href="/{{ $subitem['url'] }}">{{ $subitem['name'] }}</a></li>
 						            @endforeach
 					            </ul>
 					        @endif
-						
 						</li>
 					@endforeach
-				</ul>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">

@@ -23,6 +23,10 @@ class GameController extends Controller
 	public function save(SaveGame $request){
 		$input = $request->all();
 		
+		//save 	logo
+		if(!empty($request->hasFile('logo'))){
+			$input['logo'] = saveMedia($request->file('logo'), 'UPLOAD_GAME_LOGO');
+		}
 		//save 	display_image
 		if(!empty($request->hasFile('image'))){
 			$input['image'] = saveMedia($request->file('image'), 'UPLOAD_GAME_THUMBNAIL');
@@ -46,6 +50,13 @@ class GameController extends Controller
 	public function update(SaveGame $request, $gameId){
 		$game = Game::findOrFail($gameId);
 		$input = $request->all();
+		//update logo
+		if(!empty($request->hasFile('logo'))){
+			if(!empty($game->logo)){
+				removeMedia($game->logo, 'UPLOAD_GAME_LOGO');
+			}
+			$input['logo'] = saveMedia($request->file('logo'), 'UPLOAD_GAME_LOGO');
+		}
 		//update display_image
 		if(!empty($request->hasFile('image'))){
 			if(!empty($game->image)){

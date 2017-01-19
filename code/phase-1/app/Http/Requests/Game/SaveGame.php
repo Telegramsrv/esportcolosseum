@@ -26,6 +26,7 @@ class SaveGame extends FormRequest {
 				$validation = [ 
 						'name' => 'required|max:255',
 						'slug' => 'required|unique:games,slug|max:255',
+						'logo' => 'required|image',
 						'image' => 'required|image',
 						'banner_image' => 'required|image',
 				];
@@ -37,6 +38,10 @@ class SaveGame extends FormRequest {
 						'name' => 'required|max:255',
 						'slug' => 'sometimes|required||max:255|unique:games,id,'. $this->route()->getParameter('gameId'),
 				];
+				
+				if($this->hasFile('logo')) {
+					$validation["logo"] = 'required|image';
+				}
 				
 				if($this->hasFile('image')) {
 					$validation["image"] = 'required|image';
