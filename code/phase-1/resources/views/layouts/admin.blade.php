@@ -64,21 +64,21 @@
 					</ul>
 				</li>
 				
-				<li><a href="#"><i class="fa fa-desktop"></i> Blog Managment</a>
+				<li><a href="#"><i class="fa fa-desktop"></i> Blog Manager</a>
 					<ul>
 						<li><a href="{{ url('/admin/blog') }}"> Blogs </a></li>
 						<li><a href="{{ url('/admin/blog/add') }}">Add New Blog	</a></li>
 					</ul>
 				</li>
 				
-				<li><a href="#"><i class="fa fa-desktop"></i> Esc Challenge Template Managment</a>
+				<li><a href="#"><i class="fa fa-desktop"></i> Esc Challenge Template Manager</a>
 					<ul>
 						<li><a href="{{ url('/admin/esc-challenge-template') }}"> Esc Challenge Templates </a></li>
 						<li><a href="{{ url('/admin/esc-challenge-template/add') }}">Add New Esc Challenge Template	</a></li>
 					</ul>
 				</li>
 				
-				<li><a href="#"><i class="fa fa-desktop"></i> Game Managment</a>
+				<li><a href="#"><i class="fa fa-desktop"></i> Game Manager</a>
 					<ul>
 						<li><a href="{{ url('/admin/game') }}"> Games </a></li>
 						<li><a href="{{ url('/admin/game/add') }}">Add New Game </a></li>
@@ -86,6 +86,13 @@
 				</li>
 				
 				<li><a  href="{{ url('/admin/tickets') }}"><i class="fa fa-desktop"></i> Tickets</a></li>
+				
+				<li><a href="#"><i class="fa fa-desktop"></i> Page Manager</a>
+					<ul>
+						<li><a href="{{ url('/admin/page') }}"> Pages </a></li>
+						<li><a href="{{ url('/admin/page/add') }}">Add New Page </a></li>
+					</ul>
+				</li>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">
