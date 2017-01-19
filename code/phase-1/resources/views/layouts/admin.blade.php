@@ -56,43 +56,23 @@
 		<nav class="ts-sidebar">
 			<ul class="ts-sidebar-menu">
 				<li class="ts-label">Main</li>
-				<li class="open"><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-				<li><a href="#"><i class="fa fa-desktop"></i> User Manager</a>
-					<ul>
-						<li><a href="{{ url('/admin/user') }}">User List</a></li>
-						<li><a href="{{ url('/admin/user/add') }}">Add New User</a></li>
-					</ul>
-				</li>
-				
-				<li><a href="#"><i class="fa fa-desktop"></i> Blog Manager</a>
-					<ul>
-						<li><a href="{{ url('/admin/blog') }}"> Blogs </a></li>
-						<li><a href="{{ url('/admin/blog/add') }}">Add New Blog	</a></li>
-					</ul>
-				</li>
-				
-				<li><a href="#"><i class="fa fa-desktop"></i> Esc Challenge Template Manager</a>
-					<ul>
-						<li><a href="{{ url('/admin/esc-challenge-template') }}"> Esc Challenge Templates </a></li>
-						<li><a href="{{ url('/admin/esc-challenge-template/add') }}">Add New Esc Challenge Template	</a></li>
-					</ul>
-				</li>
-				
-				<li><a href="#"><i class="fa fa-desktop"></i> Game Manager</a>
-					<ul>
-						<li><a href="{{ url('/admin/game') }}"> Games </a></li>
-						<li><a href="{{ url('/admin/game/add') }}">Add New Game </a></li>
-					</ul>
-				</li>
-				
-				<li><a  href="{{ url('/admin/tickets') }}"><i class="fa fa-desktop"></i> Tickets</a></li>
-				
-				<li><a href="#"><i class="fa fa-desktop"></i> Page Manager</a>
-					<ul>
-						<li><a href="{{ url('/admin/page') }}"> Pages </a></li>
-						<li><a href="{{ url('/admin/page/add') }}">Add New Page </a></li>
-					</ul>
-				</li>
+				<ul>
+				@php $menu =  getMenu(); @endphp
+					@foreach($menu as $item)
+						<li class="{{setParentActive($item['path'], 'open')}}"><a href="/{{$item['url']}}"><i class="fa {{$item['icon']}}"></i> {{$item['name']}}</a>
+						@php $subMenu =  getSubMenu($item['id']); @endphp
+						
+						 @if (count($subMenu)) 
+					            <ul>
+						            @foreach ($subMenu as $subitem)
+						                <li class="{{setActive($subitem['url'], 'open')}}"><a href="/{{ $subitem['url'] }}">{{ $subitem['name'] }}</a></li>
+						            @endforeach
+					            </ul>
+					        @endif
+						
+						</li>
+					@endforeach
+				</ul>
 
 				<!-- Account from above -->
 				<ul class="ts-profile-nav">
