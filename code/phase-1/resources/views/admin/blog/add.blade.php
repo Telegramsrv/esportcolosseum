@@ -36,7 +36,7 @@
 	                        <div class="form-group {{ $errors->has('	description') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Description', 'Description:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::textarea('description', null, ['class'=>'form-control mb'] ); !!}
+	                        		{!! Form::textarea('description', null, ['class'=>'form-control mb', 'id' => 'blog-description'] ); !!}
 	                        		@if ($errors->has('description'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('	description') }}</strong>
