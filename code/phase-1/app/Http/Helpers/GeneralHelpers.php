@@ -76,6 +76,16 @@ function setActive($path, $active = 'active', $inactive = '') {
 }
 
 
+/**
+ * This function is used to return classname based on URL patterns provided for pages in which we have game navigation in left side bar.
+ * 
+ * @param string - game slug
+ * @param string - Active class to be returned if path matches
+ * @param string - Inactive class to be returned if path does not match
+ *
+ * @return string - Class name (Active/Inactive) based on 
+ * 
+ */
 function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass = "inactive"){
 	$navigations = array();
 	$route = Route::current();
@@ -92,4 +102,21 @@ function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass =
 	);		
 	
 	return $navigation;
+}
+
+function findDateDifferenceInHours($endDateTime){
+	$currentDateTime 	= Carbon\Carbon::now();
+	$diffInHours 		= $endDateTime->diffInHours($currentDateTime);
+	$diffInMinues 		= $endDateTime->diffInMinutes($currentDateTime);
+	$diffInSeconds 		= $endDateTime->diffInSeconds($currentDateTime);
+
+	if($diffInHours > 0){
+		return $diffInHours." Hrs";
+	}
+	else if($diffInMinues > 0){
+		return $diffInMinues." Mins";
+	}
+	else {
+		return $diffInSeconds." Secs";
+	}
 }

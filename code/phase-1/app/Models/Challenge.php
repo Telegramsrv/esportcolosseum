@@ -10,7 +10,16 @@ class Challenge extends Model
     protected $guarded = ['id'];
 
     /**
-     * Scope a query to filter query with below parameters.
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'valid_upto'
+    ];
+
+    /**
+     * Scope a query to filter with below parameters.
      *     - Fetch only user's challenges.
      *     - Fetch either "Open" or "ESC" challenges.
      *     - Fetch only perticular game's challenges.
@@ -25,11 +34,33 @@ class Challenge extends Model
         return $query->where('user_id', $user->id)->where('name', $name)->where('game_id', $game->id);
     }
     
+    /**
+     * Scope a query to filter data with below parameters.
+     *     - Fetch challenges whose status is "Created" or "Accepted".
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCurrentGames($query){
+        return $query->whereIn('challenge_status', ['created', 'accepted']);
+    }
+
+    /**
+     * Scope a query to filter data with below parameters.
+     *     - Fetch challenges whose status is "Cancelled" or "Completed".
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePastGames($query){
+        return $query->whereIn('challenge_status', ['cancelled', 'complete']);
+    }
+
 	/**
 	 * Challenge belongs to only one user who has created it.
 	 * @return App\User User model who has created challenge.
 	 */
-    public function user(){
+    public function captain(){
     	return $this->belongsTo("App\User");
     }
 

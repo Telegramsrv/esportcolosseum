@@ -43,7 +43,9 @@ class ChallengeController extends Controller
 
 	public function myChallengelist(Game $selectedGame, $name){
 		$user = Auth::user();
-		$myChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $name)->get();
-		return view("user.challenge.my-challenge-list")->with(['selectedGame' => $selectedGame, 'myChallenges' => $myChallenges]);
+		$myCurrentChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $name)->currentGames()->get();
+		$myPastChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $name)->pastGames()->get();
+
+		return view("user.challenge.my-challenge-list", compact('selectedGame', 'myCurrentChallenges', 'myPastChallenges'));
 	}
 }
