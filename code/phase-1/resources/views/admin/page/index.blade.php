@@ -15,6 +15,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Title</th>
+									<th>Slug</th>
 									<th>Actions</th>
 								</tr>
 							</thead>
@@ -23,6 +24,7 @@
 									<tr>
 										<td>{{ $page->id }}</td>
 										<td>{{ $page->title }}</td>
+										<td>{{ $page->slug }}</td>
 										<td>
 											<a title="Edit" href="{{ url('admin/page/edit/'.$page->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
 											<a title="Delete" href="#" onClick="return deletePage({{ $page->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>

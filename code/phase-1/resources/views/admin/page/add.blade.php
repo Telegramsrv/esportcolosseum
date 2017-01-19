@@ -20,6 +20,18 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Slug', 'Slug:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{!! Form::text('slug', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('slug'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('slug') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                        </div>
+	                        
 	                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
 	                        	{!! Form::label('Description', 'Description:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
@@ -36,7 +48,7 @@
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
 									<a class="btn btn-default button" href="/admin/page">Cancel</a>
-									<button class="btn btn-primary" type="submit">Save changes</button>
+									<button class="btn btn-primary" type="submit">Save</button>
 								</div>
 							</div>
 						{!! Form::close() !!}

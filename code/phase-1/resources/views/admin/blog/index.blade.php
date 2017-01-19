@@ -17,7 +17,6 @@
 									<th>#</th>
 									<th>Title</th>
 									<th>Slug</th>
-									<th>Description</th>
 									<th>Display Image</th>
 									<th>Action</th>
 								</tr>
@@ -28,7 +27,6 @@
 										<td>{{$key+1}}</td>
 										<td>{{ $blog->title }}</td>
 										<td>{{ $blog->slug }}</td>
-										<td>{{ $blog->description}}</td>
 										<td><img class="blog-disply-image" src="{{ url(env('UPLOAD_BLOG_THUMBNAIL').$blog->display_image) }}"></td>
 										<td>
 											<a title="Edit" href="{{ url('admin/blog/edit/'.$blog->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 

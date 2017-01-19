@@ -28,6 +28,7 @@ class SavePage extends FormRequest
     		case 'POST':
     			$validation = [
     				'title' 			=> 'sometimes|required|max:255',
+    				'slug' 				=> 'sometimes|required|unique:pages,slug',
     				'description' 		=> 'sometimes|required',
     			];
     			

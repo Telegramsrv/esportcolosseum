@@ -175,7 +175,7 @@
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
 									<a class="btn btn-default button" href="/admin/user">Cancel</a>
-									<button class="btn btn-primary" type="submit">Save changes</button>
+									<button class="btn btn-primary" type="submit">Save</button>
 								</div>
 							</div>
 						{!! Form::close() !!}
