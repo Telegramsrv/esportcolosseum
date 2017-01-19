@@ -4,7 +4,7 @@
 			"aaSorting": [[4,'desc']]
 	});
 	 
-	 $(document).ready(function () {
+	 if($("#ticket-description").length > 0){
 		 CKEDITOR.replace( 'ticket-description' ,{
 		       toolbar :
 		    		[
@@ -14,21 +14,43 @@
 		 		],
 		        uiColor : '#9AB8F3'
 		    });
-	 });
+	 }
+	 else if($("#page-description").length > 0){
+		 CKEDITOR.replace( 'page-description' ,{
+		       toolbar :
+		    		[
+		 			{ name: 'basicstyles', items : [ 'Bold','Italic' ] },
+		 			{ name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+		 			{ name: 'colors', items : [ 'TextColor','BGColor' ] }
+		 		],
+		        uiColor : '#9AB8F3'
+		    });
+	 }
+	 else if($("#blog-description").length > 0){
+		 CKEDITOR.replace( 'blog-description' ,{
+		       toolbar :
+		    		[
+		 			{ name: 'basicstyles', items : [ 'Bold','Italic' ] },
+		 			{ name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+		 			{ name: 'colors', items : [ 'TextColor','BGColor' ] }
+		 		],
+		        uiColor : '#9AB8F3'
+		    });
+	 }
  });
  
- function deleteUser(uid){
+ function deleteUser(userId){
 	 var r = confirm("Are you sure that you want to delete this user?");
 	 if (r == true) {
-		window.location ='/admin/user/delete/'+uid;
+		window.location ='/admin/user/delete/'+userId;
 	 }
 	 return false;
  }
  
- function resetPassword(uid){
+ function resetPassword(userId){
 	 var r = confirm("Are you sure that you want to send reset password link to this user?");
 	 if (r == true) {
-		window.location ='/admin/user/resetpassword/'+uid;
+		window.location ='/admin/user/resetpassword/'+userId;
 	 }
 	 return false;
  }
@@ -53,6 +75,14 @@
 	 var r = confirm("Are you sure that you want to delete this game?");
 	 if (r == true) {
 		window.location ='/admin/game/delete/'+gameId;
+	 }
+	 return false;
+ }
+ 
+ function deletePage(pageId){
+	 var r = confirm("Are you sure that you want to delete this page?");
+	 if (r == true) {
+		window.location ='/admin/page/delete/'+pageId;
 	 }
 	 return false;
  }

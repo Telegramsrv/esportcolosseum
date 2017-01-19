@@ -75,11 +75,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	
 	//  ----------------------------------------------------------  Page routes Start ----------------------------------------------------------------//
 	Route::get('/page', 'Admin\PageController@index')->name('admin.page.list');
-	/* Route::get('/game/add', 'Admin\GameController@add')->name('admin.game.add');
-	Route::post('/game/add', 'Admin\GameController@save')->name('admin.game.save');
-	Route::get('/game/edit/{gameId}', 'Admin\GameController@edit')->name('admin.game.edit');
-	Route::put('/game/edit/{gameId}', 'Admin\GameController@update')->name('admin.game.update');
-	Route::get('/game/delete/{gameId}', 'Admin\GameController@delete')->name('admin.game.delete'); */
+	Route::get('/page/add', 'Admin\PageController@add')->name('admin.page.add');
+	Route::post('/page/add', 'Admin\PageController@save')->name('admin.page.save');
+	Route::get('/page/edit/{pageId}', 'Admin\PageController@edit')->name('admin.page.edit');
+	Route::post('/page/edit/{pageId}', 'Admin\PageController@update')->name('admin.page.update');
+	Route::get('/page/delete/{pageId}', 'Admin\PageController@delete')->name('admin.page.delete');
 	//  ----------------------------------------------------------  Page routes End ----------------------------------------------------------------//
 });
 

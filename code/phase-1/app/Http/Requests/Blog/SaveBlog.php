@@ -26,8 +26,8 @@ class SaveBlog extends FormRequest {
 				$validation = [ 
 						'title' => 'sometimes|required|max:255',
 						'slug' => 'sometimes|required|unique:blogs,slug',
-						'display_image' => 'sometimes|required|image|max:2000',
-						'banner_image' => 'sometimes|required|image|max:5000' 
+						'display_image' => 'required|image|max:2000',
+						'banner_image' => 'required|image|max:5000' 
 				];
 				
 				break;
@@ -39,11 +39,11 @@ class SaveBlog extends FormRequest {
 				];
 				
 				if($this->hasFile('display_image')) {
-					$validation["display_image"] = 'sometimes|required|image|max:2000';
+					$validation["display_image"] = 'required|image|max:2000';
 				}
 				
 				if($this->hasFile('banner_image')) {
-					$validation["banner_image"] = 'sometimes|required|image|max:5000';
+					$validation["banner_image"] = 'required|image|max:5000';
 				}
 			
 			default :

@@ -75,6 +75,10 @@ function setActive($path, $active = 'active', $inactive = '') {
 	 return call_user_func_array('Request::is', (array)$path) ? $active : $inactive;
 }
 
+function setParentActive($path, $active = 'active', $inactive = '')
+{
+	return  (Request::is($path . '/*') || Request::is($path)) ? $active : $inactive;
+}
 
 /**
  * This function is used to return classname based on URL patterns provided for pages in which we have game navigation in left side bar.
@@ -86,6 +90,7 @@ function setActive($path, $active = 'active', $inactive = '') {
  * @return string - Class name (Active/Inactive) based on 
  * 
  */
+
 function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass = "inactive"){
 	$navigations = array();
 	$route = Route::current();
@@ -119,4 +124,145 @@ function findDateDifferenceInHours($endDateTime){
 	else {
 		return $diffInSeconds." Secs";
 	}
+}
+
+function getMenu(){
+	$menu = array();
+
+	$menu[] = [
+			'id'   => 'dashboard',
+			'name' => 'Dashboard',
+			'icon' => 'fa fa-home',
+			'url' => "#",
+			'path' => "admin/dashboard",
+			'order' => 0,
+	];
+
+	$menu[] = [
+			'id'   => 'user-manager',
+			'name' => 'User Manager',
+			'icon' => 'fa fa-user',
+			'url' => "#",
+			'path' => "admin/user",
+			'order' => 1,
+	];
+
+	$menu[] = [
+			'id'   => 'blog-manager',
+			'name' => 'Blog Manager',
+			'icon' => 'fa fa-video-camera',
+			'url' => "#",
+			'path' => "admin/blog",
+			'order' => 2,
+	];
+
+	$menu[] = [
+			'id'   => 'esc-challenge-template-manager',
+			'name' => 'Esc Challenge Template Manager',
+			'icon' => 'fa fa-video-camera',
+			'url' => "#",
+			'path' => "admin/esc-challenge-template",
+			'order' => 3,
+	];
+	
+	$menu[] = [
+			'id'   => 'game-manager',
+			'name' => 'Game Manager',
+			'icon' => 'fa fa-video-camera',
+			'url' => "#",
+			'path' => "admin/game",
+			'order' => 4,
+	];
+	
+	$menu[] = [
+			'id'   => 'tickets',
+			'name' => 'Tickets',
+			'icon' => 'fa fa-video-camera',
+			'url' => "admin/tickets",
+			'path' => "admin/tickets",
+			'order' => 5,
+	];
+	
+	$menu[] = [
+			'id'   => 'page-manager',
+			'name' => 'Page Manager',
+			'icon' => 'fa fa-video-camera',
+			'url' => "#",
+			'path' => "admin/page",
+			'order' => 6,
+	];
+
+	
+	usort($menu, function($a, $b) {
+		return $a['order'] - $b['order'];
+	});
+
+		return $menu;
+}
+
+
+function getSubMenu($menuName){
+	$submenu = array();
+
+	$submenu['user-manager'][] = [
+			'name' => 'User List',
+			'url' => 'admin/user',
+			'route'=> 'admin.user.list',
+	];
+	$submenu['user-manager'][] = [
+			'name' => 'Add New User',
+			'url' => 'admin/user/add',
+			'route'=> 'admin.user.add',
+	];
+
+	$submenu['blog-manager'][] = [
+			'name' => 'Blogs',
+			'url' => 'admin/blog',
+			'route'=> 'admin.blog.list',
+	];
+	$submenu['blog-manager'][] = [
+			'name' => 'Add New Blog',
+			'url' => 'admin/blog/add',
+			'route'=> 'admin.blog.add',
+	];
+
+	$submenu['esc-challenge-template-manager'][] = [
+			'name' => 'Esc Challenge Templates',
+			'url' => 'admin/esc-challenge-template',
+			'route'=> 'admin.esc-challenge-template.list',
+	];
+	$submenu['esc-challenge-template-manager'][] = [
+			'name' => 'Add New Esc Challenge Template',
+			'url' => 'admin/esc-challenge-template/add',
+			'route'=> 'admin.esc-challenge-template.add',
+	];
+
+	$submenu['game-manager'][] = [
+			'name' => 'Games',
+			'url' => 'admin/game',
+			'route'=> 'admin.game.list',
+	];
+	$submenu['game-manager'][] = [
+			'name' => 'Add New Game',
+			'url' => 'admin/game/add',
+			'route'=> 'admin.game.add',
+	];
+	$submenu['page-manager'][] = [
+			'name' => 'Pages',
+			'url' => 'admin/page',
+			'route'=> 'admin.page',
+	];
+	$submenu['page-manager'][] = [
+			'name' => 'Add New Page',
+			'url' => 'admin/page/add',
+			'route'=> 'admin.page.add',
+	];
+
+	if(isset($submenu[$menuName])){
+		return $submenu[$menuName];
+	}
+	else{
+		return array();
+	}
+
 }
