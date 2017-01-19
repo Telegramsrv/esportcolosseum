@@ -109,14 +109,13 @@
 											<img src="images/vs.png">
 										</div>
 										<div class="first-challenge-left-blog">
-										<div class="first_challenge_left_width">
-										
-											<h2><span>TEAM 2 </span></h2>
-											<div class="dont-right-image">
-												<img src="images/dont.png">
-												<button class="btn btn-default">Challenge Is Not Accepted Yet</button>
+											<div class="first_challenge_left_width">
+												<h2><span>TEAM 2 </span></h2>
+												<div class="dont-right-image">
+													<img src="images/dont.png">
+													<button class="btn btn-default">Challenge Is Not Accepted Yet</button>
+												</div>
 											</div>
-										</div>
 										</div>
 									</div>
 								</div>
