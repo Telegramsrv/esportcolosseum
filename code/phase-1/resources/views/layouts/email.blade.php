@@ -85,7 +85,7 @@
 
 <body >
     <div class="email-block">
-        <div class="logo "> <a id="logo-container" href="#" class="brand-logo"><img src="{!! asset('user/images/logo.png') !!}" /></a> </div>
+        <div class="logo "> <a id="logo-container" href="{!! env('APP_URL') !!}" class="brand-logo"><img src="{!! asset('user/images/logo.png') !!}" /></a> </div>
         
         @yield('content')
         
