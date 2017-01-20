@@ -48,7 +48,7 @@
  }
  
  function resetPassword(userId){
-	 var r = confirm("Are you sure that you want to send reset password link to this user?");
+	 var r = confirm("Are you sure that you want to send reset password to this user?");
 	 if (r == true) {
 		window.location ='/admin/user/resetpassword/'+userId;
 	 }

@@ -203,7 +203,7 @@ class UserController extends Controller
 		
 		Mail::to($user)->send(new ForgotPasswordMail ($user));
 		
-		$request->session()->flash('alert-success', 'Send Reset password link successfully.');
+		$request->session()->flash('alert-success', 'Send reset password successfully.');
 		return redirect()->route('admin.user.list');
 	}
 	
