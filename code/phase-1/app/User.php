@@ -27,7 +27,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
-    
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'last_login'
+    ];
+
     public function userDetails()
     {
     	return $this->hasOne('App\Models\UserDetails');

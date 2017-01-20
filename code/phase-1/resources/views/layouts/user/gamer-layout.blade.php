@@ -11,9 +11,12 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="{!! asset('user/css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection	" />
 		<link href="{!! asset('user/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet" />
+		<link href="{!! asset('user/css/flags.css') !!}" rel="stylesheet" />
 		<link href="{!! asset('user/css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
 		<link href="{!! asset('user/css/dashboard.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="{!! asset('user/css/profile.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		<link href="{!! asset('user/css/esportcolosseum.css') !!}" type="text/css" rel="stylesheet" />
+
 		<link rel="stylesheet" type="text/css" media="screen and (min-width: 992px) and (max-width: 1199px) "
               href="{!! asset('user/css/media/medium-devices.css') !!}"/>
     	<link rel="stylesheet" type="text/css" media="screen and (min-width: 768px) and (max-width: 991px)"
@@ -34,7 +37,7 @@
 	        ]); ?>
 	    </script>
 	</head>
-	<body>
+	<body class="dashboard_page profile_page clearfix">
 		<nav class="nav-bar blue-grey darken-4" role="navigation">
     		<div class="nav-wrapper">
 				<div class="onclick-open-sidebar">

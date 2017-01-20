@@ -48,6 +48,8 @@ class LoginController extends Controller
     	
     	if ($this->attemptLogin($request)) {
     		$this->sendLoginResponse($request);
+            Auth::user()->last_login = \Carbon\Carbon::now();
+            Auth::user()->save();
     	}
     	else{
     		$errors = array(
@@ -55,7 +57,6 @@ class LoginController extends Controller
     				'Please provide valid credentials to login'
     			)
     		);
-    		
     		return response()->json($errors, 422);
     	}
     	
