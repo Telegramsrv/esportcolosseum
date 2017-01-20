@@ -1,8 +1,9 @@
-Hello User, <br /><br />
+@extends('layouts.email')
 
-{!! $ticket->description !!}<br /><br />
-
-Site Admin,<br />
-eSportColosseum 
-
-
+@section('content')
+		<div class="email-template clearfix">
+            <div class="email-name"> Hello {!! $ticket->ticket->user->email !!}, </div>
+            {!! $ticket->description !!}
+            <div class="thank"> Thanks, <span>Esport Colosseum Admin</span> </div>
+        </div>
+@endsection 
