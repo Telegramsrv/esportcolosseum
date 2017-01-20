@@ -3,7 +3,8 @@
 @section('blog-section')
 <section>
 	<div class="section-title">Latest <span>Blogs</span></div>
-	<div class="row">
+		@php($colCounter = 0)
+		<div class="row">			
 		@foreach ($blogs as $blog)
 	        <div class="col s12 m3">
 	            <div class="card hoverable">
@@ -26,7 +27,15 @@
 	              	</div>
 	            </div>
 	        </div>
+	        @php
+	        	$colCounter++;
+	        	if($colCounter%3 == 0){
+	        		echo '	</div>
+	        				<div class="row">';
+	        	}
+	        @endphp
 		@endforeach
+		</div>
 	</div>
     <hr/>
 </section>

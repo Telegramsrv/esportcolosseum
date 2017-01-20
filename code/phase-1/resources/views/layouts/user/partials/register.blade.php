@@ -1,5 +1,5 @@
 <div id="signUpModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
-	{!! Form::open(['route' => 'login', 'method' => 'post', 'id' => 'registerForm']) !!}
+	{!! Form::open(['route' => 'register', 'method' => 'post', 'id' => 'registerForm']) !!}
 		<div class="modal-content">
 			<h5 class="white-text center-align">Signup</h5>
 			<div id="signupForm" class="modal-form-container">

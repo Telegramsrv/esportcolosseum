@@ -22,8 +22,8 @@ $(document).ready(function(){
 	$("#loginSubmit").click(function(){
 		var loginForm = $("#loginForm");
 		var formData = loginForm.serialize();
+		var postUrl = loginForm.attr('action');
 	    $.ajax({
-	        url:'login',
 	        type:'POST',
 	        data:formData,
 	        success:function(data){
@@ -52,8 +52,9 @@ $(document).ready(function(){
 	$("#registerSubmit").click(function(){
 		var registerForm = $("#registerForm");
 		var formData = registerForm.serialize();
+		var postUrl = registerForm.attr('action');
 	    $.ajax({
-	        url:'register',
+	        url:postUrl,
 	        type:'POST',
 	        data:formData,
 	        success:function(data){
@@ -93,8 +94,9 @@ $(document).ready(function(){
 	$("#retrievePasswordSubmit").click(function(){
 		var forgotPasswordForm = $("#forgotPasswordForm");
 		var formData = forgotPasswordForm.serialize();
+		var postUrl = forgotPasswordForm.attr('action');
 		$.ajax({
-	        url:'forgot-password',
+	        url:postUrl,
 	        type:'POST',
 	        data:formData,
 	        success:function(data){
