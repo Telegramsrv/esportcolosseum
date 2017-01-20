@@ -99,10 +99,10 @@ function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass =
 	// Get current route parameters.
 	$parameters = $route->parameters();
 
-	// echo "<pre>"; print_r($parameters); die("");
-
 	$parameters['gameSlug']		= $gameSlug;
-	$parameters['md5UserId']	= md5($parameters['md5UserId']->id);
+	if(isset($parameters['md5UserId'])){
+		$parameters['md5UserId']	= md5($parameters['md5UserId']->id);
+	}
 
 	$navigation = array(
 		'url' => route($route->getName(), $parameters),
