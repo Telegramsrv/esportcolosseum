@@ -39,7 +39,7 @@
 
 <body>
 	<div class="brand clearfix">
-		<a href="/" class="logo"><img src="{!! asset('admin/img/logo.jpg') !!}" class="img-responsive" alt=""></a>
+		<a href="/" class="logo"><img src="{!! asset('user/images/logo.png') !!}" class="img-responsive" alt=""></a>
 		<span class="menu-btn"><i class="fa fa-bars"></i></span>
 		<ul class="ts-profile-nav">
 			<li class="ts-account">
@@ -75,8 +75,8 @@
 					<li class="ts-account">
 						<a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
 						<ul>
-<!-- 							<li><a href="#">My Account</a></li> -->
-<!-- 							<li><a href="#">Edit Account</a></li> -->
+							<li><a href="{{ url('admin/user/edit/'.Auth::user()->id) }}">My Account</a></li>
+							<li><a href="{{ url('admin/user/changepassword') }}">Change Password</a></li>
 							<li><a href="{{ url('logout') }}">Logout</a></li>
 						</ul>
 					</li>

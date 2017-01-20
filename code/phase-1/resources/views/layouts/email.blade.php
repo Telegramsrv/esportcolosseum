@@ -95,16 +95,16 @@
                 <div class="row">
                     <div class="col l12 s12 text-center">
                         <div class="social-icons"> 
-                        		<img src="{!! asset('general/img/fb.png') !!}" />
-                            <img src="{!! asset('general/img/tw.png') !!}" />
-                            <img src="{!! asset('general/img/g+.png') !!}" />
+                        		<img src="{!! asset('user/images/fb.png') !!}" />
+                            <img src="{!! asset('user/images/tw.png') !!}" />
+                            <img src="{!! asset('user/images/g+.png') !!}" />
                         </div>
                         <div class="f-menu">
-                            <div class="link-row"><a  href="{!! env('APP_URL', 'http://dev.esportcolosseum.loc') !!}">Home</a></div>
+                            <div class="link-row"><a  href="{!! env('APP_URL') !!}">Home</a></div>
                             |
-                            <div class="link-row"><a  href="{!! env('APP_URL', 'http://dev.esportcolosseum.loc') !!}">Games</a></div>
+                            <div class="link-row"><a  href="{!! env('APP_URL') !!}">Games</a></div>
                         </div>
-                        <div class="note">You don’t need to reply to this mail as it is an automated mail.</div>
+                        <div class="note">You don't need to reply to this mail as it is an automated mail.</div>
                     </div>
                 </div>
             </div>
