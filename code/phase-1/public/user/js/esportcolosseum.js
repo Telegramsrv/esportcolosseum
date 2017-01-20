@@ -24,6 +24,7 @@ $(document).ready(function(){
 		var formData = loginForm.serialize();
 		var postUrl = loginForm.attr('action');
 	    $.ajax({
+	    	url:postUrl,
 	        type:'POST',
 	        data:formData,
 	        success:function(data){
