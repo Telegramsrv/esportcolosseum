@@ -84,6 +84,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::post('/page/edit/{pageId}', 'Admin\PageController@update')->name('admin.page.update');
 	Route::get('/page/delete/{pageId}', 'Admin\PageController@delete')->name('admin.page.delete');
 	//  ----------------------------------------------------------  Page routes End ----------------------------------------------------------------//
+	
+	//  ----------------------------------------------------------  Match routes Start ----------------------------------------------------------------//
+	Route::get('/match', 'Admin\MatchController@index')->name('admin.match.list');
+	Route::get('/match/edit/{matchId}', 'Admin\MatchController@edit')->name('admin.match.edit');
+	Route::post('/match/edit/{matchId}', 'Admin\MatchController@update')->name('admin.match.update');
+	//  ----------------------------------------------------------  Match routes End ----------------------------------------------------------------//
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

@@ -195,6 +195,14 @@ function getMenu(){
 			'order' => 6,
 	];
 
+	$menu[] = [
+			'id'   => 'matches',
+			'name' => 'Match Manager',
+			'icon' => 'fa fa-user',
+			'url' => "#",
+			'path' => "admin/match",
+			'order' => 7,
+	];
 	
 	usort($menu, function($a, $b) {
 		return $a['order'] - $b['order'];
@@ -260,6 +268,16 @@ function getSubMenu($menuName){
 			'url' => 'admin/page/add',
 			'route'=> 'admin.page.add',
 	];
+	$submenu['matches'][] = [
+			'name' => 'Match List',
+			'url' => 'admin/match',
+			'route'=> 'admin.match.list',
+	];
+	/* $submenu['matches'][] = [
+			'name' => 'Add New Match',
+			'url' => 'admin/match/add',
+			'route'=> 'admin.match.add',
+	]; */
 
 	if(isset($submenu[$menuName])){
 		return $submenu[$menuName];
