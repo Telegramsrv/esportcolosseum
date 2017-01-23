@@ -14,11 +14,10 @@
 							cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<th>#</th>
 									<th>Source</th>
 									<th>Coins</th>
 									<th>Transaction Type</th>
-									<th>Date</th>
+									<th>Transaction Date</th>
 								</tr>
 							</thead>
 							<tbody>
