@@ -18,7 +18,7 @@ class PassDataToLayoutsProvider extends ServiceProvider
 
         view()->composer(['layouts.user.home', 'layouts.user.gamer-layout'], function($view)
         {
-            $games = Game::All();
+            $games = Game::where('status', 'Active')->get();
             $view->with(['games' => $games]);
         });
     }

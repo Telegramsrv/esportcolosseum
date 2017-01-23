@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
             return Blog::where('slug', $value)->firstOrFail();
         });
         Route::bind('gameSlug', function($value) {
-            return Game::where('slug', $value)->firstOrFail();
+            return Game::where('slug', $value)->where('status', 'Active')->firstOrFail();
         });
         Route::bind('md5UserId', function($value){
             return User::where(DB::raw('md5(id)'), $value)->firstOrFail(); 
