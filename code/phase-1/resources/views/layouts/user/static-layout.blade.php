@@ -91,7 +91,6 @@
 		@include('layouts.user.partials.footer')
 		<script type="text/javascript" src="{!! asset('user/js/jquery.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/materialize.js') !!}"></script>
-		<script type="text/javascript" src="{!! asset('user/js/init.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/esportcolosseum.js') !!}"></script>
 	</body>
 </html>

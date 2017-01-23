@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	$('select').material_select();
+	
 	$(".signup-btn").on("click",function(data){
         $('#loginModal').closeModal();
         $('#forgotPasswordModal').closeModal();

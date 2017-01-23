@@ -1,28 +1,13 @@
 <?php
+use Illuminate\Support\ViewErrorBag;
+
 function deleteMedia($mediaPath) {
-	
-	/*
-	 * gc_collect_cycles();
-	 *
-	 * $bool = true;
-	 * $excludeMedia = array('default-profile.png');
-	 *
-	 * foreach($excludeMedia as $media){
-	 * $pos = strpos($mediaPath, $media);
-	 * if ($pos !== false) {
-	 * $bool = false;
-	 * }
-	 * }
-	 *
-	 * if($bool){
-	 */
 	if (is_dir ( $mediaPath )) {
 		array_map ( 'unlink', glob ( $mediaPath . "*" ) );
 		rmdir ( $mediaPath );
 	} else if (file_exists ( $mediaPath )) {
 		unlink ( $mediaPath );
 	}
-	/* } */
 }
 
 /**
@@ -112,6 +97,11 @@ function setNavigationForGame($gameSlug, $activeClass="active", $inactiveClass =
 	return $navigation;
 }
 
+/**
+ * This function is used to find date diffenrece in Hours/Mins/Secs. It will return difference in hours. If difference is less then hour, then in minutes. If less then minute, then in seconds.
+ * @param  Carbon $endDateTime Cardon DateTime Object.
+ * @return String Human readable format in Hr/Min/Sec(whichever applicable).
+ */
 function findDateDifferenceInHours($endDateTime){
 	$currentDateTime 	= Carbon\Carbon::now();
 	$diffInHours 		= $endDateTime->diffInHours($currentDateTime);
@@ -127,6 +117,26 @@ function findDateDifferenceInHours($endDateTime){
 	else {
 		return $diffInSeconds." Secs";
 	}
+}
+
+/**
+ * Generic function to format error message when validation occurs.
+ * @param  ViewErrorBag $errors 			Errors object
+ * @param  string       $key    			Field name to check againts errors object
+ * @param  string       $additionalClass    Additional class to apply to form element
+ * @return Array        $result 			Array with 2 defined keys. System will find appropriate attributes if validation occurs/ does not occur.
+ */
+function formatErrorMessage(ViewErrorBag $errors, $key, $additionalClass = ''){
+	$result = [];
+	if($errors->has($key)){
+		$result['validation'] = ['class' => 'active', 'data-error' => $errors->first($key)];	
+		$result['formControlClass'] = 'validate invalid ' . $additionalClass;
+	}
+	else{
+		$result['validation'] = [];
+		$result['formControlClass'] = 'validate ' . $additionalClass;
+	}
+	return $result;
 }
 
 function getMenu(){

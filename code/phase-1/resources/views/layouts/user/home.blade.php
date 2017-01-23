@@ -80,7 +80,7 @@
     		</div>
 		</div>
 		<div class="no-pad-bot main-container" style="overflow:hidden;" >
-      		@include("user.partials.game", ['games' => $games]);
+      		@include("user.partials.game", ['games' => $games])
     		<div class="main-content mob_main_conten">
        	 		<section class="">
             		<div class="section-title ">Upcoming <span>Games</span></div>
@@ -268,7 +268,7 @@
                 	</div>
             		<hr/>
         		</section>
-        		@yield("blog-section");
+        		@yield("blog-section")
     		</div>
 		</div>
 		@include('layouts.user.partials.footer')
