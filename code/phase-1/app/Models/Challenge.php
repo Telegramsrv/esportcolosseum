@@ -69,7 +69,7 @@ class Challenge extends Model
      * @return App\Models\Game Game model for which this challenge has been created.
      */
     public function game(){
-    	return $this->belongsTo("App\Game");	
+    	return $this->belongsTo("App\Models\Game");	
     }
 
     /**
@@ -77,7 +77,7 @@ class Challenge extends Model
      * @return App\Models\Region Region model associated with this challenge.
      */
     public function region(){
-    	return $this->belongsTo("App\Region");	
+    	return $this->belongsTo("App\Models\Region");	
     }
 
     /**

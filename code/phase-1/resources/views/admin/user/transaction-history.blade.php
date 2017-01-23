@@ -14,19 +14,19 @@
 							cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<th>#</th>
 									<th>Source</th>
 									<th>Coins</th>
-									<th>transaction_type</th>
+									<th>Transaction Type</th>
+									<th>Transaction Date</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($coinTransactions as $key => $transaction)
 									<tr>
-										<td>{{$key+1}}</td>
 										<td>{{ isset($transaction->SourceTypes->name) ? $transaction->SourceTypes->name : '' }}</td>
 										<td>{{ isset($transaction->coins) ? $transaction->coins: 0}}</td>
 										<td>{{ isset($transaction->transaction_type) ? $transaction->transaction_type : '' }}</td>
+										<td>{{ isset($transaction->created_at) ? $transaction->created_at : '' }}</td>
 									</tr>
 								@endforeach
 							</tbody>
