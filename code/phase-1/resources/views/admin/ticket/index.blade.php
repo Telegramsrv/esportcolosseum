@@ -23,7 +23,7 @@
 							<tbody>
 								@foreach ($tickets as $ticket)
 									<tr>
-										<td>{{ $ticket->id }}</td>
+										<td>{{ md5($ticket->id) }}</td>
 										<td>{{ $ticket->title }}</td>
 										<td>{{ $ticket->user->email }}</td>
 										<td>{{ $ticket->status }}</td>

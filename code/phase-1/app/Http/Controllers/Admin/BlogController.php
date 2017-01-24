@@ -67,7 +67,8 @@ class BlogController extends Controller
 	
 	public function delete(SaveBlog $request, $blogId) {
 		$blog = Blog::findOrFail($blogId);
-		$blog->delete();
+		$blog->status = "Deleted";
+		$blog->save();
 		return redirect()->route('admin.blog.list');
 	}
 	

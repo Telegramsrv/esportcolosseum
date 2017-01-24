@@ -18,6 +18,7 @@
 									<th>Title</th>
 									<th>Slug</th>
 									<th>Display Image</th>
+									<th>Status</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -28,6 +29,7 @@
 										<td>{{ $blog->title }}</td>
 										<td>{{ $blog->slug }}</td>
 										<td><img class="blog-disply-image" src="{{ url(env('UPLOAD_BLOG_THUMBNAIL').$blog->display_image) }}"></td>
+										<td>{{ $blog->status }}</td>
 										<td>
 											<a title="Edit" href="{{ url('admin/blog/edit/'.$blog->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> | 
 											<a title="Delete" href="#" onClick="return deleteBlog({{ $blog->id }});" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>

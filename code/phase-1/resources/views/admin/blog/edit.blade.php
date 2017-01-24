@@ -77,6 +77,13 @@
 	                            @endif
 	                        </div>
 	                        
+	                         <div class="form-group">
+	                        	{!! Form::label('Status', 'Status:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{{ Form::select('status', array('Active' => 'Active', 'Inactive' => 'Inactive', 'Deleted' => 'Deleted'), null, array('class' => 'form-control mb')) }}
+	                            </div>
+	                        </div>
+	                        
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
 									<a class="btn btn-default button" href="/admin/blog">Cancel</a>
