@@ -82,7 +82,8 @@ $(document).ready(function(){
 	        	if(data.success == true){
 	        		if(data.intended != undefined && data.intended != ""){
 	        			Materialize.toast(data.message, 4000,'',function(){
-	        				window.location = data.intended;
+	        				$('#signUpModal').closeModal();
+	            			$(".login-btn").click();
 	        			});
 		            }
 	        	}
