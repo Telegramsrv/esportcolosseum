@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\UserWelcomeMail;
 
 class RegisterController extends Controller
 {
@@ -92,11 +93,13 @@ class RegisterController extends Controller
         $userDetailsInput = $request->only('first_name', 'last_name', 'gamer_name');
         $user->userDetails()->save(new UserDetails($userDetailsInput));
 
+        // Send welcome email to newly registered user!
+        Mail::to($user)->send(new UserWelcomeMail ($user));
+
     	if($user->id){
     		return response()->json([
     				'success' => true,
     				'message' => "You have been registered successfully. Kindly login to continue!",
-    				'intended' => URL::to("/")
     				]);
     	}
     	else{

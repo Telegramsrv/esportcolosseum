@@ -80,12 +80,10 @@ $(document).ready(function(){
 	        data:formData,
 	        success:function(data){
 	        	if(data.success == true){
-	        		if(data.intended != undefined && data.intended != ""){
-	        			Materialize.toast(data.message, 4000,'',function(){
-	        				$('#signUpModal').closeModal();
-	            			$(".login-btn").click();
-	        			});
-		            }
+        			Materialize.toast(data.message, 4000,'',function(){
+        				$('#signUpModal').closeModal();
+            			$(".login-btn").click();
+        			});
 	        	}
 	        },
 	        error: function (data) {
