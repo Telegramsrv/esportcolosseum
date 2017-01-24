@@ -3,16 +3,34 @@
 		<div class="modal-content">
 			<h5 class="white-text center-align">Signup</h5>
 			<div id="signupForm" class="modal-form-container">
+				<div class="row">
+	                <div class="input-field col s12 m12">
+	                    {!! Form::email('first_name', '', ['class' => 'validate', 'id' => 'first_name', 'name' => 'first_name']) !!}
+	        			{!! Form::label('first_name', 'First Name', ['data-error' => '', 'id' => 'firstNameLabel', 'class' => 'error-label']) !!}
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="input-field col s12 m12">
+	                    {!! Form::email('last_name', '', ['class' => 'validate', 'id' => 'last_name', 'name' => 'last_name']) !!}
+	        			{!! Form::label('last_name', 'Last Name', ['data-error' => '', 'id' => 'lastNameLabel', 'class' => 'error-label']) !!}
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="input-field col s12 m12">
+	                    {!! Form::email('gamer_name', '', ['class' => 'validate', 'id' => 'gamer_name', 'name' => 'gamer_name']) !!}
+	        			{!! Form::label('gamer_name', 'Gamer Name', ['data-error' => '', 'id' => 'gamerNameLabel', 'class' => 'error-label']) !!}
+	                </div>
+	            </div>
 	            <div class="row">
 	                <div class="input-field col s12 m12">
 	                    {!! Form::email('email', '', ['class' => 'validate', 'id' => 'email', 'name' => 'email']) !!}
-	        			{!! Form::label('email', 'Email', ['data-error' => '', 'id' => 'emailLabel']) !!}
+	        			{!! Form::label('email', 'Email', ['data-error' => '', 'id' => 'emailLabel', 'class' => 'error-label']) !!}
 	                </div>
 	            </div>
 	            <div class="row">
 	                <div class="input-field col s12 m12">
 	                    {!! Form::password('password', ['class' => 'validate', 'id' => 'password', 'name' => 'password']) !!}
-	        			{!! Form::label('password', 'Password', ['data-error' => '', 'id' => 'passwordLabel']) !!}
+	        			{!! Form::label('password', 'Password', ['data-error' => '', 'id' => 'passwordLabel', 'class' => 'error-label']) !!}
 	                </div>
 	            </div>
 	            <div class="row">
@@ -25,7 +43,7 @@
 	                <div class="input-field col s12 m12">
 	                	
 	                	{!! Form::text('CaptchaCode', '', ['class' => 'validate', 'id' => 'CaptchaCode', 'name' => 'CaptchaCode']) !!}
-	            		{!! Form::label('captcha_code', '', ['data-error' => '', 'id' => 'captchaLabel']) !!}
+	            		{!! Form::label('captcha_code', '', ['data-error' => '', 'id' => 'captchaLabel', 'class' => 'error-label']) !!}
 	            		{!! captcha_image_html('ContactCaptcha') !!}
 	            	</div>
 	            </div>		

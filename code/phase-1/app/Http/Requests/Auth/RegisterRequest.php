@@ -24,8 +24,11 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email', 
-        	'password' => 'required|min:6|confirmed',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gamer_name' => 'required|max:255|unique:user_details,gamer_name',
+            'email' => 'required|email|max:255|unique:users,email', 
+        	'password' => 'required|min:6|confirmed|max:255',
             'CaptchaCode' => 'required|valid_captcha'
         ];
     }
@@ -33,6 +36,7 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
+            'password.confirmed' => 'Confirm Password does not match',
             'CaptchaCode.required' => 'Captcha field is required.',
             'CaptchaCode.valid_captcha' => 'Captcha field is invalid.',
         ];

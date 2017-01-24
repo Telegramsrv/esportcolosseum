@@ -53,7 +53,7 @@ class LoginController extends Controller
     	}
     	else{
     		$errors = array(
-    			'email' => array(
+    			'password' => array(
     				'Please provide valid credentials to login'
     			)
     		);

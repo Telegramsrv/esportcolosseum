@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
     	return [
-    		'email.exists' => 'Email is either not verified or banned.',
+    		'email.exists' => 'Email does not exists.',
     	];
     }
 }

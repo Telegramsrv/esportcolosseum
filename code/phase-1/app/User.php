@@ -57,6 +57,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Challenge');
     }
 
+    /**
+     * User can have many tickets
+     * @return App\Models\Ticket set of tickets created by User.
+     */
+    public function tickets(){
+        return $this->hasMany('App\Models\Ticket');   
+    }
+
     
     
     /* public function getAttribute($key)

@@ -2,10 +2,25 @@ $(document).ready(function(){
 
 	$('select').material_select();
 	
+	$("body").keypress(function(event) {
+	    if (event.keyCode == 13) {
+	        if($('#loginModal').is(':visible')){
+	        	$("#loginSubmit").click();
+	        }
+	        else if($('#signUpModal').is(':visible')){
+	        	$("#registerSubmit").click();	
+	        }
+	        else if($('#forgotPasswordModal').is(':visible')){
+	        	$("#retrievePasswordSubmit").click();	
+	        }
+	    }
+	});
+
 	$(".signup-btn").on("click",function(data){
         $('#loginModal').closeModal();
         $('#forgotPasswordModal').closeModal();
         $('#signUpModal').openModal();
+        $('#registerForm')[0].reset();
 
     });
 
@@ -13,12 +28,14 @@ $(document).ready(function(){
         $('#signUpModal').closeModal();
         $('#forgotPasswordModal').closeModal();
         $('#loginModal').openModal();
+        $('#loginForm')[0].reset();
     });
 
     $(".forgot-password-btn").on("click", function(data){
     	$('#signUpModal').closeModal();
         $('#loginModal').closeModal();
         $('#forgotPasswordModal').openModal();	
+        $('#forgotPasswordForm')[0].reset();
     });
 
 	$("#loginSubmit").click(function(){
@@ -56,6 +73,7 @@ $(document).ready(function(){
 		var registerForm = $("#registerForm");
 		var formData = registerForm.serialize();
 		var postUrl = registerForm.attr('action');
+		$('#registerForm .error-label').attr('data-error', "");
 	    $.ajax({
 	        url:postUrl,
 	        type:'POST',
@@ -66,13 +84,30 @@ $(document).ready(function(){
 	        			Materialize.toast(data.message, 4000,'',function(){
 	        				window.location = data.intended;
 	        			});
-		            	
 		            }
 	        	}
 	        },
 	        error: function (data) {
 	        	var errors = data.responseJSON;
-	        	if(errors.email != undefined && errors.email[0] != ""){
+	        	if(errors.first_name != undefined && errors.first_name[0] != ""){
+	        		$("#registerForm #firstNameLabel").attr("data-error", errors.first_name[0]);
+	        		$("#registerForm #firstNameLabel").addClass("active");
+	        		$("#registerForm #first_name").addClass("invalid");
+	        		$("#registerForm #first_name").focus();
+	        	}
+	        	else if(errors.last_name != undefined && errors.last_name[0] != ""){
+	        		$("#registerForm #lastNameLabel").attr("data-error", errors.last_name[0]);
+	        		$("#registerForm #lastNameLabel").addClass("active");
+	        		$("#registerForm #last_name").addClass("invalid");
+	        		$("#registerForm #last_name").focus();
+	        	}
+	        	else if(errors.gamer_name != undefined && errors.gamer_name[0] != ""){
+	        		$("#registerForm #gamerNameLabel").attr("data-error", errors.gamer_name[0]);
+	        		$("#registerForm #gamerNameLabel").addClass("active");
+	        		$("#registerForm #gamer_name").addClass("invalid");
+	        		$("#registerForm #gamer_name").focus();
+	        	}
+	        	else if(errors.email != undefined && errors.email[0] != ""){
 	        		$("#registerForm #emailLabel").attr("data-error", errors.email[0]);
 	        		$("#registerForm #emailLabel").addClass("active");
 	        		$("#registerForm #email").addClass("invalid");
@@ -179,5 +214,4 @@ $(document).ready(function(){
 	        }
 	    });
 	});
-	
 });

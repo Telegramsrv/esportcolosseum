@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Models\Role;
+use App\Models\UserDetails;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -73,15 +74,12 @@ class RegisterController extends Controller
     }
     
     public function register(RegisterRequest $request){
-    	$data = $request->only('email', 'password');
-    	
-    	$user = User::create([
-    				'email' => $data['email'],
-    				'password' => bcrypt($data['password']),
-    				'ip_address' => request()->ip(),
-    				'status' => 'Active',
-    	]);
-    	
+    	$userInput = $request->only('email', 'password');
+        $userInput['password'] = bcrypt($userInput['password']);
+        $userInput['ip_address'] = request()->ip();
+        $userInput['status'] = 'Active';
+        $user = User::create($userInput);
+
     	$userRole = Role::where("name", "=", "user")->firstOrCreate(
     		array(
     			'name' => 'user',
@@ -89,9 +87,11 @@ class RegisterController extends Controller
     			'description' => 'User role for user'		
     		)
     	);
-        
     	$user->attachRole($userRole);
-    	
+
+        $userDetailsInput = $request->only('first_name', 'last_name', 'gamer_name');
+        $user->userDetails()->save(new UserDetails($userDetailsInput));
+
     	if($user->id){
     		return response()->json([
     				'success' => true,
