@@ -19,7 +19,7 @@
 					@foreach($tickets as $ticket)
 					<tr>
 						<td>{!! $cnt++ !!}</td>
-						<td>{!! $ticket->title !!}</td>
+						<td><a href="{!! route('user.ticket.view', md5($ticket->id)) !!}" ">{!! $ticket->title !!}</a></td>
 						<td>{!! $ticket->status !!}</td>
 						<td>{!! $ticket->ticketConversation()->orderBy('created_at', 'desc')->first()->created_at !!}</td>
 					</tr>

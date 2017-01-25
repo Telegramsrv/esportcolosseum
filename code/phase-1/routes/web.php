@@ -106,6 +106,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');
 	Route::get('/ticket/add', 'User\TicketController@add')->name('user.ticket.add');
 	Route::post('/ticket/add', 'User\TicketController@save')->name('user.ticket.save');
+	Route::get('/ticket/{md5TicketId}', 'User\TicketController@viewTicket')->name('user.ticket.view');
+	Route::put('/ticket/update/{md5TicketId}', 'User\TicketController@updateTicket')->name('user.ticket.update');
 });
 
 Auth::routes();

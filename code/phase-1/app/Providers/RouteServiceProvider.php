@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Models\Blog;
 use App\Models\Game;
+use App\Models\Ticket;
 use App\User;
 use DB;
 
@@ -37,6 +38,9 @@ class RouteServiceProvider extends ServiceProvider
         });
         Route::bind('md5UserId', function($value){
             return User::where(DB::raw('md5(id)'), $value)->firstOrFail(); 
+        });
+        Route::bind('md5TicketId', function($value){
+        	return Ticket::where(DB::raw('md5(id)'), $value)->firstOrFail();
         });
     }
 

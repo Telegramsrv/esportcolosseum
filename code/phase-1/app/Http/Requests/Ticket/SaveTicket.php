@@ -48,6 +48,11 @@ class SaveTicket extends FormRequest
                             'description'   => 'required',
                         ];
                         break;
+                     case 'PUT':
+                        $validation = [
+                        	'description'   => 'required',
+                        	];
+                        	break;
                 }
                 break;
         }

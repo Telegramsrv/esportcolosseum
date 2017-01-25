@@ -39,4 +39,28 @@ class TicketController extends Controller
 
 		return redirect(route('user.ticket.list'));
     }
+    
+    public function viewTicket(Ticket $ticket){
+    	$ticketConversations = $ticket->ticketConversation;
+    	return view('user.ticket.view', compact('ticket', 'ticketConversations'));
+    }
+    
+    public function updateTicket(SaveTicket $request, Ticket $ticket){
+    	$user = Auth::user();
+    	$ticketConversationInput = $request->only('description');
+    	$ticketConversationInput['subject'] = "Re: ".$ticket->title;
+    	$ticketConversationInput['reply_by'] = $user->id;
+    	
+    	$ticket->update($request->only('status'));
+    	
+    	$ticketConversation = $ticket->ticketConversation()->save(new TicketConversation($ticketConversationInput));
+    	
+    	//send Conversion Mali to User
+    	Mail::to(env('FROM_EMAIL'))->send(new TicketReplayMail($ticketConversation));
+    	
+    	return redirect(route('user.ticket.view', md5($ticket->id)));
+    	
+    }
+    
+    
 }
