@@ -102,7 +102,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::post('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');
 	Route::get('/profile/{md5UserId}/{gameSlug?}', 'User\UserController@showProfile')->name('user.profile')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
-	Route::get('/ticket/list', 'User\TicketController@index')->name('user.ticket.list');
+	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');
+	Route::get('/ticket/add', 'User\TicketController@add')->name('user.ticket.add');
+	Route::post('/ticket/add', 'User\TicketController@save')->name('user.ticket.save');
 });
 
 Auth::routes();

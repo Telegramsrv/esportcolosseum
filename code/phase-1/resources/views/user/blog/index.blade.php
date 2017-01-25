@@ -1,4 +1,4 @@
-@extends('layouts.user.static-layout')
+@extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
 	<section>
 		<div class="section-title">Latest <span>Blogs</span></div>

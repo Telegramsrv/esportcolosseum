@@ -213,4 +213,11 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+
+	// if($("table#ticket-list").length > 0){
+	// 	$("table#ticket-list").dataTable({
+ //   			"bLengthChange": false,
+ //    		"bInfo": false,
+	// 	});
+	// }
 });
