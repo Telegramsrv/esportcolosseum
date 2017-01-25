@@ -1,14 +1,14 @@
 <?php
 //namespace App;
 
-require_once('../vendor/autoload.php');
+require_once('/../vendor/autoload.php');
 
 /*Create a server variable with the link to the tcp IP and custom port you need to
 specify the Homestead IP if you are using homestead or, for local environment using
 WAMP, MAMP, ... use 127.0.0..1*/
 
 $server = new \Hoa\Websocket\Server(
-    new \Hoa\Socket\Server('tcp://132.148.72.192:8889')
+    new \Hoa\Socket\Server('tcp://'.env('DB_HOST').':8889')
 );
 
 $server->on('open', function ( \Hoa\Event\Bucket $bucket) {
