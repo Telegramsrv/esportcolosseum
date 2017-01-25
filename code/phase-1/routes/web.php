@@ -89,6 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('/match', 'Admin\MatchController@index')->name('admin.match.list');
 	Route::get('/match/edit/{matchId}', 'Admin\MatchController@edit')->name('admin.match.edit');
 	Route::post('/match/edit/{matchId}', 'Admin\MatchController@update')->name('admin.match.update');
+	Route::get('/match/chat', 'Admin\MatchController@chat')->name('admin.match.chat');
 	//  ----------------------------------------------------------  Match routes End ----------------------------------------------------------------//
 });
 
@@ -102,7 +103,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::post('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');
 	Route::get('/profile/{md5UserId}/{gameSlug?}', 'User\UserController@showProfile')->name('user.profile')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
-	Route::get('/ticket/list', 'User\TicketController@index')->name('user.ticket.list');
+	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');
+	Route::get('/ticket/add', 'User\TicketController@add')->name('user.ticket.add');
+	Route::post('/ticket/add', 'User\TicketController@save')->name('user.ticket.save');
 });
 
 Auth::routes();

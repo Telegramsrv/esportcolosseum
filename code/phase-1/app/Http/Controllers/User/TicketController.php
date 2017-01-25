@@ -14,4 +14,12 @@ class TicketController extends Controller
     	// dd($tickets);
     	return view('user.ticket.index', compact('tickets'));
     }
+
+    public function add(){
+    	return view('user.ticket.add');	
+    }
+
+    public function save(){
+    	
+    }
 }
