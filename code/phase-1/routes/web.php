@@ -89,6 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('/match', 'Admin\MatchController@index')->name('admin.match.list');
 	Route::get('/match/edit/{matchId}', 'Admin\MatchController@edit')->name('admin.match.edit');
 	Route::post('/match/edit/{matchId}', 'Admin\MatchController@update')->name('admin.match.update');
+	Route::get('/match/chat', 'Admin\MatchController@chat')->name('admin.match.chat');
 	//  ----------------------------------------------------------  Match routes End ----------------------------------------------------------------//
 });
 

@@ -8,7 +8,7 @@ use App\Models\Challenge;
 
 class MatchController extends Controller
 {
-public function index() {
+	public function index() {
 		$matches = Challenge::all();
 		return view("admin.match.index", compact('matches'));
 	}
@@ -24,5 +24,9 @@ public function index() {
 		$match->update($input);
 		$request->session()->flash('alert-success', 'Match updated successfully.');
 		return redirect()->route('admin.match.list');
+	}
+	
+	public function chat() {
+		return view("admin.match.chat");
 	}
 }
