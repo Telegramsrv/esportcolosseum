@@ -1,7 +1,7 @@
 <?php
 //namespace App;
 
-require_once('/../vendor/autoload.php');
+require_once('/vendor/autoload.php');
 
 /*Create a server variable with the link to the tcp IP and custom port you need to
 specify the Homestead IP if you are using homestead or, for local environment using
