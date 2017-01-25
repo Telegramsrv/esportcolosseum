@@ -72,7 +72,7 @@
 				<div class="row">
 					<div class="static_container nav-wrapper">
 						<ul class="nav nav-pills nav-stacked col s12 m2">
-                			<li class="{!! setActive(['blog/*'], 'active') !!}">
+                			<li class="{!! setActive(['blog/*', 'blog'], 'active') !!}">
                 				<a href="{!! route('blog-listing') !!}">Blogs</a>
                 			</li>
                 			<li><a href="#" class="">Faq</a></li>

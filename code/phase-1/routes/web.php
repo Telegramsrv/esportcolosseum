@@ -112,5 +112,5 @@ Route::post('/forgot-password', 'User\HomeController@forgotPassword')->name("for
 Route::get('logout', 'Auth\LoginController@logout')->name("logout");
 
 //Blog Pages
-Route::get('/blog', 'User\BlogController@index')->name("blog-listing");
+Route::get('/blog/index', 'User\BlogController@index')->name("blog-listing");
 Route::get('/blog/{blogSlug}', 'User\BlogController@detail')->name("blog-detail");

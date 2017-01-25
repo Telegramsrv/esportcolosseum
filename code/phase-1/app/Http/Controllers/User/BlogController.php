@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     
     public function index(){
-    	$blogs = Blog::orderBy("updated_at", 'desc')->paginate(env('BLOG_RECORDS_PER_PAGE', 12));
+    	$blogs = Blog::active()->orderBy("updated_at", 'desc')->paginate(env('BLOG_RECORDS_PER_PAGE', 12));
 
     	return view("user.blog.index")->with(['blogs' => $blogs]);
     }

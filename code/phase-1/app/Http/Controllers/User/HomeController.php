@@ -17,7 +17,7 @@ use App\Mail\ForgotPasswordMail;
 class HomeController extends Controller
 {
     public function index(Game $selectedGame){
-        $blogs = Blog::latestFour()->get();
+        $blogs = Blog::active()->latestFour()->get();
     	return view("user.home.index")->with(['blogs' => $blogs, 'selectedGame' => $selectedGame]);
     }
     
