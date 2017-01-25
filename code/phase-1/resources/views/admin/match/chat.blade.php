@@ -30,7 +30,7 @@
 @section('footer') 
 <script>
     //The homestead or local host server (don't forget the ws prefix)
-    var host = 'ws://132.148.72.192:8889';
+    var host = 'ws://127.0.0.1:8889';
     var socket = null;
     var input = document.getElementById('input');
     var messages = document.getElementById('messages');
