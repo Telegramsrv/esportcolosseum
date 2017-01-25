@@ -8,7 +8,7 @@ specify the Homestead IP if you are using homestead or, for local environment us
 WAMP, MAMP, ... use 127.0.0..1*/
 
 $server = new \Hoa\Websocket\Server(
-    new \Hoa\Socket\Server('tcp://127.0.0.1:8889')
+    new \Hoa\Socket\Server('tcp://132.148.72.192:8889')
 );
 
 $server->on('open', function ( \Hoa\Event\Bucket $bucket) {
