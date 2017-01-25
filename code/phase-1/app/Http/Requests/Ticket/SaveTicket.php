@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Ticket;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class SaveTicket extends FormRequest
 {
@@ -23,19 +24,34 @@ class SaveTicket extends FormRequest
      */
     public function rules()
     {
+        $roleName = getRole('name');
+        if($roleName == "admin"){}
+
         $validation = [];
-    	switch ($this->method()){
-    		case 'POST':
-    			$validation = [
-    				'status' 			=> 'sometimes|required',
-    			];
-    			
-    			break;
-    			
-    		case 'PUT':
-    			
-    		default: break;	
-    	}
+        switch ($roleName){
+            case 'admin':
+                switch ($this->method()){
+                    case 'POST':
+                        $validation = [
+                            'status'    => 'sometimes|required',
+                        ];
+                        break;
+                    case 'PUT':
+                    default: break; 
+                }
+                break;
+            case 'user':
+                switch ($this->method()){
+                    case 'POST':
+                        $validation = [
+                            'title'         => 'required|max:255',
+                            'description'   => 'required',
+                        ];
+                        break;
+                }
+                break;
+        }
+    	
     	
     	return $validation;
     }

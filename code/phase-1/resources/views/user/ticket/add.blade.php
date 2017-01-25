@@ -16,7 +16,7 @@
 					@php($errorFormat = formatErrorMessage($errors, 'description', 'materialize-textarea'))
 
 					{!! Form::textarea('description', null, ['class' => $errorFormat['formControlClass'], 'id' => 'description', 'name' => 'description']) !!}
-					{!! Form::label('description', 'Address 1', $errorFormat['validation']) !!}
+					{!! Form::label('description', 'Message', $errorFormat['validation']) !!}
 				</div>
 			</div>
 			<div class="row">

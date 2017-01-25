@@ -139,6 +139,15 @@ function formatErrorMessage(ViewErrorBag $errors, $key, $additionalClass = ''){
 	return $result;
 }
 
+/**
+ * Get role information of logged in user.
+ * @param  string $field field name which require to display
+ * @return string        
+ */
+function getRole($field = 'display_name'){
+	return Auth::user()->roles[0]->$field;
+}
+
 function getMenu(){
 	$menu = array();
 

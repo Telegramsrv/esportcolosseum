@@ -18,7 +18,7 @@
 					@php($cnt = 1)
 					@foreach($tickets as $ticket)
 					<tr>
-						<td>{!! $i++ !!}</td>
+						<td>{!! $cnt++ !!}</td>
 						<td>{!! $ticket->title !!}</td>
 						<td>{!! $ticket->status !!}</td>
 						<td>{!! $ticket->ticketConversation()->orderBy('created_at', 'desc')->first()->created_at !!}</td>
