@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('blogSlug', function($value) {
-            return Blog::where('slug', $value)->firstOrFail();
+            return Blog::active()->where('slug', $value)->firstOrFail();
         });
         Route::bind('gameSlug', function($value) {
             return Game::where('slug', $value)->where('status', 'Active')->firstOrFail();
