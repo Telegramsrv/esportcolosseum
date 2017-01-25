@@ -10,7 +10,8 @@
         "zizaco/entrust": "5.2.x-dev",
         "laravelcollective/html": "5.3.*",
         "guzzlehttp/guzzle": "^6.2",
-        "captcha-com/laravel-captcha": "4.*"
+        "captcha-com/laravel-captcha": "4.*",
+        "hoa/websocket": "^3.17"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
