@@ -43,7 +43,7 @@
 		<span class="menu-btn"><i class="fa fa-bars"></i></span>
 		<ul class="ts-profile-nav">
 			<li class="ts-account">
-				<a href="#"><img src="{{ url(env('PROFILE_PICTURE_PATH').Auth::user()->userDetails->user_image) }}" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
+				<a href="#"><img src="{{ url(env('PROFILE_PICTURE_PATH'). (isset(Auth::user()->userDetails->user_image) ? Auth::user()->userDetails->user_image : '')) }}" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
 				<ul>
 					<li><a href="{{ url('admin/user/edit/'.Auth::user()->id) }}">My Account</a></li>
 					<li><a href="{{ url('admin/user/changepassword') }}">Change Password</a></li>
