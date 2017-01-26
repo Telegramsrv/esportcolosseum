@@ -1,6 +1,7 @@
-@extends('layouts.user.static-layout')
+@extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
-	<div class="row">
+	<div class="tab-content col s12 m12">
+		<div class="row">
 			<div class="row">
 				<div class="col s12">
 					<h3 class="page-title"> {{ $ticket->title }} </h3>
@@ -47,15 +48,6 @@
 			<hr class="full-width">
 			<h2 class="page-title">Replay</h2>
 			{!! Form::model($ticket, ['route' => ['user.ticket.update', md5($ticket->id)], 'method' => 'PUT']) !!}
-<!-- 				<div class="row"> -->
-<!-- 					<div class="input-field col s12"> -->
-<!-- 						@php($errorFormat = formatErrorMessage($errors, 'subject')) -->
-							
-<!-- 						{!! Form::text('subject', 'Re: ' . $ticket->title, ['class' => $errorFormat['formControlClass'], 'id' => 'subject', 'name' => 'subject','disabled'=>'disabled']) !!} -->
-<!-- 						{!! Form::label('subject', 'Subject', $errorFormat['validation']) !!}	 -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
 				<div class="row">
 					<div class="input-field col s12">
 						@php($errorFormat = formatErrorMessage($errors, 'description', 'materialize-textarea'))
@@ -79,7 +71,7 @@
 						<a href="{!! route('user.ticket.list') !!}" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Cancel</a>
 					</div>
 				</div>
-		{!! Form::close() !!}
-
-	</div>
+			{!! Form::close() !!}
+		</div>
+	</div>	
 @endsection

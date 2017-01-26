@@ -43,30 +43,43 @@
 			        <a id="logo-container" href="{!! route('user.home') !!}" class="brand-logo">
 			        	<img src="{!! asset('user/images/logo.png') !!}" />
 			        </a>
-			        <ul class="right">
-			            <li><a href="#!" class="white-text"><i class="fa fa-bell-o" aria-hidden="true"></i><!--<i class="fa fa-bell" aria-hidden="true"></i>--></a></li>
-			            <li><a href="#addCoinModal" class="white-text  modal-trigger"><i class="fa fa-usd" aria-hidden="true"></i> AddCoins</a></li>
-			            <li>
-			            	@if (Auth::check())
-				            	<a href="#!" class="white-text dropdown-button" data-activates="userMenu">
-				            		<i class="fa fa-user-secret" aria-hidden="true"></i> Rajan Kaneria
+			        @if (Auth::check())
+			        	<ul class="right">
+				            <li>
+				            	<a href="#!" class="white-text">
+				            		<i class="fa fa-bell-o" aria-hidden="true"></i>
 				            	</a>
-							@else
+				            </li>
+				            <li>
+				            	<a href="#addCoinModal" class="white-text  modal-trigger">
+				            		<i class="fa fa-usd" aria-hidden="true"></i> AddCoins
+				            	</a>
+				            </li>
+				            <li>
+				            	<a href="#!" class="white-text dropdown-button" data-activates="userMenu">
+				            		<i class="fa fa-user-secret" aria-hidden="true"></i> 
+				            		{!! Auth::user()->userDetails->first_name !!} {!! Auth::user()->userDetails->last_name !!}
+				            	</a>
+				            </li>
+				        </ul>
+					@else
+						<ul class="right">
+							<li>
 								<a href="{!! route('user.home') !!}" class="white-text dropdown-button">
 				            		<i class="fa fa-user-secret" aria-hidden="true"></i> Login
 				            	</a>
-							@endif	            	
-			            </li>
-			        </ul>
+				            </li>	
+			            </ul>	
+					@endif
 			    </div>
 			</nav>
 			@if (Auth::check())
 				<ul id="userMenu" class="dropdown-content">
-				    <li><a href="#!">Personal Info</a></li>
+				    <li><a href="{!! route('user.profile.edit') !!}">Personal Info</a></li>
 				    <li><a href="#!">Game Settings</a></li>
 				    <li class="divider"></li>
-				    <li><a href="#supportModal" class="modal-trigger">Support</a></li>
-				    <li><a href="#!">Logout</a></li>
+				    <li><a href="{!! route('user.ticket.list') !!}" class="modal-trigger">Support</a></li>
+				    <li><a href="{!! route('logout') !!}">Logout</a></li>
 				</ul>
 			@endif
 			<div class="no-pad-bot main-container" style="overflow:hidden;" > 
@@ -86,9 +99,7 @@
 		              			</ul>
 		              		@endif
               			</div>
-              			<div class="tab-content col s12 m10">
-              				@yield('static-content')
-              			</div>
+              			@yield('static-content')
 					</div>
 				</div>
 			</div>
