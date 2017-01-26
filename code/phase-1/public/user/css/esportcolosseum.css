@@ -37,3 +37,8 @@ h3.card-header {
 .card-block {
 	 padding: 10px;
 }
+
+.progress {
+	margin:0px; 
+	display:none;
+}

@@ -49,6 +49,9 @@
 	            </div>		
 	            <div class="row">
 	                <a id="registerSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Sign Up</a>
+	                <div class="progress">
+	                	<div class="indeterminate"></div>
+	                </div>
 	            </div>
 			</div>
 		</div>
