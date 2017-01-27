@@ -12,6 +12,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserWelcomeMail;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -97,9 +98,11 @@ class RegisterController extends Controller
         Mail::to($user)->send(new UserWelcomeMail ($user));
 
     	if($user->id){
+            Auth::login($user);
     		return response()->json([
     				'success' => true,
     				'message' => "You have been registered successfully. Kindly login to continue!",
+                    'intended' => URL::to("/")
     				]);
     	}
     	else{

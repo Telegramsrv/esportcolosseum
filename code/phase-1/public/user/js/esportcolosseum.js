@@ -167,10 +167,7 @@ var registerSubmit = function() {
         	if(data.success == true){
         		$("#registerForm #registerSubmit").html("SIGN UP");
         		hideLoader(registerForm, 'registerSubmit');
-    			Materialize.toast(data.message, 4000,'',function(){
-    				$('#signUpModal').closeModal();
-        			$(".login-btn").click();
-    			});
+                window.location = data.intended;
         	}
         },
         error: function (data) {
