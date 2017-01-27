@@ -52,7 +52,7 @@
 					<div class="input-field col s12">
 						@php($errorFormat = formatErrorMessage($errors, 'description', 'materialize-textarea'))
 	
-						{!! Form::textarea('description', '', ['class' => $errorFormat['formControlClass'], 'id' => 'description', 'name' => 'description']) !!}
+						{!! Form::textarea('description', '', ['class' => 'black-text ' . $errorFormat['formControlClass'], 'id' => 'description', 'name' => 'description']) !!}
 						{!! Form::label('description', 'Message', $errorFormat['validation']) !!}
 					</div>
 				</div>

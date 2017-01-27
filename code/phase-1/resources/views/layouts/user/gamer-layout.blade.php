@@ -14,6 +14,7 @@
 		<link href="{!! asset('user/css/flags.css') !!}" rel="stylesheet" />
 		<link href="{!! asset('user/css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
 		<link href="{!! asset('user/css/dashboard.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="{!! asset('css/challenge.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		<link href="{!! asset('user/css/profile.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		<link href="{!! asset('user/css/esportcolosseum.css') !!}" type="text/css" rel="stylesheet" />
 
@@ -113,7 +114,7 @@
 		<script type="text/javascript" src="{!! asset('user/js/materialize.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/init.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/dashboard.js') !!}"></script>
-		<script type="text/javascript" src="{!! asset('user/js/challenge-list.js') !!}"></script>
+		<!-- <script type="text/javascript" src="{!! asset('user/js/challenge-list.js') !!}"></script> -->
 		<script type="text/javascript" src="{!! asset('user/js/esportcolosseum.js') !!}"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){

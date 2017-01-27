@@ -98,7 +98,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/dashboard/{gameSlug?}', 'User\DashboardController@index')->name('user.dashboard')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
 	Route::get('/open-challenge/{gameSlug}', 'User\ChallengeController@listOpenChallenges')->name('user.open-challenge.list');
 	Route::post('/save-challenge/{gameSlug}', 'User\ChallengeController@saveOpenChallenge')->name('user.open-challenge.save');
-	Route::get('/esc-challenge/{gameSlug?}', 'User\ChallengeController@listESCChallenges')->name('user.esc-challenge.list');
+	Route::get('/esc-challenge/{gameSlug}/{name?}', 'User\ChallengeController@listEscChallenges')->name('user.esc-challenge.list')->defaults('gameType', 'solo');
 	Route::get('/my-challenge/{gameSlug}/{name?}', 'User\ChallengeController@myChallengelist')->name('user.my-challenge.list');
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::put('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');
