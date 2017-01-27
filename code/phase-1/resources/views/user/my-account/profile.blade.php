@@ -1,4 +1,4 @@
-@extends('layouts.user.gamer-layout')
+@extends('layouts.user.gamer-layout', ['bodyClass' => 'profile_page'])
 @section('game-info')
     <section>
         <div class="game-banner z-depth-2">

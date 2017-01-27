@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
-	$('select').material_select();
+    if($("select.no-material-select").length == 0){
+        $('select').material_select();    
+    }
 	
 	$("body").keypress(function(event) {
 	    if (event.keyCode == 13) {

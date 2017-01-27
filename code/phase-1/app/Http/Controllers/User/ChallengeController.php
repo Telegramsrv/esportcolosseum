@@ -50,6 +50,6 @@ class ChallengeController extends Controller
 	}
 
 	public function listEscChallenges(Game $selectedGame, $gameType){
-    	return view("user.esc-challenge.challenge-list", compact('selectedGame', 'gameType'));
+    	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'gameType'));
     }
 }

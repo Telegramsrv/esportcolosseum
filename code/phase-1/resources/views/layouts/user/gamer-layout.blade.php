@@ -14,7 +14,7 @@
 		<link href="{!! asset('user/css/flags.css') !!}" rel="stylesheet" />
 		<link href="{!! asset('user/css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
 		<link href="{!! asset('user/css/dashboard.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
-		<link href="{!! asset('css/challenge.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="{!! asset('user/css/challenge.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		<link href="{!! asset('user/css/profile.css') !!}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		<link href="{!! asset('user/css/esportcolosseum.css') !!}" type="text/css" rel="stylesheet" />
 
@@ -38,7 +38,7 @@
 	        ]); ?>
 	    </script>
 	</head>
-	<body class="dashboard_page profile_page clearfix">
+	<body class="dashboard_page {!! $bodyClass or '' !!} clearfix">
 		<nav class="nav-bar blue-grey darken-4" role="navigation">
     		<div class="nav-wrapper">
 				<div class="onclick-open-sidebar">
