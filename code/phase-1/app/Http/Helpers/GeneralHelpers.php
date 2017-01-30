@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\ViewErrorBag;
+use App\Models\Setting;
 
 function deleteMedia($mediaPath) {
 	if (is_dir ( $mediaPath )) {
@@ -314,4 +315,10 @@ function getSubMenu($menuName){
 		return array();
 	}
 
+}
+
+function getOptions(){
+	$setting = Setting::first();
+	$setting = json_decode($setting->settings);
+	return $setting;
 }

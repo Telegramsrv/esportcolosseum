@@ -50,10 +50,11 @@ class UserController extends Controller
     }
     
     public function updateCoins(SaveCoins $request){
+    	$options = getOptions();
     	$requestData = $request->all();
     	$input['user_id'] = Auth::user()->id;
     	$input['source_id'] = 7;
-    	$input['coins'] = $requestData['amount'] * 10;
+    	$input['coins'] = $requestData['amount'] * $options->coins_per_dollar;
     	$input['transaction_type'] = 'Credit';
     	$input['challenge_id'] = 0;
 		$CoinTransections = new CoinTransections($input);
@@ -66,6 +67,5 @@ class UserController extends Controller
 		return response()->json([
 				'intended' => URL::to(url()->previous())
 		]);
-		
     }
 }
