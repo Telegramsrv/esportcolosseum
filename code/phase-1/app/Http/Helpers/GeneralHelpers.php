@@ -218,7 +218,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'matches',
 			'name' => 'Match Manager',
-			'icon' => 'fa fa-user',
+			'icon' => 'fa fa-clock-o',
 			'url' => "#",
 			'path' => "admin/match",
 			'order' => 7,
@@ -227,7 +227,7 @@ function getMenu(){
 	$menu[] = [
 			'id'   => 'settings',
 			'name' => 'General Settings',
-			'icon' => 'fa fa-ticket',
+			'icon' => 'fa fa-cog',
 			'url' => "admin/settings",
 			'path' => "admin/settings",
 			'order' => 8,
@@ -302,11 +302,6 @@ function getSubMenu($menuName){
 			'url' => 'admin/match',
 			'route'=> 'admin.match.list',
 	];
-	/* $submenu['matches'][] = [
-			'name' => 'Add New Match',
-			'url' => 'admin/match/add',
-			'route'=> 'admin.match.add',
-	]; */
 
 	if(isset($submenu[$menuName])){
 		return $submenu[$menuName];
@@ -314,7 +309,6 @@ function getSubMenu($menuName){
 	else{
 		return array();
 	}
-
 }
 
 function getOptions(){
