@@ -84,12 +84,11 @@
                                 </div>
                             </div>
                         </div>
-                        @if($cnt%4 == 3)
-                            @php($cnt = 0)
+                        @php($cnt++)
+                        @if($cnt%4 == 0)
                             </div>
                             <div class="row">
                         @endif
-                        @php($cnt++)
                     @endforeach
                 </div>
             </div>
