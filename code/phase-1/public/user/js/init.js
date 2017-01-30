@@ -32,16 +32,18 @@
 })(jQuery); // end of jQuery name space
 
 function onElementHeightChange(elm, callback){
-    var lastHeight = elm.clientHeight, newHeight;
-    (function run(){
-        newHeight = elm.clientHeight;
-        if( lastHeight != newHeight )
-            callback();
-        lastHeight = newHeight;
+	if(elm){
+		var lastHeight = elm.clientHeight, newHeight;
+	    (function run(){
+	        newHeight = elm.clientHeight;
+	        if( lastHeight != newHeight )
+	            callback();
+	        lastHeight = newHeight;
 
-        if( elm.onElementHeightChangeTimer )
-            clearTimeout(elm.onElementHeightChangeTimer);
+	        if( elm.onElementHeightChangeTimer )
+	            clearTimeout(elm.onElementHeightChangeTimer);
 
-        elm.onElementHeightChangeTimer = setTimeout(run, 200);
-    })();
+	        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+	    })();
+	}
 }

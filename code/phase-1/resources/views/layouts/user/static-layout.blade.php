@@ -71,9 +71,11 @@
 			</div>
 		</div>
 		@include('layouts.user.partials.footer')
+		@include('layouts.user.partials.add-coin')
 		<script type="text/javascript" src="{!! asset('user/js/jquery.min.js') !!}"></script>
 		<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/zf/jq-2.2.4/dt-1.10.13/datatables.min.js"></script> -->
 		<script type="text/javascript" src="{!! asset('user/js/materialize.js') !!}"></script>
+		<script type="text/javascript" src="{!! asset('user/js/init.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/esportcolosseum.js') !!}"></script>
 	</body>
 </html>

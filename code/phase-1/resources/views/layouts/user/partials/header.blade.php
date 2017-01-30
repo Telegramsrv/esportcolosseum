@@ -29,6 +29,11 @@
 			            	</a>
 			            </li>
 			            <li>
+			            	<a href="#" class="white-text">
+			            		<i class="fa fa-circle-o" aria-hidden="true"></i> {!! Auth::user()->userDetails->coins !!}
+			            	</a>
+			            </li>
+			            <li>
 			            	<a href="#!" class="white-text dropdown-button" data-activates="userMenu">
 			            		<i class="fa fa-user-secret" aria-hidden="true"></i> 
 			            		{!! Auth::user()->userDetails->first_name !!} {!! Auth::user()->userDetails->last_name !!}
