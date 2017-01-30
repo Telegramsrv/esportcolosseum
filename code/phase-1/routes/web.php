@@ -91,6 +91,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::post('/match/edit/{matchId}', 'Admin\MatchController@update')->name('admin.match.update');
 	Route::get('/match/chat', 'Admin\MatchController@chat')->name('admin.match.chat');
 	//  ----------------------------------------------------------  Match routes End ----------------------------------------------------------------//
+	
+	//  ---------------------------------------------------------- Settings routes  Start ----------------------------------------------------------------//
+	Route::get('/settings', 'Admin\SettingController@view')->name('admin.setting.view');
+	Route::post('/setting/edit/', 'Admin\SettingController@update')->name('admin.setting.update');
+	//  ----------------------------------------------------------  Settings routes  End ----------------------------------------------------------------//
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {

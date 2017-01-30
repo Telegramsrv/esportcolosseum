@@ -223,6 +223,15 @@ function getMenu(){
 			'order' => 7,
 	];
 	
+	$menu[] = [
+			'id'   => 'settings',
+			'name' => 'General Settings',
+			'icon' => 'fa fa-ticket',
+			'url' => "admin/settings",
+			'path' => "admin/settings",
+			'order' => 8,
+	];
+	
 	usort($menu, function($a, $b) {
 		return $a['order'] - $b['order'];
 	});
