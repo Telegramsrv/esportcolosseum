@@ -13,63 +13,69 @@
         <div class="challenge-page-tab-back">
             <div class="">
               <ul class='tabs'>
-                  <li><a class="active" href='#tab1'><i class="fa fa-user" aria-hidden="true"></i><span>Solo </span></a></li>
-                  <li><a href='#tab2'><i class="fa fa-users" aria-hidden="true"></i><span>Team</span></a></li>
+                  <li><a class="active" href='javascript:void(0);'><i class="fa fa-user" aria-hidden="true"></i><span>Solo </span></a></li>
+                  <li><a href='javascript:void(0);'><i class="fa fa-users" aria-hidden="true"></i><span>Team</span></a></li>
               </ul>
           </div>
         </div>
         <div class="inner-page-tab-back"> 
-        		<div class="row">           
-                <div id='tab1'>
-                    @php($today = \Carbon\Carbon::now())
-                	@include('user.partials.challenge.esc-challenge-date-time-list', ['today' => $today, 'escChallengeInterval' => $escChallengeInterval])
-                    <div class="row">
-                        <div class="col s12 m3">
-                            <div class="challenge-member">
-                                <div class="ch-coin-block">
-                                    <div class="ch-coin">
-                                        win <span>16</span> coins
-                                    </div>
-                                    <div class="ch-coin-black">
-                                        Pay <span>10</span> coins
-                                    </div>
-                                </div>
-                                <div class="member-block">
-                                    <div class="members">members<span>1 / 2</span></div>
-                                    <button class="join-btn">Join</button>
-                                </div>
-                            </div>
+        	<div class="row">           
+                @php($today = \Carbon\Carbon::now())
+                <div class="row buttons-block">
+                    <div class="col s13">
+                        <button class="challengr-btn">
+                            {!! $today->format('d M Y'); !!}   
+                        </button>
+                    </div>
+                    @php
+                        $i=1;
+                        $incrementingDays=1;
+                    @endphp
+                    @for($i=1; $i<7; $i++)
+                        <div class="col s13">
+                            <button class="challengr-btn">
+                                {!! $today->addDays($incrementingDays)->format('d M Y'); !!}   
+                            </button>
+                        </div>
+                    @endfor
+                </div>
+                <div class="col s12">
+                    <div class="time-block">
+                        <ul class="timing disabled_for_mobile">
+                            @php($hours = 0)
+                            @while($hours<24)
+                                <li>{!! sprintf('%02d:00', $hours) !!}</li>
+                                @php($hours = $hours + $settings->esc_challenge_interval_hrs)
+                            @endwhile
+                        </ul>
+                        <div class="timing display_for_mobile_drop">
+                            <select id="leave" class="no-material-select"  style="display: block">
+                                @php($hours = 0)
+                                @while($hours <24)
+                                    <option value="tab1">
+                                        <a href="#">{!! sprintf('%02d:00', $hours) !!}</a>
+                                    </option>
+                                    @php($hours = $hours + $settings->esc_challenge_interval_hrs)
+                                @endwhile
+                            </select>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i> 
+                        </div>
+                        <div class="ist-time">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i><span>{!! \Carbon\Carbon::now()->format('H:i:s') !!} (IST)</span>
                         </div>
                     </div>
                 </div>
-                <div id='tab2'> 
-                    @php($today = \Carbon\Carbon::now())
-                    @include('user.partials.challenge.esc-challenge-date-time-list', ['today' => $today, 'escChallengeInterval' => $escChallengeInterval])
-                    <div class="row">
-                    	<div class="col s12 m3">
-                            <div class="challenge-member">
-                                <div class="ch-coin-block">
-                                    <div class="ch-coin">
-                                        win <span>16</span> coins
-                                    </div>
-                                    <div class="ch-coin-black">
-                                        Pay <span>10</span> coins
-                                    </div>
-                                </div>
-                                <div class="member-block">
-                                    <div class="members">members<span>1 / 2</span></div>
-                                    <button class="join-btn">Join</button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row">
+                    @php($cnt = 0)
+                    @foreach($escChallangeTemplates as $escChallangeTemplate)
                         <div class="col s12 m3">
                             <div class="challenge-member">
                                 <div class="ch-coin-block">
                                     <div class="ch-coin">
-                                        win <span>16</span> coins
+                                        win <span>{!! $escChallangeTemplate->winning_coins !!}</span> coins
                                     </div>
                                     <div class="ch-coin-black">
-                                        Pay <span>10</span> coins
+                                        Pay <span>{!! $escChallangeTemplate->joining_coins !!}</span> coins
                                     </div>
                                 </div>
                                 <div class="member-block">
@@ -78,39 +84,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s12 m3">
-                            <div class="challenge-member">
-                                <div class="ch-coin-block">
-                                    <div class="ch-coin">
-                                        win <span>16</span> coins
-                                    </div>
-                                    <div class="ch-coin-black">
-                                        Pay <span>10</span> coins
-                                    </div>
-                                </div>
-                                <div class="member-block">
-                                    <div class="members">members<span>1 / 2</span></div>
-                                    <button class="join-btn">Join</button>
-                                </div>
+                        @if($cnt%4 == 3)
+                            @php($cnt = 0)
                             </div>
-                        </div>
-                        <div class="col s12 m3">
-                            <div class="challenge-member">
-                                <div class="ch-coin-block">
-                                    <div class="ch-coin">
-                                        win <span>16</span> coins
-                                    </div>
-                                    <div class="ch-coin-black">
-                                        Pay <span>10</span> coins
-                                    </div>
-                                </div>
-                                <div class="member-block">
-                                    <div class="members">members<span>1 / 2</span></div>
-                                    <button class="join-btn">Join</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="row">
+                        @endif
+                        @php($cnt++)
+                    @endforeach
                 </div>
             </div>
         </div>

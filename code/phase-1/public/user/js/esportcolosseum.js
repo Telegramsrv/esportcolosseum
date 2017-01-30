@@ -112,6 +112,18 @@ $(document).ready(function(){
 	$("#amountSubmit").click(function(){
 		amountSubmit();
 	});
+
+    $(".challengr-btn").click(function(){
+        $('.esc-challenge-date-active').removeClass('esc-challenge-date-active');
+        $(this).addClass('esc-challenge-date-active');
+        return false;
+    });
+
+    $("ul.timing li").click(function(){
+        $(".esc-challenge-time-active").removeClass('esc-challenge-time-active');
+        $(this).addClass('esc-challenge-time-active');
+        return false;
+    });
 });
 
 //login submit

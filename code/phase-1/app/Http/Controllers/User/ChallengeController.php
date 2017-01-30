@@ -10,6 +10,7 @@ use App\Models\Game;
 use App\Models\Region;
 use App\Models\Team;
 use App\Models\Challenge;
+use App\Models\EscChallengeTemplate;
 use Carbon\Carbon;
 
 class ChallengeController extends Controller
@@ -50,7 +51,9 @@ class ChallengeController extends Controller
 	}
 
 	public function listEscChallenges(Game $selectedGame){
-		$escChallengeInterval = 3;
-    	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'escChallengeInterval'));
+		$escChallangeTemplates = EscChallengeTemplate::all();
+		$settings = getOptions();
+
+    	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'settings', 'escChallangeTemplates'));
     }
 }

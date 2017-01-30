@@ -26,12 +26,12 @@
 }
 
 h3.card-header {
-    background-color: #f5f5f5;
-    font-size: 19px;
-    font-weight: bold;
-    line-height: 0;
-    padding: 25px 10px;
-    width: 100%;
+	background-color: #f5f5f5;
+	font-size: 19px;
+	font-weight: bold;
+	line-height: 0;
+	padding: 25px 10px;
+	width: 100%;
 }
 
 .card-block {
@@ -45,4 +45,19 @@ h3.card-header {
 
 .blog p{
 	color: #fff;
+}
+
+button.esc-challenge-date-active.challengr-btn{
+    background: #f00;
+    border: 0;
+    border-radius: 3px;
+    padding: 8px 20px;
+    color: #fff;
+    width: 100%;
+    transition: ease 0.4s;
+}
+
+ul.timing li.esc-challenge-time-active{
+    background: #f00;
+    color: #fff;
 }
