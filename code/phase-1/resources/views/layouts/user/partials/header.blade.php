@@ -30,7 +30,7 @@
 			            </li>
 			            <li>
 			            	<a href="#" class="white-text">
-			            		<i class="fa fa-circle-o" aria-hidden="true"></i> {!! Auth::user()->userDetails->coins !!}
+			            		<i class="fa fa-circle-o" aria-hidden="true"></i> {{ isset(Auth::user()->userDetails->coins) ? Auth::user()->userDetails->coins : 0 }}
 			            	</a>
 			            </li>
 			            <li>
