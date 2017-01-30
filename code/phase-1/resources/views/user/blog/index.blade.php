@@ -1,6 +1,6 @@
 @extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
-	<div class="tab-content col s12 m10">
+	<div class="tab-content col s12 m12">
 		<section>
 			<div class="section-title">Latest <span>Blogs</span></div>
 			<div class="row">
@@ -18,11 +18,11 @@
 			                		<i class="material-icons right">more_vert</i>
 			                	</span>
 			              	</div>
-			              	<div class="card-reveal blue-grey darken-4">
+			              	<div class="card-reveal blue-grey darken-4 blog">
 				                <span class="card-title white-text text-darken-4">
 				                	Blog Title<i class="material-icons right">close</i>
 				                </span>
-			                	<p class="grey-text">{!! str_limit($blog->description, 200) !!}</p>
+			                	{!! str_limit($blog->description, 200) !!}
 			              	</div>
 			            </div>
 			        </div>
