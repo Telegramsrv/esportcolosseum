@@ -27,7 +27,8 @@ class SaveSetting extends FormRequest
     	switch ($this->method()){
     		case 'POST':
     			$validation = [
-    				'coin' 			=> 'sometimes|required|numeric',
+    				'coins_per_dollar' 			=> 'sometimes|required|numeric|min:1',
+    				'esc_challenge_interval_hrs'=> 'sometimes|required|numeric|min:1',
     			];
     			
     			break;

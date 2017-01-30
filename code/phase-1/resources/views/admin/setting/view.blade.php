@@ -8,13 +8,25 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						{!! Form::model($setting, ['route' => ['admin.setting.update'], 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
-                         	<div class="form-group {{ $errors->has('coin') ? 'has-error' : '' }}">
-	                        	{!! Form::label('$1 Coins', '$1 Coins:', ['class' => 'col-sm-2 control-label required']) !!}
+                         	<div class="form-group {{ $errors->has('coins_per_dollar') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Coins/$1', 'Coins/$1:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
-	                        		{!! Form::text('coin', null, ['class'=>'form-control mb'] ); !!}
-	                        		@if ($errors->has('coin'))
+	                        		{!! Form::text('coins_per_dollar', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('coins_per_dollar'))
 	                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('coin') }}</strong>
+	                                        <strong>{{ $errors->first('coins_per_dollar') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                        </div>
+	                        
+	                        <div class="form-group {{ $errors->has('esc_challenge_interval_hrs') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Challenge Interval Hrs', 'Challenge Interval Hrs:', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{!! Form::text('esc_challenge_interval_hrs', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('esc_challenge_interval_hrs'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('esc_challenge_interval_hrs') }}</strong>
 	                                    </span>
 	                                @endif
 	                            </div>
