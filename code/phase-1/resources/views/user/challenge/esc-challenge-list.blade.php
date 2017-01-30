@@ -18,371 +18,101 @@
               </ul>
           </div>
         </div>
-            <div class="inner-page-tab-back"> 
-            		<div class="row">           
-                    <div id='tab1'>
-                    		<div class="row buttons-block ">
-                            @php
-                                $today = \Carbon\Carbon::now();
-                            @endphp
-                            <div class="col s13">
-                                <button class="challengr-btn">
-                                    {!! $today->format('d M Y'); !!}   
-                                </button>
-                            </div>
-                            @php
-                                $i=1;
-                                $incrementingDays=1;
-                            @endphp
-                            @for($i=1; $i<7; $i++)
-                                <div class="col s13">
-                                    <button class="challengr-btn">
-                                        {!! $today->addDays($incrementingDays)->format('d M Y'); !!}   
-                                    </button>
+        <div class="inner-page-tab-back"> 
+        		<div class="row">           
+                <div id='tab1'>
+                    @php($today = \Carbon\Carbon::now())
+                	@include('user.partials.challenge.esc-challenge-date-time-list', ['today' => $today, 'escChallengeInterval' => $escChallengeInterval])
+                    <div class="row">
+                        <div class="col s12 m3">
+                            <div class="challenge-member">
+                                <div class="ch-coin-block">
+                                    <div class="ch-coin">
+                                        win <span>16</span> coins
+                                    </div>
+                                    <div class="ch-coin-black">
+                                        Pay <span>10</span> coins
+                                    </div>
                                 </div>
-                            @endfor
-                        </div>
-                        <div class="col s12">
-                            <div class="time-block">
-                                <ul class="timing disabled_for_mobile">
-                                    <li>00:00</li>
-                                    <li>03:00</li>
-                                    <li>06:00</li>
-                                    <li>09:00</li>
-                                    <li>12:00</li>
-                                    <li>05:00</li>
-                                    <li>08:00</li>
-                                    <li>21:00</li>
-                                </ul>
-                                <div class="timing display_for_mobile_drop">
-                                    <select id="leave" class="no-material-select"  style="display: block">
-                                        <option value="tab1"><a href="#"> 00:00 </a></option>
-                                        <option value="tab2"><a href="#"> 03:00</a></option>
-                                        <option value="tab1"><a href="#"> 00:00 </a></option>
-                                        <option value="tab2"><a href="#"> 03:00</a></option>
-                                        <option value="tab1"><a href="#"> 00:00 </a></option>
-                                        <option value="tab2"><a href="#"> 03:00</a></option>
-                                    </select>
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i> 
-                                </div>
-                                <div class="ist-time">
-                                    <i class="fa fa-angle-down" aria-hidden="true"></i><span>10:10:35 (IST)</span>
+                                <div class="member-block">
+                                    <div class="members">members<span>1 / 2</span></div>
+                                    <button class="join-btn">Join</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id='tab2'>
-                    		<div class="row buttons-block ">
-                        		@php
-                                $today = \Carbon\Carbon::now();
-                            @endphp
-                            <div class="col s13">
-                                <button class="challengr-btn">
-                                    {!! $today->format('d M Y'); !!}   
-                                </button>
-                            </div>
-                            @php
-                                $i=1;
-                                $incrementingDays=1;
-                            @endphp
-                            @for($i=1; $i<7; $i++)
-                                <div class="col s13">
-                                    <button class="challengr-btn">
-                                        {!! $today->addDays($incrementingDays)->format('d M Y'); !!}   
-                                    </button>
+                </div>
+                <div id='tab2'> 
+                    @php($today = \Carbon\Carbon::now())
+                    @include('user.partials.challenge.esc-challenge-date-time-list', ['today' => $today, 'escChallengeInterval' => $escChallengeInterval])
+                    <div class="row">
+                    	<div class="col s12 m3">
+                            <div class="challenge-member">
+                                <div class="ch-coin-block">
+                                    <div class="ch-coin">
+                                        win <span>16</span> coins
+                                    </div>
+                                    <div class="ch-coin-black">
+                                        Pay <span>10</span> coins
+                                    </div>
                                 </div>
-                            @endfor
+                                <div class="member-block">
+                                    <div class="members">members<span>1 / 2</span></div>
+                                    <button class="join-btn">Join</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s12">
-                        	<div class="time-block">
-                            <ul class="timing disabled_for_mobile">
-                              <li>00:00</li>
-                              <li>03:00</li>
-                              <li>06:00</li>
-                              <li>09:00</li>
-                              <li>12:00</li>
-                              <li>05:00</li>
-                              <li>08:00</li>
-                              <li>21:00</li>
-                            </ul>
-                            <div class="timing display_for_mobile_drop">
-                              <select id="leave" class="no-material-select" style="display: block">
-                                  <option value="tab1"><a href="#"> 00:00 </a></option>
-                                  <option value="tab2"><a href="#"> 03:00</a></option>
-                                  <option value="tab1"><a href="#"> 00:00 </a></option>
-                                  <option value="tab2"><a href="#"> 03:00</a></option>
-                                  <option value="tab1"><a href="#"> 00:00 </a></option>
-                                  <option value="tab2"><a href="#"> 03:00</a></option>
-                              </select>
-                              <i class="fa fa-caret-down" aria-hidden="true"></i> 
-                          </div>
-                            
-                            <div class="ist-time">
-                              <i class="fa fa-angle-down" aria-hidden="true"></i><span>10:10:35 (IST)</span>
+                        <div class="col s12 m3">
+                            <div class="challenge-member">
+                                <div class="ch-coin-block">
+                                    <div class="ch-coin">
+                                        win <span>16</span> coins
+                                    </div>
+                                    <div class="ch-coin-black">
+                                        Pay <span>10</span> coins
+                                    </div>
+                                </div>
+                                <div class="member-block">
+                                    <div class="members">members<span>1 / 2</span></div>
+                                    <button class="join-btn">Join</button>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                        
-                        <!-- ROW 1 -->
-                        <div class="row">
-                        	<div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
+                        <div class="col s12 m3">
+                            <div class="challenge-member">
+                                <div class="ch-coin-block">
+                                    <div class="ch-coin">
+                                        win <span>16</span> coins
+                                    </div>
+                                    <div class="ch-coin-black">
+                                        Pay <span>10</span> coins
+                                    </div>
+                                </div>
+                                <div class="member-block">
+                                    <div class="members">members<span>1 / 2</span></div>
+                                    <button class="join-btn">Join</button>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                        
-                        <!-- ROW 2 -->
-                        <div class="row">
-                        	<div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
+                        <div class="col s12 m3">
+                            <div class="challenge-member">
+                                <div class="ch-coin-block">
+                                    <div class="ch-coin">
+                                        win <span>16</span> coins
+                                    </div>
+                                    <div class="ch-coin-black">
+                                        Pay <span>10</span> coins
+                                    </div>
+                                </div>
+                                <div class="member-block">
+                                    <div class="members">members<span>1 / 2</span></div>
+                                    <button class="join-btn">Join</button>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <!-- ROW 3 -->
-                        <div class="row">
-                        	<div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <!-- ROW 4 -->
-                         <div class="row">
-                        	<div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col s12 m3">
-                          	<div class="challenge-member">
-                            	<div class="ch-coin-block">
-                                  <div class="ch-coin">
-                                    win <span>16</span> coins
-                                  </div>
-                                  <div class="ch-coin-black">
-                                    Pay <span>10</span> coins
-                                  </div>
-                              </div>
-                              <div class="member-block">
-                              		<div class="members">members<span>1 / 2</span></div>
-                                  <button class="join-btn">Join</button>
-                              </div>
-                            </div>
-                          </div>
-                          
                         </div>
                     </div>
-                   
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 @endsection
