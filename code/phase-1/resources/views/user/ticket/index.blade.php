@@ -1,7 +1,7 @@
 @extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
 	<div class="tab-content col s12 m12">
-		<div class="section-title ">Generate <span>ticket/ Support</span></div>
+		<div class="section-title">Generate <span>ticket/ Support</span></div>
 		<div class="row">
 			<div class="right">
 				<a href="{!! route('user.ticket.add') !!}" class="waves-effect waves-light btn deep-orange darken-4 modal-trigger">Create</a>

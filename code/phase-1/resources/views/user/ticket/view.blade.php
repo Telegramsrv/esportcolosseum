@@ -1,13 +1,13 @@
 @extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
 	<div class="tab-content col s12 m12">
+		<div class="section-title">Generate <span>ticket/ Support</span></div>
 		<div class="row">
 			<div class="row">
 				<div class="col s12">
 					<h3 class="page-title"> {{ $ticket->title }} </h3>
 					<div class="col s6">
 					 	<p><strong>Owner:</strong> {{ $ticket->user->email }} </p>
-					 	<p><strong>Status:</strong> {{ $ticket->status }} </p>
 					</div>
 					<div class="col s6">
 					 	<p><strong>Created:</strong> {{ $ticket->created_at->diffForHumans() }} </p>

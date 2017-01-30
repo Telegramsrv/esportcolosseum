@@ -1,6 +1,7 @@
 @extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
 	<div class="tab-content col s12 m12">
+		<div class="section-title">Generate <span>ticket/ Support</span></div>
 		<div class="row">
 			{!! Form::open(['route' => 'user.ticket.save', 'method' => 'post']) !!}
 				<div class="row">
