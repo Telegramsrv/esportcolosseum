@@ -10,7 +10,8 @@ use App\Models\Setting;
 class SettingController extends Controller
 {
 	public function view() {
-		$setting = Setting::findOrFail(1);
+		$setting = Setting::all();
+		dd($setting);
 		return view("admin.setting.view", compact('setting'));
 	}
 	

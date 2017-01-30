@@ -15,7 +15,7 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('coin')->default(10);
+            $table->longText('settings');
             $table->timestamps();
         });
     }
