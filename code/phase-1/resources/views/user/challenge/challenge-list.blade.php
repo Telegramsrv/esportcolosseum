@@ -115,5 +115,5 @@
 @endsection
 
 @section('create-game-challenge')
-	@include('user.partials.challenge.create-challenge',['regions' => $regions, 'selectedGame' => $selectedGame, 'challengeName' => 'open'])
+	@include('user.partials.challenge.create-open-challenge',['regions' => $regions, 'selectedGame' => $selectedGame, 'challengeType' => 'open'])
 @endsection	

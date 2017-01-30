@@ -30,8 +30,8 @@ class Challenge extends Model
      * @param String $name
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeMyChallengesPerGamePerName($query, User $user, Game $game, $name){
-        return $query->with(["captainDetails"])->where('user_id', $user->id)->where('name', $name)->where('game_id', $game->id);
+    public function scopeMyChallengesPerGamePerName($query, User $user, Game $game, $challengeType){
+        return $query->with(["captainDetails"])->where('user_id', $user->id)->where('challenge_type', $challengeType)->where('game_id', $game->id);
     }
     
     /**

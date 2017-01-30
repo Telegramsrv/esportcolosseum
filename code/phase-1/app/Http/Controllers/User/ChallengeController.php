@@ -36,21 +36,21 @@ class ChallengeController extends Controller
 	    	return response()->json([
 	    		'success' => true,
 	    		'message' => 'You have created challenge successfully.',
-	    		'intended' => route('user.my-challenge.list', ['gameSlug' => $selectedGame->slug, 'name' => $challenge->name])
+	    		'intended' => route('user.my-challenge.list', ['gameSlug' => $selectedGame->slug, 'challengeType' => $challenge->challenge_type])
 	    	]);
 	    }
 	}
 
-	public function myChallengelist(Game $selectedGame, $name){
+	public function myChallengelist(Game $selectedGame, $challengeType){
 		$user = Auth::user();
-		$myCurrentChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $name)->currentGames()->get();
-		$myPastChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $name)->pastGames()->get();
+		$myCurrentChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->currentGames()->get();
+		$myPastChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->pastGames()->get();
 
 		return view("user.challenge.my-challenge-list", compact('selectedGame', 'myCurrentChallenges', 'myPastChallenges'));
 	}
 
-	public function listEscChallenges(Game $selectedGame, $gameType){
+	public function listEscChallenges(Game $selectedGame){
 		$escChallengeInterval = 3;
-    	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'gameType', 'escChallengeInterval'));
+    	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'escChallengeInterval'));
     }
 }

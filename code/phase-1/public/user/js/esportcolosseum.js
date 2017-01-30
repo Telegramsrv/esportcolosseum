@@ -112,13 +112,6 @@ $(document).ready(function(){
 	$("#amountSubmit").click(function(){
 		amountSubmit();
 	});
-
-	// if($("table#ticket-list").length > 0){
-	// 	$("table#ticket-list").dataTable({
- //   			"bLengthChange": false,
- //    		"bInfo": false,
-	// 	});
-	// }
 });
 
 //login submit

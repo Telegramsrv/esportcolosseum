@@ -1,7 +1,7 @@
 <div id="createChallengeModal" class="modal modal-fixed-footer blue-grey darken-4 modal-form">
     {!! Form::open(['route' => ['user.open-challenge.save', $selectedGame->slug], 'method' => 'post', 'id' => 'createChallengeForm']) !!}
         {!! Form::hidden('game_id', $selectedGame->id) !!}
-        {!! Form::hidden('name', $challengeName) !!}
+        {!! Form::hidden('challenge_type', $challengeType) !!}
         <div class="modal-content">
             <h5 class="white-text center-align">Create Challenge</h5>
             <div id="signupForm" class="modal-form-container">
@@ -35,8 +35,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m12">
-                        {!! Form::select('challenge_type', $challengeModes, ['class' => 'validate', 'id' => 'challenge_type', 'name' => 'challenge_type']) !!}
-                        {!! Form::label('challenge_type', 'Challenge Mode', ['data-error' => '', 'id' => 'challengeTypeLabel']) !!}
+                        {!! Form::select('challenge_sub_type', $challengeModes, ['class' => 'validate', 'id' => 'challenge_sub_type', 'name' => 'challenge_sub_type']) !!}
+                        {!! Form::label('challenge_sub_type', 'Challenge Mode', ['data-error' => '', 'id' => 'challengeTypeLabel']) !!}
                     </div>
                 </div>
                 <div class="row">
