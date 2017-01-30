@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class CoinTransections extends Model
 {
     
-
+	protected $guarded = ['id'];
+	
 	/**
 	 * Blog belongs to only one user.
 	 */

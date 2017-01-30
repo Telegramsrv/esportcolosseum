@@ -108,6 +108,10 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+	
+	$("#amountSubmit").click(function(){
+		amountSubmit();
+	});
 
 	// if($("table#ticket-list").length > 0){
 	// 	$("table#ticket-list").dataTable({
@@ -245,6 +249,39 @@ var retrievePasswordSubmit = function () {
         		$("#forgotPasswordForm #emailLabel").addClass("active");
         		$("#forgotPasswordForm #email").addClass("invalid");
         		$("#forgotPasswordForm #email").focus();
+        	}
+        }
+    });
+}
+
+//amount submit
+var amountSubmit = function () {
+	var amountForm = $("#amountForm");
+	var formData = amountForm.serialize();
+	var postUrl = amountForm.attr('action');
+	
+	showLoader(amountForm, 'amountSubmit');
+    $("#amountForm #amountSubmit").html("Processing...");
+    
+    $.ajax({
+    	url:postUrl,
+        type:'POST',
+        data:formData,
+        success:function(data){
+            if(data.intended != undefined && data.intended != ""){
+            	$("#amountForm #amountSubmit").html("Redirecting...");
+            	window.location = data.intended;
+            }
+        },
+        error: function (data) {
+        	var errors = data.responseJSON;
+        	$("#amountForm #amountSubmit").html("ADD");
+        	hideLoader(amountForm, 'amountSubmit', amountSubmit);
+        	if(errors.amount != undefined && errors.amount[0] != ""){
+        		$("#amountLabel").attr("data-error", errors.amount[0]);
+        		$("#amountLabel").addClass("active");
+        		$("#amount").addClass("invalid");
+        		$("#amount").focus();
         	}
         }
     });

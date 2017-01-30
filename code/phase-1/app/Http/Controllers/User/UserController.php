@@ -9,6 +9,9 @@ use App\Models\Game;
 use App\Models\Country;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\SaveUser;
+use App\Http\Requests\User\SaveCoins;
+use App\Models\CoinTransections;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -44,5 +47,25 @@ class UserController extends Controller
 
         $userDetails->update($input);
         return redirect(route('user.dashboard'));
+    }
+    
+    public function updateCoins(SaveCoins $request){
+    	$requestData = $request->all();
+    	$input['user_id'] = Auth::user()->id;
+    	$input['source_id'] = 7;
+    	$input['coins'] = $requestData['amount'] * 10;
+    	$input['transaction_type'] = 'Credit';
+    	$input['challenge_id'] = 0;
+		$CoinTransections = new CoinTransections($input);
+		$CoinTransections->save();
+		
+		$userDetails = Auth::user()->userDetails;
+		$updatedCoins = Auth::user()->userDetails->coins + $input['coins'];
+		$userDetails->update(['coins' => $updatedCoins]);
+		
+		return response()->json([
+				'intended' => URL::to(url()->previous())
+		]);
+		
     }
 }

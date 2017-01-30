@@ -23,20 +23,40 @@ class SaveCoins extends FormRequest
      */
     public function rules()
     {
-        $validation = [];
-    	switch ($this->method()){
-    		case 'POST':
-    			$validation = [
-    				'coins' 			=> 'sometimes|required|numeric',
-    			];
-    			
-    			break;
-    			
-    		case 'PUT':
-    			
-    		default: break;	
-    	}
+    	$roleName = getRole('name');
+    	$validation = [];
     	
+    	switch ($roleName){
+    		case 'admin':
+    			switch ($this->method()){
+    				case 'POST':
+		    			$validation = [
+		    				'coins' 			=> 'sometimes|required|numeric',
+		    			];
+		    			
+		    			break;
+		    			
+		    		case 'PUT':
+		    			
+		    		default: break;
+    			}
+    			break;
+    		case 'user':
+    			switch ($this->method()){
+    				case 'POST':
+		    			$validation = [
+		    				'amount' 			=> 'sometimes|required|numeric|min:1',
+		    			];
+		    			
+		    			break;
+		    			
+		    		case 'PUT':
+		    			
+		    		default: break;
+    			}
+    			break;
+    	}
+    	 
     	return $validation;
     }
 }
