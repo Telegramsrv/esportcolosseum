@@ -23,7 +23,7 @@
             @php($hours = 0)
             @while($hours<24)
                 <li>{!! sprintf('%02d:00', $hours) !!}</li>
-                @php($hours = $hours + $escChallengeInterval->challenge_duration_time)
+                @php($hours = $hours + $escChallengeInterval)
             @endwhile
         </ul>
         <div class="timing display_for_mobile_drop">
@@ -33,7 +33,7 @@
                     <option value="tab1">
                         <a href="#">{!! sprintf('%02d:00', $hours) !!}</a>
                     </option>
-                    @php($hours = $hours + $escChallengeInterval->challenge_duration_time)
+                    @php($hours = $hours + $escChallengeInterval)
                 @endwhile
             </select>
             <i class="fa fa-caret-down" aria-hidden="true"></i> 
