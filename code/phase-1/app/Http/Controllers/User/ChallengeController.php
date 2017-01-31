@@ -24,8 +24,6 @@ class ChallengeController extends Controller
 
 	public function saveOpenChallenge(createOpenChallengeRequest $request, Game $selectedGame){
 		$input = $request->all();
-		$team = Team::Create(['name' => $input['team_name']]);
-		unset($input['team_name']);
 
 		$input['user_id'] = Auth::user()->id;
 		$input['challenge_status'] = 'created';

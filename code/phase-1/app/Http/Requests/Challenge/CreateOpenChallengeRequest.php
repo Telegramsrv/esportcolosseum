@@ -27,12 +27,9 @@ class CreateOpenChallengeRequest extends FormRequest
             'coins' => 'required|numeric|min:1|check_coins_balance|is_multiple_of_five',
             'region_id' => 'required|exists:regions,id',
             'challenge_type' => 'required',
+            'challenge_sub_type' => 'required',
         );
-
-        if($this->request->get("game_type") == 'team'){
-            $validations['team_name'] = 'required';
-        }
-
+        
         return $validations;
     }
 }

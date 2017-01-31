@@ -27,16 +27,10 @@
                         {!! Form::label('region_id', 'Region', ['data-error' => '', 'id' => 'regionLabel']) !!}
                     </div>
                 </div>
-                <div class="row challenge-team-field">
-                    <div class="input-field col s12 m12">
-                        {!! Form::text('team_name', '', ['class' => 'validate', 'id' => 'team_name', 'name' => 'team_name']) !!}
-                        {!! Form::label('team_name', 'Team Name', ['data-error' => '', 'id' => 'teamLabel']) !!}
-                    </div>
-                </div>
                 <div class="row">
                     <div class="input-field col s12 m12">
                         {!! Form::select('challenge_sub_type', $challengeModes, ['class' => 'validate', 'id' => 'challenge_sub_type', 'name' => 'challenge_sub_type']) !!}
-                        {!! Form::label('challenge_sub_type', 'Challenge Mode', ['data-error' => '', 'id' => 'challengeTypeLabel']) !!}
+                        {!! Form::label('challenge_sub_type', 'Challenge Mode', ['data-error' => '', 'id' => 'challengeSubTypeLabel']) !!}
                     </div>
                 </div>
                 <div class="row">
