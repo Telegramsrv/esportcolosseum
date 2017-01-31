@@ -88,9 +88,14 @@ class UserController extends Controller
     	$requestData = $request->all();
     	$options = getOptions();
 
-    	$amount = round($requestData['coins'] / $options->coins_per_dollar, 2);
+    	if($requestData['coins'] > 0 && preg_match('/^[0-9]+$/', $requestData['coins'])){
+    		$amount = "$".round($requestData['coins'] / $options->coins_per_dollar, 2);
+    	}
+    	else{
+    		$amount = 'Invalid';
+    	}
     	return response()->json([
-				'amount' => "$".$amount
+				'amount' => $amount
 		]);
     }
 }
