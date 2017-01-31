@@ -65,3 +65,11 @@ ul.timing li.esc-challenge-time-active{
 #coinMoney{
 	padding: 10px;
 }
+
+/*----------------------- My Challenge Page ----------------------- Start*/
+.challenge-captain-image{
+	width:86px;
+	height: 86px;
+	border-radius: 50%;
+}
+/*----------------------- My Challenge Page ----------------------- End*/

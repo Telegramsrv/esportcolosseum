@@ -27,11 +27,19 @@
 		<div class="row">
 			<div class="first-challenge-left-blog">
 				<div class="first_challenge_left_width">
-					<h2><span>TEAM 1 :</span> Static Team 1</h2>
+					<h2>
+						<span>TEAM 1 :</span>
+						<a href="#addTeamModal" class="modal-trigger">Click here</a> to create Team.
+						<a href="#addTeamModal" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
+					</h2>
 					<ul>
-						<li><a href="#"><img src="images/i.png"></a></li>
-						<li><a href="#"><img src="images/blog1.png"></a></li>
-						<li><a href="#"><img src="images/minus.png"></a></li>
+						<li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li>
+						<li>
+							<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
+								<img class="challenge-captain-image" src="{!! url(env('PROFILE_PICTURE_PATH', 'storage/user/profile_pictures/') . $challenge->captainDetails->user_image) !!}">
+							</a>
+						</li>
+						<li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li>
 					</ul>
 					<h3>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}<span>( Captain ) </span></h3>
 					<div class="player-section">
@@ -49,7 +57,7 @@
 				</div>
 				</div>
 				<div class="versus-image">
-					<img src="images/vs.png">
+					<img src="{!! url('user/images/vs.png') !!}">
 				</div>
 				<div class="first-challenge-left-blog">
 					<div class="first_challenge_left_width">

@@ -28,7 +28,7 @@
 				</div>
 				<div id="tab1">
 					@foreach($myCurrentChallenges as $challenge)
-						@include('user.partials.challenge.current-challenge', $challenge)
+						@include('user.partials.challenge.single-challenge', $challenge)
 					@endforeach	
 				</div>
 				<div id="tab2" style="display: none;">
