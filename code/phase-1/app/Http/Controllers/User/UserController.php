@@ -4,12 +4,13 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\SaveUser;
+use App\Http\Requests\User\PasswordRequest;
+use App\Http\Requests\User\SaveCoins;
 use App\User;
 use App\Models\Game;
 use App\Models\Country;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\User\SaveUser;
-use App\Http\Requests\User\SaveCoins;
 use App\Models\CoinTransections;
 use Illuminate\Support\Facades\URL;
 
@@ -46,6 +47,19 @@ class UserController extends Controller
         }
 
         $userDetails->update($input);
+        return redirect(route('user.dashboard'));
+    }
+
+    public function editPassword(){
+        return view('user.my-account.change-password');
+    }
+
+    public function updatePassword(PasswordRequest $request){
+        $input = $request->only('password');
+        $input['password'] = bcrypt($input['password']);
+        $user = Auth::user();
+        $user->update($input);
+
         return redirect(route('user.dashboard'));
     }
     

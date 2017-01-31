@@ -40,15 +40,6 @@
 	</head>
 	<body class="dashboard_page {!! $bodyClass or '' !!} clearfix">
 		@include('layouts.user.partials.header', ['gameRequire' => true, 'games' => $games])
-  		@if(Auth::check())
-	  		<ul id="userMenu" class="dropdown-content">
-			    <li><a href="{!! route('user.profile.edit') !!}">Personal Info</a></li>
-			    <li><a href="#!">Game Settings</a></li>
-			    <li class="divider"></li>
-			    <li><a href="{!! route('user.ticket.list') !!}" class="modal-trigger">Support</a></li>
-			    <li><a href="{!! route('logout') !!}">Logout</a></li>
-			</ul>
-		@endif	
 		<div class="no-pad-bot main-container" style="overflow:hidden;">
 			<div class="display_for_mobile">
 				@include("user.partials.game", ['games' => $games, 'extraClass' => 'mobile_res'])

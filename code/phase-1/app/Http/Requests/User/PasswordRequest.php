@@ -37,7 +37,13 @@ class PasswordRequest extends FormRequest
     			break;
     			
     		case 'PUT':
-    			
+    			$validation = [
+                    'old_password' => 'required|old_password:' . Auth::user()->password,
+                    'password' => 'required|confirmed',
+                    'password_confirmation' => 'required'
+                ];
+                break;
+                
     		default: break;	
     	}
     	
