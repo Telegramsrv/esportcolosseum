@@ -112,6 +112,10 @@ $(document).ready(function(){
 	$("#amountSubmit").click(function(){
 		amountSubmit();
 	});
+	
+	$(".add-coins-button").click(function(){
+		$("#coins").val("");
+	});
 
     $(".challengr-btn").click(function(){
         $('.esc-challenge-date-active').removeClass('esc-challenge-date-active');
@@ -123,6 +127,22 @@ $(document).ready(function(){
         $(".esc-challenge-time-active").removeClass('esc-challenge-time-active');
         $(this).addClass('esc-challenge-time-active');
         return false;
+    });
+    
+    $("#coins").keyup(function(){
+    	$.ajax({
+        	url:'/user/coins/calculation',
+            type:'GET',
+            data:{'coins': $("#coins").val()},
+            success:function(data){
+            	$("#coinMoney").html(data.amount);
+            },
+            error: function (data) {
+            	$("#coinMoney").html('');
+            }
+        });
+    	
+    	return false;
     });
 });
 
@@ -282,11 +302,11 @@ var amountSubmit = function () {
         	var errors = data.responseJSON;
         	$("#amountForm #amountSubmit").html("ADD");
         	hideLoader(amountForm, 'amountSubmit', amountSubmit);
-        	if(errors.amount != undefined && errors.amount[0] != ""){
-        		$("#amountLabel").attr("data-error", errors.amount[0]);
+        	if(errors.coins != undefined && errors.coins[0] != ""){
+        		$("#amountLabel").attr("data-error", errors.coins[0]);
         		$("#amountLabel").addClass("active");
-        		$("#amount").addClass("invalid");
-        		$("#amount").focus();
+        		$("#coins").addClass("invalid");
+        		$("#coins").focus();
         	}
         }
     });

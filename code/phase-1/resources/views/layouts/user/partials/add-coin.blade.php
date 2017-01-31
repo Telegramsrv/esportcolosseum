@@ -5,8 +5,10 @@
 	      	<div id="amountForm" class="modal-form-container">
 	            <div class="row">
 	        		<div class="input-field col s12 m12">
-	        			{!! Form::email('amount', '', ['class' => 'validate', 'id' => 'amount', 'name' => 'amount']) !!}
-	        			{!! Form::label('Amount', 'Amount', ['data-error' => '', 'id' => 'amountLabel']) !!}
+	        			{!! Form::text('coins', '', ['class' => 'validate input-field col s9 m9', 'id' => 'coins', 'name' => 'coins']) !!}
+	        			{!! Form::label('Coins', 'Coins', ['data-error' => '', 'id' => 'amountLabel']) !!}
+	        			<span class="input-field col s3 m3" id="coinMoney">&nbsp;</span>
+	        			<span class="input-field col s12 m12">{{ $options->coins_per_dollar }} coins = 1$</span>
 	        		</div>
 	    		</div>
 	            <div class="row">

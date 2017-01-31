@@ -24,7 +24,7 @@
 			            	</a>
 			            </li>
 			            <li>
-			            	<a href="#addCoinModal" class="white-text  modal-trigger">
+			            	<a href="#addCoinModal" class="white-text  modal-trigger add-coins-button">
 			            		<i class="fa fa-usd" aria-hidden="true"></i> AddCoins
 			            	</a>
 			            </li>

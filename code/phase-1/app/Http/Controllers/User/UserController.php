@@ -54,7 +54,8 @@ class UserController extends Controller
     	$requestData = $request->all();
     	$input['user_id'] = Auth::user()->id;
     	$input['source_id'] = 7;
-    	$input['coins'] = $requestData['amount'] * $options->coins_per_dollar;
+    	//$input['coins'] = $requestData['amount'] * $options->coins_per_dollar;
+    	$input['coins'] = $requestData['coins'];
     	$input['transaction_type'] = 'Credit';
     	$input['challenge_id'] = 0;
 		$CoinTransections = new CoinTransections($input);
@@ -66,6 +67,16 @@ class UserController extends Controller
 		
 		return response()->json([
 				'intended' => URL::to(url()->previous())
+		]);
+    }
+    
+    public function coinCalculation(SaveCoins $request){
+    	$requestData = $request->all();
+    	$options = getOptions();
+
+    	$amount = round($requestData['coins'] / $options->coins_per_dollar, 2);
+    	return response()->json([
+				'amount' => "$".$amount
 		]);
     }
 }

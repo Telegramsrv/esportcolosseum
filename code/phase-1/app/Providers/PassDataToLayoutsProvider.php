@@ -21,6 +21,12 @@ class PassDataToLayoutsProvider extends ServiceProvider
             $games = Game::where('status', 'Active')->get();
             $view->with(['games' => $games]);
         });
+        
+        view()->composer(['layouts.user.partials.add-coin'], function($view)
+        {
+        	$options = getOptions();
+        	$view->with(['options' => $options]);
+        });
     }
 
     /**

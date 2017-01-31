@@ -61,3 +61,7 @@ ul.timing li.esc-challenge-time-active{
     background: #f00;
     color: #fff;
 }
+
+#coinMoney{
+	padding: 10px;
+}
