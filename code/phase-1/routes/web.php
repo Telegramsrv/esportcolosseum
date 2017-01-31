@@ -107,6 +107,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/my-challenge/{gameSlug}/{challengeType}', 'User\ChallengeController@myChallengelist')->name('user.my-challenge.list');
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::put('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');
+	Route::get('/profile/change-password', 'User\UserController@editPassword')->name('user.change-password.edit');
+	Route::put('/profile/change-password', 'User\UserController@updatePassword')->name('user.change-password.update');
 	Route::get('/profile/{md5UserId}/{gameSlug?}', 'User\UserController@showProfile')->name('user.profile')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
 	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');
 	Route::get('/ticket/add', 'User\TicketController@add')->name('user.ticket.add');
