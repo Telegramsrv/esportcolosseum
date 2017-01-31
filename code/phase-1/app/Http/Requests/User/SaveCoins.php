@@ -45,7 +45,7 @@ class SaveCoins extends FormRequest
     			switch ($this->method()){
     				case 'POST':
 		    			$validation = [
-		    				'coins' 			=> 'sometimes|required|numeric|min:1',
+		    				'coins' 			=> 'sometimes|required|integer|min:1',
 		    			];
 		    			
 		    			break;
