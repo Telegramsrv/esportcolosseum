@@ -997,3 +997,100 @@ a:active, a:hover {
 @media only screen and (max-width: 407px) {
     
 }
+
+/*added by rajan*/
+.team-input-overlay {
+    display: block;
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+.team-input {
+    width: 30%;
+    min-width: 400px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+/*************************/
+/* changes on 28-01-2017 */
+/*************************/
+
+/* label focus color */
+.input-field textarea:focus + label {
+    color: #d84c21 !important;
+}
+
+/* label underline focus color */
+.input-field textarea:focus {
+    border-bottom: 1px solid #d84c21 !important;
+    box-shadow: 0 1px 0 0 #d84c21 !important;
+}
+
+/* valid color */
+.input-field textarea.valid {
+    border-bottom: 1px solid #d84c21 !important;
+    box-shadow: 0 1px 0 0 #d84c21 !important;
+}
+.team-title i{
+	color:#ccc;
+}
+.team-title:hover i{
+	color:#263238;
+	cursor:pointer
+}
+.modal-smal-form{
+	width:30%;
+	height:auto;
+	min-height: 450px;
+}
+.modal-smal-form .modal-form-container{
+	margin-top:25px;
+}
+
+#teamPlayerList .player-image{
+	float:none;
+	margin-right:0px;
+}
+
+#teamPlayerList .player-informations{
+	float:none;
+}
+
+#teamPlayerList img {
+    margin: 0 auto;
+    display: block;
+}
+
+#teamPlayerList .player-informations h2 {
+    text-align: center;
+	margin-top:5px;
+	color: #d84c21;
+}
+
+#teamPlayerList .player-section{
+	width:50%;
+}
+div#teamPlayerList {
+    overflow: hidden;
+    margin-top: 50px;
+	display:none;
+}
+div#message {
+    text-align: center;
+    color: #444;
+}
+
+div#noTeamMessage {
+    padding: 125px 0px;
+    /* border: 1px solid; */
+}
+#editTeamNameModal .btn-full{
+	margin-top: 0px;
+}
+#editTeamNameModal .autocomplete-content{
+	    position: absolute;
+    width: 100%;
+}

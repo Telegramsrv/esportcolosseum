@@ -1,6 +1,6 @@
 @extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
-	<div class="tab-content col s12 m10">
+	<div class="tab-content col s12 m12">
 		<div class="section-title">Change <span>Password</span></div>
 		<div class="row">
 			{!! Form::open(['route' => 'user.change-password.update', 'method' => 'put']) !!}

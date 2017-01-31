@@ -3008,7 +3008,7 @@ $(document).ready(function(){
         var $input = $(this);
         var data = options.data,
             $inputDiv = $input.closest('.input-field'); // Div to append on
-
+		var onCompleteFunction = options.onComplete;
         // Check if data isn't empty
         if (!$.isEmptyObject(data)) {
           // Create autocomplete element
@@ -3068,6 +3068,7 @@ $(document).ready(function(){
           // Set input value
           $autocomplete.on('click', 'li', function () {
             $input.val($(this).text().trim());
+			onCompleteFunction($(this).text().trim());
             $autocomplete.empty();
           });
         }

@@ -1,6 +1,6 @@
 @extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
-	<div class="tab-content col s12 m10">
+	<div class="tab-content col s12 m12">
 		<div class="section-title">Edit <span>Profile</span></div>
 		<div class="row">
 			{!! Form::model($userDetails, ['route' => 'user.profile.update', 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
