@@ -1,4 +1,4 @@
-@extends('layouts.user.static-layout')
+@extends('layouts.user.static-layout', ['displayLeftSidebar' => false])
 @section('static-content')
 	<div class="tab-content col s12 m10">
 		<div class="section-title">Edit <span>Profile</span></div>
