@@ -65,11 +65,11 @@ $(document).ready(function(){
 	});
 	
 	$("#searchForm #searchSubmit").click(function(){
-		//searchSubmit();
+		searchSubmit();
 	});
 	
 	$("form#searchForm").submit(function(){
-		//searchSubmit();
+		searchSubmit();
 		return false;
 	});
 	
@@ -106,6 +106,33 @@ $(document).ready(function(){
     });
 });
 
+function addFriend(friendID){
+	$.ajax({
+    	url:'/user/friend/add',
+        type:'GET',
+        data:{'friendID': friendID},
+        success:function(data){
+        	$("#addFriend").html(data.html);
+        },
+        error: function (data) {
+        }
+    });
+	return false;
+}
+
+function acceptFriend(friendID){
+	$.ajax({
+    	url:'/user/friend/accept',
+        type:'GET',
+        data:{'friendID': friendID},
+        success:function(data){
+        	$("#addFriend").html(data.html);
+        },
+        error: function (data) {
+        }
+    });
+	return false;
+}
 
 // $("#createChallengeForm #createChallengeSubmit").click(
 var createChallenge = function(){

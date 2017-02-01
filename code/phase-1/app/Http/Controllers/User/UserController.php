@@ -15,6 +15,8 @@ use App\Models\Country;
 use App\Models\CoinTransections;
 use Illuminate\Support\Facades\URL;
 use App\Models\UserDetails;
+use App\Models\UserFriends;
+use DB;
 
 class UserController extends Controller
 {
@@ -129,8 +131,33 @@ class UserController extends Controller
     	if($user){
     		$member = array('id' => $user->id, 'name' => $user->userDetails->first_name." ".$user->userDetails->last_name, 'image' => $user->userDetails->user_image);
     		$errorBool = false;
+    		
+    		$buttonText = 'Add Friend';
+    		$friendsData = DB::table('user_friends')->where('user_id', Auth::id())->where('friend_id', $user->id)->first();
+    		if($friendsData){
+    			if($friendsData->status == 'Invited'){
+    				$buttonText = 'Invited';
+    			}
+    		}
+    		
     		$html = '<div class="player-section"><div class="player-image"><img src="'.url(env('PROFILE_PICTURE_PATH').$member['image']).'"></div><div class="player-informations">';
-    		$html .= '<h2>'.$member['name'].'</h2><a id="searchSubmit" class="waves-effect waves-light btn deep-orange">Add Friend</a>';
+    		$html .= '<h2>'.$member['name'].'</h2>';
+    		
+    		$friendsData = DB::table('user_friends')->where(array('user_id' => Auth::id(), 'friend_id' => $user->id))
+    												->orWhere(array('friend_id' => Auth::id(), 'user_id' => $user->id))
+    												->first();
+    		if($friendsData){
+    			if($friendsData->status == 'Invited' && Auth::id() == $friendsData->user_id){
+    				$html .= '<a id="addFriend" class="addFriend waves-effect waves-light btn deep-orange">REQUESTED</a>';
+    			}
+    			else if($friendsData->status == 'Invited' && Auth::id() == $friendsData->friend_id){
+    				$html .= '<a id="addFriend" onClick="acceptFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">ACCEPT</a>';
+    			}
+    		}
+    		else{
+    			$html .= '<a id="addFriend" onClick="addFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">ADD FRIEND</a>';
+    		}
+    		
     		$html .= '</div></div>';
     	}
     	else{
@@ -142,6 +169,38 @@ class UserController extends Controller
     		return response()->json([
     				'html' => $html,
     				'error' => $errorBool
+    		]);
+    	}
+    }
+    
+    function addFriend(){
+    	$requestData = \Request::all();
+    	
+    	if($requestData['friendID'] > 0){
+    		$data['user_id'] = Auth::id();
+    		$data['friend_id'] = $requestData['friendID'];
+    		$data['status'] = 'Invited';
+    		$userFriends = new UserFriends($data);
+    		$userFriends->save();
+    	}
+    	
+    	if (\Request::ajax()) {
+    		return response()->json([
+    				'html' => "REQUESTED"
+    		]);
+    	}
+    }
+    
+    function acceptFriend(){
+    	$requestData = \Request::all();
+    	$userFriends = UserFriends::where('user_id', $requestData['friendID'])->where('friend_id', Auth::id())->first();
+    	
+    	$userFriends->status = 'Accepted';
+    	$userFriends->update();
+    	 
+    	if (\Request::ajax()) {
+    		return response()->json([
+    				'html' => "ACCEPTED"
     		]);
     	}
     }
