@@ -21,7 +21,9 @@ class TeamController extends Controller
     	$input = $request->only('name');
     	$team = Team::create($input);
     	$user = Auth::user();
+    	$team = Challenge::
 
     	$team->users()->attach($user);
+
 	}    	
 }

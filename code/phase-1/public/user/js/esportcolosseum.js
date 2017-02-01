@@ -57,7 +57,7 @@ $(document).ready(function(){
     });
 
     $("#createTeamForm #createTeamSubmit").click(function(){
-        creatTeam();    
+        5creatTeam();    
     });
     
 	$("#amountForm #amountSubmit").click(function(){
@@ -70,11 +70,11 @@ $(document).ready(function(){
 	});
 	
 	$("#searchForm #searchSubmit").click(function(){
-		//searchSubmit();
+		searchSubmit();
 	});
 	
 	$("form#searchForm").submit(function(){
-		//searchSubmit();
+		searchSubmit();
 		return false;
 	});
 	
@@ -141,7 +141,34 @@ var creatTeam = function(){
                 $("#createTeamForm #name").focus();
             }
         }
-    });    
+    });
+
+function addFriend(friendID){
+	$.ajax({
+    	url:'/user/friend/add',
+        type:'GET',
+        data:{'friendID': friendID},
+        success:function(data){
+        	$("#addFriend").html(data.html);
+        },
+        error: function (data) {
+        }
+    });
+	return false;
+}
+
+function acceptFriend(friendID){
+	$.ajax({
+    	url:'/user/friend/accept',
+        type:'GET',
+        data:{'friendID': friendID},
+        success:function(data){
+        	$("#addFriend").html(data.html);
+        },
+        error: function (data) {
+        }
+    });
+	return false;
 }
 
 var createChallenge = function(){
