@@ -152,6 +152,7 @@ class UserController extends Controller
     			}
     			else if($friendsData->status == 'Invited' && Auth::id() == $friendsData->friend_id){
     				$html .= '<a id="addFriend" onClick="acceptFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">ACCEPT</a>';
+    				$html .= '&nbsp;&nbsp;<a id="rejectFriend" onClick="rejectFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">REJECT</a>';
     			}
     		}
     		else{

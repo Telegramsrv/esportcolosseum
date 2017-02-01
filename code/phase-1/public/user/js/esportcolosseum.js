@@ -165,10 +165,26 @@ function acceptFriend(friendID){
         data:{'friendID': friendID},
         success:function(data){
         	$("#addFriend").html(data.html);
+        	$("#rejectFriend").hide();
         },
         error: function (data) {
         }
     });
+	return false;
+}
+
+function rejectFriend(friendID){
+	/*$.ajax({
+    	url:'/user/friend/accept',
+        type:'GET',
+        data:{'friendID': friendID},
+        success:function(data){
+        	$("#addFriend").html(data.html);
+        	$("#rejectFriend").hide();
+        },
+        error: function (data) {
+        }
+    });*/
 	return false;
 }
 
