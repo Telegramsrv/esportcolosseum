@@ -57,7 +57,7 @@ $(document).ready(function(){
     });
 
     $("#createTeamForm #createTeamSubmit").click(function(){
-        5creatTeam();    
+        creatTeam();    
     });
     
 	$("#amountForm #amountSubmit").click(function(){
