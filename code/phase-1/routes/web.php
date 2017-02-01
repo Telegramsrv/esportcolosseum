@@ -117,6 +117,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::put('/ticket/update/{md5TicketId}', 'User\TicketController@updateTicket')->name('user.ticket.update');
 	Route::post('/coins/update', 'User\UserController@updateCoins')->name('user.coins.update');
 	Route::get('/coins/calculation', 'User\UserController@coinCalculation')->name('user.coins.calculation');
+	Route::post('/member/search', 'User\UserController@memberSearch')->name('user.member.search');
 });
 
 Auth::routes();

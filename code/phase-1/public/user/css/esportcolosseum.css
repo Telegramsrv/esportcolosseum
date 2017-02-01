@@ -73,3 +73,39 @@ ul.timing li.esc-challenge-time-active{
 	border-radius: 50%;
 }
 /*----------------------- My Challenge Page ----------------------- End*/
+
+
+/*----------------------- Add Friend Popup ----------------------- Start*/
+.searchResults .player-image{
+	float:none;
+	margin-right:0px;
+}
+
+.searchResults .player-informations{
+	float:none;
+}
+
+.searchResults img {
+    margin: 0 auto;
+    display: block;
+}
+
+.searchResults .player-informations h2 {
+    text-align: center;
+	margin-top:5px;
+	color: #d84c21;
+}
+.searchResults .player-section{
+	width: 100%;
+}
+div.searchResults {
+    overflow: hidden;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.searchResults #message{
+	margin-top: 25px;
+	color: #FFFFFF;
+}
+/*----------------------- Add Friend Popup ----------------------- End*/

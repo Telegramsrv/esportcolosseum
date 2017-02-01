@@ -24,8 +24,13 @@
 	            	</a>
 	            </li>
 	            <li>
+	            	<a href="#addFriendModal" class="white-text modal-trigger">
+	            		<i class="fa fa-user" aria-hidden="true"></i> Add Friends
+	            	</a>
+	            </li>
+	            <li>
 	            	<a href="#addCoinModal" class="white-text  modal-trigger add-coins-button">
-	            		<i class="fa fa-usd" aria-hidden="true"></i> AddCoins
+	            		<i class="fa fa-usd" aria-hidden="true"></i> Add Coins
 	            	</a>
 	            </li>
 	            <li>

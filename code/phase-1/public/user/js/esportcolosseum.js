@@ -56,8 +56,21 @@ $(document).ready(function(){
         createChallenge();
     });
 
-	$("#amountSubmit").click(function(){
+	$("#amountForm #amountSubmit").click(function(){
 		amountSubmit();
+	});
+	$("form#amountForm").submit(function(){
+		amountSubmit();
+		return false;
+	});
+	
+	$("#searchForm #searchSubmit").click(function(){
+		//searchSubmit();
+	});
+	
+	$("form#searchForm").submit(function(){
+		//searchSubmit();
+		return false;
 	});
 	
 	$(".add-coins-button").click(function(){
@@ -306,6 +319,38 @@ var amountSubmit = function () {
     });
 }
 
+//Search submit
+var searchSubmit = function () {
+	$(".searchResults").html('');
+	var searchForm = $("#searchForm");
+	var formData = searchForm.serialize();
+	var postUrl = searchForm.attr('action');
+	
+	showLoader(searchForm, 'searchSubmit');
+    $("#searchForm #searchSubmit").html("Processing...");
+    
+    $.ajax({
+    	url:postUrl,
+        type:'POST',
+        data:formData,
+        success:function(data){
+        	hideLoader(searchForm, 'searchSubmit', searchSubmit);
+        	$("#searchForm #searchSubmit").html("SEARCH");
+            $(".searchResults").html(data.html);
+        },
+        error: function (data) {
+        	var errors = data.responseJSON;
+        	$("#searchForm #searchSubmit").html("SEARCH");
+        	hideLoader(searchForm, 'searchSubmit', searchSubmit);
+        	if(errors.search != undefined && errors.search[0] != ""){
+        		$("#searchLabel").attr("data-error", errors.search[0]);
+        		$("#searchLabel").addClass("active");
+        		$("#search").addClass("invalid");
+        		$("#search").focus();
+        	}
+        }
+    });
+}
 //show Loader on signup.login
 function showLoader(_this, btnID) {
 	if(btnID != undefined && btnID != "") {

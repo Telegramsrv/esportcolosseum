@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\SaveUser;
 use App\Http\Requests\User\PasswordRequest;
 use App\Http\Requests\User\SaveCoins;
+use App\Http\Requests\User\SearchMembers;
 use App\User;
 use App\Models\Game;
 use App\Models\Country;
 use App\Models\CoinTransections;
 use Illuminate\Support\Facades\URL;
+use App\Models\UserDetails;
 
 class UserController extends Controller
 {
@@ -97,5 +99,39 @@ class UserController extends Controller
     	return response()->json([
 				'amount' => $amount
 		]);
+    }
+    
+    public function memberSearch(SearchMembers $request){
+    	$requestData = $request->all();
+    	
+    	$user = User::where('email', $requestData['search'])->first();
+    	if($user){
+    		$member = array('id' => $user->id, 'name' => $user->userDetails->first_name." ".$user->userDetails->last_name, 'image' => $user->userDetails->user_image);
+    	}
+    	else{
+    		$userDetails = UserDetails::where('gamer_name', $requestData['search'])->first();
+    		if($userDetails){
+    			$member = array('id' => $userDetails->user_id, 'name' => $userDetails->first_name." ".$userDetails->last_name, 'image' => $userDetails->user_image);
+    		}
+    	}
+    	
+    	if(isset($member)){
+    		$errorBool = false;
+    		$html = '<div class="player-section"><div class="player-image"><img src="'.url(env('PROFILE_PICTURE_PATH').$member['image']).'"></div><div class="player-informations">';
+    		$html .= '<h2>'.$member['name'].'</h2><a id="searchSubmit" class="waves-effect waves-light btn deep-orange">Add Friend</a>';
+    		$html .= '</div></div>';
+    		
+    	}
+    	else{
+    		$errorBool = true;
+    		$html = '<div id="message">No members found!</div>';
+    	}
+    	
+    	if ($request->ajax()) {
+    		return response()->json([
+    				'html' => $html,
+    				'error' => $errorBool
+    		]);
+    	}
     }
 }
