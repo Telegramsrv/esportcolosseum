@@ -142,6 +142,7 @@ var creatTeam = function(){
             }
         }
     });
+}
 
 function addFriend(friendID){
 	$.ajax({
