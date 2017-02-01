@@ -110,6 +110,7 @@ class UserController extends Controller
 					    	})
 					    	->where('email', $requestData['search'])
 					    	->where('status', 'Active')
+					    	->where('id', '!=', Auth::id())
 					    	->first();
     	
     	if(!$user){
@@ -121,9 +122,9 @@ class UserController extends Controller
 			    					$q->where('gamer_name', \Request::all()['search']);
 			    				})
 			    				->where('status', 'Active')
+			    				->where('id', '!=', Auth::id())
 			    				->first();
     	}
-    		
     		
     	if($user){
     		$member = array('id' => $user->id, 'name' => $user->userDetails->first_name." ".$user->userDetails->last_name, 'image' => $user->userDetails->user_image);
