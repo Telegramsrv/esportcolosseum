@@ -104,23 +104,33 @@ class UserController extends Controller
     public function memberSearch(SearchMembers $request){
     	$requestData = $request->all();
     	
-    	$user = User::where('email', $requestData['search'])->first();
+    	$user = User::with('userDetails')
+    						->whereHas('roles', function($q){
+					    		$q->where('name', 'user');
+					    	})
+					    	->where('email', $requestData['search'])
+					    	->where('status', 'Active')
+					    	->first();
+    	
+    	if(!$user){
+    		$user = User::with('userDetails')
+    							->whereHas('roles', function($q){
+    								$q->where('name', 'user');
+    							})
+			    				->whereHas('userDetails', function($q){
+			    					$q->where('gamer_name', \Request::all()['search']);
+			    				})
+			    				->where('status', 'Active')
+			    				->first();
+    	}
+    		
+    		
     	if($user){
     		$member = array('id' => $user->id, 'name' => $user->userDetails->first_name." ".$user->userDetails->last_name, 'image' => $user->userDetails->user_image);
-    	}
-    	else{
-    		$userDetails = UserDetails::where('gamer_name', $requestData['search'])->first();
-    		if($userDetails){
-    			$member = array('id' => $userDetails->user_id, 'name' => $userDetails->first_name." ".$userDetails->last_name, 'image' => $userDetails->user_image);
-    		}
-    	}
-    	
-    	if(isset($member)){
     		$errorBool = false;
     		$html = '<div class="player-section"><div class="player-image"><img src="'.url(env('PROFILE_PICTURE_PATH').$member['image']).'"></div><div class="player-informations">';
     		$html .= '<h2>'.$member['name'].'</h2><a id="searchSubmit" class="waves-effect waves-light btn deep-orange">Add Friend</a>';
     		$html .= '</div></div>';
-    		
     	}
     	else{
     		$errorBool = true;
