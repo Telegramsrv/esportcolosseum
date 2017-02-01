@@ -126,7 +126,7 @@ var creatTeam = function(){
         success:function(data){
             if(data.success == true){
                 $("#createTeamForm #createTeamSubmit").html("Redirecting...");
-                window.location = data.intended;
+                window.location.reload();
             }
         },
         error: function (data) {

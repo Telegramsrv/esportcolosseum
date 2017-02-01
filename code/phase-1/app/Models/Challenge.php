@@ -87,4 +87,12 @@ class Challenge extends Model
     public function captainDetails(){
         return $this->belongsTo("App\Models\UserDetails", "user_id", "user_id");  
     }    
+
+    /**
+     * Teams that belongs to challenge.
+     * @return App\Models\Team Team Models associated with this challenge.
+     */
+    public function teams(){
+        return $this->belongsToMany('App\Models\Team');
+    }
 }

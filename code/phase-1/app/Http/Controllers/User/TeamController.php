@@ -9,6 +9,7 @@ use App\Models\Team;
 use App\Models\Challenge;
 use App\User;
 use Auth;
+use DB;
 
 class TeamController extends Controller
 {
@@ -17,13 +18,21 @@ class TeamController extends Controller
 	 * @return [type] [description]
 	 */
     public function save(CreateTeamRequest $request){
-    	dd($request->all());
-    	$input = $request->only('name');
-    	$team = Team::create($input);
     	$user = Auth::user();
-    	$team = Challenge::
 
+    	$teamInput = $request->only('name');
+    	$team = Team::create($teamInput);
     	$team->users()->attach($user);
 
+    	$challengeInput = $request->only('challenge_id');
+    	$challenge = Challenge::where(DB::raw('md5(id)'), $challengeInput['challenge_id'])->firstOrFail();
+
+    	$challenge->teams()->attach($team);
+
+    	if ($request->ajax()) {
+	    	return response()->json([
+	    		'success' => true,
+	    	]);
+	    }
 	}    	
 }
