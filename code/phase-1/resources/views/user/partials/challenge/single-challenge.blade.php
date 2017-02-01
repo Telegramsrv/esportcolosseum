@@ -29,8 +29,8 @@
 				<div class="first_challenge_left_width">
 					<h2>
 						<span>TEAM 1 :</span>
-						<a href="#addTeamModal" class="modal-trigger">Click here</a> to create Team.
-						<a href="#addTeamModal" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
+						<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
+						<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
 					</h2>
 					<ul>
 						<li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li>
@@ -72,3 +72,4 @@
 		</div>
 	</div>
 </div>
+@include('layouts.user.partials.add-team', ['challenge' => $challenge])

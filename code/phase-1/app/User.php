@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App; 
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,12 +58,14 @@ class User extends Authenticatable
     }
 
     /**
-     * User can have many tickets
-     * @return App\Models\Ticket set of tickets created by User.
+     * User can be associated with meny teams
+     * * @return App\Models\Team number of users associated with team.
      */
-    public function tickets(){
-        return $this->hasMany('App\Models\Ticket');   
-    }  
+    public function teams(){
+        return $this->hasMany('App\Models\Team');   
+    } 
+
+
     
     /* public function getAttribute($key)
     {

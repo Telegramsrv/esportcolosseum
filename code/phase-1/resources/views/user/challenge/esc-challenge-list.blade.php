@@ -2,7 +2,7 @@
 @section('game-info')
     <section>
         <div class="game-banner z-depth-2">
-            <div class="game-banner-title text-shadow">{!! $selectedGame->name !!} (Open Challenge)</div>
+            <div class="game-banner-title text-shadow">{!! $selectedGame->name !!} (ESC Challenge)</div>
             <img src="{!! url(env('UPLOAD_GAME_BANNER', 'storage/games/large/').$selectedGame->banner_image) !!}" />
         </div>
     </section>

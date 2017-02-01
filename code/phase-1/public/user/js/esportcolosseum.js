@@ -56,9 +56,14 @@ $(document).ready(function(){
         createChallenge();
     });
 
+    $("#createTeamForm #createTeamSubmit").click(function(){
+        creatTeam();    
+    });
+    
 	$("#amountForm #amountSubmit").click(function(){
 		amountSubmit();
 	});
+
 	$("form#amountForm").submit(function(){
 		amountSubmit();
 		return false;
@@ -106,8 +111,39 @@ $(document).ready(function(){
     });
 });
 
+var creatTeam = function(){
+    var createTeamForm = $("#createTeamForm");
+    var formData = createTeamForm.serialize();
+    var postUrl = createTeamForm.attr('action');
 
-// $("#createChallengeForm #createChallengeSubmit").click(
+    showLoader(createTeamForm, 'createTeamSubmit');
+    $("#createTeamForm #createTeamSubmit").html("Processing...");
+
+    $.ajax({
+        url: postUrl,
+        type:'POST',
+        data:formData,
+        success:function(data){
+            if(data.success == true){
+                $("#createTeamForm #createTeamSubmit").html("Redirecting...");
+                window.location = data.intended;
+            }
+        },
+        error: function (data) {
+            $("#createTeamForm #createTeamSubmit").html("Submit");
+            hideLoader(createTeamForm, 'createTeamSubmit', creatTeam);
+
+            var errors = data.responseJSON;
+            if(errors.name != undefined && errors.name[0] != ""){
+                $("#createTeamForm #nameLabel").attr("data-error", errors.name[0]);
+                $("#createTeamForm #nameLabel").addClass("active");
+                $("#createTeamForm #name").addClass("invalid");
+                $("#createTeamForm #name").focus();
+            }
+        }
+    });    
+}
+
 var createChallenge = function(){
     var createChallengeForm = $("#createChallengeForm");
     var formData = createChallengeForm.serialize();

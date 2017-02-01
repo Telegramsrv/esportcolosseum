@@ -53,7 +53,7 @@
 		@include('layouts.user.partials.footer')
 		@include('layouts.user.partials.add-coin')
 		@include('layouts.user.partials.add-friend')
-		@include('layouts.user.partials.add-team')
+		
 		@yield('create-game-challenge')
 		
 		
