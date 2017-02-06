@@ -61,6 +61,7 @@
 	    <li><a href="{!! route('user.profile.edit') !!}">Personal Info</a></li>
 	    <li><a href="{!! route('user.change-password.edit') !!}">Change Password</a></li>
 	    <li><a href="#!">Game Settings</a></li>
+	    <li><a href="{!! route('user.friends') !!}">My Friends</a></li>
 	    <li class="divider"></li>
 	    <li><a href="{!! route('user.ticket.list') !!}" class="modal-trigger">Support</a></li>
 	    <li><a href="{!! route('logout') !!}">Logout</a></li>

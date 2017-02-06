@@ -194,7 +194,7 @@ class UserController extends Controller
     
     function acceptFriend(){
     	$requestData = \Request::all();
-    	$userFriends = UserFriends::where('user_id', $requestData['friendID'])->where('friend_id', Auth::id())->first();
+    	$userFriends = UserFriends::where('user_id', $requestData['friendID'])->where('friend_id', Auth::id())->where('status', "Invited")->firstOrFail();
     	
     	$userFriends->status = 'Accepted';
     	$userFriends->update();
@@ -204,5 +204,26 @@ class UserController extends Controller
     				'html' => "ACCEPTED"
     		]);
     	}
+    }
+    
+    function rejectFriend(){
+    	$requestData = \Request::all();
+    	$userFriends = UserFriends::where('user_id', $requestData['friendID'])->where('friend_id', Auth::id())->where('status', "Invited")->firstOrFail();
+    	 
+    	$userFriends->delete();
+    
+    	if (\Request::ajax()) {
+    		return response()->json([
+    				'html' => "REJECTED"
+    		]);
+    	}
+    }
+    
+    
+    
+    function myFriends() {
+    	$user_id = Auth::id();
+    	$userFriends = UserFriends::with("userFriendDetails")->where('user_id', $user_id)->where("status", "Accepted")->get();
+    	return view('user.my-account.my-friends', compact('userFriends'));
     }
 }
