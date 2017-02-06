@@ -1,3 +1,6 @@
+@php
+	$captainTeam = $challenge->captainTeam(Auth::user());
+@endphp
 <div class="first-challenge-section versus-image-one">
 	<div class="row">
 	<div class="row">
@@ -29,8 +32,13 @@
 				<div class="first_challenge_left_width">
 					<h2>
 						<span>TEAM 1 :</span>
-						<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
-						<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
+						@if($captainTeam != null)
+							{!! $captainTeam-> name !!}
+							<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
+						@else
+							<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
+						@endif
+						
 					</h2>
 					<ul>
 						<li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li>
@@ -42,18 +50,25 @@
 						<li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li>
 					</ul>
 					<h3>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}<span>( Captain ) </span></h3>
-					<div class="player-section">
-						<div class="player-image">
-							<img src="images/blog2.png">
-						</div>
-						<div class="player-informations">
-							<h2>Kavit Varma</h2>
-							<p>Remove  |  Report</p>
-						</div>
-					</div>
-					<div class="firt-team-image">
-						<img src="images/person.png">
-					</div>
+					@if($captainTeam->users->count())
+						@foreach($captainTeam->users as $user)
+							@if($challenge->captain->id != $user->id)
+								<div class="player-section">
+									<div class="player-image">
+										<img class="challenge-team-image" src="{!! url(env('PROFILE_PICTURE_PATH', 'storage/user/profile_pictures/') . $user->userDetails->user_image) !!}">
+									</div>
+									<div class="player-informations">
+										<h2>{!! $user->userDetails->first_name !!} {!! $user->userDetails->last_name !!}</h2>
+										<p>Remove  |  Report</p>
+									</div>
+								</div>
+								<div class="firt-team-image">
+									<img src="images/person.png">
+								</div>
+							@endif
+						@endforeach
+					@endif
+					
 				</div>
 				</div>
 				<div class="versus-image">

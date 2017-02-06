@@ -1,12 +1,13 @@
-<div id="addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal blue-grey darken-4 modal-smal-form">
+<div id="addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal blue-grey darken-4 modal-smal-form add-team-model">
 	{!! Form::open(['route' => 'user.team.save', 'method' => 'post', 'id' => 'createTeamForm']) !!}
-		{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+		{!! Form::hidden('challenge_id', md5($challenge->id), ['id' => 'challenge_id']) !!}
 	    <div class="modal-content">
 	      	<div class="modal-form-container">
 	            <div class="row">
 	                <div class="input-field col s12 m12">
 	                    <!-- <input id="teamNameAutoComplete" data-json-content="" type="text" class="validate autocomplete" value="Lorem Ipsum's Team"> -->
-	                    {!! Form::text('name', '',['class' => 'validate input-field col s12 m12', 'id' => 'name']) !!}
+	                    <!-- validate input-field col s12 m12 -->
+	                    {!! Form::text('name', '',['class' => '', 'id' => 'name', 'autocomplete' => 'off']) !!}
 	                    {!! Form::label('name', 'Enter your team\'s name', ['data-error' => '', 'id' => 'nameLabel']) !!}
 	                </div>
 					<div class="input-field col s12 m12">

@@ -61,7 +61,7 @@ class Challenge extends Model
 	 * @return App\User User model who has created challenge.
 	 */
     public function captain(){
-    	return $this->belongsTo("App\User", "user_id", "id");
+    	return $this->hasOne("App\User", "id", "user_id");
     }
 
     /**
@@ -95,4 +95,15 @@ class Challenge extends Model
     public function teams(){
         return $this->belongsToMany('App\Models\Team');
     }
+
+    public function captainTeam(User $user){
+        $teams = $this::teams()->get();
+        foreach($teams as $team){
+            if($team->users()->find($user->id)->count()){
+                return $team;
+            }
+        }
+    }
+
+
 }

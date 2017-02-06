@@ -112,6 +112,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::put('/profile/change-password', 'User\UserController@updatePassword')->name('user.change-password.update');
 	Route::get('/profile/{md5UserId}/{gameSlug?}', 'User\UserController@showProfile')->name('user.profile')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
 
+	Route::post('/team/fetch-auto-complete-list', 'User\TeamController@fetchAutocompleteList')->name('user.team.fetch-auto-complete-list');
 	Route::post('/team/save', 'User\TeamController@save')->name('user.team.save');
 
 	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');

@@ -42,11 +42,11 @@ class User extends Authenticatable
     }
 
     public function blogs(){
-        return $this->hasMAny('App\Models\Blog');   
+        return $this->hasMany('App\Models\Blog');   
     }
     
     public function Transactions(){
-    	return $this->hasMAny('App\Models\CoinTransections');
+    	return $this->hasMany('App\Models\CoinTransections');
     }
 
     /**
@@ -62,7 +62,7 @@ class User extends Authenticatable
      * * @return App\Models\Team number of users associated with team.
      */
     public function teams(){
-        return $this->hasMany('App\Models\Team');   
+        return $this->belongsToMany('App\Models\Team');   
     } 
 
 

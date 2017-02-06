@@ -9,6 +9,7 @@
     </section>
 @endsection
 @section('gamer-content')
+<input type="text" name="testname" id="testname" class="" autocomplete="off" />
 <section class="">
 	<div class="section-title ">My <span>Challenges</span></div>
 		<div class="inner-page-tab-back">

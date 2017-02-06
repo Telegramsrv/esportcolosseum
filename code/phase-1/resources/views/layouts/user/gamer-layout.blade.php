@@ -9,6 +9,8 @@
 	    <!-- Styles -->
 
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 		<link href="{!! asset('user/css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection	" />
 		<link href="{!! asset('user/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet" />
 		<link href="{!! asset('user/css/flags.css') !!}" rel="stylesheet" />
@@ -57,12 +59,16 @@
 		@yield('create-game-challenge')
 		
 		
+		<!-- <script type="text/javascript" src="{!! asset('user/js/jquery.min.js') !!}"></script> -->
+		<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+		<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 		<script type="text/javascript" src="{!! asset('user/js/jquery.min.js') !!}"></script>
+		<script type="text/javascript" src="{!! asset('user/js/jquery-ui.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/bootstrap.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/materialize.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/init.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/dashboard.js') !!}"></script>
-		<!-- <script type="text/javascript" src="{!! asset('user/js/challenge-list.js') !!}"></script> -->
+		<script type="text/javascript" src="{!! asset('user/js/challenge-list.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('user/js/esportcolosseum.js') !!}"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){

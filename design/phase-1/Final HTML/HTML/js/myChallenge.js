@@ -4,7 +4,8 @@ var teamData = {
 		"RP Riders": null,
 		"Darky Killers": null,
 		"Serious Players": null,
-		"Anonymous Hackers": null
+		"Anonymous Hackers": null,
+		"Anonymous 1 Hackers": null
 	};
 
 $(function(){

@@ -72,6 +72,11 @@ ul.timing li.esc-challenge-time-active{
 	height: 86px;
 	border-radius: 50%;
 }
+.challenge-team-image{
+	width:66px;
+	height: 67px;
+	border-radius: 50%;	
+}
 /*----------------------- My Challenge Page ----------------------- End*/
 
 

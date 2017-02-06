@@ -1,8 +1,88 @@
 $(document).ready(function(){
+    var teams = [];
 
     if($("select.no-material-select").length == 0){
         $('select').material_select();    
     }
+
+     var availableTags = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+    ];
+
+    // $("body #createTeamForm #name").on('keyup', function(){
+     $(document).on("keydown.autocomplete","#createTeamForm #name",function(request, response){
+     // $('.modal-trigger').on('click', '#createTeamForm #name', function(){
+        // console.log("click event called!");
+        // $(this).autocomplete({
+            // source: function( request, response ) {
+                $.ajax({
+                    url: '/user/team/fetch-auto-complete-list',
+                    type: 'POST',
+                    data: {
+                        'name': $('#createTeamForm #name').val(),
+                        'challenge_id': $('#createTeamForm #challenge_id').val(),
+                    },
+                    success: function(data){
+                        response( JSON.parse(data.response) );
+                    },
+                    error: function(data){
+                        console.log("coming in errur");
+                    },
+                    minLength: 3,
+                    select: function( event, ui ) {
+                        log( ui.item ?
+                            "Selected: " + ui.item.label :
+                            "Nothing selected, input was " + this.value);
+                    },
+                    open: function() {
+                        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+                    },
+                    close: function() {
+                        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+                    }
+                });
+            // }
+        // });    
+     });
+    // $(document).on("focus","#createTeamForm #name",function(e) {
+        // alert("key up event called!");
+        // if ( !$(this).data("autocomplete") ) {
+            // $("#createTeamForm #name").autocomplete({
+                // source: function( request, response ) {
+                    // $.ajax({
+                    //     url: '/user/team/fetch-auto-complete-list',
+                    //     type: 'POST',
+                    //     data: {
+                    //         'name': $('#createTeamForm #name').val(),
+                    //         'challenge_id': $('#createTeamForm #challenge_id').val(),
+                    //     },
+                    //     success: function(data){
+                    //         response( JSON.parse(data.response) );
+                    //     },
+                    //     error: function(data){
+                    //         console.log("coming in errur");
+                    //     },
+                    //     minLength: 3,
+                    //     select: function( event, ui ) {
+                    //         log( ui.item ?
+                    //             "Selected: " + ui.item.label :
+                    //             "Nothing selected, input was " + this.value);
+                    //     },
+                    //     open: function() {
+                    //         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+                    //     },
+                    //     close: function() {
+                    //         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+                    //     }
+                    // });
+                // },
+            // });
+        // }
+    // });
+    
 	
 	$("body").keypress(function(event) {
 	    if (event.keyCode == 13) {
@@ -15,8 +95,74 @@ $(document).ready(function(){
 	        else if($('#forgotPasswordModal').is(':visible')){
 	        	$("#retrievePasswordSubmit").click();	
 	        }
+            else if($('.add-team-model').is(':visible')){
+                $('#createTeamForm #createTeamSubmit').click();
+            }
 	    }
 	});
+
+    // $( "#createTeamForm #name" ).autocomplete({
+    //     source: function( request, response ) {
+    //         console.log("Line no 38: ");
+    //         $.ajax({
+    //             url: '/user/team/fetch-auto-complete-list',
+    //             type: 'POST',
+    //             data: {
+    //                 'name': $("#createTeamForm #name").val(),
+    //                 'challenge_id': $("#challenge_id").val(),
+    //             },
+    //             success: function(data){
+    //                 response( data );
+    //             },
+    //             error: function(data){
+    //                 console.log(data);  
+    //             },
+    //             minLength: 3,
+    //             select: function( event, ui ) {
+    //                 log( ui.item ?
+    //                     "Selected: " + ui.item.label :
+    //                     "Nothing selected, input was " + this.value);
+    //             },
+    //             open: function() {
+    //                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+    //             },
+    //             close: function() {
+    //                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+    //             }
+    //         });
+    //     },
+    // });
+
+    // $("#createTeamForm #name").keyup(function(){
+    //     $.ajax({
+    //         url: '/user/team/fetch-auto-complete-list',
+    //         type: 'POST',
+    //         data: {
+    //             'name': $("#createTeamForm #name").val(),
+    //             'challenge_id': $("#challenge_id").val(),
+    //         },
+    //         success: function(data){
+    //             teamNames = data.teams['names'];
+    //             teamIds = data.teams['ids'];
+               
+    //             var availableTags = [
+    //                 "ActionScript",
+    //                 "AppleScript",
+    //                 "Asp",
+    //                 "BASIC",
+    //             ];
+
+    //             $('#createTeamForm #name').autocomplete({
+    //                 source: availableTags,
+    //             });
+                
+    //             console.log("coming in success!");
+    //         },
+    //         error: function(data){
+    //             console.log(data);  
+    //         }
+    //     });
+    // });
 
 	$(".signup-btn").on("click",function(data){
         $('#loginModal').closeModal();
@@ -57,7 +203,7 @@ $(document).ready(function(){
     });
 
     $("#createTeamForm #createTeamSubmit").click(function(){
-        creatTeam();    
+        creatTeam();
     });
     
 	$("#amountForm #amountSubmit").click(function(){
@@ -109,6 +255,8 @@ $(document).ready(function(){
     	
     	return false;
     });
+
+
 });
 
 var creatTeam = function(){
