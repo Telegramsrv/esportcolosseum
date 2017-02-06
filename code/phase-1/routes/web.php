@@ -127,6 +127,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::post('/member/search', 'User\UserController@memberSearch')->name('user.member.search');
 	Route::get('/friend/add', 'User\UserController@addFriend')->name('user.friend.add');
 	Route::get('/friend/accept', 'User\UserController@acceptFriend')->name('user.friend.accept');
+	Route::get('/friend/reject', 'User\UserController@rejectFriend')->name('user.friend.reject');
+	Route::get('/my-friends', 'User\UserController@myFriends')->name('user.friends');
 });
 
 Auth::routes();

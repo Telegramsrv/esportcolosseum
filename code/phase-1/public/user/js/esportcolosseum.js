@@ -306,14 +306,16 @@ function addFriend(friendID){
 	return false;
 }
 
-function acceptFriend(friendID){
+function rejectFriend(friendID){
 	$.ajax({
-    	url:'/user/friend/accept',
+    	url:'/user/friend/reject',
         type:'GET',
         data:{'friendID': friendID},
         success:function(data){
+        	$("#addFriend").removeAttr("onclick");
+        	$('#addFriend').prop('onclick',null);
         	$("#addFriend").html(data.html);
-        	$("#rejectFriend").hide();
+        	$("#rejectFriend").remove();
         },
         error: function (data) {
         }
@@ -321,20 +323,25 @@ function acceptFriend(friendID){
 	return false;
 }
 
-function rejectFriend(friendID){
-	/*$.ajax({
+
+function acceptFriend(friendID){
+	$.ajax({
     	url:'/user/friend/accept',
         type:'GET',
         data:{'friendID': friendID},
         success:function(data){
+        	$("#addFriend").removeAttr("onclick");
+        	$('#addFriend').prop('onclick',null);
         	$("#addFriend").html(data.html);
-        	$("#rejectFriend").hide();
+        	$("#rejectFriend").remove();
         },
         error: function (data) {
+        	alert("You can not Accept this request.")
         }
-    });*/
+    });
 	return false;
 }
+
 
 var createChallenge = function(){
     var createChallengeForm = $("#createChallengeForm");
