@@ -120,6 +120,25 @@ $(document).ready(function(){
         appendTo: '#addTeamModal-ffde102eb7989ecd787a487b6c37a248' //$("#createTeamForm").parent().attr("id")
     });
     
+    $( "#search-friend").autocomplete({
+        source: function( request, response ) {
+   		 	$.ajax({
+                url: '/user/member/fetch-auto-complete-list',
+                type: 'GET',
+                data: {
+                    'name': $('#search-friend').val(),
+                },
+                success: function(data){
+                    response( JSON.parse(data.response) );
+                },
+                error: function(data){
+                   
+                }
+            });
+        },
+       appendTo: "#addFriendModal"
+	});
+    
     $("#coins").keyup(function(){
     	$.ajax({
         	url:'/user/coins/calculation',
