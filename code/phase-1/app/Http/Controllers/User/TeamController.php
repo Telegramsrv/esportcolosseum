@@ -17,7 +17,7 @@ class TeamController extends Controller
 	 * This method is used to create team.
 	 * @return JSON 
 	 */
-    public function save( $request){
+    public function save(CreateTeamRequest $request){
     	$input = $request->all();
 	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
