@@ -99,6 +99,7 @@ $(document).ready(function(){
     });
 
     $("#createTeamForm #name").autocomplete({
+        maxResults: 6,
         source: function( request, response ) {
             $.ajax({
                 url: '/user/team/fetch-auto-complete-list',
@@ -109,15 +110,20 @@ $(document).ready(function(){
                 },
                 success: function(data){
                     var teams = JSON.parse(data.response);
-
-                    response( teams );
+                    response( teams.slice(0, this.options.maxResults) );
                 },
                 error: function(data){
                     console.log("coming in error");
                 }
             });
         },
-        appendTo: '#addTeamModal-ffde102eb7989ecd787a487b6c37a248' //$("#createTeamForm").parent().attr("id")
+        appendTo: $("#createTeamForm").parent(),
+        select: function( event, ui ){
+
+            console.log(ui);
+            return false;
+        }
+
     });
     
     $("#coins").keyup(function(){

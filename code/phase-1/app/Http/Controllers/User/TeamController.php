@@ -62,7 +62,6 @@ class TeamController extends Controller
 			return response()->json([
 				"succes" => true,
 				'response' => json_encode($response)
-	    		// $response
 	    		]
 	    	);	
 		}
