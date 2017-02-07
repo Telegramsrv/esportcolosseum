@@ -176,18 +176,17 @@ class UserController extends Controller
     
     function addFriend(){
     	$requestData = \Request::all();
+    	$status = 0;
     	
-    	if($requestData['friendID'] > 0){
-    		$data['user_id'] = Auth::id();
-    		$data['friend_id'] = $requestData['friendID'];
-    		$data['status'] = 'Invited';
-    		$userFriends = new UserFriends($data);
+    	if(!empty($requestData['friend_id']) && $requestData['friend_id'] > 0) {
+    		$userFriends = new UserFriends(["user_id" => Auth::id(), "friend_id" => $requestData['friend_id'], "status" => "Invited"]);
     		$userFriends->save();
-    	}
+    		$status = 1;
+    	} 
     	
     	if (\Request::ajax()) {
     		return response()->json([
-    				'html' => "REQUESTED"
+    				'status' => $status
     		]);
     	}
     }
@@ -232,7 +231,7 @@ class UserController extends Controller
     	$members = UserFriends::getMembers(Auth::id(), $requestData["name"]);
     	$userLists = [];
     	foreach($members as $user){
-    		$user = array("id" => $user->id, "label" => $user->first_name . " " . $user->last_name, "value" => $user->first_name . " " . $user->last_name);
+    		$user = array("id" => $user->id, "label" => $user->first_name . " " . $user->last_name, "value" =>  $user->id);
     		array_push($userLists,$user);
     	}
     	if (\Request::ajax()) { 
