@@ -5,85 +5,6 @@ $(document).ready(function(){
         $('select').material_select();    
     }
 
-     var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-    ];
-
-    // $("body #createTeamForm #name").on('keyup', function(){
-     $(document).on("keydown.autocomplete","#createTeamForm #name",function(request, response){
-     // $('.modal-trigger').on('click', '#createTeamForm #name', function(){
-        // console.log("click event called!");
-        // $(this).autocomplete({
-            // source: function( request, response ) {
-                $.ajax({
-                    url: '/user/team/fetch-auto-complete-list',
-                    type: 'POST',
-                    data: {
-                        'name': $('#createTeamForm #name').val(),
-                        'challenge_id': $('#createTeamForm #challenge_id').val(),
-                    },
-                    success: function(data){
-                        response( JSON.parse(data.response) );
-                    },
-                    error: function(data){
-                        console.log("coming in errur");
-                    },
-                    minLength: 3,
-                    select: function( event, ui ) {
-                        log( ui.item ?
-                            "Selected: " + ui.item.label :
-                            "Nothing selected, input was " + this.value);
-                    },
-                    open: function() {
-                        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-                    },
-                    close: function() {
-                        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-                    }
-                });
-            // }
-        // });    
-     });
-    // $(document).on("focus","#createTeamForm #name",function(e) {
-        // alert("key up event called!");
-        // if ( !$(this).data("autocomplete") ) {
-            // $("#createTeamForm #name").autocomplete({
-                // source: function( request, response ) {
-                    // $.ajax({
-                    //     url: '/user/team/fetch-auto-complete-list',
-                    //     type: 'POST',
-                    //     data: {
-                    //         'name': $('#createTeamForm #name').val(),
-                    //         'challenge_id': $('#createTeamForm #challenge_id').val(),
-                    //     },
-                    //     success: function(data){
-                    //         response( JSON.parse(data.response) );
-                    //     },
-                    //     error: function(data){
-                    //         console.log("coming in errur");
-                    //     },
-                    //     minLength: 3,
-                    //     select: function( event, ui ) {
-                    //         log( ui.item ?
-                    //             "Selected: " + ui.item.label :
-                    //             "Nothing selected, input was " + this.value);
-                    //     },
-                    //     open: function() {
-                    //         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-                    //     },
-                    //     close: function() {
-                    //         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-                    //     }
-                    // });
-                // },
-            // });
-        // }
-    // });
-    
-	
 	$("body").keypress(function(event) {
 	    if (event.keyCode == 13) {
 	        if($('#loginModal').is(':visible')){
@@ -100,69 +21,6 @@ $(document).ready(function(){
             }
 	    }
 	});
-
-    // $( "#createTeamForm #name" ).autocomplete({
-    //     source: function( request, response ) {
-    //         console.log("Line no 38: ");
-    //         $.ajax({
-    //             url: '/user/team/fetch-auto-complete-list',
-    //             type: 'POST',
-    //             data: {
-    //                 'name': $("#createTeamForm #name").val(),
-    //                 'challenge_id': $("#challenge_id").val(),
-    //             },
-    //             success: function(data){
-    //                 response( data );
-    //             },
-    //             error: function(data){
-    //                 console.log(data);  
-    //             },
-    //             minLength: 3,
-    //             select: function( event, ui ) {
-    //                 log( ui.item ?
-    //                     "Selected: " + ui.item.label :
-    //                     "Nothing selected, input was " + this.value);
-    //             },
-    //             open: function() {
-    //                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-    //             },
-    //             close: function() {
-    //                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-    //             }
-    //         });
-    //     },
-    // });
-
-    // $("#createTeamForm #name").keyup(function(){
-    //     $.ajax({
-    //         url: '/user/team/fetch-auto-complete-list',
-    //         type: 'POST',
-    //         data: {
-    //             'name': $("#createTeamForm #name").val(),
-    //             'challenge_id': $("#challenge_id").val(),
-    //         },
-    //         success: function(data){
-    //             teamNames = data.teams['names'];
-    //             teamIds = data.teams['ids'];
-               
-    //             var availableTags = [
-    //                 "ActionScript",
-    //                 "AppleScript",
-    //                 "Asp",
-    //                 "BASIC",
-    //             ];
-
-    //             $('#createTeamForm #name').autocomplete({
-    //                 source: availableTags,
-    //             });
-                
-    //             console.log("coming in success!");
-    //         },
-    //         error: function(data){
-    //             console.log(data);  
-    //         }
-    //     });
-    // });
 
 	$(".signup-btn").on("click",function(data){
         $('#loginModal').closeModal();
@@ -239,6 +97,28 @@ $(document).ready(function(){
         $(this).addClass('esc-challenge-time-active');
         return false;
     });
+
+    $("#createTeamForm #name").autocomplete({
+        source: function( request, response ) {
+            $.ajax({
+                url: '/user/team/fetch-auto-complete-list',
+                type: 'POST',
+                data: {
+                    'name': $('#createTeamForm #name').val(),
+                    'challenge_id': $('#createTeamForm #challenge_id').val(),
+                },
+                success: function(data){
+                    var teams = JSON.parse(data.response);
+
+                    response( teams );
+                },
+                error: function(data){
+                    console.log("coming in error");
+                }
+            });
+        },
+        appendTo: '#addTeamModal-ffde102eb7989ecd787a487b6c37a248' //$("#createTeamForm").parent().attr("id")
+    });
     
     $("#coins").keyup(function(){
     	$.ajax({
@@ -256,7 +136,7 @@ $(document).ready(function(){
     	return false;
     });
 
-
+    
 });
 
 var creatTeam = function(){
@@ -306,42 +186,35 @@ function addFriend(friendID){
 	return false;
 }
 
-function rejectFriend(friendID){
-	$.ajax({
-    	url:'/user/friend/reject',
-        type:'GET',
-        data:{'friendID': friendID},
-        success:function(data){
-        	$("#addFriend").removeAttr("onclick");
-        	$('#addFriend').prop('onclick',null);
-        	$("#addFriend").html(data.html);
-        	$("#rejectFriend").remove();
-        },
-        error: function (data) {
-        }
-    });
-	return false;
-}
-
-
 function acceptFriend(friendID){
 	$.ajax({
     	url:'/user/friend/accept',
         type:'GET',
         data:{'friendID': friendID},
         success:function(data){
-        	$("#addFriend").removeAttr("onclick");
-        	$('#addFriend').prop('onclick',null);
         	$("#addFriend").html(data.html);
-        	$("#rejectFriend").remove();
+        	$("#rejectFriend").hide();
         },
         error: function (data) {
-        	alert("You can not Accept this request.")
         }
     });
 	return false;
 }
 
+function rejectFriend(friendID){
+	/*$.ajax({
+    	url:'/user/friend/accept',
+        type:'GET',
+        data:{'friendID': friendID},
+        success:function(data){
+        	$("#addFriend").html(data.html);
+        	$("#rejectFriend").hide();
+        },
+        error: function (data) {
+        }
+    });*/
+	return false;
+}
 
 var createChallenge = function(){
     var createChallengeForm = $("#createChallengeForm");

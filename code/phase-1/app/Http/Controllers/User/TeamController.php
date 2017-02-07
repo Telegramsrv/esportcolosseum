@@ -53,8 +53,9 @@ class TeamController extends Controller
 			$response[$index]['id'] = $team->id;
 			$response[$index]['label'] = $team->name;
 			$response[$index]['value'] = $team->name;
+
+			$index++;
 		}
-		// $response = '[{"id":"Aegithalos caudatus","label":"Long-tailed Tit","value":"Long-tailed Tit"},{"id":"Buteo rufinus","label":"Long-legged Buzzard","value":"Long-legged Buzzard"},{"id":"Clangula hyemalis","label":"Long-tailed Duck","value":"Long-tailed Duck"},{"id":"Calcarius lapponicus","label":"Lapland Longspur","value":"Lapland Longspur"},{"id":"Porzana pusilla","label":"Baillon`s Crake","value":"Baillon`s Crake"},{"id":"Stercorarius longicaudus","label":"Long-tailed Jaeger","value":"Long-tailed Jaeger"},{"id":"Asio otus","label":"Long-eared Owl","value":"Long-eared Owl"},{"id":"Limnodromus scolopaceus","label":"Long-billed Dowitcher","value":"Long-billed Dowitcher"},{"id":"Lanius schach","label":"Long-Tailed Shrike","value":"Long-Tailed Shrike"},{"id":"Phalacrocorax africanus","label":"Long-Tailed Cormorant","value":"Long-Tailed Cormorant"}]';
 		
 		if ($request->ajax()) {
 			// return $response;
