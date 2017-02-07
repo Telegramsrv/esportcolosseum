@@ -144,7 +144,10 @@ $(document).ready(function(){
                 }
             });
         },
-       appendTo: "#addFriendModal"
+       appendTo: "#addFriendModal",
+       select: function( event, ui ){
+    	   $("#addFriendModal #friend_id").val(ui.item.id);
+       }
 	});
     
     $("#coins").keyup(function(){
@@ -474,7 +477,7 @@ var inviteFriendSubmit = function () {
         success:function(data){
         	hideLoader(inviteFriendForm, 'inviteFriendSubmit', inviteFriendSubmit);
         	if(data.status == 1) {
-        		$("#addFriendForm #addFriendSubmit").html("Invited");
+        		$('#addFriendModal').closeModal();
         	}else {
         		showError("searchLabel", "search" , "Somthing went wrong");
         	}
