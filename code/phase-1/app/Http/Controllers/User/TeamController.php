@@ -17,7 +17,7 @@ class TeamController extends Controller
 	 * This method is used to create team.
 	 * @return JSON 
 	 */
-    public function save(CreateTeamRequest $request){
+    public function save( $request){
     	$input = $request->all();
 	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
@@ -94,8 +94,15 @@ class TeamController extends Controller
 		$index = 0;
 		foreach($players as $player){
 			$playerDetails[$index]['name'] = $player->userDetails->first_name." ".$player->userDetails->last_name;
-			$playerDetails[$index]['profile_pic'] = ($player->userDetails->user_image != '' ? $player->userDetails->user_image : env('DEFAULT_USER_PROFILE_IMAGE', 'default-profile.png'));
-			$playerDetails[$index]['profile_pic_url'] = url(env('PROFILE_PICTURE_PATH') . $player->userDetails->user_image);
+			$profileImage = '';
+			if($player->userDetails->user_image != ""){
+				$profileImage = $player->userDetails->user_image;
+			}
+			else{
+				$profileImage = env('DEFAULT_USER_PROFILE_IMAGE', 'default-profile.png');	
+			}
+
+			$playerDetails[$index]['profile_pic_url'] = $profileImage;
 			$index++;
 		}
 		if ($request->ajax()) {

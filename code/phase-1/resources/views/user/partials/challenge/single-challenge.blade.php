@@ -56,7 +56,16 @@
 									@if($challenge->captain->id != $player->id)
 										<div class="player-section">
 											<div class="player-image">
-												<img class="challenge-team-image" src="{!! url(env('PROFILE_PICTURE_PATH', 'storage/user/profile_pictures/') . $player->userDetails->user_image) !!}">
+												@php
+													if($player->userDetails->user_image != ''){
+														$profilePicURL = url(env('PROFILE_PICTURE_PATH') . $player->userDetails->user_image);
+													}
+													else{
+														$profilePicURL = url(env('PROFILE_PICTURE_PATH') . env(
+														'DEFAULT_USER_PROFILE_IMAGE'));
+													}
+												@endphp		
+												<img class="challenge-team-image" src="{!! $profilePicURL !!}">
 											</div>
 											<div class="player-informations">
 												<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
