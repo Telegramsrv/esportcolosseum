@@ -9,6 +9,7 @@ use App\Http\Requests\User\SaveUser;
 use App\Http\Requests\User\PasswordRequest;
 use App\Http\Requests\User\SaveCoins;
 use App\Http\Requests\User\SearchMembers;
+use App\Http\Requests\User\InviteFriend;
 use App\User;
 use App\Models\Game;
 use App\Models\Country;
@@ -174,20 +175,19 @@ class UserController extends Controller
     	}
     }
     
-    function addFriend(){
-    	$requestData = \Request::all();
+    function addFriend(InviteFriend $request){
+    	$requestData = $request->all();
+    	$status = 0;
     	
-    	if($requestData['friendID'] > 0){
-    		$data['user_id'] = Auth::id();
-    		$data['friend_id'] = $requestData['friendID'];
-    		$data['status'] = 'Invited';
-    		$userFriends = new UserFriends($data);
+    	if(!empty($requestData['friend_id']) && $requestData['friend_id'] > 0 && !UserFriends::isUserFriend(Auth::id(), $requestData['friend_id'])) {
+    		$userFriends = new UserFriends(["user_id" => Auth::id(), "friend_id" => $requestData['friend_id'], "status" => "Invited"]);
     		$userFriends->save();
-    	}
+    		$status = 1;
+    	} 
     	
     	if (\Request::ajax()) {
     		return response()->json([
-    				'html' => "REQUESTED"
+    				'status' => $status
     		]);
     	}
     }

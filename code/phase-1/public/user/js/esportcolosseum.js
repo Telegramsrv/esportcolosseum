@@ -73,12 +73,14 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	$("#searchForm #searchSubmit").click(function(){
-		searchSubmit();
+	$("#inviteFriendForm #inviteFriendSubmit").click(function(){
+//		searchSubmit();
+		inviteFriendSubmit();
 	});
 	
-	$("form#searchForm").submit(function(){
-		searchSubmit();
+	$("form#inviteFriendForm").submit(function(){
+		inviteFriendSubmit();
+//		searchSubmit();
 		return false;
 	});
 	
@@ -154,13 +156,13 @@ $(document).ready(function(){
         }
     });
     
-    $( "#search-friend").autocomplete({
+    $( "#addFriendModal #search").autocomplete({
         source: function( request, response ) {
    		 	$.ajax({
                 url: '/user/member/fetch-auto-complete-list',
                 type: 'GET',
                 data: {
-                    'name': $('#search-friend').val(),
+                    'name': $('#addFriendModal #search').val(),
                 },
                 success: function(data){
                     response( JSON.parse(data.response) );
@@ -170,7 +172,10 @@ $(document).ready(function(){
                 }
             });
         },
-       appendTo: "#addFriendModal"
+       appendTo: "#addFriendModal",
+       select: function( event, ui ){
+    	   $("#addFriendModal #friend_id").val(ui.item.id);
+       }
 	});
     
     $("#coins").keyup(function(){
@@ -480,38 +485,44 @@ var amountSubmit = function () {
     });
 }
 
-//Search submit
-var searchSubmit = function () {
-	$(".searchResults").html('');
-	var searchForm = $("#searchForm");
-	var formData = searchForm.serialize();
-	var postUrl = searchForm.attr('action');
+//add Friend Submit
+var inviteFriendSubmit = function () {
+	var inviteFriendForm = $("#inviteFriendForm");
+	if(!$("#inviteFriendForm #search").val()) {
+		showError("searchLabel", "search" , "Please enter value");
+		return false;
+	}
+	var formData = inviteFriendForm.serialize();
+	var postUrl = inviteFriendForm.attr('action');
 	
-	showLoader(searchForm, 'searchSubmit');
-    $("#searchForm #searchSubmit").html("Processing...");
+	showLoader(inviteFriendForm, 'inviteFriendSubmit');
+    $("#searchForm #inviteFriendSubmit").html("Processing...");
     
     $.ajax({
     	url:postUrl,
         type:'POST',
         data:formData,
         success:function(data){
-        	hideLoader(searchForm, 'searchSubmit', searchSubmit);
-        	$("#searchForm #searchSubmit").html("SEARCH");
-            $(".searchResults").html(data.html);
+        	hideLoader(inviteFriendForm, 'inviteFriendSubmit', inviteFriendSubmit);
+        	if(data.status == 1) {
+        		$('#addFriendModal').closeModal();
+        	}else {
+        		showError("searchLabel", "search" , "Somthing went wrong");
+        	}
+        	
         },
         error: function (data) {
         	var errors = data.responseJSON;
-        	$("#searchForm #searchSubmit").html("SEARCH");
-        	hideLoader(searchForm, 'searchSubmit', searchSubmit);
+        	$("#inviteFriendForm #addFriendSubmit").html("Invite Friend");
+        	hideLoader(inviteFriendForm, 'inviteFriendSubmit', inviteFriendSubmit);
         	if(errors.search != undefined && errors.search[0] != ""){
-        		$("#searchLabel").attr("data-error", errors.search[0]);
-        		$("#searchLabel").addClass("active");
-        		$("#search").addClass("invalid");
-        		$("#search").focus();
+        		showError("searchLabel", "search" , errors.search[0]);
         	}
         }
     });
 }
+
+
 //show Loader on signup.login
 function showLoader(_this, btnID) {
 	if(btnID != undefined && btnID != "") {
@@ -531,4 +542,11 @@ function hideLoader(_this, btnID, bindFunction) {
 		$(_this).find("#" + btnID).attr( "disabled", false );
 	}
 	$(_this).find(".progress").css("display", "none");
+}
+
+function showError(labelId, inputId, message) {
+	$("#" + labelId).attr("data-error", message);
+	$("#" + labelId).addClass("active");
+	$("#" + inputId).addClass("invalid");
+	$("#" + inputId).focus();
 }

@@ -126,8 +126,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::post('/coins/update', 'User\UserController@updateCoins')->name('user.coins.update');
 	Route::get('/coins/calculation', 'User\UserController@coinCalculation')->name('user.coins.calculation');
 	
-	Route::post('/member/search', 'User\UserController@memberSearch')->name('user.member.search');
-	Route::get('/friend/add', 'User\UserController@addFriend')->name('user.friend.add');
+// 	Route::post('/member/search', 'User\UserController@memberSearch')->name('user.member.search');
+	Route::post('/friend/add', 'User\UserController@addFriend')->name('user.friend.add');
 	Route::get('/friend/accept', 'User\UserController@acceptFriend')->name('user.friend.accept');
 	Route::get('/friend/reject', 'User\UserController@rejectFriend')->name('user.friend.reject');
 	Route::get('/my-friends', 'User\UserController@myFriends')->name('user.friends');
