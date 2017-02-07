@@ -5,7 +5,7 @@
 	      	<div id="searchForm" class="modal-form-container">
 	            <div class="row">
 	        		<div class="input-field col s12 m12">
-	        			{!! Form::text('search', '', ['class' => 'validate input-field col s12 m12', 'id' => 'search', 'name' => 'search']) !!}
+	        			{!! Form::text('search', null, ['class' => 'validate input-field col s12 m12', 'id' => 'search-friend', 'name' => 'search']) !!}
 	        			{!! Form::label('Search', 'Gamer Name OR Email', ['data-error' => '', 'id' => 'searchLabel']) !!}
 	        		</div>
 	    		</div>

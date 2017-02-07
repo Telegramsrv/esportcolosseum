@@ -126,6 +126,25 @@ $(document).ready(function(){
 
     });
     
+    $( "#search-friend").autocomplete({
+        source: function( request, response ) {
+   		 	$.ajax({
+                url: '/user/member/fetch-auto-complete-list',
+                type: 'GET',
+                data: {
+                    'name': $('#search-friend').val(),
+                },
+                success: function(data){
+                    response( JSON.parse(data.response) );
+                },
+                error: function(data){
+                   
+                }
+            });
+        },
+       appendTo: "#addFriendModal"
+	});
+    
     $("#coins").keyup(function(){
     	$.ajax({
         	url:'/user/coins/calculation',
