@@ -27,9 +27,17 @@
 					<i class="fa fa-caret-down" aria-hidden="true"></i>
 				</div>
 				<div id="tab1">
-					@foreach($myCurrentChallenges as $challenge)
-						@include('user.partials.challenge.single-challenge', $challenge)
-					@endforeach	
+					@if($myCurrentChallenges->count() == 0)
+						<div class="first-challenge-section versus-image-one">
+							<div class="row">
+								No active challenges!
+							</div>
+						</div>	
+					@else
+						@foreach($myCurrentChallenges as $challenge)
+							@include('user.partials.challenge.single-challenge', $challenge)
+						@endforeach	
+					@endif	
 				</div>
 				<div id="tab2" style="display: none;">
 					<div class="first-challenge-section">

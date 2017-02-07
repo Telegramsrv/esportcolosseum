@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use App\Models\Blog;
 use App\Models\Game;
 use App\Models\Ticket;
+use App\Models\Team;
 use App\User;
 use DB;
 
@@ -42,6 +43,10 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('md5TicketId', function($value){
         	return Ticket::where(DB::raw('md5(id)'), $value)->firstOrFail();
         });
+        Route::bind('md5TeamId', function($value){
+            return Team::where(DB::raw('md5(id)'), $value)->firstOrFail();
+        }); 
+        
     }
 
     /**

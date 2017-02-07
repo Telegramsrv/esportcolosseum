@@ -99,7 +99,7 @@ class Challenge extends Model
     public function captainTeam(User $user){
         $teams = $this::teams()->get();
         foreach($teams as $team){
-            if($team->users()->find($user->id)->count()){
+            if($team->players()->find($user->id)->count()){
                 return $team;
             }
         }

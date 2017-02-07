@@ -18,17 +18,25 @@ class TeamController extends Controller
 	 * @return JSON 
 	 */
     public function save(CreateTeamRequest $request){
-    	$user = Auth::user();
+    	$input = $request->all();
+	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
-    	$teamInput = $request->only('name');
-    	$team = Team::create($teamInput);
-    	$team->users()->attach($user);
+    	if($input['team_id'] != '' && $input['team_id'] != null){
+    		// Attach already create team with challenge.
+    		$team = Team::where(DB::raw('md5(id)'), '=', $input['team_id'])->firstOrFail();
+    	}
+    	else{
+    		$user = Auth::user();
 
-    	$challengeInput = $request->only('challenge_id');
-    	$challenge = Challenge::where(DB::raw('md5(id)'), $challengeInput['challenge_id'])->firstOrFail();
+    		// Create new team adn attach it with user.
+	    	$teamInput = $request->only('name');
+	    	$team = Team::create($teamInput);
+	    	$team->players()->attach($user);
+    	}
 
-    	$challenge->teams()->attach($team);
-
+    	//Sync Team with Challenge
+    	$challenge->teams()->sync([$team->id]);
+    	
     	if ($request->ajax()) {
 	    	return response()->json([
 	    		'success' => true,
@@ -36,21 +44,28 @@ class TeamController extends Controller
 	    }
 	}    	
 
-	public function fetchAutocompleteList(Request $request){
+	/**
+	 * function to get team list of logged in user which is used for auto-complete functionality.
+	 * @param  Request $request 
+	 * @return JSON    $response      JSON string of team list of logged in user.
+	 */
+	public function getAutocompleteTeamList(Request $request){
 		$input = $request->all();
 		$currentUser = Auth::user();
 		$currentChallenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
-		$currentTeam = $currentChallenge->captainTeam($currentUser)->firstOrFail();
-		$teamLists = $currentUser->teams()->where(
-			[
-				['teams.name', 'like', '%'.$input['name'].'%'],
-				// ['teams.id', '!=', $currentTeam->id]
-			])->get(['teams.id', 'teams.name']);
+		$currentTeam = $currentChallenge->captainTeam($currentUser);
+		// dd($currentTeam);
+		$teamLists = $currentUser->teams()->where('teams.name', 'like', '%'.$input['name'].'%');
+		if($currentTeam){
+			$teamLists = $teamLists->where('teams.id', '!=', $currentTeam->id);
+		}
+		$teamLists = $teamLists->limit(env('AUTOCOMPLETE_RESULT_LIMIT', 6))->get(['teams.id', 'teams.name']);
+
 		$response = [];
 		$index = 0;
-		foreach($teamLists as $team){
 
-			$response[$index]['id'] = $team->id;
+		foreach($teamLists as $team){
+			$response[$index]['id'] = md5($team->id);
 			$response[$index]['label'] = $team->name;
 			$response[$index]['value'] = $team->name;
 
@@ -58,12 +73,33 @@ class TeamController extends Controller
 		}
 		
 		if ($request->ajax()) {
-			// return $response;
 			return response()->json([
 				"succes" => true,
 				'response' => json_encode($response)
 	    		]
 	    	);	
+		}
+	}
+
+	/**
+	 * Function to get Team Players except current user for respective team.
+	 * @param  Request $request 
+	 * @param  Team    $team      Team object of selected team.
+	 * @return JSON    $response  Team Players except current user of selected team.
+	 */
+	public function getTeamPlayers(Request $request, Team $team){
+		$currentUser = Auth::user();
+		$players = $team->players()->where('users.id', '!=', $currentUser->id)->get();
+		$playerDetails = [];
+		$index = 0;
+		foreach($players as $player){
+			$playerDetails[$index]['name'] = $player->userDetails->first_name." ".$player->userDetails->last_name;
+			$playerDetails[$index]['profile_pic'] = ($player->userDetails->user_image != '' ? $player->userDetails->user_image : env('DEFAULT_USER_PROFILE_IMAGE', 'default-profile.png'));
+			$playerDetails[$index]['profile_pic_url'] = url(env('PROFILE_PICTURE_PATH') . $player->userDetails->user_image);
+			$index++;
+		}
+		if ($request->ajax()) {
+			return response()->json($playerDetails);	
 		}
 	}
 }

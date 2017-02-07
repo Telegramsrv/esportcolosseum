@@ -3,6 +3,12 @@ use Illuminate\Support\ViewErrorBag;
 use App\Models\Setting;
 
 function deleteMedia($mediaPath) {
+	$destinationPath 	= public_path(env('PROFILE_PICTURE_PATH'));
+	// dont delete media if it is default profile image.
+	if($mediaPath == $destinationPath.env('DEFAULT_USER_PROFILE_IMAGE')){
+		return true;
+	}
+
 	if (is_dir ( $mediaPath )) {
 		array_map ( 'unlink', glob ( $mediaPath . "*" ) );
 		rmdir ( $mediaPath );

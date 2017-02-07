@@ -99,18 +99,25 @@ $(document).ready(function(){
     });
 
     $("#createTeamForm #name").autocomplete({
-        maxResults: 6,
         source: function( request, response ) {
             $.ajax({
-                url: '/user/team/fetch-auto-complete-list',
-                type: 'POST',
+                url: '/user/team/get-autocomplete-team-list',
+                type: 'GET',
                 data: {
                     'name': $('#createTeamForm #name').val(),
                     'challenge_id': $('#createTeamForm #challenge_id').val(),
                 },
                 success: function(data){
                     var teams = JSON.parse(data.response);
-                    response( teams.slice(0, this.options.maxResults) );
+                    
+                    $("#createTeamForm #team-player-list").html('');
+                    $("#createTeamForm #team-player-list").hide();
+                    $("#createTeamForm #no-team-selected").show();
+
+                    if(teams.length == 0){
+                        $("#createTeamForm #team_id").val("");
+                    }
+                    response( teams );
                 },
                 error: function(data){
                     console.log("coming in error");
@@ -119,11 +126,32 @@ $(document).ready(function(){
         },
         appendTo: $("#createTeamForm").parent(),
         select: function( event, ui ){
-
-            console.log(ui);
-            return false;
+            var item = ui.item;
+            $("#createTeamForm #team_id").val(item.id);
+            $.ajax({
+                url: '/user/team/get-team-players/' + item.id,
+                type: 'GET',
+                success: function(players){
+                    $.each(players, function (index, player){
+                        var playerStr = '<div class="player-section">';
+                        playerStr +=      '<div class="player-image">';
+                        playerStr +=          '<img src="' + player.profile_pic_url +'">';
+                        playerStr +=      '</div>';
+                        playerStr +=      '<div class="player-informations">';
+                        playerStr +=          '<h2>'+ player.name +'</h2>';
+                        playerStr +=      '</div>';
+                        playerStr +=     '</div>';
+                        $("#createTeamForm #team-player-list").append(playerStr);
+                        $("#createTeamForm #team-player-list").show();
+                        $("#createTeamForm #no-team-selected").hide();
+                    });
+                },
+                error: function(data){
+                    console.log(data);
+                    console.log("coming in error");
+                }
+            });
         }
-
     });
     
     $( "#search-friend").autocomplete({

@@ -1050,30 +1050,30 @@ a:active, a:hover {
 	margin-top:25px;
 }
 
-#teamPlayerList .player-image{
+#team-player-list .player-image{
 	float:none;
 	margin-right:0px;
 }
 
-#teamPlayerList .player-informations{
+#team-player-list .player-informations{
 	float:none;
 }
 
-#teamPlayerList img {
+#team-player-list img {
     margin: 0 auto;
     display: block;
 }
 
-#teamPlayerList .player-informations h2 {
+#team-player-list .player-informations h2 {
     text-align: center;
 	margin-top:5px;
 	color: #d84c21;
 }
 
-#teamPlayerList .player-section{
+#team-player-list .player-section{
 	width:50%;
 }
-div#teamPlayerList {
+div#team-player-list {
     overflow: hidden;
     margin-top: 50px;
 	display:none;
@@ -1083,7 +1083,7 @@ div#message {
     color: #444;
 }
 
-div#noTeamMessage {
+div#no-team-selected {
     padding: 125px 0px;
     /* border: 1px solid; */
 }
