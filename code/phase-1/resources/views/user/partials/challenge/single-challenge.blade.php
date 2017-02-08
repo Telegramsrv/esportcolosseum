@@ -49,9 +49,11 @@
 							<li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li>
 						</ul>
 						<h3>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}<span>( Captain ) </span></h3>
+						@php($teamPlayerCount = 0)
 						@if($captainTeam != null)
 							@if($captainTeam->players->count())
 								@foreach($captainTeam->players as $player)
+									@php($teamPlayerCount++)
 									@if($challenge->captain->id != $player->id)
 										<div class="player-section">
 											<div class="player-image">
@@ -74,10 +76,17 @@
 									@endif
 								@endforeach
 							@endif
-						@endif	
-						<div class="firt-team-image">
-							<img src="{!! url('user/images/person.png') !!}">
-						</div>
+						@endif
+
+						@if($captainTeam != null && $teamPlayerCount < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+							<div class="firt-team-image">
+								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal-trigger">
+									<img src="{!! url('user/images/person.png') !!}">
+								</a>	
+							</div>
+							@include('user.partials.challenge.add-player-in-team', ['team' => $captainTeam])
+						@endif
+	 					
 					</div>
 				</div>
 				<div class="versus-image">

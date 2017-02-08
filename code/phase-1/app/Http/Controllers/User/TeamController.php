@@ -109,4 +109,27 @@ class TeamController extends Controller
 			return response()->json($playerDetails);	
 		}
 	}
+
+	public function getAutocompletePlayerList(Team $team, Request $request){
+		$input = $request->all();
+
+		$users = User::roleType('user')->seachGamerNameOrEmail($input['player'])->playerlistForTeam($input['team_id'])->get();
+
+		$userLists = [];
+    	foreach($users as $user){
+    		$user = array("id" => $user->id, "label" => $user->first_name . " " . $user->last_name, "value" => $user->first_name . " " . $user->last_name);
+    		array_push($userLists,$user);
+    	}
+    	if ($request->ajax()) { 
+    		return response()->json(["succes" => true,'response' => json_encode($userLists)]);
+    	}		
+	}
+
+	/**
+	 * This function is used to add player in team.
+	 * @return JSON $Response success/failure response.
+	 */
+	public function savePlayerInTeam(Request $request){
+		dd($request->all());
+	}
 }

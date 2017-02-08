@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use DB;
+use App\Models\Team;
 
 class User extends Authenticatable
 {
@@ -65,18 +67,46 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Team');   
     } 
 
+    /**
+     * Scope a query to filter users with specific role.
+     * @param  \Illuminate\Database\Eloquent\Builder $query  
+     * @param  String $role  Role name
+     * @return \Illuminate\Database\Eloquent\Builder $query  
+     */
+    public function scopeRoleType($query, $role){
+        return $query->whereHas('Roles', function($query) use ($role){
+                        $query->where('name', $role);
+                    });
+    }
 
+    /**
+     * Scope a query to filter users with below parameters.
+     *     - email or gamer name matches with search criteria.
+     * @param  \Illuminate\Database\Eloquent\Builder $query  
+     * @param  String $search  Search keyword
+     * @return \Illuminate\Database\Eloquent\Builder $query  
+     */
+    public function scopeSeachGamerNameOrEmail($query, $search){
+        return $query->with('userDetails')
+                    ->whereHas('userDetails', function($query) use ($search){
+                        $query->where('email', 'like', '%' . $search . '%')
+                                ->orWhere('gamer_name', 'like', '%' . $search . '%');
+                    });
+    }
+
+    /**
+     * Scope a query to filter users with below parameters.
+     *     - list of players which are not added into specific team already.
+     * @param  \Illuminate\Database\Eloquent\Builder $query  
+     * @param  String $teamId  Team id
+     * @return \Illuminate\Database\Eloquent\Builder $query  
+     */
+    public function scopePlayerlistForTeam($query, $teamId){
+        return $query->whereNotIn('id', function($query) use ($teamId) {
+                        $query->select('user_id')
+                        ->from("team_user")
+                        ->where(DB::raw('md5(team_id)'), $teamId);
+                    });
+    }
     
-    /* public function getAttribute($key)
-    {
-    	$profile = Models\UserDetails::where('user_id', '=', $this->attributes['id'])->first()->toArray();
-    
-    	foreach ($profile as $attr => $value) {
-    		if (!array_key_exists($attr, $this->attributes)) {
-    			$this->attributes[$attr] = $value;
-    		}
-    	}
-    
-    	return parent::getAttribute($key);
-    } */
 }

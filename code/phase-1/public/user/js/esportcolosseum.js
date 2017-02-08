@@ -156,6 +156,30 @@ $(document).ready(function(){
             });
         }
     });
+
+    $("#addPlayerInTeamForm #player").autocomplete({
+        source: function( request, response ) {
+            $("#addPlayerToTeamForm #player_id").val("");
+            $.ajax({
+                url: '/user/team/get-autocomplete-player-list/' + $("#addPlayerInTeamForm #team_id").val(),
+                type: 'GET',
+                data: {
+                    player: $("#addPlayerInTeamForm #player").val(),
+                    team_id: $("#addPlayerInTeamForm #team_id").val()
+                },
+                success: function(data){
+                    response( JSON.parse(data.response) );
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        },
+        appendTo: $("#addPlayerToTeamForm #player").parent(),
+        select: function(event, ui){
+            $("#addPlayerToTeamForm #player_id").val(ui.item.id);
+        }
+    });
     
     $( "#addFriendModal #search").autocomplete({
         source: function( request, response ) {
@@ -174,10 +198,10 @@ $(document).ready(function(){
                 }
             });
         },
-       appendTo: "#addFriendModal",
-       select: function( event, ui ){
+        appendTo: "#addFriendModal",
+        select: function( event, ui ){
     	   $("#addFriendModal #friend_id").val(ui.item.id);
-       }
+        }
 	});
     
     $("#coins").keyup(function(){
