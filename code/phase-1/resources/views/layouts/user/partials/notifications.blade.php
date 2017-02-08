@@ -1,10 +1,11 @@
 <ul id="dropdown2" class="dropdown-content">
 	@foreach($notifications as $notification)
-		<li>
+		<?php $notification->data = json_decode($notification->data); ?>
+		<li id="notification-{{ $notification->id }}">
 			<a href="#!">
-				{!! $notification->message !!}
-				<i class="fa fa-check-circle fa-lg" aria-hidden="true" onClick="acceptFriend()"></i>
-				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+				{!!  $notification->message !!}
+				<i class="fa fa-check-circle fa-lg" aria-hidden="true" onClick="acceptFriend({{ $notification->data->from_id }}, {{ $notification->id }})"></i>
+				<i class="fa fa-times fa-lg" aria-hidden="true" onClick="rejectFriend({{ $notification->data->from_id }}, {{ $notification->id }})"></i>
 			</a>
 		</li>
 	@endforeach

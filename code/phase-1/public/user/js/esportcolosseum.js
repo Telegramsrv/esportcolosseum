@@ -251,15 +251,13 @@ function addFriend(friendID){
 	return false;
 }
 
-function acceptFriend(friendID){
-	return false;
+function acceptFriend(friendID, notificationID){
 	$.ajax({
     	url:'/user/friend/accept',
         type:'GET',
-        data:{'friendID': friendID},
+        data:{'friendID': friendID, 'notificationID': notificationID},
         success:function(data){
-        	//$("#addFriend").html(data.html);
-        	//$("#rejectFriend").hide();
+        	//$("#notification-"+notificationID).remove();
         },
         error: function (data) {
         }
@@ -267,18 +265,17 @@ function acceptFriend(friendID){
 	return false;
 }
 
-function rejectFriend(friendID){
-	/*$.ajax({
-    	url:'/user/friend/accept',
+function rejectFriend(friendID, notificationID){
+	$.ajax({
+    	url:'/user/friend/reject',
         type:'GET',
-        data:{'friendID': friendID},
+        data:{'friendID': friendID, 'notificationID': notificationID},
         success:function(data){
-        	$("#addFriend").html(data.html);
-        	$("#rejectFriend").hide();
+        	//$("#notification-"+notificationID).remove();
         },
         error: function (data) {
         }
-    });*/
+    });
 	return false;
 }
 
