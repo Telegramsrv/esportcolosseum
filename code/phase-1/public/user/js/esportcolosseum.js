@@ -257,7 +257,7 @@ function acceptFriend(friendID, notificationID){
         type:'GET',
         data:{'friendID': friendID, 'notificationID': notificationID},
         success:function(data){
-        	//$("#notification-"+notificationID).remove();
+        	notificationAffect(notificationID);
         },
         error: function (data) {
         }
@@ -271,12 +271,19 @@ function rejectFriend(friendID, notificationID){
         type:'GET',
         data:{'friendID': friendID, 'notificationID': notificationID},
         success:function(data){
-        	//$("#notification-"+notificationID).remove();
+        	notificationAffect(notificationID);
         },
         error: function (data) {
         }
     });
 	return false;
+}
+
+function notificationAffect(notificationID){
+	$("#notification-"+notificationID).remove();
+	var total = parseInt($("#total-notification").html()) - 1;
+	if(total == 0) total = '';
+	$("#total-notification").html(total);
 }
 
 var createChallenge = function(){

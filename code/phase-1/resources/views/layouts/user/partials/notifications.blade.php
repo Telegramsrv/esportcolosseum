@@ -1,4 +1,5 @@
 <ul id="dropdown2" class="dropdown-content">
+	<?php $total = count($notifications); ?>
 	@foreach($notifications as $notification)
 		<?php $notification->data = json_decode($notification->data); ?>
 		<li id="notification-{{ $notification->id }}">
@@ -10,4 +11,4 @@
 		</li>
 	@endforeach
 </ul>
-<a class="dropdown-button white-text" href="#!" data-activates="dropdown2"><i class="fa fa-bell-o collection-item" aria-hidden="true"></i></a>
+<a class="dropdown-button white-text" href="#!" data-activates="dropdown2"><span id="total-notification" class="badge white-text">{{$total}}</span><i class="fa fa-bell-o collection-item" aria-hidden="true"></i></a>
