@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\URL;
 use App\Models\UserDetails;
 use App\Models\UserFriends;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FriendRequestMail;
 
 class UserController extends Controller
 {
@@ -182,6 +184,15 @@ class UserController extends Controller
     	if(!empty($requestData['friend_id']) && $requestData['friend_id'] > 0 && !UserFriends::isUserFriend(Auth::id(), $requestData['friend_id'])) {
     		$userFriends = new UserFriends(["user_id" => Auth::id(), "friend_id" => $requestData['friend_id'], "status" => "Invited"]);
     		$userFriends->save();
+    		
+    		//Send Conversion Mail to friend
+    		$user = User::findOrFail($requestData['friend_id']);
+    		Mail::to($user)->send(new FriendRequestMail($user));
+    		
+    		
+    		//Save Ticket Conversion
+    		//$ticket->ticketConversation()->save($ticketConversation);
+    		
     		$status = 1;
     	} 
     	
