@@ -34,7 +34,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <a id="createChallengeSubmit" class="waves-effect waves-light btn btn-full deep-orange darken-4">Create</a>
+                    <a id="createChallengeSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Create</a>
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
                 </div>
             </div>
         </div>

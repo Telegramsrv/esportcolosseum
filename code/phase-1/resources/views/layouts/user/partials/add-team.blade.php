@@ -11,6 +11,9 @@
 	                </div>
 					<div class="input-field col s12 m12">
 	                    <a id="createTeamSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">SUBMIT</a>
+	                    <div class="progress">
+		                	<div class="indeterminate"></div>
+		                </div>
 	                </div>
 	            </div>
 				<div id="no-team-selected">
