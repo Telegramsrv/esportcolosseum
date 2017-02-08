@@ -190,15 +190,15 @@ class UserController extends Controller
     		$data['user_id'] = $requestData['friend_id'];
     		$data['message'] = Auth::user()->email." has sent you friend request.";
     		$data['type'] = 'Friend Request';
-    		$options = array();
+    		$options = array('from_id' => Auth::id());
     		$data['data'] = json_encode($options);
     		
     		$notification = new Notification($data);
     		$notification->save();
     		
     		//Send Conversion Mail to friend
-    		//$user = User::findOrFail($requestData['friend_id']);
-    		//Mail::to($user)->send(new FriendRequestMail($user));
+    		$user = User::findOrFail($requestData['friend_id']);
+    		Mail::to($user)->send(new FriendRequestMail($user));
     		
     		$status = 1;
     	} 
@@ -216,6 +216,9 @@ class UserController extends Controller
     	
     	$userFriends->status = 'Accepted';
     	$userFriends->update();
+    	
+    	$notification = Notification::findOrFail($requestData['notificationID']);
+    	$notification->delete();
     	 
     	if (\Request::ajax()) {
     		return response()->json([
@@ -229,6 +232,9 @@ class UserController extends Controller
     	$userFriends = UserFriends::where('user_id', $requestData['friendID'])->where('friend_id', Auth::id())->where('status', "Invited")->firstOrFail();
     	 
     	$userFriends->delete();
+    	
+    	$notification = Notification::findOrFail($requestData['notificationID']);
+    	$notification->delete();
     
     	if (\Request::ajax()) {
     		return response()->json([

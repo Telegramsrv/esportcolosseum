@@ -275,14 +275,13 @@ function addFriend(friendID){
 	return false;
 }
 
-function acceptFriend(friendID){
+function acceptFriend(friendID, notificationID){
 	$.ajax({
     	url:'/user/friend/accept',
         type:'GET',
-        data:{'friendID': friendID},
+        data:{'friendID': friendID, 'notificationID': notificationID},
         success:function(data){
-        	$("#addFriend").html(data.html);
-        	$("#rejectFriend").hide();
+        	notificationAffect(notificationID);
         },
         error: function (data) {
         }
@@ -290,19 +289,25 @@ function acceptFriend(friendID){
 	return false;
 }
 
-function rejectFriend(friendID){
-	/*$.ajax({
-    	url:'/user/friend/accept',
+function rejectFriend(friendID, notificationID){
+	$.ajax({
+    	url:'/user/friend/reject',
         type:'GET',
-        data:{'friendID': friendID},
+        data:{'friendID': friendID, 'notificationID': notificationID},
         success:function(data){
-        	$("#addFriend").html(data.html);
-        	$("#rejectFriend").hide();
+        	notificationAffect(notificationID);
         },
         error: function (data) {
         }
-    });*/
+    });
 	return false;
+}
+
+function notificationAffect(notificationID){
+	$("#notification-"+notificationID).remove();
+	var total = parseInt($("#total-notification").html()) - 1;
+	if(total == 0) total = '';
+	$("#total-notification").html(total);
 }
 
 var createChallenge = function(){

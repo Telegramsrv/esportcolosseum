@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Game;
+use App\Models\Notification;
 use Route;
+use Auth;
+use GuzzleHttp\json_decode;
 
 class PassDataToLayoutsProvider extends ServiceProvider
 {
@@ -26,6 +29,14 @@ class PassDataToLayoutsProvider extends ServiceProvider
         {
         	$options = getOptions();
         	$view->with(['options' => $options]);
+        });
+        
+        view()->composer(['layouts.user.partials.notifications'], function($view)
+        {
+        	$notifications = Notification::where('user_id', Auth::id())->get();
+        	/* dd($notifications);
+        	$notifications->data = json_decode($notifications['data']); */
+        	$view->with(['notifications' => $notifications]);
         });
     }
 

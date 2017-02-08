@@ -114,3 +114,13 @@ div.searchResults {
 	color: #FFFFFF;
 }
 /*----------------------- Add Friend Popup ----------------------- End*/
+
+ul#dropdown2{
+    top:auto !important;
+    width: 40% !important;
+}
+
+.notification-btn{
+	display:inline !important;
+	width: 100px !important;
+}
