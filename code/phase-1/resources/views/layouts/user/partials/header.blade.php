@@ -19,9 +19,7 @@
 		@if (Auth::check())
         	<ul class="right">
 	            <li>
-	            	<a href="#!" class="white-text">
-	            		<i class="fa fa-bell-o" aria-hidden="true"></i>
-	            	</a>
+					@include("layouts.user.partials.notifications")
 	            </li>
 	            <li>
 	            	<a href="#addFriendModal" class="white-text modal-trigger">

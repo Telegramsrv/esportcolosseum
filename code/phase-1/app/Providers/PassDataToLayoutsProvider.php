@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Game;
+use App\Models\Notification;
 use Route;
+use Auth;
 
 class PassDataToLayoutsProvider extends ServiceProvider
 {
@@ -26,6 +28,12 @@ class PassDataToLayoutsProvider extends ServiceProvider
         {
         	$options = getOptions();
         	$view->with(['options' => $options]);
+        });
+        
+        view()->composer(['layouts.user.partials.notifications'], function($view)
+        {
+        	$notifications = Notification::where('user_id', Auth::id())->get();
+        	$view->with(['notifications' => $notifications]);
         });
     }
 

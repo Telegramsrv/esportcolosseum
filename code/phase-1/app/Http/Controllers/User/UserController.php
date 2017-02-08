@@ -197,8 +197,8 @@ class UserController extends Controller
     		$notification->save();
     		
     		//Send Conversion Mail to friend
-    		//$user = User::findOrFail($requestData['friend_id']);
-    		//Mail::to($user)->send(new FriendRequestMail($user));
+    		$user = User::findOrFail($requestData['friend_id']);
+    		Mail::to($user)->send(new FriendRequestMail($user));
     		
     		$status = 1;
     	} 

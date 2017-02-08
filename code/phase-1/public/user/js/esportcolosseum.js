@@ -252,13 +252,14 @@ function addFriend(friendID){
 }
 
 function acceptFriend(friendID){
+	return false;
 	$.ajax({
     	url:'/user/friend/accept',
         type:'GET',
         data:{'friendID': friendID},
         success:function(data){
-        	$("#addFriend").html(data.html);
-        	$("#rejectFriend").hide();
+        	//$("#addFriend").html(data.html);
+        	//$("#rejectFriend").hide();
         },
         error: function (data) {
         }
