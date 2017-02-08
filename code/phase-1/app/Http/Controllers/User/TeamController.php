@@ -21,7 +21,7 @@ class TeamController extends Controller
     	$input = $request->all();
 	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
-    	if($input['team_id'] != '' && $input['team_id'] != null){
+    	if(isset($input['team_id']) && $input['team_id'] != '' && $input['team_id'] != null){
     		// Attach already create team with challenge.
     		$team = Team::where(DB::raw('md5(id)'), '=', $input['team_id'])->firstOrFail();
     	}

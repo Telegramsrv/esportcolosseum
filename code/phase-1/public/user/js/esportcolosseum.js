@@ -201,11 +201,14 @@ $(document).ready(function(){
 
 var creatTeam = function(){
     var createTeamForm = $("#createTeamForm");
-    var formData = createTeamForm.serialize();
     var postUrl = createTeamForm.attr('action');
-
-    console.log(formData); return false;
-
+    if($("#createTeamForm #team_id").val() == ""){
+        var formData = createTeamForm.find('input[id!=team_id]').serialize();
+    }
+    else{
+        var formData = createTeamForm.find('input[id!=name]').serialize();
+    }
+    
     showLoader(createTeamForm, 'createTeamSubmit');
     $("#createTeamForm #createTeamSubmit").html("Processing...");
 

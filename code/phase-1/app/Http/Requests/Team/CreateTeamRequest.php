@@ -24,10 +24,16 @@ class CreateTeamRequest extends FormRequest
     public function rules()
     {
         $validation = [
-            'name'  => 'required|max:255',
             'challenge_id' => 'required',
         ];
 
+        if($this->has('name')){
+            $validation['name'] = 'required|unique:teams,name';
+        }
+        
+        if($this->has('team_id')){
+            $validation['team_id'] = 'required';
+        }
         return $validation;
     }
 }
