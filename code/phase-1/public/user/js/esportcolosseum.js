@@ -102,6 +102,7 @@ $(document).ready(function(){
 
     $("#createTeamForm #name").autocomplete({
         source: function( request, response ) {
+            $("#createTeamForm #team_id").val("");
             $.ajax({
                 url: '/user/team/get-autocomplete-team-list',
                 type: 'GET',
@@ -201,6 +202,8 @@ var creatTeam = function(){
     var createTeamForm = $("#createTeamForm");
     var formData = createTeamForm.serialize();
     var postUrl = createTeamForm.attr('action');
+
+    console.log(formData); return false;
 
     showLoader(createTeamForm, 'createTeamSubmit');
     $("#createTeamForm #createTeamSubmit").html("Processing...");
