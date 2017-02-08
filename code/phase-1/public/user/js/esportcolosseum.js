@@ -158,6 +158,7 @@ $(document).ready(function(){
     
     $( "#addFriendModal #search").autocomplete({
         source: function( request, response ) {
+        	$("#addFriendModal #friend_id").val("");
    		 	$.ajax({
                 url: '/user/member/fetch-auto-complete-list',
                 type: 'GET',
@@ -517,6 +518,10 @@ var inviteFriendSubmit = function () {
         	hideLoader(inviteFriendForm, 'inviteFriendSubmit', inviteFriendSubmit);
         	if(errors.search != undefined && errors.search[0] != ""){
         		showError("searchLabel", "search" , errors.search[0]);
+        	}
+        	
+        	if(errors.friend_id != undefined && errors.friend_id[0] != ""){
+        		showError("searchLabel", "search" , "No members found!!!");
         	}
         }
     });
