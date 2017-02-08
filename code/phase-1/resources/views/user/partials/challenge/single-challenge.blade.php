@@ -38,7 +38,6 @@
 							@else
 								<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
 							@endif
-							
 						</h2>
 						<ul>
 							<li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li>
@@ -97,4 +96,4 @@
 		</div>
 	</div>
 </div>
-@include('layouts.user.partials.add-team', ['challenge' => $challenge])
+@include('user.partials.challenge.add-team', ['challenge' => $challenge])

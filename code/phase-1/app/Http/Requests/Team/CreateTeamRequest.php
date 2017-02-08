@@ -25,11 +25,8 @@ class CreateTeamRequest extends FormRequest
     {
         $validation = [
             'challenge_id' => 'required',
+            'name' => 'sometimes|required|unique:teams,name'
         ];
-
-        if($this->has('name')){
-            $validation['name'] = 'required|unique:teams,name';
-        }
         
         if($this->has('team_id')){
             $validation['team_id'] = 'required';

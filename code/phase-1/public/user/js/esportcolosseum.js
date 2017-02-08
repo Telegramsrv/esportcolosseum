@@ -208,7 +208,7 @@ var creatTeam = function(){
     else{
         var formData = createTeamForm.find('input[id!=name]').serialize();
     }
-    
+
     showLoader(createTeamForm, 'createTeamSubmit');
     $("#createTeamForm #createTeamSubmit").html("Processing...");
 
