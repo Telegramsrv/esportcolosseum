@@ -251,15 +251,15 @@ class UserController extends Controller
     	return view('user.my-account.my-friends', compact('userFriends'));
     }
     
-    function fetchAutocompleteList() {
-    	$requestData = \Request::all();
+    function fetchAutocompleteList(Request $request) {
+    	$requestData = $request->all();
     	$members = UserFriends::getMembers(Auth::id(), $requestData["name"]);
     	$userLists = [];
     	foreach($members as $user){
     		$user = array("id" => $user->id, "label" => $user->first_name . " " . $user->last_name, "value" => $user->first_name . " " . $user->last_name);
     		array_push($userLists,$user);
     	}
-    	if (\Request::ajax()) { 
+    	if ($request->ajax()) { 
     		return response()->json(["succes" => true,'response' => json_encode($userLists)]);
     	}
     }

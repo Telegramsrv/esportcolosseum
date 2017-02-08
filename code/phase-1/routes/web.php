@@ -114,6 +114,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 
 	Route::get('/team/get-autocomplete-team-list', 'User\TeamController@getAutocompleteTeamList');
 	Route::get('/team/get-team-players/{md5TeamId}', 'User\TeamController@getTeamPlayers');
+	Route::get('/team/get-autocomplete-player-list/{md5TeamId}', 'User\TeamController@getAutocompletePlayerList');
+	Route::post('/team/add-player-in-team', 'User\TeamController@savePlayerInTeam')->name('user.add-player-in-team.save');
+
 	
 	Route::post('/team/save', 'User\TeamController@save')->name('user.team.save');
 
@@ -132,6 +135,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/friend/reject', 'User\UserController@rejectFriend')->name('user.friend.reject');
 	Route::get('/my-friends', 'User\UserController@myFriends')->name('user.friends');
 	Route::get('/member/fetch-auto-complete-list', 'User\UserController@fetchAutocompleteList')->name('user.member.fetch-auto-complete-list');
+
 });
 
 Auth::routes();
