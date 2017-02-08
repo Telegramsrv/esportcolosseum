@@ -20,6 +20,7 @@ use App\Models\UserFriends;
 use DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FriendRequestMail;
+use App\Models\Notification;
 
 class UserController extends Controller
 {
@@ -185,13 +186,19 @@ class UserController extends Controller
     		$userFriends = new UserFriends(["user_id" => Auth::id(), "friend_id" => $requestData['friend_id'], "status" => "Invited"]);
     		$userFriends->save();
     		
+    		//Save Notification
+    		$data['user_id'] = $requestData['friend_id'];
+    		$data['message'] = Auth::user()->email." has sent you friend request.";
+    		$data['type'] = 'Friend Request';
+    		$options = array();
+    		$data['data'] = json_encode($options);
+    		
+    		$notification = new Notification($data);
+    		$notification->save();
+    		
     		//Send Conversion Mail to friend
-    		$user = User::findOrFail($requestData['friend_id']);
-    		Mail::to($user)->send(new FriendRequestMail($user));
-    		
-    		
-    		//Save Ticket Conversion
-    		//$ticket->ticketConversation()->save($ticketConversation);
+    		//$user = User::findOrFail($requestData['friend_id']);
+    		//Mail::to($user)->send(new FriendRequestMail($user));
     		
     		$status = 1;
     	} 
