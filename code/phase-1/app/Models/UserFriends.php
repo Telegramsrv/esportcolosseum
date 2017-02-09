@@ -27,8 +27,10 @@ class UserFriends extends Model
 		})
 		->select('uf.id', 'ud.user_id', 'ud.first_name', 'ud.last_name', 'ud.user_image')
 		->where('uf.status', 'Accepted')
-		->where('uf.user_id', Auth::id())
-		->Orwhere('uf.friend_id', Auth::id())
+		->where(function ($query) {
+			$query->where('uf.user_id', Auth::id())
+			->Orwhere('uf.friend_id', Auth::id());
+		})
 		->where('ud.user_id', '!=', Auth::id())
 		->get();
 		return $members;
