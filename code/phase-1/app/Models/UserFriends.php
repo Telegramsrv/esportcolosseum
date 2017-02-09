@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class UserFriends extends Model
 {
@@ -18,6 +19,21 @@ class UserFriends extends Model
 	{
 		return $this->belongsTo('App\Models\UserDetails', 'friend_id', 'user_id');
 	}
+	
+	public static function getUserFriends(){
+		$members = DB::table('user_friends as uf')
+		->join('user_details as ud', function ($join) {
+			$join->on('uf.user_id', '=', 'ud.user_id')->orOn('uf.friend_id', '=', 'ud.user_id');
+		})
+		->select('uf.id', 'ud.user_id', 'ud.first_name', 'ud.last_name', 'ud.user_image')
+		->where('uf.status', 'Accepted')
+		->where('uf.user_id', Auth::id())
+		->Orwhere('uf.friend_id', Auth::id())
+		->where('ud.user_id', '!=', Auth::id())
+		->get();
+		return $members;
+	}
+	
 	
 	public static function getMembers($uid, $searchKeyword) {
 		$members = DB::table('users as u')

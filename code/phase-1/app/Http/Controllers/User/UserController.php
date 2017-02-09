@@ -247,7 +247,8 @@ class UserController extends Controller
     
     function myFriends() {
     	$user_id = Auth::id();
-    	$userFriends = UserFriends::with("userFriendDetails")->where('user_id', $user_id)->Orwhere('friend_id', $user_id)->where("status", "Accepted")->get();
+    	$userFriends = UserFriends::getUserFriends();
+    	//$userFriends = UserFriends::with("userFriendDetails")->where('user_id', $user_id)->Orwhere('friend_id', $user_id)->where("status", "Accepted")->get();
     	return view('user.my-account.my-friends', compact('userFriends'));
     }
     

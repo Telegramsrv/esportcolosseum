@@ -5,18 +5,21 @@
 		<?php $cnt = count($userFriends);?>
 		@if($cnt > 0)
 			@foreach ($userFriends as $key => $userFriend)
-				@if($key % 2 == 0)
+				@if($key % 3 == 0)
 				@if($key != 0) 
 				</div>
+				 <br>
 				@endif
 				<div class="row">
 				@endif
-			      <div class="col s6">
-			      		<img class="user-image" src="{{ url(env('PROFILE_PICTURE_PATH').$userFriend->userFriendDetails->user_image) }}">
-			      		{{$userFriend->userFriendDetails->first_name}} {{ $userFriend->userFriendDetails->last_name }}
+			      <div class="col s4 text-center">
+			      		<a href="{{ url('user/profile/'.md5($userFriend->user_id)) }}"><img class="friend-img responsive-img circle" src="{{ url(env('PROFILE_PICTURE_PATH').$userFriend->user_image) }}"></a>
+			      		<br>
+			      		<b>{{$userFriend->first_name}} {{ $userFriend->last_name }}</b>
 			      </div>
 			     @if($key == ($cnt-1))
 			    </div>
+			     <br>
 			    @endif
 			 @endforeach
     	@else
