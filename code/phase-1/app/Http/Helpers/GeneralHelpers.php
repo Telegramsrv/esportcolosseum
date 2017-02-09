@@ -140,7 +140,7 @@ function formatErrorMessage(ViewErrorBag $errors, $key, $additionalClass = ''){
 		$result['formControlClass'] = 'validate invalid ' . $additionalClass;
 	}
 	else{
-		$result['validation'] = [];
+		$result['validation'] = []; //TODO 'class' => 'active'
 		$result['formControlClass'] = 'validate ' . $additionalClass;
 	}
 	return $result;
