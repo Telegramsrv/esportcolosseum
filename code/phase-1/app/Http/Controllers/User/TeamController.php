@@ -133,11 +133,28 @@ class TeamController extends Controller
 
 	/**
 	 * This function is used to add player in team.
-	 * @return JSON $Response success/failure response.
+	 * @param  Request 	$request 
+	 * @return JSON 	$response success/failure response.
 	 */
 	public function savePlayerInTeam(AddPlayerInTeamRequest $request){
 		$input = $request->all();
-		$user = User::findOrFail($input['player_id']);
-		dd($user);
+		$user = User::where(DB::raw('md5(id)'), $input['player_id'])->firstOrFail();
+		$team = Team::where(DB::raw('md5(id)'), $input['team_id'])->firstOrFail();
+
+		if($team->players()->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
+			$team->players()->attach($user);
+		}
+		else{
+			$errors = array(
+    			'player_id' => array(
+    				'Team is full.'
+    			)
+    		);
+    		return response()->json($errors, 422);
+		}
+
+		if ($request->ajax()) { 
+			return response()->json(["success" => true]);
+		}
 	}
 }

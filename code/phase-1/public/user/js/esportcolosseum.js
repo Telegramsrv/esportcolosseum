@@ -5,7 +5,7 @@ $(document).ready(function(){
         $('select').material_select();    
     }
 
-	$("body").keypress(function(event) {
+	$("form").on("keypress", function(event) {
 	    if (event.keyCode == 13) {
 	        if($('#loginModal').is(':visible')){
 	        	$("#loginSubmit").click();
@@ -19,6 +19,10 @@ $(document).ready(function(){
             else if($('.add-team-model').is(':visible')){
                 $('#createTeamForm #createTeamSubmit').click();
             }
+            else if($('.add-player-model').is(':visible')){
+                $('#addPlayerInTeamForm #addPlayerSubmit').click();
+            }
+            return false;
 	    }
 	});
 
@@ -62,7 +66,6 @@ $(document).ready(function(){
 
     $("#createTeamForm #createTeamSubmit").click(function(){
         creatTeam();
-        return false;
     });
 
     $("#addPlayerInTeamForm #addPlayerSubmit").click(function(){
@@ -252,10 +255,11 @@ var creatTeam = function(){
             }
         },
         error: function (data) {
+            var errors = ''; 
             $("#createTeamForm #createTeamSubmit").html("Submit");
             hideLoader(createTeamForm, 'createTeamSubmit', creatTeam);
 
-            var errors = data.responseJSON;
+            errors = data.responseJSON;
             if(errors.name != undefined && errors.name[0] != ""){
                 $("#createTeamForm #nameLabel").attr("data-error", errors.name[0]);
                 $("#createTeamForm #nameLabel").addClass("active");
@@ -289,6 +293,7 @@ var addPlayerInTeam = function(){
             hideLoader(addPlayerInTeamForm, 'addPlayerSubmit', addPlayerInTeam);
 
             var errors = data.responseJSON;
+
             if(errors.player_id != undefined && errors.player_id[0] != ""){
                 $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.player_id[0]);
                 $("#addPlayerInTeamForm #playerLabel").addClass("active");
@@ -303,7 +308,6 @@ var addPlayerInTeam = function(){
             }
         }
     });
-
 }
 
 function addFriend(friendID){

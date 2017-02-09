@@ -1,4 +1,4 @@
-<div id="addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal blue-grey darken-4 modal-smal-form add-team-model">
+<div id="addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal blue-grey darken-4 modal-smal-form add-player-model">
 	{!! Form::open(['route' => 'user.add-player-in-team.save', 'method' => 'post', 'id' => 'addPlayerInTeamForm']) !!}
 		{!! Form::hidden('team_id', md5($team->id), ['id' => 'team_id']) !!}
 		{!! Form::hidden('player_id', '', ['id' => 'player_id']) !!}
@@ -7,7 +7,7 @@
 	      	<div class="modal-form-container">
 	            <div class="row">
 	                <div class="input-field col s12 m12">
-	                    {!! Form::text('player', '',['class' => '', 'id' => 'player', 'autocomplete' => 'off']) !!}
+	                    {!! Form::text('player', '',['class' => 'validate', 'id' => 'player', 'autocomplete' => 'off']) !!}
 	                    {!! Form::label('player', 'Gamer Name OR Email', ['data-error' => '', 'id' => 'playerLabel']) !!}
 	                </div>
 					<div class="input-field col s12 m12">
