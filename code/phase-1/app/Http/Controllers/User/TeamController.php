@@ -114,7 +114,7 @@ class TeamController extends Controller
 	public function getAutocompletePlayerList(Team $team, Request $request){
 		$input = $request->all();
 
-		$users = User::roleType('user')->seachGamerNameOrEmail($input['player'])->playerlistForTeam($input['team_id'])->get();
+		$users = User::active()->roleType('user')->seachGamerNameOrEmail($input['player'])->playerlistForTeam($input['team_id'])->get();
 
 		$userLists = [];
     	foreach($users as $user){

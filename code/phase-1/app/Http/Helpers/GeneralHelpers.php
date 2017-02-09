@@ -147,6 +147,22 @@ function formatErrorMessage(ViewErrorBag $errors, $key, $additionalClass = ''){
 }
 
 /**
+ * This function will display profile image if provided. else will display default image.
+ * @param  String $image        	Image name
+ * @return String $profilePicURL    Image URL
+ */
+function displayProfileImage($image){
+	if($image != ''){
+		$profilePicURL = url(env('PROFILE_PICTURE_PATH') . $image);
+	}
+	else{
+		$profilePicURL = url(env('PROFILE_PICTURE_PATH') . env('DEFAULT_USER_PROFILE_IMAGE'));
+	}
+
+	return $profilePicURL;
+}
+
+/**
  * Get role information of logged in user.
  * @param  string $field field name which require to display
  * @return string        

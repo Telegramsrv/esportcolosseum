@@ -58,13 +58,8 @@
 										<div class="player-section">
 											<div class="player-image">
 												@php
-													if($player->userDetails->user_image != ''){
-														$profilePicURL = url(env('PROFILE_PICTURE_PATH') . $player->userDetails->user_image);
-													}
-													else{
-														$profilePicURL = url(env('PROFILE_PICTURE_PATH') . env(
-														'DEFAULT_USER_PROFILE_IMAGE'));
-													}
+													$profilePicURL = displayProfileImage($player->userDetails->user_image)
+													
 												@endphp		
 												<img class="challenge-team-image" src="{!! $profilePicURL !!}">
 											</div>

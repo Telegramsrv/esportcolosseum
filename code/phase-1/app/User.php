@@ -67,6 +67,17 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Team');   
     } 
 
+
+    /**
+     * Scope a query to filter users whose status is "Active".
+     * @param  \Illuminate\Database\Eloquent\Builder $query  
+     * @param  String $role  Role name
+     * @return \Illuminate\Database\Eloquent\Builder $query  
+     */
+    public function scopeActive($query){
+        return $query->where('status', 'Active');
+    }    
+
     /**
      * Scope a query to filter users with specific role.
      * @param  \Illuminate\Database\Eloquent\Builder $query  
