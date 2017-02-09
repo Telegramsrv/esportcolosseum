@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,26 @@ class AppServiceProvider extends ServiceProvider
                     $valid = false;    
                 }
             }
+            return $valid;
+        });
+
+        Validator::extend('custom_exists', function($attribute, $value, $parameters, $validator){
+            $valid = false;
+            $query = DB::table($parameters['0'])->select('*');
+            if(isset($parameters[2]) && $parameters[2] == true){
+                $query->where(DB::raw($parameters[1]), "=", $value);
+            }
+            else{
+                $query->where($parameters[1], "=", $value);   
+            }
+
+            if($query->count() > 0){
+                $valid = true;
+            }
+            else{
+                $valid = false;   
+            }
+
             return $valid;
         });
 

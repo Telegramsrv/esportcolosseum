@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Team\CreateTeamRequest;
+use App\Http\Requests\Team\AddPlayerInTeamRequest;
 use App\Models\Team;
 use App\Models\Challenge;
 use App\User;
@@ -134,7 +135,9 @@ class TeamController extends Controller
 	 * This function is used to add player in team.
 	 * @return JSON $Response success/failure response.
 	 */
-	public function savePlayerInTeam(Request $request){
-		dd($request->all());
+	public function savePlayerInTeam(AddPlayerInTeamRequest $request){
+		$input = $request->all();
+		$user = User::findOrFail($input['player_id']);
+		dd($user);
 	}
 }

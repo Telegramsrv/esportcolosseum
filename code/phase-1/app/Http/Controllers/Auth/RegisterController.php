@@ -77,10 +77,11 @@ class RegisterController extends Controller
     
     public function register(RegisterRequest $request){
     	$userInput = $request->only('email', 'password');
-        $userInput['password'] = bcrypt($userInput['password']);
-        $userInput['ip_address'] = request()->ip();
-        $userInput['status'] = 'Active';
-        $user = User::create($userInput);
+        $userInput['password']      = bcrypt($userInput['password']);
+        $userInput['ip_address']    = request()->ip();
+        $userInput['status']        = 'Active';
+        $userInput['last_login']    = \Carbon\Carbon::now();
+        $user                       = User::create($userInput);
 
     	$userRole = Role::where("name", "=", "user")->firstOrCreate(
     		array(

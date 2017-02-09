@@ -62,6 +62,7 @@ $(document).ready(function(){
 
     $("#createTeamForm #createTeamSubmit").click(function(){
         creatTeam();
+        return false;
     });
 
     $("#addPlayerInTeamForm #addPlayerSubmit").click(function(){
@@ -268,7 +269,7 @@ var creatTeam = function(){
 var addPlayerInTeam = function(){
     var addPlayerInTeamForm = $("#addPlayerInTeamForm");
     var postUrl = addPlayerInTeamForm.attr('action');
-    var formData = createTeamForm.serialize();
+    var formData = addPlayerInTeamForm.serialize();
 
     showLoader(addPlayerInTeamForm, 'addPlayerSubmit');
     $("#addPlayerInTeamForm #addPlayerSubmit").html("Processing...");
@@ -285,11 +286,17 @@ var addPlayerInTeam = function(){
         },
         error: function (data) {
             $("#addPlayerInTeamForm #addPlayerSubmit").html("Submit");
-            hideLoader(addPlayerInTeamForm, 'addPlayerSubmit', creatTeam);
+            hideLoader(addPlayerInTeamForm, 'addPlayerSubmit', addPlayerInTeam);
 
             var errors = data.responseJSON;
-            if(errors.name != undefined && errors.name[0] != ""){
-                $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.name[0]);
+            if(errors.player_id != undefined && errors.player_id[0] != ""){
+                $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.player_id[0]);
+                $("#addPlayerInTeamForm #playerLabel").addClass("active");
+                $("#addPlayerInTeamForm #player").addClass("invalid");
+                $("#addPlayerInTeamForm #player").focus();
+            }
+            else if(errors.team_id != undefined && errors.team_id[0] != ""){
+                $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.team_id[0]);
                 $("#addPlayerInTeamForm #playerLabel").addClass("active");
                 $("#addPlayerInTeamForm #player").addClass("invalid");
                 $("#addPlayerInTeamForm #player").focus();
