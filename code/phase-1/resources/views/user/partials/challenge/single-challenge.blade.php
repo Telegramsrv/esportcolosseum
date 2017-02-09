@@ -59,7 +59,6 @@
 											<div class="player-image">
 												@php
 													$profilePicURL = displayProfileImage($player->userDetails->user_image)
-													
 												@endphp		
 												<img class="challenge-team-image" src="{!! $profilePicURL !!}">
 											</div>

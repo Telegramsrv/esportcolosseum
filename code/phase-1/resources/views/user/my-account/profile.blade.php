@@ -16,14 +16,20 @@
 	    <div class="row">
     		<div class="col l3 s12">
         		<div class="profile_pic">
-      				<img src="{!! url(env('PROFILE_PICTURE_PATH', 'storage/user/profile_pictures/').$user->userDetails->user_image) !!}" alt="{!! $profileName !!}" title="{!! $profileName !!}" class="img-pro-pic">
+                    @php
+                        $profilePicURL = displayProfileImage($user->userDetails->user_image)
+                    @endphp     
+      				<img src="{!! $profilePicURL !!}" alt="{!! $profileName !!}" title="{!! $profileName !!}" class="img-pro-pic">
 			      	<div class="edit-pic">
 			    		<i class="fa fa-pencil" aria-hidden="true"></i>
 			      	</div>
         			<div class="pro-name">
             			<span>
             				{!! $profileName !!}
-            				<img class="flag flag-{!! strtolower($user->userDetails->country->code) !!}" />
+                            @if(isset($user->userDetails->country->code))
+                                <img class="flag flag-{!! strtolower($user->userDetails->country->code) !!}" />
+                            @endif
+            				
             			</span> 
             		</div>
             	</div>
