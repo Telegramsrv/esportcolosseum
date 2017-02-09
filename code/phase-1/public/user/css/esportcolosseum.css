@@ -72,10 +72,17 @@ ul.timing li.esc-challenge-time-active{
 	height: 86px;
 	border-radius: 50%;
 }
+
 .challenge-team-image{
 	width:66px;
 	height: 67px;
 	border-radius: 50%;	
+}
+
+.first-challenge-left-blog  ul.ui-autocomplete li {
+	list-style: inherit;
+	float: none;
+	text-align: left;
 }
 /*----------------------- My Challenge Page ----------------------- End*/
 

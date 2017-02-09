@@ -117,8 +117,13 @@ class TeamController extends Controller
 
 		$userLists = [];
     	foreach($users as $user){
-    		$user = array("id" => $user->id, "label" => $user->first_name . " " . $user->last_name, "value" => $user->first_name . " " . $user->last_name);
-    		array_push($userLists,$user);
+    		$name = $user->userDetails->first_name . " " . $user->userDetails->last_name;
+    		$user = array(
+    			"id" => md5($user->id), 
+    			"label" => $name, 
+    			"value" => $name
+    		);
+    		array_push($userLists, $user);
     	}
     	if ($request->ajax()) { 
     		return response()->json(["succes" => true,'response' => json_encode($userLists)]);

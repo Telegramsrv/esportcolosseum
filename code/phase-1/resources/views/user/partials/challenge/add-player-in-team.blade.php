@@ -11,7 +11,7 @@
 	                    {!! Form::label('player', 'Gamer Name OR Email', ['data-error' => '', 'id' => 'playerLabel']) !!}
 	                </div>
 					<div class="input-field col s12 m12">
-	                    <a id="createTeamSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">SUBMIT</a>
+	                    <a id="addPlayerSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">SUBMIT</a>
 	                    <div class="progress">
 		                	<div class="indeterminate"></div>
 		                </div>

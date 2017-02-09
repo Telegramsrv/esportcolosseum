@@ -63,6 +63,10 @@ $(document).ready(function(){
     $("#createTeamForm #createTeamSubmit").click(function(){
         creatTeam();
     });
+
+    $("#addPlayerInTeamForm #addPlayerSubmit").click(function(){
+        addPlayerInTeam();
+    });    
     
 	$("#amountForm #amountSubmit").click(function(){
 		amountSubmit();
@@ -159,7 +163,7 @@ $(document).ready(function(){
 
     $("#addPlayerInTeamForm #player").autocomplete({
         source: function( request, response ) {
-            $("#addPlayerToTeamForm #player_id").val("");
+            $("#addPlayerInTeamForm #player_id").val("");
             $.ajax({
                 url: '/user/team/get-autocomplete-player-list/' + $("#addPlayerInTeamForm #team_id").val(),
                 type: 'GET',
@@ -175,9 +179,9 @@ $(document).ready(function(){
                 }
             });
         },
-        appendTo: $("#addPlayerToTeamForm #player").parent(),
+        appendTo: $("#addPlayerInTeamForm").parent(),
         select: function(event, ui){
-            $("#addPlayerToTeamForm #player_id").val(ui.item.id);
+            $("#addPlayerInTeamForm #player_id").val(ui.item.id);
         }
     });
     
@@ -259,6 +263,40 @@ var creatTeam = function(){
             }
         }
     });
+}
+
+var addPlayerInTeam = function(){
+    var addPlayerInTeamForm = $("#addPlayerInTeamForm");
+    var postUrl = addPlayerInTeamForm.attr('action');
+    var formData = createTeamForm.serialize();
+
+    showLoader(addPlayerInTeamForm, 'addPlayerSubmit');
+    $("#addPlayerInTeamForm #addPlayerSubmit").html("Processing...");
+
+    $.ajax({
+        url: postUrl,
+        type:'POST',
+        data:formData,
+        success:function(data){
+            if(data.success == true){
+                $("#addPlayerInTeamForm #addPlayerSubmit").html("Redirecting...");
+                window.location.reload();
+            }
+        },
+        error: function (data) {
+            $("#addPlayerInTeamForm #addPlayerSubmit").html("Submit");
+            hideLoader(addPlayerInTeamForm, 'addPlayerSubmit', creatTeam);
+
+            var errors = data.responseJSON;
+            if(errors.name != undefined && errors.name[0] != ""){
+                $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.name[0]);
+                $("#addPlayerInTeamForm #playerLabel").addClass("active");
+                $("#addPlayerInTeamForm #player").addClass("invalid");
+                $("#addPlayerInTeamForm #player").focus();
+            }
+        }
+    });
+
 }
 
 function addFriend(friendID){
