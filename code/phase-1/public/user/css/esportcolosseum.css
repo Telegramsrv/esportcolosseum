@@ -124,3 +124,11 @@ ul#dropdown2{
 	display:inline !important;
 	width: 100px !important;
 }
+
+.text-center{
+	text-align: center !important;
+}
+
+.friend-img{
+	width: 75%;
+}
