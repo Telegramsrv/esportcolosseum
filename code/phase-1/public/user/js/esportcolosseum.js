@@ -5,7 +5,6 @@ $(document).ready(function(){
         $('select').material_select();    
     }
 
-    // $( "div.main-content" ).on( "keypress", "div.modal", function(event) {
     $( "div.modal" ).on( "keypress", "form", function(event) {
 	    if (event.keyCode == 13) {
 	        if($('#loginModal').is(':visible')){
