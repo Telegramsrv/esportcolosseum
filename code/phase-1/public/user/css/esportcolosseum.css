@@ -143,4 +143,26 @@ ul#dropdown2{
 
 .friend-img{
 	width: 75%;
+	height: 250px !important;
+}
+
+@media only screen and (max-width: 980px) {
+   .friend-img{
+		width: 75%;
+		height: 200px !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+   .friend-img{
+		width: 75%;
+		height: 150px !important;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+   .friend-img{
+		width: 75%;
+		height: 100px !important;
+	}
 }
