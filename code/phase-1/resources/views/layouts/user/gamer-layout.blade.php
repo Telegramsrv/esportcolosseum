@@ -9,9 +9,9 @@
 	    <!-- Styles -->
 
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	    <link rel="stylesheet" href="{!! asset('user/css/jquery-ui.css') !!}">
 
-		<link href="{!! asset('user/css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection	" />
+		<link href="{!! asset('user/css/materialize.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
 		<link href="{!! asset('user/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet" />
 		<link href="{!! asset('user/css/flags.css') !!}" rel="stylesheet" />
 		<link href="{!! asset('user/css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
