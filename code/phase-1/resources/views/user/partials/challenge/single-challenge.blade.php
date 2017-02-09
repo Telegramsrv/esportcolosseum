@@ -80,7 +80,7 @@
 
 						@if($captainTeam != null && $teamPlayerCount < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 							<div class="firt-team-image">
-								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal-trigger">
+								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal-trigger add-team-player">
 									<img src="{!! url('user/images/person.png') !!}">
 								</a>	
 							</div>

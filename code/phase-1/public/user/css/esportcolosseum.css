@@ -84,6 +84,11 @@ ul.timing li.esc-challenge-time-active{
 	float: none;
 	text-align: left;
 }
+
+a.add-team-player{
+	position: relative;
+	z-index: 2;
+}
 /*----------------------- My Challenge Page ----------------------- End*/
 
 
