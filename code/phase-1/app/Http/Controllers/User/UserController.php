@@ -107,77 +107,6 @@ class UserController extends Controller
 		]);
     }
     
-    public function memberSearch(SearchMembers $request){
-    	$requestData = $request->all();
-    	
-    	$user = User::with('userDetails')
-    						->whereHas('roles', function($q){
-					    		$q->where('name', 'user');
-					    	})
-					    	->where('email', $requestData['search'])
-					    	->where('status', 'Active')
-					    	->where('id', '!=', Auth::id())
-					    	->first();
-    	
-    	if(!$user){
-    		$user = User::with('userDetails')
-    							->whereHas('roles', function($q){
-    								$q->where('name', 'user');
-    							})
-			    				->whereHas('userDetails', function($q){
-			    					$q->where('gamer_name', \Request::all()['search']);
-			    				})
-			    				->where('status', 'Active')
-			    				->where('id', '!=', Auth::id())
-			    				->first();
-    	}
-    		
-    	if($user){
-    		$member = array('id' => $user->id, 'name' => $user->userDetails->first_name." ".$user->userDetails->last_name, 'image' => $user->userDetails->user_image);
-    		$errorBool = false;
-    		
-    		$buttonText = 'Add Friend';
-    		$friendsData = DB::table('user_friends')->where('user_id', Auth::id())->where('friend_id', $user->id)->first();
-    		if($friendsData){
-    			if($friendsData->status == 'Invited'){
-    				$buttonText = 'Invited';
-    			}
-    		}
-    		
-    		$html = '<div class="player-section"><div class="player-image"><img src="'.url(env('PROFILE_PICTURE_PATH').$member['image']).'"></div><div class="player-informations">';
-    		$html .= '<h2>'.$member['name'].'</h2>';
-    		
-    		$friendsData = DB::table('user_friends')->where(array('user_id' => Auth::id(), 'friend_id' => $user->id))
-    												->orWhere(array('friend_id' => Auth::id(), 'user_id' => $user->id))
-    												->first();
-    		if($friendsData){
-    			if($friendsData->status == 'Invited' && Auth::id() == $friendsData->user_id){
-    				$html .= '<a id="addFriend" class="addFriend waves-effect waves-light btn deep-orange">REQUESTED</a>';
-    			}
-    			else if($friendsData->status == 'Invited' && Auth::id() == $friendsData->friend_id){
-    				$html .= '<a id="addFriend" onClick="acceptFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">ACCEPT</a>';
-    				$html .= '&nbsp;&nbsp;<a id="rejectFriend" onClick="rejectFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">REJECT</a>';
-    			}
-    		}
-    		else{
-    			$html .= '<a id="addFriend" onClick="addFriend('.$member['id'].')" class="addFriend waves-effect waves-light btn deep-orange">ADD FRIEND</a>';
-    		}
-    		
-    		$html .= '</div></div>';
-    	}
-    	else{
-    		$errorBool = true;
-    		$html = '<div id="message">No members found!</div>';
-    	}
-    	
-    	if ($request->ajax()) {
-    		return response()->json([
-    				'html' => $html,
-    				'error' => $errorBool
-    		]);
-    	}
-    }
-    
     function addFriend(InviteFriend $request){
     	$requestData = $request->all();
     	$status = 0;
@@ -254,10 +183,12 @@ class UserController extends Controller
     
     function fetchAutocompleteList(Request $request) {
     	$requestData = $request->all();
-    	$members = UserFriends::getMembers(Auth::id(), $requestData["name"]);
+    	$users = User::where('id', '!=', Auth::id())->active()->roleType('user')->seachGamerNameOrEmail($requestData["name"])->notUserFriends(Auth::id())->get();
     	$userLists = [];
-    	foreach($members as $user){
-    		$user = array("id" => $user->id, "label" => $user->first_name . " " . $user->last_name, "value" => $user->first_name . " " . $user->last_name);
+    	foreach($users as $user){
+    		$user = array("id" => $user->id,
+	    				 "label" => $user->userDetails->first_name . " " . $user->userDetails->last_name,
+	    				 "value" => $user->userDetails->first_name . " " . $user->userDetails->last_name);
     		array_push($userLists,$user);
     	}
     	if ($request->ajax()) { 

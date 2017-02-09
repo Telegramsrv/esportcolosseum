@@ -120,4 +120,24 @@ class User extends Authenticatable
                     });
     }
     
+    /**
+     * Scope a query to filter users with below parameters.
+     *     - list of users which are not friends already.
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  String $teamId  Team id
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function scopeNotUserFriends($query, $uid){
+    	return  $query->whereNotIn('id', function($query) use ($uid) {
+		    			$query->select('friend_id')
+				    	->from("user_friends")
+				    	->where('user_id', $uid);
+			    })
+			    ->whereNotIn('id', function($query) use ($uid) {
+			    	$query->select('user_id')
+			    	->from("user_friends")
+			    	->where('friend_id', $uid);
+			    });
+    }
+    
 }
