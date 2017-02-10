@@ -105,6 +105,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::post('/save-challenge/{gameSlug}', 'User\ChallengeController@saveOpenChallenge')->name('user.open-challenge.save');
 	Route::get('/esc-challenge/{gameSlug}', 'User\ChallengeController@listEscChallenges')->name('user.esc-challenge.list');
 	Route::get('/my-challenge/{gameSlug}/{challengeType}', 'User\ChallengeController@myChallengelist')->name('user.my-challenge.list');
+	Route::post('/challenge/accept', 'User\ChallengeController@accept')->name('user.challenge.accept');
 
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::put('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');
@@ -113,12 +114,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/profile/{md5UserId}/{gameSlug?}', 'User\UserController@showProfile')->name('user.profile')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
 
 	Route::get('/team/get-autocomplete-team-list', 'User\TeamController@getAutocompleteTeamList');
+	Route::post('/team/save', 'User\TeamController@save')->name('user.team.save');
 	Route::get('/team/get-team-players/{md5TeamId}', 'User\TeamController@getTeamPlayers');
 	Route::get('/team/get-autocomplete-player-list/{md5TeamId}', 'User\TeamController@getAutocompletePlayerList');
 	Route::post('/team/add-player-in-team', 'User\TeamController@savePlayerInTeam')->name('user.add-player-in-team.save');
-
-	
-	Route::post('/team/save', 'User\TeamController@save')->name('user.team.save');
+	Route::delete('/team/remove-player', 'User\TeamController@removePlayer')->name('user.remove-player.remove');
 
 	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');
 	Route::get('/ticket/add', 'User\TicketController@add')->name('user.ticket.add');

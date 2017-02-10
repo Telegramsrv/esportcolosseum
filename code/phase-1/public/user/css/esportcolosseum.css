@@ -89,6 +89,21 @@ a.add-team-player{
 	position: relative;
 	z-index: 2;
 }
+
+div.player-section{
+	position: relative;
+	z-index: 2;
+}
+
+div.player-informations > p{
+	display: inline-block;
+}
+
+div.remove-player-div{
+	display: inline-block;
+	max-width: 39px;
+	width: 100%;
+}
 /*----------------------- My Challenge Page ----------------------- End*/
 
 

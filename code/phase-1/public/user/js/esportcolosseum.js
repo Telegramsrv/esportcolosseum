@@ -228,7 +228,15 @@ $(document).ready(function(){
     	return false;
     });
 
-    
+    $(".remove-player").click(function(){
+        if(confirm("Are you sure?")){
+            console.log($(this).parent().parent());
+            $(this).parent().parent().submit();
+        }
+        else{
+            return false;
+        }
+    })
 });
 
 var creatTeam = function(){

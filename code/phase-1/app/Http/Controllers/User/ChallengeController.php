@@ -12,6 +12,7 @@ use App\Models\Team;
 use App\Models\Challenge;
 use App\Models\EscChallengeTemplate;
 use Carbon\Carbon;
+use DB;
 
 class ChallengeController extends Controller
 {
@@ -52,5 +53,17 @@ class ChallengeController extends Controller
 		$settings = getOptions();
 
     	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'settings', 'escChallangeTemplates'));
+    }
+
+    /**
+     * This function is used to complete challenge.
+     * @param  Request $request Request Parameter
+     */
+    public function accept(Request $request){
+    	$input = $request->all();
+    	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
+    	$challenge->is_accepted = 'yes';
+    	$challenge->save();
+    	return redirect()->back();
     }
 }

@@ -157,4 +157,24 @@ class TeamController extends Controller
 			return response()->json(["success" => true]);
 		}
 	}
+
+	/**
+	 * This function is used to remove player from team.
+	 * @param  Request   $request Request object
+	 */
+	public function removePlayer(Request $request){
+		$input = $request->only('player_id', 'team_id', 'challenge_id');
+		$user = User::where(DB::raw('md5(id)'), $input['player_id'])->firstOrFail();
+		$team = Team::where(DB::raw('md5(id)'), $input['team_id'])->firstOrFail();
+		$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
+
+		if($challenge->is_accepted == 'no'){
+			if($team->players()->detach($user)){
+				return redirect()->back();
+			}
+		}
+		else{
+			return redirect()->back();
+		}
+	}
 }

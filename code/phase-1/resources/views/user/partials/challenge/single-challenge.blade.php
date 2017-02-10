@@ -23,7 +23,19 @@
 				
 			</div>
 			<div class="first-challenge-header-button">
-				<button class="btn btn-default">COMPLETE CHALLENGE</button>
+				@if($challenge->is_accepted == 'yes')
+					<label class="btn btn-default">CANCEL CHALLENGE</label>	
+				@elseif($captainTeam != null && $captainTeam->players->count() == env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+					{!! Form::open(['route' => 'user.challenge.accept', 'method'=>'POST']) !!}
+						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default']) !!}
+					{!! Form::close() !!}
+					<!-- <button class="btn btn-default">COMPLETE CHALLENGE</button> -->
+					
+				@else
+					<label class="btn btn-default">COMPLETE CHALLENGE</label>	
+				@endif
+				
 			</div>
 		</div>
 		<div class="vs_area">
@@ -48,12 +60,13 @@
 							</li>
 							<li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li>
 						</ul>
-						<h3>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}<span>( Captain ) </span></h3>
-						@php($teamPlayerCount = 0)
+						<h3>
+							{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}
+							<span>( Captain ) </span>
+						</h3>
 						@if($captainTeam != null)
 							@if($captainTeam->players->count())
 								@foreach($captainTeam->players as $player)
-									@php($teamPlayerCount++)
 									@if($challenge->captain->id != $player->id)
 										<div class="player-section">
 											<div class="player-image">
@@ -64,7 +77,12 @@
 											</div>
 											<div class="player-informations">
 												<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
-												<p>Remove  |  Report</p>
+												
+												@include('user.partials.challenge.remove-player-from-team', ['
+												player' => $player, 'team' => $captainTeam, 'challenge' => $challenge])	
+												
+												<p> |  Report</p>
+											
 											</div>
 										</div>
 									@endif
@@ -72,7 +90,7 @@
 							@endif
 						@endif
 
-						@if($captainTeam != null && $teamPlayerCount < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+						@if($captainTeam != null && $captainTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 							<div class="firt-team-image">
 								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal-trigger add-team-player">
 									<img src="{!! url('user/images/person.png') !!}">
