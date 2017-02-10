@@ -241,7 +241,8 @@ class UserController extends Controller
     	}
     	else{
     		return response()->json([
-    				'intended' => URL::to('user/profile/edit')
+    				'intended' => URL::to('user/profile/edit'),
+    				'error' => 1
     		]);
     	}
     }

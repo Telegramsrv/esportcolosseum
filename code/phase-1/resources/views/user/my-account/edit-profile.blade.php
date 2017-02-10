@@ -85,6 +85,38 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<div class="row">
+					<div class="input-field col s12 m6">
+						@php($errorFormat = formatErrorMessage($errors, 'account_no'))
+
+						{!! Form::text('account_no', null, ['class' => 'black-text ' . $errorFormat['formControlClass'], 'id' => 'account_no', 'name' => 'account_no']) !!}
+						{!! Form::label('account_no', 'Account No', $errorFormat['validation']) !!}
+					</div>
+					<div class="input-field col s12 m6">
+						@php($errorFormat = formatErrorMessage($errors, 'account_name'))
+
+						{!! Form::text('account_name', null, ['class' => 'black-text ' . $errorFormat['formControlClass'], 'id' => 'account_name', 'name' => 'account_name']) !!}
+						{!! Form::label('account_name', 'Account Name', $errorFormat['validation']) !!}
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-field col s12 m6">
+						@php($errorFormat = formatErrorMessage($errors, 'account_swift_code'))
+
+						{!! Form::text('account_swift_code', null, ['class' => 'black-text ' . $errorFormat['formControlClass'], 'id' => 'account_swift_code', 'name' => 'account_swift_code']) !!}
+						{!! Form::label('account_swift_code', 'Account SWIFT Code', $errorFormat['validation']) !!}
+					</div>
+					<div class="input-field col s12 m6">
+						@php($errorFormat = formatErrorMessage($errors, 'paypal_id'))
+
+						{!! Form::text('paypal_id', null, ['class' => 'black-text ' . $errorFormat['formControlClass'], 'id' => 'paypal_id', 'name' => 'paypal_id']) !!}
+						{!! Form::label('paypal_id', 'Paypal ID', $errorFormat['validation']) !!}
+					</div>
+				</div>
+				
 				<div class="row">
 					<div class="input-field col s2">
 						<button class="waves-effect waves-light btn-large btn-full deep-orange darken-4" type="submit">Submit</button>

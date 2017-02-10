@@ -612,6 +612,7 @@ var amountSubmit = function () {
 
 //withdrawFundSubmit
 var withdrawFundSubmit = function () {
+	return false;
 	var withdrawFundForm = $("#withdrawFundForm");
 	var formData = withdrawFundForm.serialize();
 	var postUrl = withdrawFundForm.attr('action');
@@ -626,9 +627,14 @@ var withdrawFundSubmit = function () {
         success:function(data){
             if(data.intended != undefined && data.intended != ""){
             	$("#withdrawFundForm #withdrawFundSubmit").html("Redirecting...");
-            	Materialize.toast('Please fill payment detials first for do withdraw fund.', 3000,'',function(){
+            	if(data.error != undefined && data.error != ""){
+            		Materialize.toast('Please fill payment detials first for do withdraw fund.', 3000,'',function(){
+                		window.location = data.intended;
+                	});
+            	}
+            	else{
             		window.location = data.intended;
-            	});
+            	}
             }
         },
         error: function (data) {
