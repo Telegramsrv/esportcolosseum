@@ -612,7 +612,6 @@ var amountSubmit = function () {
 
 //withdrawFundSubmit
 var withdrawFundSubmit = function () {
-	return false;
 	var withdrawFundForm = $("#withdrawFundForm");
 	var formData = withdrawFundForm.serialize();
 	var postUrl = withdrawFundForm.attr('action');
