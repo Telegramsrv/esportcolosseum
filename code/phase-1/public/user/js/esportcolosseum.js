@@ -392,6 +392,35 @@ function rejectFriend(friendID, notificationID){
 	return false;
 }
 
+function acceptTeamRequest(notificationID){
+    $.ajax({
+        url:'/user/team/accept',
+        type:'GET',
+        data:{'notificationID': notificationID},
+        success:function(data){
+            notificationAffect(notificationID);
+        },
+        error: function (data) {
+        }
+    });
+    return false;
+}
+
+function rejectTeamRequest(notificationID){
+    $.ajax({
+        url:'/user/team/reject',
+        type:'GET',
+        data:{'notificationID': notificationID},
+        success:function(data){
+            notificationAffect(notificationID);
+        },
+        error: function (data) {
+        }
+    });
+    return false;
+}
+
+
 function notificationAffect(notificationID){
 	$("#notification-"+notificationID).remove();
 	var total = parseInt($("#total-notification").html()) - 1;

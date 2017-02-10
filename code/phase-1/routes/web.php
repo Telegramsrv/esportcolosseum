@@ -119,6 +119,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/team/get-autocomplete-player-list/{md5TeamId}', 'User\TeamController@getAutocompletePlayerList');
 	Route::post('/team/add-player-in-team', 'User\TeamController@savePlayerInTeam')->name('user.add-player-in-team.save');
 	Route::delete('/team/remove-player', 'User\TeamController@removePlayer')->name('user.remove-player.remove');
+	Route::get('/team/accept', 'User\TeamController@acceptTeamRequest')->name('user.team.accept');
+	Route::get('/team/reject', 'User\TeamController@rejectTeamRequest')->name('user.team.reject');
 
 	Route::get('/ticket/index', 'User\TicketController@index')->name('user.ticket.list');
 	Route::get('/ticket/add', 'User\TicketController@add')->name('user.ticket.add');

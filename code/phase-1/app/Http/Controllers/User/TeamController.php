@@ -191,4 +191,44 @@ class TeamController extends Controller
 			return redirect()->back();
 		}
 	}
+
+	/**
+	 * This function is used to accept team request.
+	 * @param  Request   $request Request object
+	 */
+	public function acceptTeamRequest(Request $request){
+		$notification = Notification::where(DB::raw('md5(id)'), $request->notificationID)->where('user_id', Auth::id())->firstOrFail();
+		$notificationData = json_decode($notification->data);
+		$userTeam = Team::where('id' , $notificationData->team_id)->firstOrFail()->players()->updateExistingPivot(Auth::id(), ['status' => 'Accepted']);
+
+		//Remove Notification
+		$notification->delete();
+
+		if ($request->ajax()) { 
+			return response()->json(["success" => true]);
+		}else{
+			return redirect()->back();
+		}
+	}
+
+	/**
+	 * This function is used to reject team request.
+	 * @param  Request   $request Request object
+	 */
+	public function rejectTeamRequest(Request $request){
+		$notification = Notification::where(DB::raw('md5(id)'), $request->notificationID)->where('user_id', Auth::id())->firstOrFail();
+		$notificationData = json_decode($notification->data);
+		$userTeam = Team::where('id' , $notificationData->team_id)->firstOrFail()->players()->detach(Auth::id());
+
+		//Remove Notification
+		$notification->delete();
+
+		if ($request->ajax()) { 
+			return response()->json(["success" => true]);
+		}else{
+			return redirect()->back();
+		}
+	}
+
+	
 }
