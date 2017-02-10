@@ -95,6 +95,10 @@ $(document).ready(function(){
 	$(".add-coins-button").click(function(){
 		$("#coins").val("");
 	});
+	
+	$(".withdraw-fund-button").click(function(){
+		$("#withdraw-fund").val("");
+	});
 
     $(".challengr-btn").click(function(){
         $('.esc-challenge-date-active').removeClass('esc-challenge-date-active');
