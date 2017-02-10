@@ -56,10 +56,10 @@ class SaveUser extends FormRequest
                     'country_id'        => 'required',
                     'state'             => 'required|max:255',
                     'user_image'        => 'sometimes|required|image|max:2000',
-                    'account_no'        => 'required|max:255',
-                    'account_name'      => 'required|max:255',
-                    'account_swift_code'=> 'required|max:255',
-                    'paypal_id'         => 'required|max:255',
+                    'account_no'        => 'required_without_all:paypal_id',
+                    'account_name'      => 'required_without_all:paypal_id',
+                    'account_swift_code'=> 'required_without_all:paypal_id',
+                    'paypal_id' 		=> 'required_without_all:account_no,account_name,account_swift_code',
                 ];
     			
     		default: break;	
