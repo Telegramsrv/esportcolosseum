@@ -145,6 +145,7 @@ div.searchResults {
 ul#dropdown2{
     top:auto !important;
     width: 40% !important;
+    left: auto !important;
 }
 
 .notification-btn{
