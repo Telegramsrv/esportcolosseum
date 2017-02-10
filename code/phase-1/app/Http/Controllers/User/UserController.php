@@ -220,22 +220,29 @@ class UserController extends Controller
     }
     
     public function updateWithdrawFund(SaveCoins $request){
-    	/* $options = getOptions();
-    	$requestData = $request->all();
-    	$input['user_id'] = Auth::user()->id;
-    	$input['source_id'] = 7;
-    	$input['coins'] = $requestData['coins'];
-    	$input['transaction_type'] = 'Credit';
-    	$input['challenge_id'] = 0;
-    	$CoinTransections = new CoinTransections($input);
-    	$CoinTransections->save();
-    
-    	$userDetails = Auth::user()->userDetails;
-    	$updatedCoins = Auth::user()->userDetails->coins + $input['coins'];
-    	$userDetails->update(['coins' => $updatedCoins]);
-    
-    	return response()->json([
-    			'intended' => URL::to(url()->previous())
-    	]); */
+    	if(Auth::user()->userDetails->paypal_id != '' || (Auth::user()->userDetails->account_no != '' && Auth::user()->userDetails->account_name != '' && Auth::user()->userDetails->account_swift_code != '')){
+    		$options = getOptions();
+	    	$requestData = $request->all();
+	    	$input['user_id'] = Auth::user()->id;
+	    	$input['source_id'] = 7;
+	    	$input['coins'] = $requestData['withdrawFund'];
+	    	$input['transaction_type'] = 'Debit';
+	    	$input['challenge_id'] = 0;
+	    	$CoinTransections = new CoinTransections($input);
+	    	$CoinTransections->save();
+	    
+	    	$userDetails = Auth::user()->userDetails;
+	    	$updatedCoins = Auth::user()->userDetails->coins - $input['coins'];
+	    	$userDetails->update(['coins' => $updatedCoins]);
+	    
+	    	return response()->json([
+	    			'intended' => URL::to(url()->previous())
+	    	]);
+    	}
+    	else{
+    		return response()->json([
+    				'intended' => URL::to('user/profile/edit?error=1')
+    		]);
+    	}
     }
 }
