@@ -8,9 +8,12 @@ use App\Http\Requests\Team\CreateTeamRequest;
 use App\Http\Requests\Team\AddPlayerInTeamRequest;
 use App\Models\Team;
 use App\Models\Challenge;
+use App\Models\Notification;
 use App\User;
 use Auth;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TeamRequestMail;
 
 class TeamController extends Controller
 {
@@ -32,7 +35,7 @@ class TeamController extends Controller
     		// Create new team adn attach it with user.
 	    	$teamInput = $request->only('name');
 	    	$team = Team::create($teamInput);
-	    	$team->players()->attach($user);
+	    	$team->players()->attach($user, ['status' => 'Accepted']);
     	}
 
     	//Sync Team with Challenge
@@ -142,7 +145,18 @@ class TeamController extends Controller
 		$team = Team::where(DB::raw('md5(id)'), $input['team_id'])->firstOrFail();
 
 		if($team->players()->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
-			$team->players()->attach($user);
+
+			//save user to team
+			$team->players()->attach($user, ['status' => 'Invited']);
+
+			//Save Notification
+			$notification = new Notification(['type' => 'Team Invite',
+    										  'data' => json_encode(['captain_id' => Auth::id(), 'team_id' => $team->id]),
+    										  'message' => Auth::user()->email." has sent you team request."
+    										  ]);
+			$user->notifications()->save($notification);
+    	    //Send Team Invitation
+    		Mail::to($user)->send(new TeamRequestMail($user));
 		}
 		else{
 			$errors = array(

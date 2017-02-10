@@ -67,6 +67,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Team');   
     } 
 
+    /**
+     * User can be associated with many notifications
+     * * @return App\Models\Notification number of notifications associated with User.
+     */
+    public function notifications(){
+        return $this->hasMAny('App\Models\Notification');   
+    } 
 
     /**
      * Scope a query to filter users whose status is "Active".
