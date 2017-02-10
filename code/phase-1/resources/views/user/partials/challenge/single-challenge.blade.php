@@ -55,7 +55,10 @@
 							<li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li>
 							<li>
 								<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
-									<img class="challenge-captain-image" src="{!! url(env('PROFILE_PICTURE_PATH', 'storage/user/profile_pictures/') . $challenge->captainDetails->user_image) !!}">
+									@php
+										$profilePicURL = displayProfileImage($challenge->captainDetails->user_image)
+									@endphp		
+									<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
 								</a>
 							</li>
 							<li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li>
