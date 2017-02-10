@@ -32,6 +32,18 @@
 	                            </div>
 	                        </div>
 	                        
+	                        <div class="form-group {{ $errors->has('service_charge') ? 'has-error' : '' }}">
+	                        	{!! Form::label('Service Charge (%)', 'Service Charge (%):', ['class' => 'col-sm-2 control-label required']) !!}
+	                        	<div class="col-sm-10">
+	                        		{!! Form::text('service_charge', null, ['class'=>'form-control mb'] ); !!}
+	                        		@if ($errors->has('service_charge'))
+	                                    <span class="help-block">
+	                                        <strong>{{ $errors->first('service_charge') }}</strong>
+	                                    </span>
+	                                @endif
+	                            </div>
+	                        </div>
+	                        
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
 									<a class="btn btn-default button" href="/admin/settings">Cancel</a>

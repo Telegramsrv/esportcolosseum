@@ -195,4 +195,54 @@ class UserController extends Controller
     		return response()->json(["succes" => true,'response' => json_encode($userLists)]);
     	}
     }
+    
+    
+    public function withdrawFundCalculation(Request $request){
+    	$requestData = $request->all();
+    	$options = getOptions();
+    
+    	if($requestData['withdrawFund'] > 0 && preg_match('/^[0-9]+$/', $requestData['withdrawFund'])){
+    		if(isset(Auth::user()->userDetails->coins) && Auth::user()->userDetails->coins >= $requestData['withdrawFund']){
+    			$amount = round($requestData['withdrawFund'] / $options->coins_per_dollar, 2);
+    			$serviceCharge = ($amount * $options->service_charge) / 100;
+    			$amount = "$".($amount - $serviceCharge);
+    		}
+    		else{
+    			$amount = 'Invalid';
+    		}
+    	}
+    	else{
+    		$amount = 'Invalid';
+    	}
+    	return response()->json([
+    			'amount' => $amount
+    	]);
+    }
+    
+    public function updateWithdrawFund(SaveCoins $request){
+    	if(Auth::user()->userDetails->paypal_id != '' || (Auth::user()->userDetails->account_no != '' && Auth::user()->userDetails->account_name != '' && Auth::user()->userDetails->account_swift_code != '')){
+    		$options = getOptions();
+	    	$requestData = $request->all();
+	    	$input['user_id'] = Auth::user()->id;
+	    	$input['source_id'] = 7;
+	    	$input['coins'] = $requestData['withdrawFund'];
+	    	$input['transaction_type'] = 'Debit';
+	    	$input['challenge_id'] = 0;
+	    	$CoinTransections = new CoinTransections($input);
+	    	$CoinTransections->save();
+	    
+	    	$userDetails = Auth::user()->userDetails;
+	    	$updatedCoins = Auth::user()->userDetails->coins - $input['coins'];
+	    	$userDetails->update(['coins' => $updatedCoins]);
+	    
+	    	return response()->json([
+	    			'intended' => URL::to(url()->previous())
+	    	]);
+    	}
+    	else{
+    		return response()->json([
+    				'intended' => URL::to('user/profile/edit?error=1')
+    		]);
+    	}
+    }
 }

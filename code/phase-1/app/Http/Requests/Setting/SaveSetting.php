@@ -29,6 +29,7 @@ class SaveSetting extends FormRequest
     			$validation = [
     				'coins_per_dollar' 			=> 'sometimes|required|numeric|min:1',
     				'esc_challenge_interval_hrs'=> 'sometimes|required|numeric|min:1',
+    				'service_charge' 			=> 'sometimes|required|numeric|min:1',
     			];
     			
     			break;

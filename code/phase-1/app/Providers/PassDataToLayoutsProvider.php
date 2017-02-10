@@ -25,7 +25,7 @@ class PassDataToLayoutsProvider extends ServiceProvider
             $view->with(['games' => $games]);
         });
         
-        view()->composer(['layouts.user.partials.add-coin'], function($view)
+        view()->composer(['layouts.user.partials.add-coin', 'layouts.user.partials.withdraw-fund'], function($view)
         {
         	$options = getOptions();
         	$view->with(['options' => $options]);
@@ -34,8 +34,6 @@ class PassDataToLayoutsProvider extends ServiceProvider
         view()->composer(['layouts.user.partials.notifications'], function($view)
         {
         	$notifications = Notification::where('user_id', Auth::id())->get();
-        	/* dd($notifications);
-        	$notifications->data = json_decode($notifications['data']); */
         	$view->with(['notifications' => $notifications]);
         });
     }

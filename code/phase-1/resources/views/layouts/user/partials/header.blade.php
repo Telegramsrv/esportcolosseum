@@ -60,6 +60,7 @@
 	    <li><a href="{!! route('user.change-password.edit') !!}">Change Password</a></li>
 	    <li><a href="#!">Game Settings</a></li>
 	    <li><a href="{!! route('user.friends') !!}">My Friends</a></li>
+	    <li><a href="#withdrawFundModal" class="modal-trigger withdraw-fund-button">Withdraw Fund</a></li>
 	    <li class="divider"></li>
 	    <li><a href="{!! route('user.ticket.list') !!}" class="modal-trigger">Support</a></li>
 	    <li><a href="{!! route('logout') !!}">Logout</a></li>

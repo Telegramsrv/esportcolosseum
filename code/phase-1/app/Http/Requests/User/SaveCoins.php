@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class SaveCoins extends FormRequest
 {
@@ -44,8 +45,10 @@ class SaveCoins extends FormRequest
     		case 'user':
     			switch ($this->method()){
     				case 'POST':
+    					$maxCoins = (isset(Auth::user()->userDetails->coins) ? Auth::user()->userDetails->coins : 0);
 		    			$validation = [
 		    				'coins' 			=> 'sometimes|required|integer|min:1',
+		    				'withdrawFund' 		=> 'sometimes|required|integer|min:1|max:'.$maxCoins,
 		    			];
 		    			
 		    			break;
@@ -58,5 +61,15 @@ class SaveCoins extends FormRequest
     	}
     	 
     	return $validation;
+    }
+    
+    public function messages()
+    {
+    	return [
+    			'withdrawFund.required' => 'Coins field is invalid.',
+    			'withdrawFund.integer'  => 'Coins field is invalid.',
+    			'withdrawFund.min' 		=> 'Coins field is invalid.',
+    			'withdrawFund.max' 		=> 'You dont have sufficient coins.',
+    	];
     }
 }

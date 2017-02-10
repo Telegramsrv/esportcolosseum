@@ -14,7 +14,8 @@ class SettingController extends Controller
 		if($setting === null){
 			$options = array(
 					'coins_per_dollar' => "10",
-					'esc_challenge_interval_hrs' => "3"
+					'esc_challenge_interval_hrs' => "3",
+					'service_charge' => "10"
 			);
 			$data['settings'] = json_encode($options);
 			$setting = Setting::firstOrCreate($data);
@@ -30,7 +31,8 @@ class SettingController extends Controller
 		$input = $request->all();
 		$options = array(
 						'coins_per_dollar' => $input['coins_per_dollar'], 
-						'esc_challenge_interval_hrs' => $input['esc_challenge_interval_hrs']
+						'esc_challenge_interval_hrs' => $input['esc_challenge_interval_hrs'],
+						'service_charge' => $input['service_charge']
 					);
 		$setting->settings = json_encode($options);
 		$setting->save();
