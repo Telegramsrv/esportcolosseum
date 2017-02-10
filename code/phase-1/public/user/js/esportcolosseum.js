@@ -9,20 +9,24 @@ $(document).ready(function(){
 	    if (event.keyCode == 13) {
 	        if($('#loginModal').is(':visible')){
 	        	$("#loginSubmit").click();
+	        	 return false;
 	        }
 	        else if($('#signUpModal').is(':visible')){
 	        	$("#registerSubmit").click();	
+	        	 return false;
 	        }
 	        else if($('#forgotPasswordModal').is(':visible')){
 	        	$("#retrievePasswordSubmit").click();	
+	        	 return false;
 	        }
             else if($('.add-team-model').is(':visible')){
                 $('#createTeamForm #createTeamSubmit').click();
+                return false;
             }
             else if($('.add-player-model').is(':visible')){
                 $('#addPlayerInTeamForm #addPlayerSubmit').click();
+                return false;
             }
-            return false;
 	    }
 	});
 
@@ -82,22 +86,22 @@ $(document).ready(function(){
 	});
 	
 	$("#inviteFriendForm #inviteFriendSubmit").click(function(){
-//		searchSubmit();
 		inviteFriendSubmit();
 	});
 	
 	$("form#inviteFriendForm").submit(function(){
 		inviteFriendSubmit();
-//		searchSubmit();
 		return false;
 	});
 	
 	$(".add-coins-button").click(function(){
 		$("#coins").val("");
+		$("#coinMoney").html('');
 	});
 	
 	$(".withdraw-fund-button").click(function(){
-		$("#withdraw-fund").val("");
+		$("#withdrawFund").val("");
+		$("#withdrawFundMoney").html('');
 	});
 
     $(".challengr-btn").click(function(){
@@ -231,7 +235,30 @@ $(document).ready(function(){
     	
     	return false;
     });
+    
+    $("#withdrawFund").keyup(function(){
+    	$.ajax({
+        	url:'/user/withdraw-fund/calculation',
+            type:'GET',
+            data:{'withdrawFund': $("#withdrawFund").val()},
+            success:function(data){
+            	$("#withdrawFundMoney").html(data.amount);
+            },
+            error: function (data) {
+            	$("#withdrawFundMoney").html('');
+            }
+        });
+    	return false;
+    });
 
+    $("#withdrawFundForm #withdrawFundSubmit").click(function(){
+    	withdrawFundSubmit();
+	});
+
+	$("form#withdrawFundForm").submit(function(){
+		withdrawFundSubmit();
+		return false;
+	});
     
 });
 
@@ -569,6 +596,39 @@ var amountSubmit = function () {
         		$("#amountLabel").addClass("active");
         		$("#coins").addClass("invalid");
         		$("#coins").focus();
+        	}
+        }
+    });
+}
+
+//withdrawFundSubmit
+var withdrawFundSubmit = function () {
+	var withdrawFundForm = $("#withdrawFundForm");
+	var formData = withdrawFundForm.serialize();
+	var postUrl = withdrawFundForm.attr('action');
+	
+	showLoader(withdrawFundForm, 'withdrawFundSubmit');
+    $("#withdrawFundForm #withdrawFundSubmit").html("Processing...");
+    
+    $.ajax({
+    	url:postUrl,
+        type:'POST',
+        data:formData,
+        success:function(data){
+            if(data.intended != undefined && data.intended != ""){
+            	$("#withdrawFundForm #withdrawFundSubmit").html("Redirecting...");
+            	window.location = data.intended;
+            }
+        },
+        error: function (data) {
+        	var errors = data.responseJSON;
+        	$("#withdrawFundForm #withdrawFundSubmit").html("WITHDRAW");
+        	hideLoader(withdrawFundForm, 'withdrawFundSubmit', withdrawFundSubmit);
+        	if(errors.withdrawFund != undefined && errors.withdrawFund[0] != ""){
+        		$("#withdrawFundLabel").attr("data-error", errors.withdrawFund[0]);
+        		$("#withdrawFundLabel").addClass("active");
+        		$("#withdrawFund").addClass("invalid");
+        		$("#withdrawFund").focus();
         	}
         }
     });

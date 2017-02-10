@@ -62,7 +62,7 @@ ul.timing li.esc-challenge-time-active{
     color: #fff;
 }
 
-#coinMoney{
+#coinMoney, #withdrawFundMoney{
 	padding: 10px;
 }
 

@@ -134,6 +134,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::get('/friend/reject', 'User\UserController@rejectFriend')->name('user.friend.reject');
 	Route::get('/my-friends', 'User\UserController@myFriends')->name('user.friends');
 	Route::get('/member/fetch-auto-complete-list', 'User\UserController@fetchAutocompleteList')->name('user.member.fetch-auto-complete-list');
+	
+	Route::post('/withdraw-fund/update', 'User\UserController@updateWithdrawFund')->name('user.withdraw-fund.update');
+	Route::get('/withdraw-fund/calculation', 'User\UserController@withdrawFundCalculation')->name('user.coins.withdraw-fund-calculation');
 
 });
 
