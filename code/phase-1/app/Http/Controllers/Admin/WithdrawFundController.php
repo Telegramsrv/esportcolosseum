@@ -19,6 +19,7 @@ class WithdrawFundController extends Controller
 	}
 	
 	public function update($requestID, Request $request) {
+		dd($requestID);
 		$withdrawFundRequest = WithdrawFundRequest::findOrFail($requestID);
 		$input = $request->all();
 		$withdrawFundRequest->status = $input['status'];
