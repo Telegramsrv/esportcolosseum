@@ -56,6 +56,16 @@ class Challenge extends Model
         return $query->whereIn('challenge_status', ['cancelled', 'complete']);
     }
 
+    /**
+     * Scope a query to filter data which are not accepted.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNotAccepted($query){
+        return $query->where('is_accepted', 'no');   
+    }
+
 	/**
 	 * Challenge belongs to only one user who has created it.
 	 * @return App\User User model who has created challenge.
