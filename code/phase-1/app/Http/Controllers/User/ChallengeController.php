@@ -43,7 +43,7 @@ class ChallengeController extends Controller
 
 	public function myChallengelist(Game $selectedGame, $challengeType){
 		$user = Auth::user();
-		$myCurrentChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->currentGames()->notAccepted()->get();
+		$myCurrentChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->currentGames()->get();
 		$myPastChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->pastGames()->get();
 		return view("user.challenge.my-challenge-list", compact('selectedGame', 'myCurrentChallenges', 'myPastChallenges'));
 	}
@@ -62,7 +62,7 @@ class ChallengeController extends Controller
     public function accept(Request $request){
     	$input = $request->all();
     	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
-    	$challenge->is_accepted = 'yes';
+    	$challenge->challenge_status = 'listed';
     	$challenge->save();
     	return redirect()->back();
     }

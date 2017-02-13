@@ -59,7 +59,7 @@
 							@endif
 						</h2>
 						<ul>
-							<li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li>
+							<!-- <li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li> -->
 							<li>
 								<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
 									@php
@@ -68,7 +68,7 @@
 									<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
 								</a>
 							</li>
-							<li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li>
+							<!-- <li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li> -->
 						</ul>
 						<h3>
 							{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}

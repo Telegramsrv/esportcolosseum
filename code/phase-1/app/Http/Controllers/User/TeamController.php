@@ -183,7 +183,7 @@ class TeamController extends Controller
 		$team = Team::where(DB::raw('md5(id)'), $input['team_id'])->firstOrFail();
 		$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
-		if($challenge->is_accepted == 'no'){
+		if(in_array($challenge->challenge_status, ['created', 'listed'])){
 			/**
 			 * Peform below actions.
 			 * 1) Remove team invite notification if any

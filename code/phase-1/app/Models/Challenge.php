@@ -42,7 +42,7 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCurrentGames($query){
-        return $query->whereIn('challenge_status', ['created', 'accepted']);
+        return $query->whereIn('challenge_status', ['created', 'accepted', 'listed']);
     }
 
     /**
