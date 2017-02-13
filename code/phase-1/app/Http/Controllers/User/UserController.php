@@ -275,8 +275,8 @@ class UserController extends Controller
 	    	$mailData['email'] = Auth::user()->email;
 	    	$mailData['coins'] = $input['coins'];
 	    	$mailData = (object) $mailData;
-	    	//Mail::to(Auth::user()->email)->send(new WithdrawFundUserMail($mailData));
-	    	//Mail::to(env('FROM_EMAIL'))->send(new WithdrawFundAdminMail($mailData));
+	    	Mail::to(Auth::user()->email)->send(new WithdrawFundUserMail($mailData));
+	    	Mail::to(env('FROM_EMAIL'))->send(new WithdrawFundAdminMail($mailData));
 	    	
 	    	return response()->json([
 	    			'intended' => URL::to(url()->previous())
