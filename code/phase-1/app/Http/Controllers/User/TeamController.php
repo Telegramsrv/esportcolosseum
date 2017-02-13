@@ -153,15 +153,11 @@ class TeamController extends Controller
 
 			//save user to team
 			$team->players()->attach($user, ['status' => 'Invited']);
-
-			//Save Notification
-			$notification = new Notification(['type' => 'Team Invite',
-    										  'data' => json_encode(['captain_id' => Auth::id(), 'team_id' => $team->id]),
-    										  'message' => Auth::user()->email." has sent you team request."
-    										  ]);
-			$user->notifications()->save($notification);
-    	    //Send Team Invitation
-    		Mail::to($user)->send(new TeamRequestMail($user));
+			/**
+			 * 1) send "Team Invite" notification mail to player.
+			 * 2) Add DB row in Notification table.
+			 */
+			Notification::addTeamInviteNotification($user, Auth::user(), $team);
 		}
 		else{
 			$errors = array(
