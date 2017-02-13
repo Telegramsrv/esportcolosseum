@@ -21,6 +21,9 @@ use DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FriendRequestMail;
 use App\Models\Notification;
+use App\Mail\WithdrawFundUserMail;
+use App\Mail\WithdrawFundAdminMail;
+use App\Models\WithdrawFundRequest;
 
 class UserController extends Controller
 {
@@ -30,7 +33,12 @@ class UserController extends Controller
 
     public function editProfile(){
     	$userDetails = Auth::user()->userDetails;
-
+    	
+    	$userDetails->account_no = decrypt($userDetails->account_no);
+    	$userDetails->account_name = decrypt($userDetails->account_name);
+    	$userDetails->account_swift_code = decrypt($userDetails->account_swift_code);
+    	$userDetails->paypal_id = decrypt($userDetails->paypal_id);
+    	
     	$countries = Country::all()->pluck('name', 'id');	
     	$countries->prepend("Select Country", '');
 
@@ -54,6 +62,11 @@ class UserController extends Controller
             $input['user_image'] = $filename;
         }
 
+        $input['account_no'] = encrypt($input['account_no']);
+        $input['account_name'] = encrypt($input['account_name']);
+        $input['account_swift_code'] = encrypt($input['account_swift_code']);
+        $input['paypal_id'] = encrypt($input['paypal_id']);
+        
         $userDetails->update($input);
         return redirect(route('user.dashboard'));
     }
@@ -76,7 +89,6 @@ class UserController extends Controller
     	$requestData = $request->all();
     	$input['user_id'] = Auth::user()->id;
     	$input['source_id'] = 7;
-    	//$input['coins'] = $requestData['amount'] * $options->coins_per_dollar;
     	$input['coins'] = $requestData['coins'];
     	$input['transaction_type'] = 'Credit';
     	$input['challenge_id'] = 0;
@@ -172,12 +184,9 @@ class UserController extends Controller
     	}
     }
     
-    
-    
     function myFriends() {
     	$user_id = Auth::id();
     	$userFriends = UserFriends::getUserFriends();
-    	//$userFriends = UserFriends::with("userFriendDetails")->where('user_id', $user_id)->Orwhere('friend_id', $user_id)->where("status", "Accepted")->get();
     	return view('user.my-account.my-friends', compact('userFriends'));
     }
     
@@ -223,6 +232,7 @@ class UserController extends Controller
     	if(Auth::user()->userDetails->paypal_id != '' || (Auth::user()->userDetails->account_no != '' && Auth::user()->userDetails->account_name != '' && Auth::user()->userDetails->account_swift_code != '')){
     		$options = getOptions();
 	    	$requestData = $request->all();
+	    	
 	    	$input['user_id'] = Auth::user()->id;
 	    	$input['source_id'] = 7;
 	    	$input['coins'] = $requestData['withdrawFund'];
@@ -231,10 +241,35 @@ class UserController extends Controller
 	    	$CoinTransections = new CoinTransections($input);
 	    	$CoinTransections->save();
 	    
+	    	//UPDATE USER COINS
 	    	$userDetails = Auth::user()->userDetails;
 	    	$updatedCoins = Auth::user()->userDetails->coins - $input['coins'];
 	    	$userDetails->update(['coins' => $updatedCoins]);
-	    
+	    	
+	    	//SAVE WITHDRAW FUND REQUEST
+	    	$totalAmount = round($requestData['withdrawFund'] / $options->coins_per_dollar, 2);
+	    	$serviceCharge = ($totalAmount * $options->service_charge) / 100;
+	    	$amount = $totalAmount - $serviceCharge;
+	    	
+	    	$data['user_id'] = $input['user_id'];
+	    	$data['coins']	 = $input['coins'];
+	    	$data['coins_per_dollar'] = $options->coins_per_dollar;
+	    	$data['total_amount'] = $totalAmount;
+	    	$data['service_charge'] = $options->service_charge;
+	    	$data['esc_charge'] = $serviceCharge;
+	    	$data['amount_given'] = $amount;
+	    	$data['status'] = 'InProcess';
+	    	
+	    	//$withdrawFundRequest = new WithdrawFundRequest($data);
+	    	//$withdrawFundRequest->save();
+	    	
+	    	//MAIL TO USER & ADMIN
+	    	$mailData['email'] = Auth::user()->email;
+	    	$mailData['coins'] = $input['coins'];
+	    	$mailData = (object) $mailData;
+	    	//Mail::to(Auth::user()->email)->send(new WithdrawFundUserMail($mailData));
+	    	//Mail::to(env('FROM_EMAIL'))->send(new WithdrawFundAdminMail($mailData));
+	    	
 	    	return response()->json([
 	    			'intended' => URL::to(url()->previous())
 	    	]);
