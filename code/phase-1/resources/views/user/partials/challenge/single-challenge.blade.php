@@ -1,6 +1,15 @@
 @php
 	$captainTeam = $challenge->captainTeam(Auth::user());
+	$inviteAcceptedTeamCount = 0;
+	$canCompleteChallenge = false;
+	if($captainTeam != null ){
+		$inviteAcceptedTeamCount = $captainTeam->players()->wherePivot('status', '=', 'Accepted')->count();	
+		if($inviteAcceptedTeamCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
+			$canCompleteChallenge = true;
+		}
+	}
 @endphp
+
 <div class="first-challenge-section versus-image-one">
 	<div class="row">
 		<div class="row">
@@ -25,13 +34,11 @@
 			<div class="first-challenge-header-button">
 				@if($challenge->is_accepted == 'yes')
 					<label class="btn btn-default">CANCEL CHALLENGE</label>	
-				@elseif($captainTeam != null && $captainTeam->players->count() == env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+				@elseif($canCompleteChallenge)
 					{!! Form::open(['route' => 'user.challenge.accept', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
 						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default']) !!}
 					{!! Form::close() !!}
-					<!-- <button class="btn btn-default">COMPLETE CHALLENGE</button> -->
-					
 				@else
 					<label class="btn btn-default">COMPLETE CHALLENGE</label>	
 				@endif

@@ -183,6 +183,21 @@ class TeamController extends Controller
 		$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
 		if($challenge->is_accepted == 'no'){
+			/**
+			 * Peform below actions.
+			 * 1) Remove team invite notification if any
+			 * 2) Detach user from team if removed.
+			 */
+			$notifications = Notification::type('Team Invite')->where(DB::raw('md5(user_id)'), $input['player_id'])->get();
+
+			foreach($notifications as $notification){
+				$data = json_decode($notification->data, true);
+				if(md5($data['team_id']) == $input['team_id']){
+					$notification->delete();
+					break;
+				}
+			}
+			 
 			if($team->players()->detach($user)){
 				return redirect()->back();
 			}
