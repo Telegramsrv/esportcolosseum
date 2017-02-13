@@ -255,6 +255,15 @@ function getMenu(){
 			'order' => 8,
 	];
 	
+	$menu[] = [
+			'id'   => 'withdraw-fund',
+			'name' => 'Withdraw Fund',
+			'icon' => 'fa fa-paper-plane-o',
+			'url' => "admin/withdraw-fund",
+			'path' => "admin/withdraw-fund",
+			'order' => 9,
+	];
+	
 	usort($menu, function($a, $b) {
 		return $a['order'] - $b['order'];
 	});

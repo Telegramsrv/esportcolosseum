@@ -96,6 +96,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('/settings', 'Admin\SettingController@view')->name('admin.setting.view');
 	Route::post('/setting/edit/', 'Admin\SettingController@update')->name('admin.setting.update');
 	//  ----------------------------------------------------------  Settings routes  End ----------------------------------------------------------------//
+	
+	//  ---------------------------------------------------------- Withdraw Fund routes  Start ----------------------------------------------------------------//
+	Route::get('/withdraw-fund', 'Admin\WithdrawFundController@index')->name('admin.withdraw-fund.list');
+	Route::get('/withdraw-fund/view/{requestId}', 'Admin\WithdrawFundController@view')->name('admin.withdraw-fund.view');
+	Route::post('/withdraw-fund/view/{requestId}', 'Admin\WithdrawFundController@update')->name('admin.withdraw-fund.update');
+	Route::get('/withdraw-fund/bank-details/{requestId}', 'Admin\WithdrawFundController@bankDetails')->name('admin.withdraw-fund.bank-details');
+	//  ----------------------------------------------------------  Withdraw Fund routes  End ----------------------------------------------------------------//
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
