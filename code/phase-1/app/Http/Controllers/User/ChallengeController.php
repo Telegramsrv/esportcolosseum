@@ -28,7 +28,7 @@ class ChallengeController extends Controller
 
 		$input['user_id'] = Auth::user()->id;
 		$input['challenge_status'] = 'created';
-		$input['valid_upto'] = Carbon::now()->addHours(env('CHALLENGE_EXPIRATION_TIME_IN_HOURS', 72));
+		$input['valid_upto'] = Carbon::createFromFormat('Y-m-d H', date('Y-m-d H'))->addHours(72);
 
 		$challenge = Challenge::Create($input);
 
@@ -65,5 +65,17 @@ class ChallengeController extends Controller
     	$challenge->is_accepted = 'yes';
     	$challenge->save();
     	return redirect()->back();
+    }
+
+    public function makeChallengeExpire(){
+    	$challenges = Challenge::currentGames()->get();
+    	$now = Carbon::now();
+
+    	foreach($challenges as $challenge){
+    		if($now->gt($challenge->valid_upto)){
+    			$challenge->challenge_status = 'cancelled';
+    			$challenge->save();
+    		}
+    	}
     }
 }

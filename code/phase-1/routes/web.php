@@ -151,3 +151,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name("logout");
 //Blog Pages
 Route::get('/blog/index', 'User\BlogController@index')->name("blog-listing");
 Route::get('/blog/{blogSlug}', 'User\BlogController@detail')->name("blog-detail");
+
+
+// Crons
+Route::get('/cron/make-challenge-expire', 'User\ChallengeController@makeChallengeExpire')->name('cron.challenge.make-expire');
