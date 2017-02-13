@@ -19,7 +19,6 @@ class WithdrawFundController extends Controller
 	}
 	
 	public function update($requestID, Request $request) {
-		dd($requestID);
 		$withdrawFundRequest = WithdrawFundRequest::findOrFail($requestID);
 		$input = $request->all();
 		$withdrawFundRequest->status = $input['status'];
@@ -29,7 +28,6 @@ class WithdrawFundController extends Controller
 	}
 	
 	public function bankDetails($requestID) {
-		dd($requestID);
 		$withdrawFundRequest = WithdrawFundRequest::findOrFail($requestID);
 		
 		if($withdrawFundRequest->user->userDetails->account_no != ''){
