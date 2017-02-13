@@ -4,6 +4,10 @@
 			"aaSorting": [[4,'desc']]
 	});
 	 
+	 $("table#withdraw-fund-table").dataTable({
+			"aaSorting": [[1,'desc']]
+	});
+	 
 	 if($("#ticket-description").length > 0){
 		 CKEDITOR.replace( 'ticket-description' ,{
 		       toolbar :
