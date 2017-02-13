@@ -34,10 +34,18 @@ class UserController extends Controller
     public function editProfile(){
     	$userDetails = Auth::user()->userDetails;
     	
-    	$userDetails->account_no = decrypt($userDetails->account_no);
-    	$userDetails->account_name = decrypt($userDetails->account_name);
-    	$userDetails->account_swift_code = decrypt($userDetails->account_swift_code);
-    	$userDetails->paypal_id = decrypt($userDetails->paypal_id);
+    	if($userDetails->account_no != ''){
+    		$userDetails->account_no = decrypt($userDetails->account_no);
+    	}
+    	if($userDetails->account_name != ''){
+    		$userDetails->account_name = decrypt($userDetails->account_name);
+    	}
+    	if($userDetails->account_swift_code != ''){
+    		$userDetails->account_swift_code = decrypt($userDetails->account_swift_code);
+    	}
+    	if($userDetails->paypal_id != ''){
+    		$userDetails->paypal_id = decrypt($userDetails->paypal_id);
+    	}
     	
     	$countries = Country::all()->pluck('name', 'id');	
     	$countries->prepend("Select Country", '');
@@ -260,8 +268,8 @@ class UserController extends Controller
 	    	$data['amount_given'] = $amount;
 	    	$data['status'] = 'InProcess';
 	    	
-	    	//$withdrawFundRequest = new WithdrawFundRequest($data);
-	    	//$withdrawFundRequest->save();
+	    	$withdrawFundRequest = new WithdrawFundRequest($data);
+	    	$withdrawFundRequest->save();
 	    	
 	    	//MAIL TO USER & ADMIN
 	    	$mailData['email'] = Auth::user()->email;
