@@ -26,8 +26,13 @@ class TeamController extends Controller
 	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
     	if(isset($input['team_id']) && $input['team_id'] != '' && $input['team_id'] != null){
-    		// Attach already create team with challenge.
     		$team = Team::where(DB::raw('md5(id)'), '=', $input['team_id'])->firstOrFail();
+    		$captain = $challenge->captain;
+    		if($challenge->teams()->count() > 0){
+    			$oldTeam = $challenge->teams()->firstOrfail();
+    			Team::removeTeamFromChallenge($challenge, $oldTeam, $captain);
+    		}
+    		Team::setTeamPlayerstatus($team, $captain, 'Invited');
     	}
     	else{
     		$user = Auth::user();
@@ -244,6 +249,4 @@ class TeamController extends Controller
 			return redirect()->back();
 		}
 	}
-
-	
 }
