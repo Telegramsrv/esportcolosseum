@@ -75,6 +75,14 @@ class Challenge extends Model
     }
 
     /**
+     * Only one Opponent can accept a challenge.
+     * @return App\User User model who has created challenge.
+     */
+    public function opponent(){
+        return $this->hasOne("App\User", "id", "opponent_id");
+    }
+
+    /**
      * User can create challenge for one game at a time.
      * @return App\Models\Game Game model for which this challenge has been created.
      */

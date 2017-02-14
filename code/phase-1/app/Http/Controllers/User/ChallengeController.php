@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Challenge\CreateOpenChallengeRequest;
+use App\Http\Requests\Challenge\ChangeChallengeStatusRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Game;
@@ -59,11 +60,25 @@ class ChallengeController extends Controller
      * This function is used to complete challenge.
      * @param  Request $request Request Parameter
      */
-    public function accept(Request $request){
+    public function changeStatus(ChangeChallengeStatusRequest $request){
     	$input = $request->all();
     	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
-    	$challenge->challenge_status = 'listed';
-    	$challenge->save();
+
+    	switch($input['challenge_status']){
+    		case md5('accepted'):
+    			break;
+    		case md5('listed'):
+    			$challenge->challenge_status = 'listed';
+    			$challenge->save();
+    			break;
+    		case md5('cancelled'):
+    			$challenge->challenge_status = 'cancelled';
+    			$challenge->save();
+    			break;
+    		default:
+    			break;
+    	}
+    	
     	return redirect()->back();
     }
 

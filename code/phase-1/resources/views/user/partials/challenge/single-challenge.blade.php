@@ -2,11 +2,15 @@
 	$captainTeam = $challenge->captainTeam(Auth::user());
 	$inviteAcceptedTeamCount = 0;
 	$canCompleteChallenge = false;
+	$canCancelChallenge = false;
 	if($captainTeam != null ){
 		$inviteAcceptedTeamCount = $captainTeam->players()->wherePivot('status', '=', 'Accepted')->count();	
 		if($inviteAcceptedTeamCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
 			$canCompleteChallenge = true;
 		}
+	}
+	if($challenge->challenge_status == 'listed' && $challenge->opponent_id == null){
+		$canCancelChallenge = true;
 	}
 @endphp
 
@@ -32,11 +36,16 @@
 				
 			</div>
 			<div class="first-challenge-header-button">
-				@if($challenge->is_accepted == 'yes')
-					<label class="btn btn-default">CANCEL CHALLENGE</label>	
-				@elseif($canCompleteChallenge)
-					{!! Form::open(['route' => 'user.challenge.accept', 'method'=>'POST']) !!}
+				@if($canCancelChallenge)
+					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+						{!! Form::hidden('challenge_status', md5('cancelled')) !!}
+						{!! Form::submit('Cancel Challenge', ['class' => 'btn btn-default']) !!}
+					{!! Form::close() !!}
+				@elseif($canCompleteChallenge)
+					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
+						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+						{!! Form::hidden('challenge_status', md5('listed')) !!}
 						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default']) !!}
 					{!! Form::close() !!}
 				@else
@@ -58,8 +67,7 @@
 								<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
 							@endif
 						</h2>
-						<ul>
-							<!-- <li><a href="#"><img src="{!! url('user/images/i.png') !!}"></a></li> -->
+						<ul class="captain-detail">
 							<li>
 								<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
 									@php
@@ -68,7 +76,6 @@
 									<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
 								</a>
 							</li>
-							<!-- <li><a href="#"><img src="{!! url('user/images/minus.png') !!}"></a></li> -->
 						</ul>
 						<h3>
 							{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}
