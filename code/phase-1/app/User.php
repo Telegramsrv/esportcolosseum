@@ -68,6 +68,14 @@ class User extends Authenticatable
     } 
 
     /**
+     * User can be captain in many teams.
+     * * @return App\Models\Team number of user associated with team.
+     */
+    public function captainteams(){
+        return $this->hasMany('App\Models\Team');
+    }
+
+    /**
      * User can be associated with many notifications
      * * @return App\Models\Notification number of notifications associated with User.
      */

@@ -51,7 +51,6 @@
 				@else
 					<label class="btn btn-default">COMPLETE CHALLENGE</label>	
 				@endif
-				
 			</div>
 		</div>
 		<div class="vs_area">
@@ -65,7 +64,6 @@
 								@if($challenge->challenge_status == 'created')
 									<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
 								@endif
-								
 							@else
 								<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
 							@endif

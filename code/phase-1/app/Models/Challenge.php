@@ -43,6 +43,10 @@ class Challenge extends Model
     public function scopeChallengesForGame($query, Game $game){
         return $query->where('game_id', $game->id);   
     }
+
+    public function scopeExcludeChallangesFromUser($query, User $user){
+        return $query->where('user_id', '!=', $user->id);
+    }
     
     /**
      * Scope a query to filter data with below parameters.

@@ -39,6 +39,7 @@ class TeamController extends Controller
 
     		// Create new team adn attach it with user.
 	    	$teamInput = $request->only('name');
+	    	$teamInput['user_id'] = Auth::user()->id;
 	    	$team = Team::create($teamInput);
 	    	$team->players()->attach($user, ['status' => 'Accepted']);
     	}
@@ -63,8 +64,8 @@ class TeamController extends Controller
 		$currentUser = Auth::user();
 		$currentChallenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 		$currentTeam = $currentChallenge->captainTeam($currentUser);
-		// dd($currentTeam);
-		$teamLists = $currentUser->teams()->where('teams.name', 'like', '%'.$input['name'].'%');
+
+		$teamLists = $currentUser->captainteams()->where('teams.name', 'like', '%'.$input['name'].'%');
 		if($currentTeam){
 			$teamLists = $teamLists->where('teams.id', '!=', $currentTeam->id);
 		}

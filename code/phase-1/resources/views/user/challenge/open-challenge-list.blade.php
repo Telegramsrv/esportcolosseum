@@ -41,9 +41,12 @@
 		                        <td class="center-align">{!! $challenge->valid_upto->format('H:i A M d, Y') !!}</td>
 		                        <td class="center-align">{!! $challenge->region->name !!}</td>
 		                        <td>
-		                            <button class="btn-flat waves-effect waves-light" type="button">
-		                                <i class="material-icons white-text">send</i>
-		                            </button>
+		                        	{!! Form::open(['route' => 'user.challenge.accept', 'method' => 'post']) !!}
+										{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+		                            	<button class="btn-flat waves-effect waves-light" type="submit">
+		                                	<i class="material-icons white-text">send</i>
+		                            	</button>
+		                           {!! Form::close() !!} 	
 		                        </td>
 		                    </tr>
 		                    @endforeach
@@ -56,17 +59,7 @@
                 </table>                                   
 			</div>
         </div>
-        <center>
-        	<ul class="pagination">
-            	<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                <li class="active  blue-grey darken-4"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            </ul>
-        </center>
+        {{ $challenges->links('user.partials.pagination') }}
 		<hr/>
     </section>
 @endsection

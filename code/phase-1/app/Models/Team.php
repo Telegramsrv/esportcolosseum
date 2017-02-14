@@ -21,6 +21,14 @@ class Team extends Model
     }
 
     /**
+     * Team belongs to one captain.
+     * @return [type] [description]
+     */
+    public function captain(){
+    	return $this->belongsToMany('App\User', 'user_id');	
+    }
+
+    /**
 	 * This function is used to remove team from challenge.
 	 * @param  Challenge 	$challenge 	Challenge from which team to be removed.
 	 * @param  Team   		$team    	Team to be removed.

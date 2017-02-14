@@ -108,11 +108,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function() {
 	Route::get('/', 'User\DashboardController@index')->name('user.home');
 	Route::get('/dashboard/{gameSlug?}', 'User\DashboardController@index')->name('user.dashboard')->defaults('gameSlug', env('DEFAULT_GAME_SLUG'));
-	Route::get('/open-challenge/{gameSlug}', 'User\ChallengeController@listOpenChallenges')->name('user.open-challenge.list');
-	Route::post('/save-challenge/{gameSlug}', 'User\ChallengeController@saveOpenChallenge')->name('user.open-challenge.save');
-	Route::get('/esc-challenge/{gameSlug}', 'User\ChallengeController@listEscChallenges')->name('user.esc-challenge.list');
+
+	Route::get('/challenge/open/{gameSlug}', 'User\ChallengeController@listOpenChallenges')->name('user.open-challenge.list');
+	Route::post('/challenge/save/{gameSlug}', 'User\ChallengeController@saveOpenChallenge')->name('user.open-challenge.save');
+	Route::get('/challenge/esc/{gameSlug}', 'User\ChallengeController@listEscChallenges')->name('user.esc-challenge.list');
 	Route::get('/my-challenge/{gameSlug}/{challengeType}', 'User\ChallengeController@myChallengelist')->name('user.my-challenge.list');
 	Route::post('/challenge/change-status', 'User\ChallengeController@changeStatus')->name('user.challenge.change-status');
+	Route::post('/challenge/accept', 'User\ChallengeController@acceptChallenge')->name('user.challenge.accept');
 
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::put('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');

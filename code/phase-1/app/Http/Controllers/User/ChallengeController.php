@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Challenge\CreateOpenChallengeRequest;
 use App\Http\Requests\Challenge\ChangeChallengeStatusRequest;
+use App\Http\Requests\Challenge\AcceptChallengeRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Game;
@@ -21,7 +22,11 @@ class ChallengeController extends Controller
 		$regions = Region::all()->pluck('name', 'id');	
 		$regions->prepend("Select Region", '');
 		$challengeModes = ['' => 'Select Mode', 'captain-pick' => 'Captain\'s Pick', 'team' => 'Team'];
-		$challenges = Challenge::with(["captain", "captainDetails"])->challengesForGame($selectedGame)->currentChallenges()->get();
+		$challenges = Challenge::with(["captain", "captainDetails"])
+						->challengesForGame($selectedGame)
+						->currentChallenges()
+						->excludeChallangesFromUser(Auth::user())
+						->paginate(env('RECORDS_PER_PAGE'));
 		return view("user.challenge.open-challenge-list", compact('selectedGame', 'regions', 'challengeModes', 'challenges'));
 	}
 
@@ -59,7 +64,7 @@ class ChallengeController extends Controller
 
     /**
      * This function is used to complete challenge.
-     * @param  Request $request Request Parameter
+     * @param  ChangeChallengeStatusRequest $request Request Parameter
      */
     public function changeStatus(ChangeChallengeStatusRequest $request){
     	$input = $request->all();
@@ -70,11 +75,11 @@ class ChallengeController extends Controller
     			break;
     		case md5('listed'):
     			$challenge->challenge_status = 'listed';
-    			$challenge->save();
+    			$challenge->update();
     			break;
     		case md5('cancelled'):
     			$challenge->challenge_status = 'cancelled';
-    			$challenge->save();
+    			$challenge->update();
     			break;
     		default:
     			break;
@@ -83,6 +88,11 @@ class ChallengeController extends Controller
     	return redirect()->back();
     }
 
+    /**
+     * This function is used to check all current games and 
+     * 	- set to "cancelled" if expired(current time > 'valid_upto' field)
+     * 
+     */
     public function makeChallengeExpire(){
     	$challenges = Challenge::currentGames()->get();
     	$now = Carbon::now();
@@ -93,5 +103,19 @@ class ChallengeController extends Controller
     			$challenge->save();
     		}
     	}
+    }
+
+    /**
+     * This function is used to accept any valid challenge.
+     * @param  AcceptChallengeRequest $request [description]
+     * @return [type]                          [description]
+     */
+    public function acceptChallenge(AcceptChallengeRequest $request){
+    	$input = $request->all();
+    	
+    	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
+    	$challenge->opponent_id = Auth::user()->id;
+    	$challenge->save();
+    	return redirect()->route('user.my-challenge.list', ['gameSlug' => $challenge->game->slug, 'challengeType' => 'open']);
     }
 }
