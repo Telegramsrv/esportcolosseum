@@ -6,9 +6,16 @@
 	 
 	 $("table#withdraw-fund-table").dataTable({
 			"aaSorting": [[1,'desc']],
-			//dom: 'Bfrtip',
+			dom: 'Blfrtip',
 	        buttons: [
-	            'excelHtml5',
+				{
+				    extend: 'excelHtml5',
+				    text: 'Download Excel',
+				    title: 'Withdraw Fund Requests',
+				    exportOptions: {
+	                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+	                }
+				},
 	        ]
 	});
 	 

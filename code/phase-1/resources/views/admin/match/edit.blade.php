@@ -58,13 +58,6 @@
 	                        </div>
 	                        
 	                        <div class="form-group">
-	                        	{!! Form::label('Is Accepted', 'Is Accepted:', ['class' => 'col-sm-2 control-label required']) !!}
-	                        	<div class="col-sm-10">
-	                        		{!! Form::text('is_accepted',  null , ['class'=>'form-control mb', 'disabled'=>'disabled'] ); !!}
-	                            </div>
-	                        </div>
-	                        
-	                        <div class="form-group">
 	                        	{!! Form::label('Status', 'Status:', ['class' => 'col-sm-2 control-label required']) !!}
 	                        	<div class="col-sm-10">
 	                        		{!! Form::text('challenge_status',  null , ['class'=>'form-control mb', 'disabled'=>'disabled'] ); !!}
