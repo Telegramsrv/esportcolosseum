@@ -289,9 +289,10 @@ var creatTeam = function(){
         type:'POST',
         data:formData,
         beforeSend: function( xhr ) {
-            $('.modal.open').leanModal({
+            /*$('.modal.open').leanModal({
                 dismissible : false
-            });
+            });*/
+        	$( ".lean-overlay").unbind( "click" );
         },
         success:function(data){
             if(data.success == true){
@@ -328,6 +329,9 @@ var addPlayerInTeam = function(){
         url: postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
             if(data.success == true){
                 $("#addPlayerInTeamForm #addPlayerSubmit").html("Redirecting...");
@@ -446,6 +450,9 @@ var createChallenge = function(){
         url: postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
             if(data.success == true){
                 $("#createChallengeForm #createChallengeSubmit").html("Redirecting...");
@@ -490,6 +497,9 @@ var loginSubmit = function () {
     	url:postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
             if(data.intended != undefined && data.intended != ""){
             	$("#loginForm #loginSubmit").html("Redirecting...");
@@ -527,6 +537,9 @@ var registerSubmit = function() {
         url:postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
         	if(data.success == true){
         		$("#registerForm #registerSubmit").html("SIGN UP");
@@ -588,6 +601,9 @@ var retrievePasswordSubmit = function () {
         url:postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
         	if(data.success == true){
         		if(data.intended != undefined && data.intended != ""){
@@ -625,6 +641,9 @@ var amountSubmit = function () {
     	url:postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
             if(data.intended != undefined && data.intended != ""){
             	$("#amountForm #amountSubmit").html("Redirecting...");
@@ -658,6 +677,9 @@ var withdrawFundSubmit = function () {
     	url:postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+       	 	$( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
             if(data.intended != undefined && data.intended != ""){
             	$("#withdrawFundForm #withdrawFundSubmit").html("Redirecting...");
@@ -702,6 +724,9 @@ var inviteFriendSubmit = function () {
     	url:postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+        	 $( ".lean-overlay").unbind( "click" );
+        },
         success:function(data){
         	hideLoader(inviteFriendForm, 'inviteFriendSubmit', inviteFriendSubmit);
         	if(data.status == 1) {
