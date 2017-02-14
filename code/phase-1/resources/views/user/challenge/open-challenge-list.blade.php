@@ -38,7 +38,7 @@
 		                        <td>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}</td>
 		                        <td class="center-align">{!! $challenge->game_type !!}</td>
 		                        <td class="center-align">{!! $challenge->coins !!}</td>
-		                        <td class="center-align">{!! $challenge->valid_upto->format('H:i A M d, Y') !!}</td>
+		                        <td class="center-align">{!! !empty($challenge->valid_upto) ? $challenge->valid_upto->format('H:i A M d, Y') : "" !!}</td>
 		                        <td class="center-align">{!! $challenge->region->name !!}</td>
 		                        <td>
 		                        	{!! Form::open(['route' => 'user.challenge.accept', 'method' => 'post']) !!}
