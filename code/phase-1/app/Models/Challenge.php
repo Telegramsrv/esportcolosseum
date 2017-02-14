@@ -33,6 +33,16 @@ class Challenge extends Model
     public function scopeMyChallengesPerGamePerName($query, User $user, Game $game, $challengeType){
         return $query->with(["captainDetails"])->where('user_id', $user->id)->where('challenge_type', $challengeType)->where('game_id', $game->id);
     }
+
+    /**
+     * Scope a query to fetch challanges for selected games.
+     * @param  \Illuminate\Database\Eloquent\Builder    $query 
+     * @param  Game                                     $game  Selected game for which challenges needed to be fetched.
+     * @return \Illuminate\Database\Eloquent\Builder    $query
+     */
+    public function scopeChallengesForGame($query, Game $game){
+        return $query->where('game_id', $game->id);   
+    }
     
     /**
      * Scope a query to filter data with below parameters.
@@ -41,7 +51,7 @@ class Challenge extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeCurrentGames($query){
+    public function scopeCurrentChallenges($query){
         return $query->whereIn('challenge_status', ['created', 'accepted', 'listed']);
     }
 
@@ -52,18 +62,8 @@ class Challenge extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePastGames($query){
+    public function scopePastChallenges($query){
         return $query->whereIn('challenge_status', ['cancelled', 'complete']);
-    }
-
-    /**
-     * Scope a query to filter data which are not accepted.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeNotAccepted($query){
-        return $query->where('is_accepted', 'no');   
     }
 
 	/**

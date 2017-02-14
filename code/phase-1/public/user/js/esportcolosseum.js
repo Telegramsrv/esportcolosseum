@@ -288,12 +288,18 @@ var creatTeam = function(){
         url: postUrl,
         type:'POST',
         data:formData,
+        beforeSend: function( xhr ) {
+            $('.modal.open').leanModal({
+                dismissible : false
+            });
+        },
         success:function(data){
             if(data.success == true){
                 $("#createTeamForm #createTeamSubmit").html("Redirecting...");
                 window.location.reload();
             }
         },
+
         error: function (data) {
             var errors = ''; 
             $("#createTeamForm #createTeamSubmit").html("Submit");
