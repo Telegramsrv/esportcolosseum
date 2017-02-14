@@ -5,7 +5,11 @@
 	});
 	 
 	 $("table#withdraw-fund-table").dataTable({
-			"aaSorting": [[1,'desc']]
+			"aaSorting": [[1,'desc']],
+			//dom: 'Bfrtip',
+	        buttons: [
+	            'excelHtml5',
+	        ]
 	});
 	 
 	 if($("#ticket-description").length > 0){
