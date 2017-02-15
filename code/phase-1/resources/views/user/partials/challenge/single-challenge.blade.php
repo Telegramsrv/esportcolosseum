@@ -133,7 +133,7 @@
 						<h2><span>TEAM 2 </span>
 							@if($opponentTeam != null)
 								{!! $opponentTeam-> name !!}
-								@if($challenge->challenge_status == 'created' && $opponentTeamCaptain == true)
+								@if($challenge->challenge_status == 'accepted' && $opponentTeamCaptain == true)
 									<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
 								@endif
 							@elseif($opponentTeamCaptain == true)

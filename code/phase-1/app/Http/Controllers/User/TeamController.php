@@ -23,16 +23,23 @@ class TeamController extends Controller
 	 */
     public function save(CreateTeamRequest $request){
     	$input = $request->all();
+    	$user = Auth::user();
 	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
     	if(isset($input['team_id']) && $input['team_id'] != '' && $input['team_id'] != null){
     		$team = Team::where(DB::raw('md5(id)'), '=', $input['team_id'])->firstOrFail();
     		$captain = $challenge->captain;
     		if($challenge->teams()->count() > 0){
-    			$oldTeam = $challenge->teams()->firstOrfail();
-    			Team::removeTeamFromChallenge($challenge, $oldTeam, $captain);
+    			$challengeTeams = $challenge->teams;
+    			foreach($challengeTeams as $challengeTeam){
+    				if($challengeTeam->captain->id == $user->id){
+    					$captain = $challengeTeam->captain;
+    					Team::removeTeamFromChallenge($challenge, $challengeTeam, $captain);		
+    					break;
+    				}
+    			}
     		}
-    		Team::setTeamPlayerstatus($team, $captain, 'Invited');
+    		Team::setTeamPlayerStatus($team, $captain, 'Invited');
     	}
     	else{
     		$user = Auth::user();
@@ -43,10 +50,10 @@ class TeamController extends Controller
 	    	$team = Team::create($teamInput);
 	    	$team->players()->attach($user, ['status' => 'Accepted']);
     	}
-
-    	//Sync Team with Challenge
-    	$challenge->teams()->sync([$team->id]);
     	
+    	//Sync Team with Challenge
+    	$challenge->teams()->attach($team);
+
     	if ($request->ajax()) {
 	    	return response()->json([
 	    		'success' => true,
@@ -67,10 +74,13 @@ class TeamController extends Controller
 		$teamLists = $user
 						->captainteams()
 						->where('teams.name', 'like', '%'.$input['name'].'%')
-						->whereNotIn("teams.id", $challenge->teams()->get(['teams.id']))
+						->whereNotIn("teams.id", function($query) use ($challenge) {
+			    			$query->select('team_id')
+			    				->from("challenge_team")
+			    				->where('challenge_id', $challenge->id);
+			    		})
 						->limit(env('AUTOCOMPLETE_RESULT_LIMIT', 6))
 						->get(['teams.id', 'teams.name']);
-
 		$response = [];
 
 		foreach($teamLists as $team){

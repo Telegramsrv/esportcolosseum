@@ -23,7 +23,7 @@ class Team extends Model
      * @return [type] [description]
      */
     public function captain(){
-    	return $this->belongsToMany('App\User', 'user_id');	
+    	return $this->belongsTo('App\User', 'user_id');	
     }
 
     /**

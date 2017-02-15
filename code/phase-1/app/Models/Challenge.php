@@ -24,25 +24,24 @@ class Challenge extends Model
      *     - Fetch either "Open" or "ESC" challenges.
      *     - Fetch only perticular game's challenges.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param App\User $user
-     * @param App\Models\Game $game
-     * @param String $name
+     * @param  \Illuminate\Database\Eloquent\Builder     $query
+     * @param  App\User                                  $user
+     * @param  String                                    $name
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeMyChallengesPerGamePerName($query, User $user, Game $game, $challengeType){
-        // return $query->with(["captainDetails"])->where('user_id', $user->id)->where('challenge_type', $challengeType)->where('game_id', $game->id);
-
-        return $query->select("challenges.*")->with(["captainDetails", "teamsWithDetails"])->where(function ($query) use ($user) {
-            $query->where('user_id', $user->id)
-            ->Orwhere('opponent_id', $user->id)
-            // ->Orwhere('teamsWithDetails.players.id', $user->id);
-            ->orWhereHas('teamsWithDetails', function ($q) use ($user) {
-                $q->WhereHas('players', function ($qq) use ($user) {
-                     $qq->where('user_id', $user->id);
-                });
-            });
-        })->where('challenge_type', $challengeType)->where('game_id', $game->id);
+    public function scopeMyChallenges($query, User $user){
+        
+        return $query->with(["captainDetails", "teamsWithDetails"])
+                    ->where(function ($query) use ($user) {
+                        $query->where('user_id', $user->id)
+                            ->Orwhere('opponent_id', $user->id)
+                            ->orWhereHas('teamsWithDetails', function ($q) use ($user) {
+                                $q->WhereHas('players', function ($qq) use ($user) {
+                                    $qq->where('user_id', $user->id);
+                            });
+                        });
+                    });
+                    
     }
 
     /**
@@ -55,8 +54,14 @@ class Challenge extends Model
         return $query->where('game_id', $game->id);   
     }
 
-    public function scopeExcludeChallangesFromUser($query, User $user){
-        return $query->where('user_id', '!=', $user->id);
+    /**
+     * Scope a query to filter challenges of selected type(ESC/Open).
+     * @param  \Illuminate\Database\Eloquent\Builder    $query
+     * @param  String                                   $challengeType
+     * @return \Illuminate\Database\Eloquent\Builder    $query
+     */
+    public function scopeChallengesPerType($query, $challengeType){
+        return $query->where('challenge_type', $challengeType);
     }
     
     /**
@@ -81,12 +86,12 @@ class Challenge extends Model
         return $query->whereIn('challenge_status', ['cancelled', 'complete']);
     }
 
-	/**
-	 * Challenge belongs to only one user who has created it.
-	 * @return App\User User model who has created challenge.
-	 */
+    /**
+     * Challenge belongs to only one user who has created it.
+     * @return App\User User model who has created challenge.
+     */
     public function captain(){
-    	return $this->hasOne("App\User", "id", "user_id");
+        return $this->hasOne("App\User", "id", "user_id");
     }
 
     /**
@@ -102,7 +107,7 @@ class Challenge extends Model
      * @return App\Models\Game Game model for which this challenge has been created.
      */
     public function game(){
-    	return $this->belongsTo("App\Models\Game");	
+        return $this->belongsTo("App\Models\Game"); 
     }
 
     /**
@@ -110,7 +115,7 @@ class Challenge extends Model
      * @return App\Models\Region Region model associated with this challenge.
      */
     public function region(){
-    	return $this->belongsTo("App\Models\Region");	
+        return $this->belongsTo("App\Models\Region");   
     }
 
     /**

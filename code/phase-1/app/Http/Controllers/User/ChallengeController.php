@@ -24,9 +24,10 @@ class ChallengeController extends Controller
 		$challengeModes = ['' => 'Select Mode', 'captain-pick' => 'Captain\'s Pick', 'team' => 'Team'];
 		$challenges = Challenge::with(["captain", "captainDetails"])
 						->challengesForGame($selectedGame)
+						->whereNotIn('id', Challenge::myChallenges(Auth::user())->get(['challenges.id']))
 						->currentChallenges()
-						->excludeChallangesFromUser(Auth::user())
 						->paginate(env('RECORDS_PER_PAGE'));
+						
 		return view("user.challenge.open-challenge-list", compact('selectedGame', 'regions', 'challengeModes', 'challenges'));
 	}
 
@@ -50,8 +51,16 @@ class ChallengeController extends Controller
 
 	public function myChallengelist(Game $selectedGame, $challengeType){
 		$user = Auth::user();
-		$myCurrentChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->currentChallenges()->get();
-		$myPastChallenges = Challenge::myChallengesPerGamePerName($user, $selectedGame, $challengeType)->pastChallenges()->get();
+		$myCurrentChallenges = Challenge::myChallenges($user)
+								->challengesForGame($selectedGame) 
+								->challengesPerType($challengeType)
+								->currentChallenges()
+								->get();
+		$myPastChallenges = Challenge::myChallenges($user)
+								->challengesForGame($selectedGame) 
+								->challengesPerType($challengeType)
+								->pastChallenges()
+								->get();
 		return view("user.challenge.my-challenge-list", compact('selectedGame', 'myCurrentChallenges', 'myPastChallenges'));
 	}
 
