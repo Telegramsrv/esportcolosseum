@@ -28,7 +28,8 @@
             "App\\": "app/"
         },
         "files": [
-	        "app/Http/Helpers/GeneralHelpers.php"
+	        "app/Http/Helpers/GeneralHelpers.php",
+            "app/Http/Helpers/ChallengeHelpers.php"
 	    ]
     },
     "autoload-dev": {

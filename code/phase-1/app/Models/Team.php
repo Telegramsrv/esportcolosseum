@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-// use App\Models\Notification;
-// use App\Models\Challenge;
 
 class Team extends Model
 {

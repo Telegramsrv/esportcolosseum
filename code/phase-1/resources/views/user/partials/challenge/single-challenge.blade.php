@@ -1,23 +1,18 @@
 @php
-	$captainTeam = $challenge->captainTeam(Auth::user());
-	$challangerTeam = $challenge->challangerTeam();
+	$challengerTeam = $challenge->challengerTeam();
+	$challengerCaptain = null;
+	$isChallengerCaptain = isCaptain($challenge);
+	$canChallengerCompleteChallenge = false;
+	$canChallengerCancelChallenge = false;
+	
+	if($challengerTeam != null ){
+		$challengerCaptain = $challenge->captain;
+		$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam);
+		$canChallengerCancelChallenge = canCancelChallenge($challenge);
+	}
+
 	$opponentTeam = $challenge->opponentTeam();
-
 	$opponentTeamCaptain = ($challenge->opponent_id == Auth::id()) ? true : false;
-	$challangerTeamCaptain = ($challenge->user_id == Auth::id()) ? true : false;
-
-	$inviteAcceptedTeamCount = 0;
-	$canCompleteChallenge = false;
-	$canCancelChallenge = false;
-	if($captainTeam != null ){
-		$inviteAcceptedTeamCount = $captainTeam->players()->wherePivot('status', '=', 'Accepted')->count();	
-		if($inviteAcceptedTeamCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
-			$canCompleteChallenge = true;
-		}
-	}
-	if($challenge->challenge_status == 'listed' && $challenge->opponent_id == null){
-		$canCancelChallenge = true;
-	}
 @endphp
 
 <div class="first-challenge-section versus-image-one">
@@ -39,23 +34,22 @@
 					<li>{!! findDateDifferenceInHours($challenge->valid_upto) !!}</li>
 					<li>{!! $challenge->coins !!}</li>
 				</ul>
-				
 			</div>
 			<div class="first-challenge-header-button">
-				@if($canCancelChallenge)
+				@if($canChallengerCancelChallenge)
 					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
 						{!! Form::hidden('challenge_status', md5('cancelled')) !!}
 						{!! Form::submit('Cancel Challenge', ['class' => 'btn btn-default']) !!}
 					{!! Form::close() !!}
-				@elseif($canCompleteChallenge)
+				@elseif($canChallengerCompleteChallenge)
 					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
 						{!! Form::hidden('challenge_status', md5('listed')) !!}
 						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default']) !!}
 					{!! Form::close() !!}
 				@else
-					<label class="btn btn-default">COMPLETE CHALLENGE</label>	
+					<!-- <label class="btn btn-default">COMPLETE CHALLENGE</label>	 -->
 				@endif
 			</div>
 		</div>
@@ -65,35 +59,36 @@
 					<div class="first_challenge_left_width">
 						<h2>
 							<span>TEAM 1 :</span>
-							@if($challangerTeam != null)
-								{!! $challangerTeam-> name !!}
-								@if($challenge->challenge_status == 'created' && $challangerTeamCaptain == true ) 
+							@if($challengerTeam != null)
+								{!! $challengerTeam-> name !!}
+								@if($challenge->challenge_status == 'created' && $isChallengerCaptain == true ) 
 									<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
 								@endif
-							@elseif($challangerTeamCaptain == true)
+							@elseif($isChallengerCaptain == true)
 								<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
 							@endif
 						</h2>
 						
-						@if($challangerTeam != null)
-							@if(count($challangerTeam->players) > 0)
-								@foreach($challangerTeam->players as $player)
-									@if($challenge->captain->id == $player->id)
-										<ul class="captain-detail">
-											<li>
-												<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
-													@php
-														$profilePicURL = displayProfileImage($player->userDetails->user_image)
-													@endphp		
-													<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
-												</a>
-											</li>
-										</ul>
-										<h3>
-											{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}
-											<span>( Captain ) </span>
-										</h3>
-									@else
+						@if($challengerTeam != null)
+							@if($challengerCaptain != null)
+								<ul class="captain-detail">
+									<li>
+										<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
+											@php
+												$profilePicURL = displayProfileImage($challengerCaptain->userDetails->user_image);
+											@endphp		
+											<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
+										</a>
+									</li>
+								</ul>
+								<h3>
+									{!! $challengerCaptain->userDetails->first_name !!} {!! $challengerCaptain->userDetails->last_name !!}
+									<span>( Captain ) </span>
+								</h3>
+							@endif
+							@if($challengerTeam->players->count() > 0)
+								@foreach($challengerTeam->players as $player)
+									@if($challenge->captain->id != $player->id)
 										<div class="player-section">
 											<div class="player-image">
 												@php
@@ -104,9 +99,9 @@
 											<div class="player-informations">
 												<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
 												
-												@if($challangerTeamCaptain == true)
+												@if($isChallengerCaptain == true)
 													@include('user.partials.challenge.remove-player-from-team', ['
-													player' => $player, 'team' => $captainTeam, 'challenge' => $challenge])	
+													player' => $player, 'team' => $challengerTeam, 'challenge' => $challenge])	
 													| 
 												@endif
 												
@@ -119,15 +114,15 @@
 							@endif
 						@endif
 
-						@if($captainTeam != null && $captainTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+						@if($challengerTeam != null && $challengerTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 							<div class="firt-team-image">
-								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal-trigger add-team-player">
+								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$challengerTeam->id) !!}" class="modal-trigger add-team-player">
 									<img src="{!! url('user/images/person.png') !!}">
 								</a>	
 							</div>
-							@include('user.partials.challenge.add-player-in-team', ['team' => $captainTeam])
+							@include('user.partials.challenge.add-player-in-team', ['team' => $challengerTeam])
 						@endif
-	 					
+						
 					</div>
 				</div>
 				<div class="versus-image">
@@ -175,7 +170,7 @@
 													<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
 													@if($opponentTeamCaptain == true)
 														@include('user.partials.challenge.remove-player-from-team', ['
-														player' => $player, 'team' => $captainTeam, 'challenge' => $challenge])
+														player' => $player, 'team' => $challengerTeam, 'challenge' => $challenge])
 														| 
 													@endif
 													<p>Report</p>
@@ -186,13 +181,13 @@
 									@endforeach
 								@endif
 
-								@if($captainTeam != null && $captainTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+								@if($challengerTeam != null && $challengerTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 									<div class="firt-team-image">
-										<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal-trigger add-team-player">
+										<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$challengerTeam->id) !!}" class="modal-trigger add-team-player">
 											<img src="{!! url('user/images/person.png') !!}">
 										</a>	
 									</div>
-									@include('user.partials.challenge.add-player-in-team', ['team' => $captainTeam])
+									@include('user.partials.challenge.add-player-in-team', ['team' => $challengerTeam])
 								@endif
 							@else
 							<div class="dont-right-image">

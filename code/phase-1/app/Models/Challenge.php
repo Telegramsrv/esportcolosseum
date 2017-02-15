@@ -139,8 +139,8 @@ class Challenge extends Model
 
     
 
-     public function challangerTeam(){
-        if(count($this->teams) > 0) {
+     public function challengerTeam(){
+        if($this->teams->count() > 0) {
             foreach($this->teams as $k => $team) {
                 if($team->user_id == $this->user_id) {
                     return $team;
@@ -150,7 +150,7 @@ class Challenge extends Model
     }
 
      public function opponentTeam(){
-        if(count($this->teams) > 0) {
+        if($this->teams->count() > 0) {
             foreach($this->teams as $k => $team) {
                 if($team->user_id == $this->opponent_id) {
                     return $team;

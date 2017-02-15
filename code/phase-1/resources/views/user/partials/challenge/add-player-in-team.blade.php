@@ -1,4 +1,4 @@
-<div id="addTeamPlayerModal-{!! md5('add-team-player-'.$captainTeam->id) !!}" class="modal blue-grey darken-4 modal-smal-form add-player-model">
+<div id="addTeamPlayerModal-{!! md5('add-team-player-'.$team->id) !!}" class="modal blue-grey darken-4 modal-smal-form add-player-model">
 	{!! Form::open(['route' => 'user.add-player-in-team.save', 'method' => 'post', 'id' => 'addPlayerInTeamForm']) !!}
 		{!! Form::hidden('team_id', md5($team->id), ['id' => 'team_id']) !!}
 		{!! Form::hidden('player_id', '', ['id' => 'player_id']) !!}
