@@ -42,17 +42,19 @@ class UserController extends Controller
     	$userDetails->account_swift_code = '';
     	$userDetails->paypal_id = '';
     	
-    	if(isset($userBankDetails->account_no) && $userBankDetails->account_no != ''){
-    		$userDetails->account_no = decrypt($userBankDetails->account_no);
-    	}
-    	if(isset($userBankDetails->account_name) && $userBankDetails->account_name != ''){
-    		$userDetails->account_name = decrypt($userBankDetails->account_name);
-    	}
-    	if(isset($userBankDetails->account_swift_code) && $userBankDetails->account_swift_code != ''){
-    		$userDetails->account_swift_code = decrypt($userBankDetails->account_swift_code);
-    	}
-    	if(isset($userBankDetails->paypal_id) && $userBankDetails->paypal_id != ''){
-    		$userDetails->paypal_id = decrypt($userBankDetails->paypal_id);
+    	if($userBankDetails){
+	    	if($userBankDetails->account_no != ''){
+	    		$userDetails->account_no = decrypt($userBankDetails->account_no);
+	    	}
+	    	if($userBankDetails->account_name != ''){
+	    		$userDetails->account_name = decrypt($userBankDetails->account_name);
+	    	}
+	    	if($userBankDetails->account_swift_code != ''){
+	    		$userDetails->account_swift_code = decrypt($userBankDetails->account_swift_code);
+	    	}
+	    	if($userBankDetails->paypal_id != ''){
+	    		$userDetails->paypal_id = decrypt($userBankDetails->paypal_id);
+	    	}
     	}
     	
     	$countries = Country::all()->pluck('name', 'id');	

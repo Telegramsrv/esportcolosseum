@@ -155,6 +155,10 @@ class User extends Authenticatable
 			    });
     }
     
+    /**
+     * User can have one bank details
+     * @return App\Models\UserBankDetails set of Bank Details added by User.
+     */
     public function userBankDetails()
     {
     	return $this->hasOne('App\Models\UserBankDetails');

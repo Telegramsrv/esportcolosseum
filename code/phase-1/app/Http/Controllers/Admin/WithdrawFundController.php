@@ -30,17 +30,24 @@ class WithdrawFundController extends Controller
 	public function bankDetails($requestID) {
 		$withdrawFundRequest = WithdrawFundRequest::findOrFail($requestID);
 		
-		if($withdrawFundRequest->user->userDetails->account_no != ''){
-			$bankData['account_no'] = decrypt($withdrawFundRequest->user->userDetails->account_no);
-		}
-		if($withdrawFundRequest->user->userDetails->account_name != ''){
-			$bankData['account_name'] = decrypt($withdrawFundRequest->user->userDetails->account_name);
-		}
-		if($withdrawFundRequest->user->userDetails->account_swift_code != ''){
-			$bankData['account_swift_code'] = decrypt($withdrawFundRequest->user->userDetails->account_swift_code);
-		}
-		if($withdrawFundRequest->user->userDetails->paypal_id != ''){
-			$bankData['paypal_id'] = decrypt($withdrawFundRequest->user->userDetails->paypal_id);
+		$bankData['account_no'] = '';
+		$bankData['account_name'] = '';
+		$bankData['account_swift_code'] = '';
+		$bankData['paypal_id'] = '';
+		
+		if($withdrawFundRequest->user->userBankDetails){
+			if($withdrawFundRequest->user->userBankDetails->account_no != ''){
+				$bankData['account_no'] = decrypt($withdrawFundRequest->user->userBankDetails->account_no);
+			}
+			if($withdrawFundRequest->user->userBankDetails->account_name != ''){
+				$bankData['account_name'] = decrypt($withdrawFundRequest->user->userBankDetails->account_name);
+			}
+			if($withdrawFundRequest->user->userBankDetails->account_swift_code != ''){
+				$bankData['account_swift_code'] = decrypt($withdrawFundRequest->user->userBankDetails->account_swift_code);
+			}
+			if($withdrawFundRequest->user->userBankDetails->paypal_id != ''){
+				$bankData['paypal_id'] = decrypt($withdrawFundRequest->user->userBankDetails->paypal_id);
+			}
 		}
 		
 		$bankData['email'] = $withdrawFundRequest->user->email;
