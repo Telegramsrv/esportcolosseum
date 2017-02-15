@@ -24,6 +24,7 @@ use App\Models\Notification;
 use App\Mail\WithdrawFundUserMail;
 use App\Mail\WithdrawFundAdminMail;
 use App\Models\WithdrawFundRequest;
+use App\Models\UserBankDetails;
 
 class UserController extends Controller
 {
@@ -34,17 +35,24 @@ class UserController extends Controller
     public function editProfile(){
     	$userDetails = Auth::user()->userDetails;
     	
-    	if($userDetails->account_no != ''){
-    		$userDetails->account_no = decrypt($userDetails->account_no);
+    	$userBankDetails = Auth::user()->userBankDetails;
+    	
+    	$userDetails->account_no = '';
+    	$userDetails->account_name = '';
+    	$userDetails->account_swift_code = '';
+    	$userDetails->paypal_id = '';
+    	
+    	if(isset($userBankDetails->account_no) && $userBankDetails->account_no != ''){
+    		$userDetails->account_no = decrypt($userBankDetails->account_no);
     	}
-    	if($userDetails->account_name != ''){
-    		$userDetails->account_name = decrypt($userDetails->account_name);
+    	if(isset($userBankDetails->account_name) && $userBankDetails->account_name != ''){
+    		$userDetails->account_name = decrypt($userBankDetails->account_name);
     	}
-    	if($userDetails->account_swift_code != ''){
-    		$userDetails->account_swift_code = decrypt($userDetails->account_swift_code);
+    	if(isset($userBankDetails->account_swift_code) && $userBankDetails->account_swift_code != ''){
+    		$userDetails->account_swift_code = decrypt($userBankDetails->account_swift_code);
     	}
-    	if($userDetails->paypal_id != ''){
-    		$userDetails->paypal_id = decrypt($userDetails->paypal_id);
+    	if(isset($userBankDetails->paypal_id) && $userBankDetails->paypal_id != ''){
+    		$userDetails->paypal_id = decrypt($userBankDetails->paypal_id);
     	}
     	
     	$countries = Country::all()->pluck('name', 'id');	
@@ -54,7 +62,7 @@ class UserController extends Controller
     }
 
     public function updateProfile(SaveUser $request){
-    	$input = $request->all();
+    	$input = $request->except(['account_no', 'account_name', 'account_swift_code', 'paypal_id']);
     	$userDetails = Auth::user()->userDetails;	
 
     	if($request->hasFile('user_image')){
@@ -70,12 +78,30 @@ class UserController extends Controller
             $input['user_image'] = $filename;
         }
 
-        $input['account_no'] = encrypt($input['account_no']);
-        $input['account_name'] = encrypt($input['account_name']);
-        $input['account_swift_code'] = encrypt($input['account_swift_code']);
-        $input['paypal_id'] = encrypt($input['paypal_id']);
-        
         $userDetails->update($input);
+        
+        
+        $input = $request->only(['account_no', 'account_name', 'account_swift_code', 'paypal_id']);
+        $userBankDetails = UserBankDetails::firstOrNew(array('user_id' => Auth::user()->id));
+        $userBankDetails->account_no = '';
+        $userBankDetails->account_name = '';
+        $userBankDetails->account_swift_code = '';
+        $userBankDetails->paypal_id = '';
+        
+        if($input['account_no'] != ''){
+        	$userBankDetails->account_no = encrypt($input['account_no']);
+        }
+    	if($input['account_name'] != ''){
+        	$userBankDetails->account_name = encrypt($input['account_name']);
+        }
+        if($input['account_swift_code'] != ''){
+        	$userBankDetails->account_swift_code = encrypt($input['account_swift_code']);
+        }
+        if($input['paypal_id'] != ''){
+        	$userBankDetails->paypal_id = encrypt($input['paypal_id']);
+        }
+        $userBankDetails->save();
+       
         return redirect(route('user.dashboard'));
     }
 
@@ -237,7 +263,7 @@ class UserController extends Controller
     }
     
     public function updateWithdrawFund(SaveCoins $request){
-    	if(Auth::user()->userDetails->paypal_id != '' || (Auth::user()->userDetails->account_no != '' && Auth::user()->userDetails->account_name != '' && Auth::user()->userDetails->account_swift_code != '')){
+    	if(Auth::user()->userBankDetails && (Auth::user()->userBankDetails->paypal_id != '' || (Auth::user()->userBankDetails->account_no != '' && Auth::user()->userBankDetails->account_name != '' && Auth::user()->userBankDetails->account_swift_code != ''))){
     		$options = getOptions();
 	    	$requestData = $request->all();
 	    	

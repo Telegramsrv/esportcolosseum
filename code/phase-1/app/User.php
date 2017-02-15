@@ -155,4 +155,9 @@ class User extends Authenticatable
 			    });
     }
     
+    public function userBankDetails()
+    {
+    	return $this->hasOne('App\Models\UserBankDetails');
+    }
+    
 }
