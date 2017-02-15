@@ -137,9 +137,11 @@ class Challenge extends Model
         return $this->belongsToMany('App\Models\Team')->with("players.userDetails");
     }
 
-    
-
-     public function challengerTeam(){
+    /**
+     * This function is used to get challeger team object.
+     * @return Team  $team  Challenger team object associated with challenge.
+     */
+    public function challengerTeam(){
         if($this->teams->count() > 0) {
             foreach($this->teams as $k => $team) {
                 if($team->user_id == $this->user_id) {
@@ -149,7 +151,11 @@ class Challenge extends Model
         }
     }
 
-     public function opponentTeam(){
+    /**
+     * This function is used to get opponent team object.
+     * @return Team  $team  Challenger team object associated with opponent.
+     */
+    public function opponentTeam(){
         if($this->teams->count() > 0) {
             foreach($this->teams as $k => $team) {
                 if($team->user_id == $this->opponent_id) {
@@ -158,22 +164,4 @@ class Challenge extends Model
             }
         }
     }
-
-    
-
-    
-
-    public function captainTeam(User $user){
-
-         return (count($this->teams) >0 ) ? $this->teams[0] : "";
-        return $this->teams[0];
-        $teams = $this::teams()->get();
-        foreach($teams as $team){
-            if($team->players()->find($user->id)->count()){
-                return $team;
-            }
-        }
-    }
-
-
 }

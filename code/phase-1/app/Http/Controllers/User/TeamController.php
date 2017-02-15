@@ -61,25 +61,25 @@ class TeamController extends Controller
 	 */
 	public function getAutocompleteTeamList(Request $request){
 		$input = $request->all();
-		$currentUser = Auth::user();
-		$currentChallenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
-		$currentTeam = $currentChallenge->captainTeam($currentUser);
+		$user = Auth::user();
+		$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
-		$teamLists = $currentUser->captainteams()->where('teams.name', 'like', '%'.$input['name'].'%');
-		if($currentTeam){
-			$teamLists = $teamLists->where('teams.id', '!=', $currentTeam->id);
-		}
-		$teamLists = $teamLists->limit(env('AUTOCOMPLETE_RESULT_LIMIT', 6))->get(['teams.id', 'teams.name']);
+		$teamLists = $user
+						->captainteams()
+						->where('teams.name', 'like', '%'.$input['name'].'%')
+						->whereNotIn("teams.id", $challenge->teams()->get(['teams.id']))
+						->limit(env('AUTOCOMPLETE_RESULT_LIMIT', 6))
+						->get(['teams.id', 'teams.name']);
 
 		$response = [];
-		$index = 0;
 
 		foreach($teamLists as $team){
-			$response[$index]['id'] = md5($team->id);
-			$response[$index]['label'] = $team->name;
-			$response[$index]['value'] = $team->name;
-
-			$index++;
+			$data = [
+    			"id" => md5($team->id), 
+    			"label" => $team->name, 
+    			"value" => $team->name
+    		];
+    		array_push($response, $data);
 		}
 		
 		if ($request->ajax()) {
@@ -98,8 +98,8 @@ class TeamController extends Controller
 	 * @return JSON    $response  Team Players except current user of selected team.
 	 */
 	public function getTeamPlayers(Request $request, Team $team){
-		$currentUser = Auth::user();
-		$players = $team->players()->where('users.id', '!=', $currentUser->id)->get();
+		$user = Auth::user();
+		$players = $team->players()->where('users.id', '!=', $user->id)->get();
 		$playerDetails = [];
 		$index = 0;
 		foreach($players as $player){
