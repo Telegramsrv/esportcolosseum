@@ -31,7 +31,18 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeMyChallengesPerGamePerName($query, User $user, Game $game, $challengeType){
-        return $query->with(["captainDetails"])->where('user_id', $user->id)->where('challenge_type', $challengeType)->where('game_id', $game->id);
+        // return $query->with(["captainDetails"])->where('user_id', $user->id)->where('challenge_type', $challengeType)->where('game_id', $game->id);
+
+        return $query->select("challenges.*")->with(["captainDetails", "teamsWithDetails"])->where(function ($query) use ($user) {
+            $query->where('user_id', $user->id)
+            ->Orwhere('opponent_id', $user->id)
+            // ->Orwhere('teamsWithDetails.players.id', $user->id);
+            ->orWhereHas('teamsWithDetails', function ($q) use ($user) {
+                $q->WhereHas('players', function ($qq) use ($user) {
+                     $qq->where('user_id', $user->id);
+                });
+            });
+        })->where('challenge_type', $challengeType)->where('game_id', $game->id);
     }
 
     /**
@@ -118,7 +129,44 @@ class Challenge extends Model
         return $this->belongsToMany('App\Models\Team');
     }
 
+    /**
+     * Teams that belongs to challenge.
+     * @return App\Models\Team Team Models associated with this challenge.
+     */
+    public function teamsWithDetails(){
+        return $this->belongsToMany('App\Models\Team')->with("players.userDetails");
+    }
+
+    
+
+     public function challangerTeam(){
+        if(count($this->teams) > 0) {
+            foreach($this->teams as $k => $team) {
+                if($team->user_id == $this->user_id) {
+                    return $team;
+                }
+            }
+        }
+    }
+
+     public function opponentTeam(){
+        if(count($this->teams) > 0) {
+            foreach($this->teams as $k => $team) {
+                if($team->user_id == $this->opponent_id) {
+                    return $team;
+                }
+            }
+        }
+    }
+
+    
+
+    
+
     public function captainTeam(User $user){
+
+         return (count($this->teams) >0 ) ? $this->teams[0] : "";
+        return $this->teams[0];
         $teams = $this::teams()->get();
         foreach($teams as $team){
             if($team->players()->find($user->id)->count()){
