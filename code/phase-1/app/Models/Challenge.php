@@ -30,7 +30,6 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeMyChallenges($query, User $user){
-        
         return $query->with(["captainDetails", "teamsWithDetails"])
                     ->where(function ($query) use ($user) {
                         $query->where('user_id', $user->id)
@@ -41,7 +40,6 @@ class Challenge extends Model
                             });
                         });
                     });
-                    
     }
 
     /**

@@ -4,11 +4,11 @@ use App\Models\Team;
 
 /**
  * This function checks if logged in user is challenger-captain or not.
- * @param  Challenge $challenge Challenge object
+ * @param  Interger $user 
  * @return boolean              
  */
-function isCaptain(Challenge $challenge){
-	if($challenge->user_id == Auth::user()->id){
+function isCaptain($user){
+	if($user == Auth::user()->id){
 		return true;	
 	}
 	else{
@@ -23,10 +23,10 @@ function isCaptain(Challenge $challenge){
  * @return Boolean               
  */
 function canCompleteChallenge(Challenge $challenge, Team $team){
-	$isCaptain = isCaptain($challenge);
+	$isCaptain = isCaptain($challenge->user_id);
 	$teamInviteAcceptCount = $team->players()->wherePivot('status', '=', 'Accepted')->count();
 
-	if($isCaptain && $teamInviteAcceptCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
+	if($isCaptain && $challenge->challenge_status == "created" && $teamInviteAcceptCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
 		return true;
 	}
 	else{
@@ -40,7 +40,7 @@ function canCompleteChallenge(Challenge $challenge, Team $team){
  * @return Boolean
  */
 function canCancelChallenge(Challenge $challenge){
-	$isCaptain = isCaptain($challenge);
+	$isCaptain = isCaptain($challenge->user_id);
 	if($isCaptain && $challenge->challenge_status == 'listed' && $challenge->opponent_id == null){
 		return true;
 	}

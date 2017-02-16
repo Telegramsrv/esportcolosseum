@@ -1,7 +1,7 @@
 @php
 	$challengerTeam = $challenge->challengerTeam();
 	$challengerCaptain = null;
-	$isChallengerCaptain = isCaptain($challenge);
+	$isChallengerCaptain = isCaptain($challenge->user_id);
 	$canChallengerCompleteChallenge = false;
 	$canChallengerCancelChallenge = false;
 	
@@ -12,7 +12,12 @@
 	}
 
 	$opponentTeam = $challenge->opponentTeam();
-	$opponentTeamCaptain = ($challenge->opponent_id == Auth::id()) ? true : false;
+	$opponentCaptain = null;
+	$isOpponentCaptain = isCaptain($challenge->opponent_id);
+
+	if($opponentTeam != null){
+		$opponentCaptain = $challenge->opponent;
+	}
 @endphp
 
 <div class="first-challenge-section versus-image-one">
@@ -71,46 +76,24 @@
 						
 						@if($challengerTeam != null)
 							@if($challengerCaptain != null)
-								<ul class="captain-detail">
-									<li>
-										<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
-											@php
-												$profilePicURL = displayProfileImage($challengerCaptain->userDetails->user_image);
-											@endphp		
-											<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
-										</a>
-									</li>
-								</ul>
-								<h3>
-									{!! $challengerCaptain->userDetails->first_name !!} {!! $challengerCaptain->userDetails->last_name !!}
-									<span>( Captain ) </span>
-								</h3>
+								@php
+									$parameters = [
+										'challenge' => $challenge, 
+										'captain' => $challengerCaptain
+									];
+								@endphp	
+								@include('user.partials.challenge.captain-details', $parameters)
 							@endif
 							@if($challengerTeam->players->count() > 0)
-								@foreach($challengerTeam->players as $player)
-									@if($challenge->captain->id != $player->id)
-										<div class="player-section">
-											<div class="player-image">
-												@php
-													$profilePicURL = displayProfileImage($player->userDetails->user_image)
-												@endphp		
-												<img class="challenge-team-image" src="{!! $profilePicURL !!}">
-											</div>
-											<div class="player-informations">
-												<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
-												
-												@if($isChallengerCaptain == true)
-													@include('user.partials.challenge.remove-player-from-team', ['
-													player' => $player, 'team' => $challengerTeam, 'challenge' => $challenge])	
-													| 
-												@endif
-												
-												<p>Report</p>
-											
-											</div>
-										</div>
-									@endif
-								@endforeach
+								@php
+									$parameters = [
+										'challenge' => $challenge,
+										'team' => $challengerTeam,
+										'players' => $challengerTeam->players,
+										'captain' => $challengerCaptain
+									];
+								@endphp	
+								@include('user.partials.challenge.player-details', $parameters)
 							@endif
 						@endif
 
@@ -120,7 +103,13 @@
 									<img src="{!! url('user/images/person.png') !!}">
 								</a>	
 							</div>
-							@include('user.partials.challenge.add-player-in-team', ['team' => $challengerTeam])
+							@php
+								$parameters = [
+									'team' => $challengerTeam,
+									'challenge' => $challenge
+								];
+							@endphp
+							@include('user.partials.challenge.add-player-in-team', $parameters)
 						@endif
 						
 					</div>
@@ -133,61 +122,48 @@
 						<h2><span>TEAM 2 </span>
 							@if($opponentTeam != null)
 								{!! $opponentTeam-> name !!}
-								@if($challenge->challenge_status == 'accepted' && $opponentTeamCaptain == true)
+								@if($challenge->challenge_status == 'accepted' && $isOpponentCaptain == true)
 									<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
 								@endif
-							@elseif($opponentTeamCaptain == true)
+							@elseif($isOpponentCaptain == true)
 								<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger">Click here</a> to create Team.
 							@endif
 							</h2>
 							@if($opponentTeam != null)
+								@if($opponentCaptain != null)
+									@php
+										$parameters = [
+											'challenge' => $challenge, 
+											'captain' => $opponentCaptain
+										];
+									@endphp	
+									@include('user.partials.challenge.captain-details', $parameters)
+								@endif
 								@if(count($opponentTeam->players) > 0)
-									@foreach($opponentTeam->players as $player)
-										@if($challenge->opponent_id == $player->id)
-											<ul class="captain-detail">
-												<li>
-													<a target="_blank" href="{!! route('user.profile', ['md5UserId' => md5($challenge->user_id), 'gameSlug' => $challenge->game->slug]) !!}">
-														@php
-															$profilePicURL = displayProfileImage($player->userDetails->user_imag)
-														@endphp		
-														<img class="challenge-captain-image" src="{!! $profilePicURL !!}">
-													</a>
-												</li>
-											</ul>
-											<h3>
-												{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}
-												<span>( Captain ) </span>
-											</h3>
-										@else
-											<div class="player-section">
-												<div class="player-image">
-													@php
-														$profilePicURL = displayProfileImage($player->userDetails->user_image)
-													@endphp		
-													<img class="challenge-team-image" src="{!! $profilePicURL !!}">
-												</div>
-												<div class="player-informations">
-													<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
-													@if($opponentTeamCaptain == true)
-														@include('user.partials.challenge.remove-player-from-team', ['
-														player' => $player, 'team' => $challengerTeam, 'challenge' => $challenge])
-														| 
-													@endif
-													<p>Report</p>
-												
-												</div>
-											</div>
-										@endif
-									@endforeach
+									@php
+										$parameters = [
+											'challenge' => $challenge,
+											'team' => $opponentTeam,
+											'players' => $opponentTeam->players,
+											'captain' => $opponentCaptain
+										];
+									@endphp	
+									@include('user.partials.challenge.player-details', $parameters)
 								@endif
 
-								@if($challengerTeam != null && $challengerTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+								@if($opponentTeam != null && $opponentTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 									<div class="firt-team-image">
-										<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$challengerTeam->id) !!}" class="modal-trigger add-team-player">
+										<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$opponentTeam->id) !!}" class="modal-trigger add-team-player">
 											<img src="{!! url('user/images/person.png') !!}">
 										</a>	
 									</div>
-									@include('user.partials.challenge.add-player-in-team', ['team' => $challengerTeam])
+									@php
+										$parameters = [
+											'team' => $opponentTeam,
+											'challenge' => $challenge
+										];
+									@endphp
+									@include('user.partials.challenge.add-player-in-team', $parameters)
 								@endif
 							@else
 							<div class="dont-right-image">

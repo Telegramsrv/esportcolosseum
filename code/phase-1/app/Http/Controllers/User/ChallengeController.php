@@ -22,12 +22,15 @@ class ChallengeController extends Controller
 		$regions = Region::all()->pluck('name', 'id');	
 		$regions->prepend("Select Region", '');
 		$challengeModes = ['' => 'Select Mode', 'captain-pick' => 'Captain\'s Pick', 'team' => 'Team'];
+
+		$excludeChallengesArr = array_column(Challenge::myChallenges(Auth::user())->get(['id'])->toArray(), 'id');
+
 		$challenges = Challenge::with(["captain", "captainDetails"])
 						->challengesForGame($selectedGame)
-						->whereNotIn('id', Challenge::myChallenges(Auth::user())->get(['challenges.id']))
+						->whereNotIn('id', $excludeChallengesArr)
 						->currentChallenges()
 						->paginate(env('RECORDS_PER_PAGE'));
-						
+
 		return view("user.challenge.open-challenge-list", compact('selectedGame', 'regions', 'challengeModes', 'challenges'));
 	}
 
@@ -80,8 +83,6 @@ class ChallengeController extends Controller
     	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
     	switch($input['challenge_status']){
-    		case md5('accepted'):
-    			break;
     		case md5('listed'):
     			$challenge->challenge_status = 'listed';
     			$challenge->update();
@@ -124,7 +125,9 @@ class ChallengeController extends Controller
     	
     	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
     	$challenge->opponent_id = Auth::user()->id;
+    	$challenge->challenge_status = 'accepted';
     	$challenge->save();
+    	
     	return redirect()->route('user.my-challenge.list', ['gameSlug' => $challenge->game->slug, 'challengeType' => 'open']);
     }
 }

@@ -26,19 +26,23 @@ class TeamController extends Controller
     	$user = Auth::user();
 	    $challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
+	    // Remove any previous team of user from challenge.
+	    if($challenge->teams->count() > 0){
+			$challengeTeams = $challenge->teams;
+			foreach($challengeTeams as $challengeTeam){
+				if($challengeTeam->captain->id == $user->id){
+					$captain = $challengeTeam->captain;
+					Team::removeTeamFromChallenge($challenge, $challengeTeam, $captain);
+					break;
+				}
+			}
+		}
+
+		// Attach newly selected team to challenge.
     	if(isset($input['team_id']) && $input['team_id'] != '' && $input['team_id'] != null){
     		$team = Team::where(DB::raw('md5(id)'), '=', $input['team_id'])->firstOrFail();
     		$captain = $challenge->captain;
-    		if($challenge->teams()->count() > 0){
-    			$challengeTeams = $challenge->teams;
-    			foreach($challengeTeams as $challengeTeam){
-    				if($challengeTeam->captain->id == $user->id){
-    					$captain = $challengeTeam->captain;
-    					Team::removeTeamFromChallenge($challenge, $challengeTeam, $captain);		
-    					break;
-    				}
-    			}
-    		}
+    		
     		Team::setTeamPlayerStatus($team, $captain, 'Invited');
     	}
     	else{
@@ -51,7 +55,7 @@ class TeamController extends Controller
 	    	$team->players()->attach($user, ['status' => 'Accepted']);
     	}
     	
-    	//Sync Team with Challenge
+    	//Attach Team with Challenge
     	$challenge->teams()->attach($team);
 
     	if ($request->ajax()) {
@@ -132,8 +136,12 @@ class TeamController extends Controller
 
 	public function getAutocompletePlayerList(Team $team, Request $request){
 		$input = $request->all();
-
-		$users = User::active()->roleType('user')->seachGamerNameOrEmail($input['player'])->playerlistForTeam($input['team_id'])->get();
+		$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
+		$users = User::active()
+					->roleType('user')
+					->seachGamerNameOrEmail($input['player'])
+					->playersNotAssociatedWithChallenge($challenge)
+					->get();
 
 		$userLists = [];
     	foreach($users as $user){

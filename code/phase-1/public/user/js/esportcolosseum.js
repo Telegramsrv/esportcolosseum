@@ -180,8 +180,9 @@ $(document).ready(function(){
                 url: '/user/team/get-autocomplete-player-list/' + $("#addPlayerInTeamForm #team_id").val(),
                 type: 'GET',
                 data: {
+                    challenge_id: $("#addPlayerInTeamForm #challenge_id").val(),
+                    team_id: $("#addPlayerInTeamForm #team_id").val(),
                     player: $("#addPlayerInTeamForm #player").val(),
-                    team_id: $("#addPlayerInTeamForm #team_id").val()
                 },
                 success: function(data){
                     response( JSON.parse(data.response) );

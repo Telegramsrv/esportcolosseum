@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use DB;
+use App\Models\Challenge;
 use App\Models\Team;
 
 class User extends Authenticatable
@@ -124,14 +125,16 @@ class User extends Authenticatable
      * Scope a query to filter users with below parameters.
      *     - list of players which are not added into specific team already.
      * @param  \Illuminate\Database\Eloquent\Builder $query  
-     * @param  String $teamId  Team id
+     * @param  Challenge  $challenge                 
      * @return \Illuminate\Database\Eloquent\Builder $query  
      */
-    public function scopePlayerlistForTeam($query, $teamId){
-        return $query->whereNotIn('id', function($query) use ($teamId) {
+    public function scopePlayersNotAssociatedWithChallenge($query, Challenge $challenge){
+        $teamsAssociatedWithChallenge = array_column($challenge->teams()->get(['teams.id'])->toArray(), 'id');
+
+        return $query->whereNotIn('id', function($query) use ($teamsAssociatedWithChallenge) {
                         $query->select('user_id')
                         ->from("team_user")
-                        ->where(DB::raw('md5(team_id)'), $teamId);
+                        ->whereIn('team_id', $teamsAssociatedWithChallenge);
                     });
     }
     
