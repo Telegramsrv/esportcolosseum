@@ -166,5 +166,21 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\UserBankDetails');
     }
-    
+
+    /**
+    * Scope a query to filter users with below parameters.
+     *     - list of players which are not added into any chanllenges already.
+     * @param  \Illuminate\Database\Eloquent\Builder $query  
+     * @param  Challenge  $challenge                 
+     * @return \Illuminate\Database\Eloquent\Builder $query  
+     */
+    public function scopePlayersNotAssociatedWithAnyChallenge($query){
+        return $query->whereNotIn('id', function($query)  {
+                    $query->select('tu.user_id')
+                    ->from("challenges as c")
+                    ->join('challenge_team as ct', 'ct.challenge_id', '=', 'c.id')
+                    ->leftJoin('team_user as tu', 'ct.team_id', '=', 'tu.team_id')
+                    ->whereIn('challenge_status', ['created', 'accepted', 'listed']);
+                });
+    }
 }

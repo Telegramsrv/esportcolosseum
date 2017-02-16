@@ -90,14 +90,15 @@
 										'challenge' => $challenge,
 										'team' => $challengerTeam,
 										'players' => $challengerTeam->players,
-										'captain' => $challengerCaptain
+										'captain' => $challengerCaptain,
+										'isCaptain' => $isChallengerCaptain
 									];
 								@endphp	
 								@include('user.partials.challenge.player-details', $parameters)
 							@endif
 						@endif
 
-						@if($challengerTeam != null && $challengerTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+						@if($challengerTeam != null && $isChallengerCaptain == true && $challengerTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 							<div class="firt-team-image">
 								<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$challengerTeam->id) !!}" class="modal-trigger add-team-player">
 									<img src="{!! url('user/images/person.png') !!}">
@@ -145,13 +146,14 @@
 											'challenge' => $challenge,
 											'team' => $opponentTeam,
 											'players' => $opponentTeam->players,
-											'captain' => $opponentCaptain
+											'captain' => $opponentCaptain,
+											'isCaptain' => $isOpponentCaptain
 										];
 									@endphp	
 									@include('user.partials.challenge.player-details', $parameters)
 								@endif
 
-								@if($opponentTeam != null && $opponentTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
+								@if($opponentTeam != null && $isOpponentCaptain == true && $opponentTeam->players->count() < env('MAX_ALLOWED_PLAYERS_PER_TEAM'))
 									<div class="firt-team-image">
 										<a href="#addTeamPlayerModal-{!! md5('add-team-player-'.$opponentTeam->id) !!}" class="modal-trigger add-team-player">
 											<img src="{!! url('user/images/person.png') !!}">

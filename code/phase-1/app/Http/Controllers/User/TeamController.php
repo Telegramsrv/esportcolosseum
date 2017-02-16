@@ -41,20 +41,19 @@ class TeamController extends Controller
 		// Attach newly selected team to challenge.
     	if(isset($input['team_id']) && $input['team_id'] != '' && $input['team_id'] != null){
     		$team = Team::where(DB::raw('md5(id)'), '=', $input['team_id'])->firstOrFail();
-    		$captain = $challenge->captain;
-    		
+    		// $captain = $challenge->captain;
+    		$captain = $team->captain;
     		Team::setTeamPlayerStatus($team, $captain, 'Invited');
     	}
     	else{
-    		$user = Auth::user();
+    		// $user = Auth::user();
 
     		// Create new team adn attach it with user.
 	    	$teamInput = $request->only('name');
-	    	$teamInput['user_id'] = Auth::user()->id;
+	    	$teamInput['user_id'] = $user->id;
 	    	$team = Team::create($teamInput);
 	    	$team->players()->attach($user, ['status' => 'Accepted']);
     	}
-    	
     	//Attach Team with Challenge
     	$challenge->teams()->attach($team);
 
@@ -140,7 +139,8 @@ class TeamController extends Controller
 		$users = User::active()
 					->roleType('user')
 					->seachGamerNameOrEmail($input['player'])
-					->playersNotAssociatedWithChallenge($challenge)
+					//->playersNotAssociatedWithChallenge($challenge)
+					->playersNotAssociatedWithAnyChallenge()
 					->get();
 
 		$userLists = [];

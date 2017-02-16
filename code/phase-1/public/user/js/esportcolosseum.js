@@ -258,12 +258,13 @@ $(document).ready(function(){
 
     $(".remove-player").click(function(){
         if(confirm("Are you sure?")){
-            $(this).parent().parent().submit();
+            // $(this).parent().parent().submit();
+            $("#remove-player-form").submit();
         }
         else{
             return false;
         }
-    })
+    });
 
 	$("form#withdrawFundForm").submit(function(){
 		withdrawFundSubmit();

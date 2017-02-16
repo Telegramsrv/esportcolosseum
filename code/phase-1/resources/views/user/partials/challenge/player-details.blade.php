@@ -10,7 +10,7 @@
 			<div class="player-informations">
 				<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
 				
-				@if($isChallengerCaptain == true)
+				@if($isCaptain == true)
 					@include('user.partials.challenge.remove-player-from-team', ['
 					player' => $player, 'team' => $challengerTeam, 'challenge' => $challenge])	
 					| 
