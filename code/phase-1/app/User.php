@@ -180,7 +180,7 @@ class User extends Authenticatable
                     ->from("challenges as c")
                     ->join('challenge_team as ct', 'ct.challenge_id', '=', 'c.id')
                     ->leftJoin('team_user as tu', 'ct.team_id', '=', 'tu.team_id')
-                    ->whereIn('challenge_status', ['created', 'accepted', 'listed']);
+                    ->whereIn('c.challenge_status', ['created', 'accepted', 'listed']);
                 });
     }
 }
