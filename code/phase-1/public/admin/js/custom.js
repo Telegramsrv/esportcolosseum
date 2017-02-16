@@ -13,10 +13,21 @@
 				    text: 'Download Excel',
 				    title: 'Withdraw Fund Requests',
 				    exportOptions: {
-	                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+	                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12 ]
 	                }
 				},
-	        ]
+	        ],
+	        columnDefs: [ {
+	            targets: [9, 10, 11, 12],
+	            visible: false
+	        } ],
+	        /*aoColumns: [ 
+	                       null, null, null, null, null, null, null, null, null, 
+	                       { "bSearchable": false },
+	                       { "bSearchable": false },
+	                       { "bSearchable": false },
+	                       { "bSearchable": false }
+	                    ]*/
 	});
 	 
 	 if($("#ticket-description").length > 0){

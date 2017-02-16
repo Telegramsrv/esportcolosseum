@@ -21,6 +21,10 @@
 									<th>Amount Given</th>
 									<th>Status</th>
 									<th>Actions</th>
+									<th>Account No</th>
+									<th>Account Name</th>
+									<th>SWIFT Code</th>
+									<th>Paypal ID</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -37,6 +41,34 @@
 										<td>
 											<a title="View" href="{{ url('admin/withdraw-fund/view/'.$withdrawFundRequest->id) }}"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a> |
 											<a title="Bank Details" href="{{ url('admin/withdraw-fund/bank-details/'.$withdrawFundRequest->id) }}"><i class="fa fa-university fa-lg" aria-hidden="true"></i></a> 
+										</td>
+										<td>
+											@if(isset($withdrawFundRequest->user->userBankDetails) && $withdrawFundRequest->user->userBankDetails->account_no != '')
+												{{ decrypt($withdrawFundRequest->user->userBankDetails->account_no) }}
+											@else
+												{{ '' }}
+											@endif
+										</td>
+										<td>
+											@if(isset($withdrawFundRequest->user->userBankDetails) && $withdrawFundRequest->user->userBankDetails->account_name != '')
+												{{ decrypt($withdrawFundRequest->user->userBankDetails->account_name) }}
+											@else
+												{{ '' }}
+											@endif
+										</td>
+										<td>
+											@if(isset($withdrawFundRequest->user->userBankDetails) && $withdrawFundRequest->user->userBankDetails->account_swift_code != '')
+												{{ decrypt($withdrawFundRequest->user->userBankDetails->account_swift_code) }}
+											@else
+												{{ '' }}
+											@endif
+										</td>
+										<td>
+											@if(isset($withdrawFundRequest->user->userBankDetails) && $withdrawFundRequest->user->userBankDetails->paypal_id != '')
+												{{ decrypt($withdrawFundRequest->user->userBankDetails->paypal_id) }}
+											@else
+												{{ '' }}
+											@endif
 										</td>
 									</tr>
 								@endforeach
