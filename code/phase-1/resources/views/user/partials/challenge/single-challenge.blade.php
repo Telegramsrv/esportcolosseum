@@ -4,19 +4,24 @@
 	$isChallengerCaptain = isCaptain($challenge->user_id);
 	$canChallengerCompleteChallenge = false;
 	$canChallengerCancelChallenge = false;
+	$canChallengerRemovePlayer = true;
 	
 	if($challengerTeam != null ){
 		$challengerCaptain = $challenge->captain;
 		$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam);
 		$canChallengerCancelChallenge = canCancelChallenge($challenge);
+		$canChallengerRemovePlayer = canChallengerRemovePlayerFromTeam($challenge, $challengerTeam);
 	}
 
 	$opponentTeam = $challenge->opponentTeam();
 	$opponentCaptain = null;
 	$isOpponentCaptain = isCaptain($challenge->opponent_id);
-
+	$canOpponentCompleteChallenge = true;
+	$canOpponentRemovePlayer = true;
+	
 	if($opponentTeam != null){
 		$opponentCaptain = $challenge->opponent;
+		$canOpponentRemovePlayer = canOpponentRemovePlayerFromTeam($challenge,$opponentTeam);
 	}
 @endphp
 
@@ -45,13 +50,13 @@
 					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
 						{!! Form::hidden('challenge_status', md5('cancelled')) !!}
-						{!! Form::submit('Cancel Challenge', ['class' => 'btn btn-default']) !!}
+						{!! Form::submit('Cancel Challenge', ['class' => 'btn btn-default', 'id' => 'cancelChallengeBtn']) !!}
 					{!! Form::close() !!}
 				@elseif($canChallengerCompleteChallenge)
 					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
-						{!! Form::hidden('challenge_status', md5('listed')) !!}
-						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default']) !!}
+						{!! Form::hidden('challenge_status', md5('challenger-submitted')) !!}
+						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default', 'id' => 'completeChallengeBtn']) !!}
 					{!! Form::close() !!}
 				@else
 					<!-- <label class="btn btn-default">COMPLETE CHALLENGE</label>	 -->
@@ -91,7 +96,8 @@
 										'team' => $challengerTeam,
 										'players' => $challengerTeam->players,
 										'captain' => $challengerCaptain,
-										'isCaptain' => $isChallengerCaptain
+										'isCaptain' => $isChallengerCaptain,
+										'canRemovePlayer' => $canChallengerRemovePlayer
 									];
 								@endphp	
 								@include('user.partials.challenge.player-details', $parameters)
@@ -123,7 +129,7 @@
 						<h2><span>TEAM 2 </span>
 							@if($opponentTeam != null)
 								{!! $opponentTeam-> name !!}
-								@if($challenge->challenge_status == 'accepted' && $isOpponentCaptain == true)
+								@if($challenge->challenge_status == 'opponent-accepted' && $isOpponentCaptain == true)
 									<a href="#addTeamModal-{!! md5('add-team-'.$challenge->id) !!}" class="modal-trigger"><i class="tiny material-icons">mode_edit</i></a>
 								@endif
 							@elseif($isOpponentCaptain == true)
@@ -147,7 +153,8 @@
 											'team' => $opponentTeam,
 											'players' => $opponentTeam->players,
 											'captain' => $opponentCaptain,
-											'isCaptain' => $isOpponentCaptain
+											'isCaptain' => $isOpponentCaptain,
+											'canRemovePlayer' => $canOpponentRemovePlayer,
 										];
 									@endphp	
 									@include('user.partials.challenge.player-details', $parameters)

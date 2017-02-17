@@ -258,7 +258,7 @@ $(document).ready(function(){
 
     $(".remove-player").click(function(){
         if(confirm("Are you sure?")){
-            $("#remove-player-form").submit();
+            $(this).parent().parent().submit();
         }
         else{
             return false;
@@ -278,6 +278,24 @@ $(document).ready(function(){
             return false;
         }
     });
+
+    $("#completeChallengeBtn").click(function(){
+        if(confirm("Are you sure want to complete this challenge?")){
+            return true;
+        }
+        else{
+            return false;
+        } 
+    });
+
+    $("#cancelChallengeBtn").click(function(){
+       if(confirm("Are you sure want to cancel this challenge?")){
+            return true;
+        }
+        else{
+            return false;
+        } 
+    })
 });
 
 var creatTeam = function(){

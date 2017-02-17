@@ -139,8 +139,8 @@ class TeamController extends Controller
 		$users = User::active()
 					->roleType('user')
 					->seachGamerNameOrEmail($input['player'])
-					//->playersNotAssociatedWithChallenge($challenge)
-					->playersNotAssociatedWithAnyChallenge()
+					->playersNotAssociatedWithChallenge($challenge)
+					// ->playersNotAssociatedWithAnyChallenge()
 					->get();
 
 		$userLists = [];
@@ -202,7 +202,7 @@ class TeamController extends Controller
 		$team = Team::where(DB::raw('md5(id)'), $input['team_id'])->firstOrFail();
 		$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
-		if(in_array($challenge->challenge_status, ['created', 'listed'])){
+		if(in_array($challenge->challenge_status, ['created', 'opponent-accepted'])){
 			/**
 			 * Peform below actions.
 			 * 1) Remove team invite notification if any

@@ -4,10 +4,10 @@
 		{!! Form::hidden('team_id', md5($team->id), ['id' => 'team_id']) !!}
 		{!! Form::hidden('challenge_id', md5($challenge->id), ['id' => 'challenge_id']) !!}
 		<p>
-			@if($challenge->challenge_status == 'listed')
-				Remove
-			@else
+			@if($canRemovePlayer)
 				<a class="remove-player" href="javascript::void(0);">Remove</a>
+			@else
+				Remove
 			@endif
 		</p>
 	{!! Form::close() !!}

@@ -29,6 +29,7 @@ class ChallengeController extends Controller
 						->challengesForGame($selectedGame)
 						->whereNotIn('id', $excludeChallengesArr)
 						->currentChallenges()
+						->notAcceptedByOpponent()
 						->paginate(env('RECORDS_PER_PAGE'));
 
 		return view("user.challenge.open-challenge-list", compact('selectedGame', 'regions', 'challengeModes', 'challenges'));
@@ -83,8 +84,8 @@ class ChallengeController extends Controller
     	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
 
     	switch($input['challenge_status']){
-    		case md5('listed'):
-    			$challenge->challenge_status = 'listed';
+    		case md5('challenger-submitted'):
+    			$challenge->challenge_status = 'challenger-submitted';
     			$challenge->update();
     			break;
     		case md5('cancelled'):
@@ -125,7 +126,7 @@ class ChallengeController extends Controller
     	
     	$challenge = Challenge::where(DB::raw('md5(id)'), $input['challenge_id'])->firstOrFail();
     	$challenge->opponent_id = Auth::user()->id;
-    	$challenge->challenge_status = 'accepted';
+    	$challenge->challenge_status = 'opponent-accepted';
     	$challenge->save();
     	
     	return redirect()->route('user.my-challenge.list', ['gameSlug' => $challenge->game->slug, 'challengeType' => 'open']);

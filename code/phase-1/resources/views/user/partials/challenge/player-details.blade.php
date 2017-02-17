@@ -9,14 +9,16 @@
 			</div>
 			<div class="player-informations">
 				<h2>{!! $player->userDetails->first_name !!} {!! $player->userDetails->last_name !!}</h2>
-				
-				@if($isCaptain == true)
-					@include('user.partials.challenge.remove-player-from-team', ['
-					player' => $player, 'team' => $challengerTeam, 'challenge' => $challenge])	
-					| 
-				@endif
-				
-				<p>Report</p>
+				@php
+					$parameters = [
+						'player' => $player,
+						'team' => $team,
+						'challenge' => $challenge,
+						'canRemovePlayer' => $canRemovePlayer
+					];
+				@endphp
+				@include('user.partials.challenge.remove-player-from-team', $parameters)	
+				| <p>Report</p>
 			</div>
 		</div>
 	@endif

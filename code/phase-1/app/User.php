@@ -174,7 +174,7 @@ class User extends Authenticatable
      * @param  Challenge  $challenge                 
      * @return \Illuminate\Database\Eloquent\Builder $query  
      */
-    public function scopePlayersNotAssociatedWithAnyChallenge($query){
+   /* public function scopePlayersNotAssociatedWithAnyChallenge($query){
         return $query->whereNotIn('id', function($query)  {
                     $query->select('tu.user_id')
                     ->from("challenges as c")
@@ -182,5 +182,5 @@ class User extends Authenticatable
                     ->leftJoin('team_user as tu', 'ct.team_id', '=', 'tu.team_id')
                     ->whereIn('c.challenge_status', ['created', 'accepted', 'listed']);
                 });
-    }
+    }*/
 }

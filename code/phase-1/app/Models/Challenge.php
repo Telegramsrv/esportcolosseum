@@ -21,8 +21,6 @@ class Challenge extends Model
     /**
      * Scope a query to filter with below parameters.
      *     - Fetch only user's challenges.
-     *     - Fetch either "Open" or "ESC" challenges.
-     *     - Fetch only perticular game's challenges.
      *
      * @param  \Illuminate\Database\Eloquent\Builder     $query
      * @param  App\User                                  $user
@@ -61,6 +59,15 @@ class Challenge extends Model
     public function scopeChallengesPerType($query, $challengeType){
         return $query->where('challenge_type', $challengeType);
     }
+
+    /**
+     * Scope a query to filter challenges not accepted by client
+     * @param  \Illuminate\Database\Eloquent\Builder    $query
+     * @return \Illuminate\Database\Eloquent\Builder    $query
+     */
+    public function scopeNotAcceptedByOpponent($query){
+        return $query->whereNull("opponent_id");
+    }
     
     /**
      * Scope a query to filter data with below parameters.
@@ -70,7 +77,7 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCurrentChallenges($query){
-        return $query->whereIn('challenge_status', ['created', 'accepted', 'listed']);
+        return $query->whereIn('challenge_status', ['created', 'challenger-submitted', 'opponent-accepted', 'opponent-submitted']);
     }
 
     /**

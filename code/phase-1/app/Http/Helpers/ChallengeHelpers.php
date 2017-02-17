@@ -41,7 +41,7 @@ function canCompleteChallenge(Challenge $challenge, Team $team){
  */
 function canCancelChallenge(Challenge $challenge){
 	$isCaptain = isCaptain($challenge->user_id);
-	if($isCaptain && $challenge->challenge_status == 'listed' && $challenge->opponent_id == null){
+	if($isCaptain && $challenge->challenge_status == 'challenger-submitted' && $challenge->opponent_id == null){
 		return true;
 	}
 	else{
@@ -49,5 +49,34 @@ function canCancelChallenge(Challenge $challenge){
 	}
 }
 
+/**
+ * This function is used to check whether challenger can remove player from team or not.
+ * @param  Challenge $challenge Challenge Object
+ * @return Boolean              
+ */
+function canChallengerRemovePlayerFromTeam(Challenge $challenge){
+	$isCaptain = isCaptain($challenge->user_id);
+	if($challenge->challenge_status == "created" && $isCaptain){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+/**
+ * This function is used to check whether opponent can remove player from team or not.
+ * @param  Challenge $challenge Challenge Object
+ * @return Boolean              
+ */
+function canOpponentRemovePlayerFromTeam(Challenge $challenge){
+	$isCaptain = isCaptain($challenge->opponent_id);
+	if($challenge->challenge_status == "opponent-accepted" && $isCaptain){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 ?>

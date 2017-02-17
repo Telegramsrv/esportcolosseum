@@ -97,6 +97,7 @@ return [
     'check_coins_balance' => 'You don\'t have enough coins.',
     'is_multiple_of_five' => 'Coins are not mutliple of 5.' ,
     'custom_exists'       => ':attribute is not valid.',
+    'not_playing_any_active_challenge' => ':attribute is associated with other challenge.',
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
