@@ -5,10 +5,11 @@
 	$canChallengerCompleteChallenge = false;
 	$canChallengerCancelChallenge = false;
 	$canChallengerRemovePlayer = true;
+	$canOpponentCompleteChallenge = false;
 	
 	if($challengerTeam != null ){
 		$challengerCaptain = $challenge->captain;
-		$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam);
+		$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam, 'challenger');
 		$canChallengerCancelChallenge = canCancelChallenge($challenge);
 		$canChallengerRemovePlayer = canChallengerRemovePlayerFromTeam($challenge, $challengerTeam);
 	}
@@ -21,6 +22,7 @@
 	
 	if($opponentTeam != null){
 		$opponentCaptain = $challenge->opponent;
+		$canOpponentCompleteChallenge = canCompleteChallenge($challenge, $opponentTeam, 'opponent');
 		$canOpponentRemovePlayer = canOpponentRemovePlayerFromTeam($challenge,$opponentTeam);
 	}
 @endphp
@@ -56,6 +58,12 @@
 					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
 						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
 						{!! Form::hidden('challenge_status', md5('challenger-submitted')) !!}
+						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default', 'id' => 'completeChallengeBtn']) !!}
+					{!! Form::close() !!}
+				@elseif($canOpponentCompleteChallenge)
+					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
+						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+						{!! Form::hidden('challenge_status', md5('opponent-submitted')) !!}
 						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default', 'id' => 'completeChallengeBtn']) !!}
 					{!! Form::close() !!}
 				@else

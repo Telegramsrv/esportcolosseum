@@ -22,11 +22,19 @@ function isCaptain($user){
  * @param  Team      $team      Team object associated with challenge.
  * @return Boolean               
  */
-function canCompleteChallenge(Challenge $challenge, Team $team){
-	$isCaptain = isCaptain($challenge->user_id);
+function canCompleteChallenge(Challenge $challenge, Team $team, $type = 'challenger'){
+	if($type == 'opponent') {
+		$challengeCaptainId = $challenge->opponent_id;
+		$checkStatus = "opponent-accepted";
+	} else {
+		$challengeCaptainId = $challenge->user_id;
+		$checkStatus = "created";
+	}
+
+	$isCaptain = isCaptain($challengeCaptainId);
 	$teamInviteAcceptCount = $team->players()->wherePivot('status', '=', 'Accepted')->count();
 
-	if($isCaptain && $challenge->challenge_status == "created" && $teamInviteAcceptCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
+	if($isCaptain && $challenge->challenge_status == $checkStatus && $teamInviteAcceptCount == env('MAX_ALLOWED_PLAYERS_PER_TEAM')){
 		return true;
 	}
 	else{

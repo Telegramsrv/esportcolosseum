@@ -18,7 +18,7 @@ class ChangeChallengeStatusRequest extends FormRequest
     {
         $user = Auth::user();
         $challenge = Challenge::where(DB::raw('md5(id)'), $this->input('challenge_id'))->firstOrFail();
-        if($user->id == $challenge->user_id){
+        if($user->id == $challenge->user_id || $user->id == $challenge->opponent_id){
             return true;
         }
         else{

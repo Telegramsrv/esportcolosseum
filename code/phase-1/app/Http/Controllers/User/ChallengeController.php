@@ -92,6 +92,10 @@ class ChallengeController extends Controller
     			$challenge->challenge_status = 'cancelled';
     			$challenge->update();
     			break;
+            case md5('opponent-submitted'):
+                $challenge->challenge_status = 'opponent-submitted';
+                $challenge->update();
+                break;
     		default:
     			break;
     	}
