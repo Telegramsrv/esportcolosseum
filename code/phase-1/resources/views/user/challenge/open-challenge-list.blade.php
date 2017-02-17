@@ -43,7 +43,7 @@
 		                        <td>
 		                        	{!! Form::open(['route' => 'user.challenge.accept', 'method' => 'post']) !!}
 										{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
-		                            	<button class="btn-flat waves-effect waves-light" type="submit">
+		                            	<button class="btn-flat waves-effect waves-light" type="submit" id="acceptChallengeBtn">
 		                                	<i class="material-icons white-text">send</i>
 		                            	</button>
 		                           {!! Form::close() !!} 	
