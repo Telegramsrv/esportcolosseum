@@ -299,7 +299,7 @@ var creatTeam = function(){
         success:function(data){
             if(data.success == true){
                 $("#createTeamForm #createTeamSubmit").html("Redirecting...");
-                window.location.reload();
+                window.location.reload(true);
             }
         },
 
@@ -337,7 +337,7 @@ var addPlayerInTeam = function(){
         success:function(data){
             if(data.success == true){
                 $("#addPlayerInTeamForm #addPlayerSubmit").html("Redirecting...");
-                window.location.reload();
+                window.location.reload(true);
             }
         },
         error: function (data) {
