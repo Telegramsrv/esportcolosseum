@@ -15,7 +15,7 @@ class CreateOpenChallengeRequest extends FormRequest
     public function authorize()
     {
         $user = Auth::user();
-        if($this->input('user_id') != md5($user->id)){
+        if($this->input('user_id') == md5($user->id)){
             return true;
         }
         else{

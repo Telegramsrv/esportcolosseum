@@ -485,7 +485,10 @@ var createChallenge = function(){
             hideLoader(createChallengeForm, 'createChallengeSubmit', createChallenge);
 
             var errors = data.responseJSON;
-            if(errors.coins != undefined && errors.coins[0] != ""){
+            if(errors.user_id != undefined && errors.user_id[0] != ""){
+                showError("createChallengeForm #coinsLabel", "createChallengeForm #coins", errors.user_id[0]);
+            }
+            else if(errors.coins != undefined && errors.coins[0] != ""){
                 showError("createChallengeForm #coinsLabel", "createChallengeForm #coins", errors.coins[0]);
             }
             else if(errors.region_id != undefined && errors.region_id[0] != ""){
