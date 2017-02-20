@@ -40,6 +40,20 @@
 					@endif	
 				</div>
 				<div id="tab2" style="display: none;">
+					@if($myPastChallenges->count() == 0)
+						<div class="first-challenge-section versus-image-one">
+							<div class="row">
+								No past challenges!
+							</div>
+						</div>	
+					@else
+						@foreach($myPastChallenges as $challenge)
+							@include('user.partials.challenge.single-challenge', $challenge)
+						@endforeach	
+					@endif	
+				</div>
+
+				<div id="tab2" style="display: none;">
 					<div class="first-challenge-section">
 						<div class="row">
 							<div class="row">

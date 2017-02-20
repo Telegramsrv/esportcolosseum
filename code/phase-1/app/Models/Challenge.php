@@ -88,7 +88,7 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePastChallenges($query){
-        return $query->whereIn('challenge_status', ['cancelled', 'complete']);
+        return $query->whereIn('challenge_status', ['cancelled', 'completed']);
     }
 
     /**

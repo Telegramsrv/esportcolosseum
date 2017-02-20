@@ -6,24 +6,34 @@
 	$canChallengerCancelChallenge = false;
 	$canChallengerRemovePlayer = true;
 	$canOpponentCompleteChallenge = false;
+	$pastChallengesStatus = ["cancelled", "completed"];
 	
-	if($challengerTeam != null ){
+	if($challengerTeam != null){
 		$challengerCaptain = $challenge->captain;
-		$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam, 'challenger');
-		$canChallengerCancelChallenge = canCancelChallenge($challenge);
-		$canChallengerRemovePlayer = canChallengerRemovePlayerFromTeam($challenge, $challengerTeam);
+		if(!in_array($challenge->challenge_status, $pastChallengesStatus)) {
+			$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam, 'challenger');
+			$canChallengerCancelChallenge = canCancelChallenge($challenge);
+			$canChallengerRemovePlayer = canChallengerRemovePlayerFromTeam($challenge, $challengerTeam);
+		} else {
+			$canChallengerRemovePlayer = false;
+		}
+		
 	}
 
 	$opponentTeam = $challenge->opponentTeam();
 	$opponentCaptain = null;
 	$isOpponentCaptain = isCaptain($challenge->opponent_id);
-	$canOpponentCompleteChallenge = true;
+	$canOpponentCompleteChallenge = false;
 	$canOpponentRemovePlayer = true;
 	
-	if($opponentTeam != null){
+	if($opponentTeam != null ){
 		$opponentCaptain = $challenge->opponent;
-		$canOpponentCompleteChallenge = canCompleteChallenge($challenge, $opponentTeam, 'opponent');
-		$canOpponentRemovePlayer = canOpponentRemovePlayerFromTeam($challenge,$opponentTeam);
+		if(!in_array($challenge->challenge_status, $pastChallengesStatus)) {
+			$canOpponentCompleteChallenge = canCompleteChallenge($challenge, $opponentTeam, 'opponent');
+			$canOpponentRemovePlayer = canOpponentRemovePlayerFromTeam($challenge,$opponentTeam);
+		} else {
+			$canOpponentRemovePlayer = false;
+		}
 	}
 @endphp
 
@@ -134,7 +144,7 @@
 				</div>
 				<div class="first-challenge-left-blog">
 					<div class="first_challenge_left_width">
-						<h2><span>TEAM 2 </span>
+						<h2><span>TEAM 2 :  </span>
 							@if($opponentTeam != null)
 								{!! $opponentTeam-> name !!}
 								@if($challenge->challenge_status == 'opponent-accepted' && $isOpponentCaptain == true)
