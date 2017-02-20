@@ -483,6 +483,7 @@ var createChallenge = function(){
         error: function (data) {
             $("#createChallengeForm #createChallengeSubmit").html("Create");
             hideLoader(createChallengeForm, 'createChallengeSubmit', createChallenge);
+            $( ".lean-overlay").bind( "click" , closeModal);
 
             var errors = data.responseJSON;
             if(errors.user_id != undefined && errors.user_id[0] != ""){
@@ -766,4 +767,8 @@ function showError(labelId, inputId, message) {
 	$("#" + labelId).addClass("active");
 	$("#" + inputId).addClass("invalid");
 	$("#" + inputId).focus();
+}
+
+function closeModal() {
+    $(".modal.open").closeModal();
 }
