@@ -38,7 +38,7 @@ class ChallengeController extends Controller
 	public function saveOpenChallenge(createOpenChallengeRequest $request, Game $selectedGame){
 		$input = $request->all();
 
-		// $input['user_id'] = Auth::user()->id;
+		$input['user_id'] = Auth::user()->id;
 		$input['game_id'] = $selectedGame->id;
 		$input['challenge_status'] = 'created';
 		$input['valid_upto'] = Carbon::createFromFormat('Y-m-d H', date('Y-m-d H'))->addHours(72);
