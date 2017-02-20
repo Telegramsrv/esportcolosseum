@@ -335,10 +335,10 @@ var creatTeam = function(){
 
             errors = data.responseJSON;
             if(errors.name != undefined && errors.name[0] != ""){
-                $("#createTeamForm #nameLabel").attr("data-error", errors.name[0]);
-                $("#createTeamForm #nameLabel").addClass("active");
-                $("#createTeamForm #name").addClass("invalid");
-                $("#createTeamForm #name").focus();
+                showError("createTeamForm #nameLabel", "createTeamForm #name", errors.name[0]);
+            }
+            else if(errors.team_id != undefined && errors.team_id[0] != ""){
+                showError("createTeamForm #nameLabel", "createTeamForm #name", errors.team_id[0]);
             }
         }
     });
@@ -372,16 +372,10 @@ var addPlayerInTeam = function(){
             var errors = data.responseJSON;
 
             if(errors.player_id != undefined && errors.player_id[0] != ""){
-                $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.player_id[0]);
-                $("#addPlayerInTeamForm #playerLabel").addClass("active");
-                $("#addPlayerInTeamForm #player").addClass("invalid");
-                $("#addPlayerInTeamForm #player").focus();
+                showError("addPlayerInTeamForm #playerLabel", "addPlayerInTeamForm #player", errors.player_id[0]);
             }
             else if(errors.team_id != undefined && errors.team_id[0] != ""){
-                $("#addPlayerInTeamForm #playerLabel").attr("data-error", errors.team_id[0]);
-                $("#addPlayerInTeamForm #playerLabel").addClass("active");
-                $("#addPlayerInTeamForm #player").addClass("invalid");
-                $("#addPlayerInTeamForm #player").focus();
+                showError("addPlayerInTeamForm #playerLabel", "addPlayerInTeamForm #player", errors.team_id[0]);
             }
         }
     });
@@ -492,22 +486,13 @@ var createChallenge = function(){
 
             var errors = data.responseJSON;
             if(errors.coins != undefined && errors.coins[0] != ""){
-                $("#createChallengeForm #coinsLabel").attr("data-error", errors.coins[0]);
-                $("#createChallengeForm #coinsLabel").addClass("active");
-                $("#createChallengeForm #coins").addClass("invalid");
-                $("#createChallengeForm #coins").focus();
+                showError("createChallengeForm #coinsLabel", "createChallengeForm #coins", errors.coins[0]);
             }
             else if(errors.region_id != undefined && errors.region_id[0] != ""){
-                $("#createChallengeForm #regionLabel").attr("data-error", errors.region_id[0]);
-                $("#createChallengeForm #regionLabel").addClass("active");
-                $("#createChallengeForm #region_id").addClass("invalid");
-                $("#createChallengeForm #region_id").focus();
+                showError("createChallengeForm #regionLabel", "createChallengeForm #region_id", errors.region_id[0]);
             }
             else if(errors.challenge_sub_type != undefined && errors.challenge_sub_type[0] != ""){
-                $("#createChallengeForm #challengeSubTypeLabel").attr("data-error", errors.challenge_sub_type[0]);
-                $("#createChallengeForm #challengeSubTypeLabel").addClass("active");
-                $("#createChallengeForm #challenge_sub_type").addClass("invalid");
-                $("#createChallengeForm #challenge_sub_type").focus();
+                showError("createChallengeForm #challengeSubTypeLabel", "createChallengeForm #challenge_sub_type", errors.challenge_sub_type[0]);
             }
         }
     });
@@ -538,16 +523,10 @@ var loginSubmit = function () {
         	$("#loginForm #loginSubmit").html("LOGIN");
         	hideLoader(loginForm, 'loginSubmit', loginSubmit);
         	if(errors.email != undefined && errors.email[0] != ""){
-        		$("#emailLabel").attr("data-error", errors.email[0]);
-        		$("#emailLabel").addClass("active");
-        		$("#email").addClass("invalid");
-        		$("#email").focus();
+                showError("emailLabel", "email", errors.email[0]);
         	}
         	else if(errors.password != undefined && errors.password[0] != ""){
-        		$("#passwordLabel").attr("data-error", errors.password[0]);
-        		$("#passwordLabel").addClass("active");
-        		$("#password").addClass("invalid");
-        		$("#password").focus();
+                showError("passwordLabel", "password", errors.password[0]);
         	}
         }
     });
@@ -579,40 +558,22 @@ var registerSubmit = function() {
         	hideLoader(registerForm, 'registerSubmit', registerSubmit);
         	var errors = data.responseJSON;
         	if(errors.first_name != undefined && errors.first_name[0] != ""){
-        		$("#registerForm #firstNameLabel").attr("data-error", errors.first_name[0]);
-        		$("#registerForm #firstNameLabel").addClass("active");
-        		$("#registerForm #first_name").addClass("invalid");
-        		$("#registerForm #first_name").focus();
+                showError("registerForm #firstNameLabel", "registerForm #first_name", errors.first_name[0]);
         	}
         	else if(errors.last_name != undefined && errors.last_name[0] != ""){
-        		$("#registerForm #lastNameLabel").attr("data-error", errors.last_name[0]);
-        		$("#registerForm #lastNameLabel").addClass("active");
-        		$("#registerForm #last_name").addClass("invalid");
-        		$("#registerForm #last_name").focus();
+                showError("registerForm #lastNameLabel", "registerForm #last_name", errors.last_name[0]);
         	}
         	else if(errors.gamer_name != undefined && errors.gamer_name[0] != ""){
-        		$("#registerForm #gamerNameLabel").attr("data-error", errors.gamer_name[0]);
-        		$("#registerForm #gamerNameLabel").addClass("active");
-        		$("#registerForm #gamer_name").addClass("invalid");
-        		$("#registerForm #gamer_name").focus();
+                showError("registerForm #gamerNameLabel", "registerForm #gamer_name", errors.gamer_name[0]);
         	}
         	else if(errors.email != undefined && errors.email[0] != ""){
-        		$("#registerForm #emailLabel").attr("data-error", errors.email[0]);
-        		$("#registerForm #emailLabel").addClass("active");
-        		$("#registerForm #email").addClass("invalid");
-        		$("#registerForm #email").focus();
+                showError("registerForm #emailLabel", "registerForm #email", errors.email[0]);
         	}
         	else if(errors.password != undefined && errors.password[0] != ""){
-        		$("#registerForm #passwordLabel").attr("data-error", errors.password[0]);
-        		$("#registerForm #passwordLabel").addClass("active");
-        		$("#registerForm #password").addClass("invalid");
-        		$("#registerForm #password").focus();
+                showError("registerForm #passwordLabel", "registerForm #password", errors.password[0]);
         	}
         	else if(errors.CaptchaCode != undefined && errors.CaptchaCode[0] != ""){
-        		$("#registerForm #captchaLabel").attr("data-error", errors.CaptchaCode[0]);
-        		$("#registerForm #captchaLabel").addClass("active");
-        		$("#registerForm #CaptchaCode").addClass("invalid");
-        		$("#registerForm #CaptchaCode").focus();	
+                showError("registerForm #captchaLabel", "registerForm #CaptchaCode", errors.CaptchaCode[0]);
         	}
         }
     });
@@ -646,10 +607,7 @@ var retrievePasswordSubmit = function () {
         	hideLoader(forgotPasswordForm, 'retrievePasswordSubmit', retrievePasswordSubmit);
         	var errors = data.responseJSON;
         	if(errors.email != undefined && errors.email[0] != ""){
-        		$("#forgotPasswordForm #emailLabel").attr("data-error", errors.email[0]);
-        		$("#forgotPasswordForm #emailLabel").addClass("active");
-        		$("#forgotPasswordForm #email").addClass("invalid");
-        		$("#forgotPasswordForm #email").focus();
+                showError("forgotPasswordForm #emailLabel", "forgotPasswordForm #email", errors.email[0]);
         	}
         }
     });

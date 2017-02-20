@@ -29,8 +29,20 @@ class CreateTeamRequest extends FormRequest
         ];
         
         if($this->has('team_id')){
-            $validation['team_id'] = 'required';
+            $validation['team_id'] = 'required|custom_exists:teams,md5(id),true|team_players_not_playing_active_challenge';
         }
         return $validation;
+    }
+
+     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'team_id.team_players_not_playing_active_challenge' => 'Some player(s) of team is playing challenge.',
+        ];
     }
 }

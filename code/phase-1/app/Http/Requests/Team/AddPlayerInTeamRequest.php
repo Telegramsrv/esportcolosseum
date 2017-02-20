@@ -43,7 +43,7 @@ class AddPlayerInTeamRequest extends FormRequest
         return [
             'player_id.required' => 'Player is required.',
             'player_id.custom_exists' => 'Please select valid player.',
-            'player_id.not_playing_any_active_challenge' => 'Player is associated with other challenge.',
+            'player_id.player_not_playing_any_active_challenge' => 'Player is associated with other challenge.',
             'team_id.required' => 'Team is required.',
             'team_id.custom_exists'  => 'Please select valid team.',
 
