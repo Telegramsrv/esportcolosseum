@@ -141,6 +141,7 @@ class TeamController extends Controller
 					->seachGamerNameOrEmail($input['player'])
 					->playersNotAssociatedWithChallenge($challenge)
 					// ->playersNotAssociatedWithAnyChallenge()
+					->take(env('AUTOCOMPLETE_RESULT_LIMIT'))
 					->get();
 
 		$userLists = [];
