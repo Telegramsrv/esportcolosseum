@@ -166,6 +166,10 @@ ul#dropdown2{
 	height: 250px !important;
 }
 
+.first_challenge_left_width {
+	min-height: 410px;
+}
+
 @media only screen and (max-width: 980px) {
    .friend-img{
 		height: 200px !important;
