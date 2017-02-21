@@ -13,7 +13,7 @@
 			</div>
 			@endif
 		</div>
-		<a id="logo-container" href="{!! route('user.home') !!}" class="brand-logo">
+		<a id="logo-container" href="{!! route('user.dashboard') !!}" class="brand-logo">
 			<img src="{!! asset('user/images/logo.png') !!}" />
 		</a>
 		@if (Auth::check())
