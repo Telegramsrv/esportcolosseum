@@ -183,4 +183,19 @@ class Challenge extends Model
             }
         }
     }
+
+
+    /**
+     * This function is used to get opponent team object.
+     * @return Team  $team  Challenger team object associated with opponent.
+     */
+    public function winnerTeam(){
+        if($this->teams->count() > 0 && !empty($this->winner_id)) {
+            foreach($this->teams as $k => $team) {
+                if($team->user_id == $this->winner_id) {
+                    return $team;
+                }
+            }
+        }
+    }
 }

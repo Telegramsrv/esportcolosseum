@@ -7,7 +7,8 @@
 	$canChallengerRemovePlayer = true;
 	$canOpponentCompleteChallenge = false;
 	$pastChallengesStatus = ["cancelled", "completed"];
-	
+	$winnerTeam =  $challenge->winnerTeam();
+
 	if($challengerTeam != null){
 		$challengerCaptain = $challenge->captain;
 		if(!in_array($challenge->challenge_status, $pastChallengesStatus)) {
@@ -84,6 +85,11 @@
 		<div class="vs_area">
 			<div class="row">
 				<div class="first-challenge-left-blog">
+					@if(!empty($winnerTeam) && $winnerTeam->user_id == $challengerTeam->user_id)
+					<div class="past_challenge_winner_image">
+						<img src="{!! url('user/images/winner.png') !!}">
+					</div>
+					@endif
 					<div class="first_challenge_left_width">
 						<h2>
 							<span>TEAM 1 :</span>
@@ -199,6 +205,11 @@
 							</div>
 						@endif	
 					</div>
+					@if(!empty($winnerTeam) && $winnerTeam->user_id == $opponentTeam->user_id)
+					<div class="past_challenge_winner_image_one">
+						<img src="{!! url('user/images/winner.png') !!}">
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>
