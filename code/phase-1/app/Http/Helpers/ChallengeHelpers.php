@@ -87,4 +87,25 @@ function canOpponentRemovePlayerFromTeam(Challenge $challenge){
 	}
 }
 
+
+function formatChallengeSubType($challenge){
+	$formattedString = "";
+
+	if($challenge->challenge_sub_type == "captain-pick"){
+		$formattedString = "Captain's Pick";
+	}
+	else if($challenge->challenge_sub_type == "team"){
+		$formattedString = "Team Pick";
+	}
+	else{
+		$formattedString = $challenge->challenge_sub_type;	
+	}
+
+	return $formattedString;
+}
+
+function formatChallengeGameType($challenge){
+	return ucfirst($challenge->game_type)." Match";
+}
+
 ?>

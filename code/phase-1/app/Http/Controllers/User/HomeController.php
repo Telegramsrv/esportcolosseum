@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\Models\Blog;
 use App\Models\Game;
+use App\Models\Challenge;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use Illuminate\Support\Facades\URL;
@@ -18,7 +19,13 @@ class HomeController extends Controller
 {
     public function index(Game $selectedGame){
         $blogs = Blog::active()->latestFour()->get();
-    	return view("user.home.index")->with(['blogs' => $blogs, 'selectedGame' => $selectedGame]);
+        $challenges = Challenge::with(['captain', 'opponent','teams'])
+                            ->challengesForGame($selectedGame)
+                            ->challengeStatus('opponent-submitted')
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(env('RECORDS_PER_PAGE', 10));
+        
+    	return view("user.home.index", compact('blogs', 'selectedGame', 'challenges'));
     }
     
     /*
