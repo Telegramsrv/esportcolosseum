@@ -26,7 +26,9 @@
 	                        <th data-field="coins" class="center-align">Coins</th>
 	                        <th data-field="validDate" class="center-align">Valid Upto</th>
 	                        <th data-field="region" class="center-align">Region</th>
+	                        @if($canUserAcceptChallenge == true)
 	                        <th data-field="acceptBtn">Accept</th>
+	                        @endif
 	                    </tr>
                     </thead>
                     <tbody>
@@ -40,14 +42,18 @@
 		                        <td class="center-align">{!! $challenge->coins !!}</td>
 		                        <td class="center-align">{!! !empty($challenge->valid_upto) ? $challenge->valid_upto->format('H:i A M d, Y') : "" !!}</td>
 		                        <td class="center-align">{!! $challenge->region->name !!}</td>
+		                        @if($canUserAcceptChallenge == true)
 		                        <td>
-		                        	{!! Form::open(['route' => 'user.challenge.accept', 'method' => 'post']) !!}
-										{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
-		                            	<button class="btn-flat waves-effect waves-light" type="submit" id="acceptChallengeBtn">
-		                                	<i class="material-icons white-text">send</i>
-		                            	</button>
-		                           {!! Form::close() !!} 	
+		                        	
+			                        	{!! Form::open(['route' => 'user.challenge.accept', 'method' => 'post']) !!}
+											{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
+			                            	<button class="btn-flat waves-effect waves-light" type="submit" id="acceptChallengeBtn">
+			                                	<i class="material-icons white-text">send</i>
+			                            	</button>
+			                           {!! Form::close() !!} 
+		                           
 		                        </td>
+		                        @endif	
 		                    </tr>
 		                    @endforeach
 		                @else    

@@ -23,16 +23,18 @@ class ChallengeController extends Controller
 		$regions->prepend("Select Region", '');
 		$challengeModes = ['' => 'Select Mode', 'captain-pick' => 'Captain\'s Pick', 'team' => 'Team'];
 
-		$excludeChallengesArr = array_column(Challenge::myChallenges(Auth::user())->get(['id'])->toArray(), 'id');
+		$activeChallengesArr = array_column(Challenge::myChallenges(Auth::user())->currentChallenges()->get(['id'])->toArray(), 'id');
+        
+        $canUserAcceptChallenge = (count($activeChallengesArr) > 0) ? false : true;
 
 		$challenges = Challenge::with(["captain", "captainDetails"])
 						->challengesForGame($selectedGame)
-						->whereNotIn('id', $excludeChallengesArr)
+						->whereNotIn('id', $activeChallengesArr)
 						->currentChallenges()
 						->notAcceptedByOpponent()
 						->paginate(env('RECORDS_PER_PAGE'));
 
-		return view("user.challenge.open-challenge-list", compact('selectedGame', 'regions', 'challengeModes', 'challenges'));
+		return view("user.challenge.open-challenge-list", compact('selectedGame', 'regions', 'challengeModes', 'challenges', 'canUserAcceptChallenge'));
 	}
 
 	public function saveOpenChallenge(createOpenChallengeRequest $request, Game $selectedGame){
