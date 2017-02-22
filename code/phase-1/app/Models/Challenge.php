@@ -161,8 +161,8 @@ class Challenge extends Model
      * @return Team  $team  Challenger team object associated with challenge.
      */
     public function challengerTeam(){
-        if($this->teams->count() > 0) {
-            foreach($this->teams as $k => $team) {
+        if($this->teamsWithDetails->count() > 0) {
+            foreach($this->teamsWithDetails as $k => $team) {
                 if($team->user_id == $this->user_id) {
                     return $team;
                 }
@@ -175,8 +175,8 @@ class Challenge extends Model
      * @return Team  $team  Challenger team object associated with opponent.
      */
     public function opponentTeam(){
-        if($this->teams->count() > 0) {
-            foreach($this->teams as $k => $team) {
+        if($this->teamsWithDetails->count() > 0) {
+            foreach($this->teamsWithDetails as $k => $team) {
                 if($team->user_id == $this->opponent_id) {
                     return $team;
                 }
@@ -190,8 +190,8 @@ class Challenge extends Model
      * @return Team  $team  Challenger team object associated with opponent.
      */
     public function winnerTeam(){
-        if($this->teams->count() > 0 && !empty($this->winner_id)) {
-            foreach($this->teams as $k => $team) {
+        if($this->teamsWithDetails->count() > 0 && !empty($this->winner_id)) {
+            foreach($this->teamsWithDetails as $k => $team) {
                 if($team->user_id == $this->winner_id) {
                     return $team;
                 }

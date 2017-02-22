@@ -108,4 +108,26 @@ function formatChallengeGameType($challenge){
 	return ucfirst($challenge->game_type)." Match";
 }
 
+
+/**
+ * This function user find my teams and my opponent teams
+ * @return Team  $team  Challenger team object associated with challenge.
+ */
+function myChallengeTeams($challenge, $userId){
+	$teams = [];
+    if($challenge->teamsWithDetails->count() > 0) {
+        foreach($challenge->teamsWithDetails as $k => $team) {
+        	$opponentTeams[$team->id] = $team ;
+             foreach($team->players as $player) { 
+                if($player->id == $userId) {
+                	$teams['my_team'] = $team;
+                	unset($opponentTeams[$team->id]);
+                }
+             }
+        }
+        $teams['opponent_team'] = array_values($opponentTeams)[0];
+    }
+     return $teams;
+}
+
 ?>
