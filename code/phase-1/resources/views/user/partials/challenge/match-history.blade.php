@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-        @if($matchHistory)
+        @if($matchHistory->count() > 0)
             @foreach($matchHistory as $k => $match)
                 @php
                     $opponent = "";
@@ -43,11 +43,16 @@
                     <td class="center-align"><a class="orange-link" href="#"><i class="material-icons white-text">launch</i></a></td>
                 </tr>
             @endforeach 
+        @else
+            <tr>
+                <td colspan="7">No Match</td>  
+            </tr>  
         @endif
         </tbody>
     </table>                                   
 </div>
 </div>
+ @if($matchHistory->count() > 0)
  <center>
     <ul class="pagination">
         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
@@ -60,3 +65,4 @@
     </ul>
 </center>
 <hr/>
+@endif
