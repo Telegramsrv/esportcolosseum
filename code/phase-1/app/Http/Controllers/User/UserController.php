@@ -317,4 +317,11 @@ class UserController extends Controller
     		]);
     	}
     }
+
+//Remove User Notification
+    public function removeNotifications(Request $request){
+        $notification = Notification::where(DB::raw('md5(id)'), $request->notificationID)->where('user_id', Auth::id())->firstOrFail();
+        //Remove Notification
+        $notification->delete();
+    }
 }

@@ -458,6 +458,20 @@ function rejectTeamRequest(notificationID){
     return false;
 }
 
+function removeNotification(notificationID){
+    $.ajax({
+        url:'/user/notification/remove',
+        type:'GET',
+        data:{'notificationID': notificationID},
+        success:function(data){
+            notificationAffect(notificationID);
+        },
+        error: function (data) {
+        }
+    });
+    return false;
+}
+
 
 function notificationAffect(notificationID){
 	$("#notification-"+notificationID).remove();

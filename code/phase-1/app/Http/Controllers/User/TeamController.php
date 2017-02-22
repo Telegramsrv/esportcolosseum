@@ -235,10 +235,15 @@ class TeamController extends Controller
 	public function acceptTeamRequest(Request $request){
 		$notification = Notification::where(DB::raw('md5(id)'), $request->notificationID)->where('user_id', Auth::id())->firstOrFail();
 		$notificationData = json_decode($notification->data);
+		$captain = User::where('id', $notificationData->captain_id)->firstOrFail();
+
 		$userTeam = Team::where('id' , $notificationData->team_id)->firstOrFail()->players()->updateExistingPivot(Auth::id(), ['status' => 'Accepted']);
 
 		//Remove Notification
 		$notification->delete();
+
+		//Send Accept Team Notification To Captain
+		Notification::acceptRejectTeamInviteNotification(Auth::user(), $captain, "Accept");
 
 		if ($request->ajax()) { 
 			return response()->json(["success" => true]);
@@ -254,10 +259,14 @@ class TeamController extends Controller
 	public function rejectTeamRequest(Request $request){
 		$notification = Notification::where(DB::raw('md5(id)'), $request->notificationID)->where('user_id', Auth::id())->firstOrFail();
 		$notificationData = json_decode($notification->data);
+		$captain = User::where('id', $notificationData->captain_id)->firstOrFail();
 		$userTeam = Team::where('id' , $notificationData->team_id)->firstOrFail()->players()->detach(Auth::id());
 
 		//Remove Notification
 		$notification->delete();
+
+		//Send Accept Team Notification To Captain
+		Notification::acceptRejectTeamInviteNotification(Auth::user(), $captain, "Reject");
 
 		if ($request->ajax()) { 
 			return response()->json(["success" => true]);

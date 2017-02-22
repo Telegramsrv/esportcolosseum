@@ -19,6 +19,13 @@
 						<i class="fa fa-times fa-lg" aria-hidden="true" onClick="rejectTeamRequest('{{ md5($notification->id) }}')"></i>
 					</a>
 				</li>
+			@elseif ($notification->type == "Other") 
+				<li id="notification-{{ md5($notification->id) }}">
+					<a href="#!">
+						{!!  $notification->message !!}
+						<i class="fa fa-trash fa-lg" aria-hidden="true" onClick="removeNotification('{{ md5($notification->id) }}')"></i>
+					</a>
+				</li>
 			@endif
 		@endforeach
 	@else

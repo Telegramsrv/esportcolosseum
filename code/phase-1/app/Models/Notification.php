@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TeamRequestMail;
+use App\Mail\TeamRequestAcceptRejectMail;
 
 class Notification extends Model
 {
@@ -65,6 +66,30 @@ class Notification extends Model
     	    
     	//Send Team Invitation
     	Mail::to($user)->send(new TeamRequestMail($user));
+    	
+    	return true;
+	}
+
+
+	/**
+	 * This function is used for 
+	 * 		- Adding accept team notification in table.
+	 * 		- Sending team invite mail to player.
+	 * @param 	User $user    Player who is part of this team.
+	 * @param 	User $captain Captain for current challenge.
+	 * @param 	Team $status  Team request Accept/Reject status
+	 * @return  Bool
+	 */
+	public static function acceptRejectTeamInviteNotification(User $user, User $captain, $status){
+		$notification = new Notification([	'type' => 'Other',
+											'data' => json_encode(['user_id' => $user->id]),
+    										'message' => $user->email . " has " . $status . " your team request."
+    	]);
+
+		$captain->notifications()->save($notification);
+    	    
+    	//Send Team Acceptation Mail
+    	Mail::to($captain)->send(new TeamRequestAcceptRejectMail($user, $captain, $status));
     	
     	return true;
 	}

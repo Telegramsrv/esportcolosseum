@@ -149,6 +149,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::post('/withdraw-fund/update', 'User\UserController@updateWithdrawFund')->name('user.withdraw-fund.update');
 	Route::get('/withdraw-fund/calculation', 'User\UserController@withdrawFundCalculation')->name('user.coins.withdraw-fund-calculation');
 
+	Route::get('/notification/remove', 'User\UserController@removeNotifications')->name('user.notification.remove');
+
 });
 
 Auth::routes();
