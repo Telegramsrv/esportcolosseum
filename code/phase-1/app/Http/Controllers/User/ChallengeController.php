@@ -72,11 +72,28 @@ class ChallengeController extends Controller
 		return view("user.challenge.my-challenge-list", compact('selectedGame', 'myCurrentChallenges', 'myPastChallenges'));
 	}
 
-	public function listEscChallenges(Game $selectedGame){
-		$escChallangeTemplates = EscChallengeTemplate::all();
-		$settings = getOptions();
+	public function listEscChallenges(Game $selectedGame, Request $request){
+        if ($request->ajax()) {
+            $input = $request->all();
+            $challenges = array();
+            if(!empty($input["date"]) && !empty($input["time"])) {
+                $date = Carbon::parse($input["date"]);
+                $date->addHour($input["time"]);
+                $challenges = Challenge::where('esc_date', '>=' , $date->toDateString())->where('challenge_status', 'challenger-submitted')->where('game_id', $selectedGame->id)->where('challenge_type' , 'esc')->where('game_type','solo')->get();
+            }
+            
+             return response()->json([
+                'success' => true,
+                'challenges' => $challenges,
+            ]);
 
-    	return view("user.challenge.esc-challenge-list", compact('selectedGame', 'settings', 'escChallangeTemplates'));
+        } else {
+            $escChallangeTemplates = EscChallengeTemplate::all();
+            $settings = getOptions();
+
+            return view("user.challenge.esc-challenge-list", compact('selectedGame', 'settings', 'escChallangeTemplates'));
+        }
+		
     }
 
     /**

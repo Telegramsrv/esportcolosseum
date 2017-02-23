@@ -107,15 +107,25 @@ $(document).ready(function(){
     $(".challengr-btn").click(function(){
         $('.esc-challenge-date-active').removeClass('esc-challenge-date-active');
         $(this).addClass('esc-challenge-date-active');
-        $(".esc-challenge-form .esc-date").val($(this).attr("data-date"));
+        var date = $(this).attr("data-date");
+        var time = $('.time-block .timing .esc-challenge-time-active').attr('data-id');
+        if(date && time) {
+            getEscGame(date, time);
+        }
+        $(".esc-challenge-form .esc-date").val(date);
         return false;
     });
 
     $("ul.timing li").click(function(){
         $(".esc-challenge-time-active").removeClass('esc-challenge-time-active');
         $(this).addClass('esc-challenge-time-active');
-        $(".esc-challenge-form .esc-time").val($(this).attr("data-id"));
-        $(".time-block .esc-challenge-time-active").attr("data-id");
+        var time = $(this).attr("data-id");
+        var date = $('.esc-challenge-date-active').attr('data-date');
+        $(".esc-challenge-form .esc-time").val(time);
+        if(date && time) {
+            getEscGame(date, time);
+        }
+        // $(".time-block .esc-challenge-time-active").attr("data-id");
         return false;
     });
 
@@ -830,6 +840,30 @@ function joinEscGame(_this) {
             else if(errors.game_type != undefined && errors.game_type[0] != ""){
                 alert(errors.game_type[0]);
             }
+        }
+    });
+    return false;
+}
+
+
+function getEscGame(date, time) {
+    $.ajax({
+        url: '/user/challenge/esc/counter-strike',
+        type:'GET',
+        data:{date:date, time:time},
+        success:function(data){
+            if(data.success == true){
+                var challenges = data.challenges;
+                if(challenges.length > 0) {
+                    for(var i=0; i<challenges.length; i++) {
+                        var challenge = challenges[i];
+                        $('#template-id-' + challenge.esc_challenge_template_id).find(".members .members-span").html(1 + " / "+ 2);
+                    }
+                }
+            }
+        },
+        error: function (data) {
+            console.log("fail");
         }
     });
     return false;

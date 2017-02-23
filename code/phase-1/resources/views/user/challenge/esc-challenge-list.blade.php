@@ -74,7 +74,7 @@
                         {!! Form::hidden('coins',  $escChallangeTemplate->joining_coins) !!}
                         {!! Form::hidden('win_coins',  $escChallangeTemplate->winning_coins) !!}
                         <div class="col s12 m3">
-                            <div class="challenge-member">
+                            <div class="challenge-member" id="template-id-{{ $escChallangeTemplate->id }}">
                                 <div class="ch-coin-block">
                                     <div class="ch-coin">
                                         win <span>{!! $escChallangeTemplate->winning_coins !!}</span> coins
