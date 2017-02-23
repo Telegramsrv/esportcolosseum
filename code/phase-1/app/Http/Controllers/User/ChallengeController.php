@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Challenge\CreateOpenChallengeRequest;
+use App\Http\Requests\Challenge\CreateEscChallengeRequest;
 use App\Http\Requests\Challenge\ChangeChallengeStatusRequest;
 use App\Http\Requests\Challenge\AcceptChallengeRequest;
 use App\Http\Controllers\Controller;
@@ -138,4 +139,30 @@ class ChallengeController extends Controller
     	
     	return redirect()->route('user.my-challenge.list', ['gameSlug' => $challenge->game->slug, 'challengeType' => 'open']);
     }
+
+
+    public function saveEscChallenge(createEscChallengeRequest $request, Game $selectedGame){
+        $input = $request->all();
+        $date = Carbon::parse($input["date"]);
+        $date->addHour($input["time"]);
+        
+        $challenge = new Challenge($request->only(['coins', 'win_coins', 'game_type', 'esc_challenge_template_id']));
+        $challenge->user_id = Auth::user()->id;
+        $challenge->game_id = $selectedGame->id;
+        $challenge->challenge_type = 'esc';
+        $challenge->challenge_sub_type = 'captain-pick';
+        $challenge->challenge_status = 'challenger-submitted';
+        $challenge->esc_date = $date;
+        $challenge->valid_upto = $date->subMinute(30);
+        $challenge->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'You have created challenge successfully.',
+            ]);
+        }
+    }
+
+    
 }

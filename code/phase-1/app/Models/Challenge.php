@@ -15,7 +15,7 @@ class Challenge extends Model
      * @var array
      */
     protected $dates = [
-        'valid_upto'
+        'valid_upto', 'esc_date'
     ];
 
     /**

@@ -8,6 +8,7 @@ use DB;
 use App\User;
 use App\Models\Challenge;
 use App\Models\Team;
+use Carbon\Carbon;
 
 class ChallengeValidationServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,18 @@ class ChallengeValidationServiceProvider extends ServiceProvider
             }
 
             return $valid;
+        });
+
+        Validator::extend('is_valid_esc_time', function ($attribute, $value, $parameters, $validator) {
+            return in_array($value, [0, 3, 6, 9, 12, 15, 18, 21]);
+        });
+
+        Validator::extend('is_valid_esc_date', function ($attribute, $value, $parameters, $validator) {
+            $time = $parameters[0];
+            $date = Carbon::parse($value);
+            $date->addHour($time);
+            $currentDate = Carbon::now();
+            return $date >= $currentDate;
         });
     }
 

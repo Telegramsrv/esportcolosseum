@@ -116,6 +116,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 	Route::post('/challenge/change-status', 'User\ChallengeController@changeStatus')->name('user.challenge.change-status');
 	Route::post('/challenge/accept', 'User\ChallengeController@acceptChallenge')->name('user.challenge.accept');
 
+	Route::post('/challenge/esc/save/{gameSlug}', 'User\ChallengeController@saveEscChallenge')->name('user.esc-challenge.save');
+
 	Route::get('/profile/edit', 'User\UserController@editProfile')->name('user.profile.edit');
 	Route::put('/profile/edit', 'User\UserController@updateProfile')->name('user.profile.update');
 	Route::get('/profile/change-password', 'User\UserController@editPassword')->name('user.change-password.edit');

@@ -23,18 +23,16 @@
                 @php($today = \Carbon\Carbon::now())
                 <div class="row buttons-block">
                     <div class="col s13">
-                        <button class="challengr-btn">
+                        <button class="challengr-btn" data-date = "{{$today->format('d M Y')}}">
                             {!! $today->format('d M Y'); !!}   
                         </button>
                     </div>
-                    @php
-                        $i=1;
-                        $incrementingDays=1;
-                    @endphp
+                    
                     @for($i=1; $i<7; $i++)
+                         @php($date = $today->addDays(1)->format('d M Y'))
                         <div class="col s13">
-                            <button class="challengr-btn">
-                                {!! $today->addDays($incrementingDays)->format('d M Y'); !!}   
+                            <button class="challengr-btn" data-date = "{{ $date }}">
+                                {!! $date; !!}   
                             </button>
                         </div>
                     @endfor
@@ -44,7 +42,7 @@
                         <ul class="timing disabled_for_mobile">
                             @php($hours = 0)
                             @while($hours<24)
-                                <li>{!! sprintf('%02d:00', $hours) !!}</li>
+                                <li data-id = "{{ $hours}}">{!! sprintf('%02d:00', $hours) !!}</li>
                                 @php($hours = $hours + $settings->esc_challenge_interval_hrs)
                             @endwhile
                         </ul>
@@ -68,6 +66,13 @@
                 <div class="row">
                     @php($cnt = 0)
                     @foreach($escChallangeTemplates as $escChallangeTemplate)
+                        {!! Form::open(['route' => ['user.esc-challenge.save', $selectedGame->slug], 'method' => 'post', 'class' => 'esc-challenge-form']) !!}
+                        {!! Form::hidden('date', '', ['class' => 'esc-date']) !!}
+                        {!! Form::hidden('time', '', ['class' => 'esc-time']) !!}
+                        {!! Form::hidden('game_type', 'solo') !!}
+                        {!! Form::hidden('esc_challenge_template_id',  $escChallangeTemplate->id) !!}
+                        {!! Form::hidden('coins',  $escChallangeTemplate->joining_coins) !!}
+                        {!! Form::hidden('win_coins',  $escChallangeTemplate->winning_coins) !!}
                         <div class="col s12 m3">
                             <div class="challenge-member">
                                 <div class="ch-coin-block">
@@ -79,8 +84,8 @@
                                     </div>
                                 </div>
                                 <div class="member-block">
-                                    <div class="members">members<span>1 / 2</span></div>
-                                    <button class="join-btn">Join</button>
+                                    <div class="members">members<span class="members-span">0 / 0</span></div>
+                                    <input type="button" class="join-btn" onclick="joinEscGame(this)"  value="Join" />
                                 </div>
                             </div>
                         </div>
@@ -89,6 +94,7 @@
                             </div>
                             <div class="row">
                         @endif
+                        {!! Form::close() !!}
                     @endforeach
                 </div>
             </div>

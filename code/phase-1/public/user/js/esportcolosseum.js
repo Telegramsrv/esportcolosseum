@@ -107,12 +107,15 @@ $(document).ready(function(){
     $(".challengr-btn").click(function(){
         $('.esc-challenge-date-active').removeClass('esc-challenge-date-active');
         $(this).addClass('esc-challenge-date-active');
+        $(".esc-challenge-form .esc-date").val($(this).attr("data-date"));
         return false;
     });
 
     $("ul.timing li").click(function(){
         $(".esc-challenge-time-active").removeClass('esc-challenge-time-active');
         $(this).addClass('esc-challenge-time-active');
+        $(".esc-challenge-form .esc-time").val($(this).attr("data-id"));
+        $(".time-block .esc-challenge-time-active").attr("data-id");
         return false;
     });
 
@@ -791,4 +794,43 @@ function showError(labelId, inputId, message) {
 
 function closeModal(){
     $(".modal.open").closeModal();
+}
+
+
+// Join Esc Game
+
+function joinEscGame(_this) {
+    var escGameForm = $(_this).closest("form.esc-challenge-form");
+    var postUrl = escGameForm.attr('action');
+    var formData = escGameForm.serialize();
+    // $('.join-btn').prop('disabled', true);
+    $.ajax({
+        url: postUrl,
+        type:'POST',
+        data:formData,
+        success:function(data){
+            if(data.success == true){
+                $(_this).parent().find(".members .members-span").html(1 + " / "+ 2);
+                $(_this).remove();
+                //$('.join-btn').prop('disabled', false);
+            }
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+             // $('.join-btn').prop('disabled', false);
+            if(errors.time != undefined && errors.time[0] != ""){
+                alert(errors.time[0]);
+            }
+            else if(errors.date != undefined && errors.date[0] != ""){
+                alert(errors.date[0]);
+            }
+            else if(errors.coins != undefined && errors.coins[0] != ""){
+                alert(errors.coins[0]);
+            }
+            else if(errors.game_type != undefined && errors.game_type[0] != ""){
+                alert(errors.game_type[0]);
+            }
+        }
+    });
+    return false;
 }
