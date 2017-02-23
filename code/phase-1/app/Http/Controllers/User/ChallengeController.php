@@ -79,7 +79,7 @@ class ChallengeController extends Controller
             if(!empty($input["date"]) && !empty($input["time"])) {
                 $date = Carbon::parse($input["date"]);
                 $date->addHour($input["time"]);
-                $challenges = Challenge::where('esc_date', '>=' , $date->toDateString())->where('challenge_status', 'challenger-submitted')->where('game_id', $selectedGame->id)->where('challenge_type' , 'esc')->where('game_type','solo')->get();
+                $challenges = Challenge::where('esc_date', '=' , $date->toDateTimeString())->where('challenge_status', 'challenger-submitted')->where('game_id', $selectedGame->id)->where('challenge_type' , 'esc')->where('game_type','solo')->get();
             }
             
              return response()->json([

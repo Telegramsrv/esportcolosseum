@@ -853,11 +853,12 @@ function getEscGame(date, time) {
         data:{date:date, time:time},
         success:function(data){
             if(data.success == true){
+                $(".members .members-span").html('0 / 0'); 
                 var challenges = data.challenges;
                 if(challenges.length > 0) {
                     for(var i=0; i<challenges.length; i++) {
                         var challenge = challenges[i];
-                        $('#template-id-' + challenge.esc_challenge_template_id).find(".members .members-span").html(1 + " / "+ 2);
+                        $('#template-id-' + challenge.esc_challenge_template_id).find(".members .members-span").html('1 / 2');
                     }
                 }
             }
