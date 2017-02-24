@@ -166,4 +166,14 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\UserBankDetails');
     }
+
+
+    /**
+     * User can have one bank details
+     * @return App\Models\UserBankDetails set of Bank Details added by User.
+     */
+    public function coinTransections()
+    {
+        return $this->hasMany('App\Models\CoinTransections');
+    }
 }

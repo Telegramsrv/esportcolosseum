@@ -13,6 +13,7 @@ use App\Models\Game;
 use App\Models\Region;
 use App\Models\Team;
 use App\Models\Challenge;
+use App\Models\CoinTransections;
 use App\Models\EscChallengeTemplate;
 use Carbon\Carbon;
 use DB;
@@ -191,6 +192,16 @@ class ChallengeController extends Controller
             }
 
             $challenge->save();
+
+            //update user coin 
+            $userDetails = Auth::user()->userDetails;
+            $userDetails->update(['coins' => ($userDetails->coins - $challenge->coins)]);
+
+            //coin transaction         
+            $coinTransections = new CoinTransections(['source_id' => 7, 'coins' => $challenge->coins, 'transaction_type' => 'Debit', 'challenge_id' => $challenge->id]);
+            Auth::user()->coinTransections()->save($coinTransections);
+
+           
              $res = [
                 'success' => true,
                 'members' => $members,
