@@ -25,7 +25,6 @@ class CreateEscChallengeRequest extends FormRequest
     public function rules()
     {
         $validations = array(
-            //'user_id' => 'required|custom_exists:users,md5(id),true|player_not_playing_any_active_challenge',
             'time' => 'required|is_valid_esc_time' ,
             'date' => 'required|is_valid_esc_date:' . $this->input('time'),
             'coins' => 'required|numeric|min:1|check_coins_balance',
@@ -43,7 +42,6 @@ class CreateEscChallengeRequest extends FormRequest
     public function messages()
     {
         return [
-           // 'user_id.player_not_playing_any_active_challenge' => 'You are associated with other challenge.',
             'time.is_valid_esc_time' => 'Please select valid time.',
             'date.is_valid_esc_date' => 'You can not select past date.',
 

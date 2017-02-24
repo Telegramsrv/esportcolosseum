@@ -112,7 +112,7 @@ $(document).ready(function(){
         if(date && time) {
             getEscGame(date, time);
         }
-        $(".esc-challenge-form .esc-date").val(date);
+        // $(".esc-challenge-form .esc-date").val(date);
         return false;
     });
 
@@ -121,11 +121,10 @@ $(document).ready(function(){
         $(this).addClass('esc-challenge-time-active');
         var time = $(this).attr("data-id");
         var date = $('.esc-challenge-date-active').attr('data-date');
-        $(".esc-challenge-form .esc-time").val(time);
+        // $(".esc-challenge-form .esc-time").val(time);
         if(date && time) {
             getEscGame(date, time);
         }
-        // $(".time-block .esc-challenge-time-active").attr("data-id");
         return false;
     });
 
@@ -820,7 +819,7 @@ function joinEscGame(_this) {
         data:formData,
         success:function(data){
             if(data.success == true){
-                $(_this).parent().find(".members .members-span").html(1 + " / "+ 2);
+                $(_this).parent().find(".members .members-span").html(data.members);
                 $(_this).remove();
                 //$('.join-btn').prop('disabled', false);
             }
@@ -853,18 +852,11 @@ function getEscGame(date, time) {
         data:{date:date, time:time},
         success:function(data){
             if(data.success == true){
-                $(".members .members-span").html('0 / 0'); 
-                var challenges = data.challenges;
-                if(challenges.length > 0) {
-                    for(var i=0; i<challenges.length; i++) {
-                        var challenge = challenges[i];
-                        $('#template-id-' + challenge.esc_challenge_template_id).find(".members .members-span").html('1 / 2');
-                    }
-                }
+                $("#esc-challenge-wrapper").html(data.challenge_html);
             }
         },
         error: function (data) {
-            console.log("fail");
+            console.log("error");
         }
     });
     return false;

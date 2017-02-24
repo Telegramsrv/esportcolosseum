@@ -40,6 +40,20 @@ class Challenge extends Model
                     });
     }
 
+/**
+     * Scope a query to filter with below parameters.
+     *     - Fetch only user's challenges.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder     $query
+     * @param  App\User                                  $user
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMyEscChallenges($query, User $user){
+         return $query->where(function ($query) use ($user) {
+            $query->where('user_id', $user->id)->Orwhere('opponent_id', $user->id);
+         });
+    }
+
     /**
      * Scope a query to fetch challanges for selected games.
      * @param  \Illuminate\Database\Eloquent\Builder    $query 
@@ -78,6 +92,17 @@ class Challenge extends Model
      */
     public function scopeCurrentChallenges($query){
         return $query->whereIn('challenge_status', ['created', 'challenger-submitted', 'opponent-accepted', 'opponent-submitted']);
+    }
+
+     /**
+     * Scope a query to filter data with below parameters.
+     *     - Fetch challenges whose status is "Created" or "Accepted".
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeEscChallengeByGameDateTime($query, $dateTime, $gameId){
+        return $query->where('esc_date', '=' , $dateTime->toDateTimeString())->where('game_id', $gameId)->where('challenge_type' , 'esc')->where('game_type','solo');
     }
 
     /**

@@ -46,6 +46,7 @@
     <div class="match-list upcomming_games">
         @if($challenges->count() > 0)
             @foreach($challenges as $challenge)
+               @if($challenge->challenge_type == 'open')
                 <div class="row card-panel blue-grey lighten-5">
                     <div class="col s12 m5 left-team">
                          <div class="team-detail card-panel deep-orange darken-4 white-text center-align hoverable">
@@ -124,6 +125,7 @@
                         </div>
                     </div>
                 </div>
+               @endif
             @endforeach
             {{ $challenges->links('user.partials.pagination') }}
         @else

@@ -130,4 +130,27 @@ function myChallengeTeams($challenge, $userId){
      return $teams;
 }
 
+
+function generateEscChallengeTemplate($escChallangeTemplates, $challenges, $selectedGame, $input){
+	$challengesArr = [];
+	$html = "";
+	if($challenges->count() > 0) {
+        foreach ($challenges as $key => $challenge) {
+            if($challenge->challenge_status == 'challenger-submitted') {
+                $challengesArr[$challenge->esc_challenge_template_id]["currentCount"] = 1;
+            }
+
+            if($challenge->user_id == Auth::id() || $challenge->opponent_id == Auth::id()) {
+                $challengesArr[$challenge->esc_challenge_template_id]["canJoinGame"] = false;
+            }
+        }
+    }
+    foreach($escChallangeTemplates as $k => $escChallangeTemplate) {
+        $canJoinGame = isset($challengesArr[$escChallangeTemplate->id]["canJoinGame"]) ? $challengesArr[$escChallangeTemplate->id]["canJoinGame"] : true;
+        $currentCount = isset($challengesArr[$escChallangeTemplate->id]["currentCount"]) ? $challengesArr[$escChallangeTemplate->id]["currentCount"] : 0;
+        $html .= view('user.partials.challenge.esc-challenge-template', ['escChallangeTemplate' => $escChallangeTemplate, 'cnt' => ($k + 1), 'canJoinGame' => $canJoinGame, 'currentCount' => $currentCount, 'selectedGame' => $selectedGame, 'date' => $input["date"] ,'time' =>$input['time']])->render();
+    }
+	return $html;
+}
+
 ?>

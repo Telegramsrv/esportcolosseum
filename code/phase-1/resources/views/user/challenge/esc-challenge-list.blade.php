@@ -63,38 +63,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="esc-challenge-wrapper">
                     @php($cnt = 0)
                     @foreach($escChallangeTemplates as $escChallangeTemplate)
-                        {!! Form::open(['route' => ['user.esc-challenge.save', $selectedGame->slug], 'method' => 'post', 'class' => 'esc-challenge-form']) !!}
-                        {!! Form::hidden('date', '', ['class' => 'esc-date']) !!}
-                        {!! Form::hidden('time', '', ['class' => 'esc-time']) !!}
-                        {!! Form::hidden('game_type', 'solo') !!}
-                        {!! Form::hidden('esc_challenge_template_id',  $escChallangeTemplate->id) !!}
-                        {!! Form::hidden('coins',  $escChallangeTemplate->joining_coins) !!}
-                        {!! Form::hidden('win_coins',  $escChallangeTemplate->winning_coins) !!}
-                        <div class="col s12 m3">
-                            <div class="challenge-member" id="template-id-{{ $escChallangeTemplate->id }}">
-                                <div class="ch-coin-block">
-                                    <div class="ch-coin">
-                                        win <span>{!! $escChallangeTemplate->winning_coins !!}</span> coins
-                                    </div>
-                                    <div class="ch-coin-black">
-                                        Pay <span>{!! $escChallangeTemplate->joining_coins !!}</span> coins
-                                    </div>
-                                </div>
-                                <div class="member-block">
-                                    <div class="members">members<span class="members-span">0 / 0</span></div>
-                                    <input type="button" class="join-btn" onclick="joinEscGame(this)"  value="Join" />
-                                </div>
-                            </div>
-                        </div>
                         @php($cnt++)
-                        @if($cnt%4 == 0)
-                            </div>
-                            <div class="row">
-                        @endif
-                        {!! Form::close() !!}
+                        @include('user.partials.challenge.esc-challenge-template', [$escChallangeTemplate, $cnt])
                     @endforeach
                 </div>
             </div>

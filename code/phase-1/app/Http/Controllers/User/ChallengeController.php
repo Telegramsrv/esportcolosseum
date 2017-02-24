@@ -75,17 +75,18 @@ class ChallengeController extends Controller
 	public function listEscChallenges(Game $selectedGame, Request $request){
         if ($request->ajax()) {
             $input = $request->all();
-            $challenges = array();
-            if(!empty($input["date"]) && !empty($input["time"])) {
+            $html = "";
+            if(!empty($input["date"]) && isset($input["time"])) {
                 $date = Carbon::parse($input["date"]);
                 $date->addHour($input["time"]);
-                $challenges = Challenge::where('esc_date', '=' , $date->toDateTimeString())->where('challenge_status', 'challenger-submitted')->where('game_id', $selectedGame->id)->where('challenge_type' , 'esc')->where('game_type','solo')->get();
+                $escChallangeTemplates = EscChallengeTemplate::all();
+                if($escChallangeTemplates->count() > 0 ) {
+                    $challenges = Challenge::escChallengeByGameDateTime($date, $selectedGame->id)->whereIn('challenge_status', ['challenger-submitted', 'opponent-submitted'])->get();
+                    $html = generateEscChallengeTemplate($escChallangeTemplates, $challenges, $selectedGame, $input);
+                }
             }
             
-             return response()->json([
-                'success' => true,
-                'challenges' => $challenges,
-            ]);
+            return response()->json(['success' => true, 'challenge_html' => $html]);
 
         } else {
             $escChallangeTemplates = EscChallengeTemplate::all();
@@ -162,22 +163,49 @@ class ChallengeController extends Controller
         $input = $request->all();
         $date = Carbon::parse($input["date"]);
         $date->addHour($input["time"]);
+
+        //get my esc challenges count for this date
+        $myChallengeCount = Challenge::myEscChallenges(Auth::user())->escChallengeByGameDateTime($date, $selectedGame->id)->currentChallenges()->count();
+
+        if($myChallengeCount <= 0) {
+
+            //get all esc challenges for this date
+            $challenge = Challenge::escChallengeByGameDateTime($date, $selectedGame->id)->whereIn('challenge_status', ['challenger-submitted'])->first();
         
-        $challenge = new Challenge($request->only(['coins', 'win_coins', 'game_type', 'esc_challenge_template_id']));
-        $challenge->user_id = Auth::user()->id;
-        $challenge->game_id = $selectedGame->id;
-        $challenge->challenge_type = 'esc';
-        $challenge->challenge_sub_type = 'captain-pick';
-        $challenge->challenge_status = 'challenger-submitted';
-        $challenge->esc_date = $date;
-        $challenge->valid_upto = $date->subMinute(30);
-        $challenge->save();
+            if(!empty($challenge)) {
+                //oppenent added for challenge
+                $challenge->opponent_id = Auth::id();
+                $challenge->challenge_status = 'opponent-submitted';
+                $members = "0 / 0";
+            } else {
+                //create new challenge for this date
+                $challenge = new Challenge($request->only(['coins', 'win_coins', 'game_type', 'esc_challenge_template_id']));
+                $challenge->user_id = Auth::id();
+                $challenge->game_id = $selectedGame->id;
+                $challenge->challenge_type = 'esc';
+                $challenge->challenge_sub_type = 'captain-pick';
+                $challenge->challenge_status = 'challenger-submitted';
+                $challenge->esc_date = $date;
+                $challenge->valid_upto = $date->subMinute(30);
+                $members = "1 / 2";
+            }
+
+            $challenge->save();
+             $res = [
+                'success' => true,
+                'members' => $members,
+                'message' => 'You have created challenge successfully.',
+            ];
+
+        } else {
+            $res = [
+                'success' => false,
+                'message' => 'You can no create challenge at this time.',
+            ];
+        }
 
         if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'You have created challenge successfully.',
-            ]);
+            return response()->json($res);
         }
     }
 
