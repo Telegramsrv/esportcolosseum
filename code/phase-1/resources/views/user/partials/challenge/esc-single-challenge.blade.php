@@ -1,9 +1,9 @@
 
 @php
-	$challengerCaptain = $challenge->captain;
+	$challengerCaptain = $challenge->captainDetails;
 	$opponentCaptain = null;
-	if($challenge->opponent != null ){
-		$opponentCaptain = $challenge->opponent;
+	if($challenge->opponentDetails != null ){
+		$opponentCaptain = $challenge->opponentDetails;
 	}
 @endphp
 
@@ -42,7 +42,7 @@
 					<div class="first_challenge_left_width">
 						<h2>
 							<span>TEAM 1 :</span>
-							{!! $challengerCaptain->userDetails->first_name !!} {!! $challengerCaptain->userDetails->last_name !!}
+							{!! $challengerCaptain->first_name !!} {!! $challengerCaptain->last_name !!}
 						</h2>
 						@if($challengerCaptain != null)
 							@php
@@ -63,7 +63,7 @@
 						@if($opponentCaptain != null)
 							<h2>
 								<span>TEAM 2 :  </span>
-								{!! $opponentCaptain->userDetails->first_name !!} {!! $opponentCaptain->userDetails->last_name !!}
+								{!! $opponentCaptain->first_name !!} {!! $opponentCaptain->last_name !!}
 							</h2>
 							@php
 								$parameters = [

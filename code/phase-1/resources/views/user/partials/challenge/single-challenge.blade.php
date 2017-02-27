@@ -10,7 +10,7 @@
 	$winnerTeam =  $challenge->winnerTeam();
 
 	if($challengerTeam != null){
-		$challengerCaptain = $challenge->captain;
+		$challengerCaptain = $challenge->captainDetails;
 		if(!in_array($challenge->challenge_status, $pastChallengesStatus)) {
 			$canChallengerCompleteChallenge = canCompleteChallenge($challenge, $challengerTeam, 'challenger');
 			$canChallengerCancelChallenge = canCancelChallenge($challenge);
@@ -28,7 +28,7 @@
 	$canOpponentRemovePlayer = true;
 	
 	if($opponentTeam != null ){
-		$opponentCaptain = $challenge->opponent;
+		$opponentCaptain = $challenge->opponentDetails;
 		if(!in_array($challenge->challenge_status, $pastChallengesStatus)) {
 			$canOpponentCompleteChallenge = canCompleteChallenge($challenge, $opponentTeam, 'opponent');
 			$canOpponentRemovePlayer = canOpponentRemovePlayerFromTeam($challenge,$opponentTeam);

@@ -29,7 +29,7 @@ class Challenge extends Model
      */
     public function scopeMyChallenges($query, User $user){
         //"captainDetails", 
-        return $query->with(["teamsWithDetails"])
+        return $query->with(["captainDetails", "teamsWithDetails"])
                     ->where(function ($query) use ($user) {
                         $query->where('user_id', $user->id)
                             ->Orwhere('opponent_id', $user->id)
@@ -200,6 +200,13 @@ class Challenge extends Model
         return $this->belongsTo("App\Models\UserDetails", "user_id", "user_id");  
     }    
 
+ /**
+     * User can create challenge for only one region at a time.
+     * @return App\Models\Region Region model associated with this challenge.
+     */
+    public function opponentDetails(){
+        return $this->belongsTo("App\Models\UserDetails", "opponent_id", "user_id");  
+    }   
     /**
      * Teams that belongs to challenge.
      * @return App\Models\Team Team Models associated with this challenge.

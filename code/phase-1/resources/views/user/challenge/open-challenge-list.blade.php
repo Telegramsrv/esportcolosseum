@@ -36,7 +36,7 @@
 		                    @foreach($challenges as $k => $challenge)
 		                    <tr>
 		                    	<td>{!! ($k + 1) !!}</td>
-		                        <td>{!! $challenge->captain->userDetails->first_name !!} {!! $challenge->captain->userDetails->last_name !!}</td>
+		                        <td>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}</td>
 		                        <td class="center-align">{!! $challenge->game_type !!}</td>
 		                        <td class="center-align">{!! $challenge->coins !!}</td>
 		                        <td class="center-align">{!! !empty($challenge->valid_upto) ? $challenge->valid_upto->format('H:i A M d, Y') : "" !!}</td>

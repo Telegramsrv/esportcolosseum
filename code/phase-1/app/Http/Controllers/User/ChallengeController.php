@@ -29,7 +29,8 @@ class ChallengeController extends Controller
         
         $canUserAcceptChallenge = (count($activeChallengesArr) > 0) ? false : true;
 
-		$challenges = Challenge::challengesForGame($selectedGame)
+		$challenges = Challenge::with(["captainDetails"])
+						->challengesForGame($selectedGame)
 						->whereNotIn('id', $activeChallengesArr)
                         ->openChallenges()
 						->currentChallenges()
@@ -61,7 +62,8 @@ class ChallengeController extends Controller
 	public function myChallengelist(Game $selectedGame, $challengeType){
 		$user = Auth::user();
         $challengeList = [];
-		$challenges = Challenge::myChallenges($user)
+		$challenges = Challenge::with(["opponentDetails"])
+                                ->myChallenges($user)
 								->challengesForGame($selectedGame) 
 								->get();
 

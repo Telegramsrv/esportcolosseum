@@ -1,5 +1,5 @@
 @foreach($players as $player)
-	@if($captain->id != $player->id)
+	@if($captain->user_id != $player->id)
 		<div class="player-section">
 			<div class="player-image">
 				@php
