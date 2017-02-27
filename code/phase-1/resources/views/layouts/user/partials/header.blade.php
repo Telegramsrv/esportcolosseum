@@ -33,7 +33,7 @@
 	            </li>
 	            <li>
 	            	<a href="#" class="white-text" title="Coins">
-	            		<i class="fa fa-circle-o" aria-hidden="true"></i> {{ isset(Auth::user()->userDetails->coins) ? Auth::user()->userDetails->coins : 0 }}
+	            		<i class="fa fa-circle-o" aria-hidden="true"></i> <span id = "u-coin"> {{ isset(Auth::user()->userDetails->coins) ? Auth::user()->userDetails->coins : 0 }} </span>
 	            	</a>
 	            </li>
 	            <li>

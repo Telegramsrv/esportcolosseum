@@ -821,6 +821,7 @@ function joinEscGame(_this) {
             if(data.success == true){
                 $(_this).parent().find(".members .members-span").html(data.members);
                 $(_this).remove();
+                $("#u-coin").html(data.remaining_coin);
                 //$('.join-btn').prop('disabled', false);
             }
         },

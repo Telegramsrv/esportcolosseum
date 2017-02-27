@@ -205,6 +205,7 @@ class ChallengeController extends Controller
              $res = [
                 'success' => true,
                 'members' => $members,
+                'remaining_coin' => $userDetails->coins,
                 'message' => 'You have created challenge successfully.',
             ];
 
