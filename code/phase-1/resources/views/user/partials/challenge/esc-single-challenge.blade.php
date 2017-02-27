@@ -34,7 +34,7 @@
 		<div class="vs_area">
 			<div class="row">
 				<div class="first-challenge-left-blog">
-					@if(Auth::id() == $challenge->winner_id)
+					@if(!empty($challenge->winner_id) && $challenge->user_id == $challenge->winner_id)
 						<div class="past_challenge_winner_image">
 							<img src="{!! url('user/images/winner.png') !!}">
 						</div>
@@ -79,7 +79,7 @@
 							</div>
 						@endif	
 					</div>
-					@if( Auth::id() == $challenge->winner_id)
+					@if(!empty($challenge->winner_id) && $challenge->opponent_id == $challenge->winner_id)
 					<div class="past_challenge_winner_image_one">
 						<img src="{!! url('user/images/winner.png') !!}">
 					</div>

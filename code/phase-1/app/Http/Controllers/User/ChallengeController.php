@@ -174,12 +174,12 @@ class ChallengeController extends Controller
         $date->addHour($input["time"]);
 
         //get my esc challenges count for this date
-        $myChallengeCount = Challenge::myEscChallenges(Auth::user())->escChallengeByGameDateTime($date, $selectedGame->id)->currentChallenges()->count();
+        $myChallengeCount = Challenge::myEscChallenges(Auth::user())->escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->currentChallenges()->count();
 
         if($myChallengeCount <= 0) {
 
             //get all esc challenges for this date
-            $challenge = Challenge::escChallengeByGameDateTime($date, $selectedGame->id)->whereIn('challenge_status', ['challenger-submitted'])->first();
+            $challenge = Challenge::escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->whereIn('challenge_status', ['challenger-submitted'])->first();
         
             if(!empty($challenge)) {
                 //oppenent added for challenge
