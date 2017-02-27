@@ -28,7 +28,7 @@ class CreateEscChallengeRequest extends FormRequest
             'time' => 'required|is_valid_esc_time' ,
             'date' => 'required|is_valid_esc_date:' . $this->input('time'),
             'coins' => 'required|numeric|min:1|check_coins_balance',
-            'game_type' => 'required',
+            'game_type' => 'required'
         );
         
         return $validations;
