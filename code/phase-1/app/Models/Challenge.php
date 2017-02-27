@@ -28,7 +28,8 @@ class Challenge extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeMyChallenges($query, User $user){
-        return $query->with(["captainDetails", "teamsWithDetails"])
+        //"captainDetails", 
+        return $query->with(["teamsWithDetails"])
                     ->where(function ($query) use ($user) {
                         $query->where('user_id', $user->id)
                             ->Orwhere('opponent_id', $user->id)

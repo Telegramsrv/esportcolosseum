@@ -27,7 +27,7 @@
 					<i class="fa fa-caret-down" aria-hidden="true"></i>
 				</div>
 				<div id="tab1">
-					@if($myCurrentChallenges->count() == 0)
+					@if(count($myCurrentChallenges) == 0)
 						<div class="first-challenge-section versus-image-one">
 							<div class="row">
 								No active challenges!
@@ -35,12 +35,17 @@
 						</div>	
 					@else
 						@foreach($myCurrentChallenges as $challenge)
+						@if($challenge->challenge_type == 'esc')
+							@include('user.partials.challenge.esc-single-challenge', $challenge)
+						@else
 							@include('user.partials.challenge.single-challenge', $challenge)
+						@endif
+							
 						@endforeach	
 					@endif	
 				</div>
 				<div id="tab2" style="display: none;">
-					@if($myPastChallenges->count() == 0)
+					@if(count($myPastChallenges) == 0)
 						<div class="first-challenge-section versus-image-one">
 							<div class="row">
 								No past challenges!

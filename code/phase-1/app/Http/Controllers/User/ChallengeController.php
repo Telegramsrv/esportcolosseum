@@ -60,16 +60,23 @@ class ChallengeController extends Controller
 
 	public function myChallengelist(Game $selectedGame, $challengeType){
 		$user = Auth::user();
-		$myCurrentChallenges = Challenge::myChallenges($user)
+        $challengeList = [];
+		$challenges = Challenge::myChallenges($user)
 								->challengesForGame($selectedGame) 
-								->challengesPerType($challengeType)
-								->currentChallenges()
 								->get();
-		$myPastChallenges = Challenge::myChallenges($user)
-								->challengesForGame($selectedGame) 
-								->challengesPerType($challengeType)
-								->pastChallenges()
-								->get();
+
+        if($challenges->count() > 0) {
+            foreach ($challenges as $key => $challenge) {
+                if(in_array($challenge->challenge_status, ['cancelled', 'completed'])) {
+                    $challengeList['past'][] = $challenge;
+                }else {
+                    $challengeList['current'][] = $challenge;
+                }
+            }
+        }
+        $myCurrentChallenges = isset($challengeList['current']) ? $challengeList['current'] : [];
+        $myPastChallenges = isset($challengeList['past']) ? $challengeList['past'] : [];
+
 		return view("user.challenge.my-challenge-list", compact('selectedGame', 'myCurrentChallenges', 'myPastChallenges'));
 	}
 
