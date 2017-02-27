@@ -53,7 +53,11 @@
 						</div>	
 					@else
 						@foreach($myPastChallenges as $challenge)
-							@include('user.partials.challenge.single-challenge', $challenge)
+							@if($challenge->challenge_type == 'esc')
+								@include('user.partials.challenge.esc-single-challenge', $challenge)
+							@else
+								@include('user.partials.challenge.single-challenge', $challenge)
+							@endif
 						@endforeach	
 					@endif	
 				</div>
