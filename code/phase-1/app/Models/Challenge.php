@@ -95,17 +95,6 @@ class Challenge extends Model
         return $query->whereIn('challenge_status', ['created', 'challenger-submitted', 'opponent-accepted', 'opponent-submitted']);
     }
 
-     /**
-     * Scope a query to filter data with below parameters.
-     *     - Fetch challenges whose status is "Created" or "Accepted".
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeEscChallengeByGameDateTime($query, $dateTime, $gameId){
-        return $query->where('esc_date', '=' , $dateTime->toDateTimeString())->where('game_id', $gameId)->where('challenge_type' , 'esc')->where('game_type','solo');
-    }
-
     /**
      * Scope a query to filter data with below parameters.
      *     - Fetch challenges whose status is "Cancelled" or "Completed".
@@ -115,6 +104,51 @@ class Challenge extends Model
      */
     public function scopePastChallenges($query){
         return $query->whereIn('challenge_status', ['cancelled', 'completed']);
+    }
+
+
+     /**
+     * Scope a query to filter data with below parameters.
+     *     - Fetch challenges whose status is "Created" or "Accepted".
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeChallengeByDateTime($query, $dateTime){
+        return $query->where('esc_date', '=' , $dateTime->toDateTimeString());
+    }
+    
+      /**
+     * Scope a query to filter data with below parameters.
+     *     - Fetch challenges whose challenge_type is "open".
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOpenChallenges($query){
+        return $query->where('challenge_type', 'open');
+    }
+
+      /**
+     * Scope a query to filter data with below parameters.
+     *     - Fetch challenges whose challenge_type is "esc".
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeEscChallenges($query){
+        return $query->where('challenge_type', 'esc');
+    }
+
+        /**
+     * Scope a query to filter data with below parameters.
+     *     - Filter challenges whose game_type.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGameType($query, $type){
+        return $query->where('game_type', $type);
     }
 
     /**

@@ -33,11 +33,10 @@
                     </thead>
                     <tbody>
                     	@if($challenges->count() > 0)
-                    		@php($recordCounter = 1)
-		                    @foreach($challenges as $challenge)
+		                    @foreach($challenges as $k => $challenge)
 		                    <tr>
-		                    	<td>{!! $recordCounter++ !!}</td>
-		                        <td>{!! $challenge->captainDetails->first_name !!} {!! $challenge->captainDetails->last_name !!}</td>
+		                    	<td>{!! ($k + 1) !!}</td>
+		                        <td>{!! $challenge->captain->userDetails->first_name !!} {!! $challenge->captain->userDetails->last_name !!}</td>
 		                        <td class="center-align">{!! $challenge->game_type !!}</td>
 		                        <td class="center-align">{!! $challenge->coins !!}</td>
 		                        <td class="center-align">{!! !empty($challenge->valid_upto) ? $challenge->valid_upto->format('H:i A M d, Y') : "" !!}</td>

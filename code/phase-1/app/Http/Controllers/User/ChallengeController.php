@@ -29,9 +29,9 @@ class ChallengeController extends Controller
         
         $canUserAcceptChallenge = (count($activeChallengesArr) > 0) ? false : true;
 
-		$challenges = Challenge::with(["captain", "captainDetails"])
-						->challengesForGame($selectedGame)
+		$challenges = Challenge::challengesForGame($selectedGame)
 						->whereNotIn('id', $activeChallengesArr)
+                        ->openChallenges()
 						->currentChallenges()
 						->notAcceptedByOpponent()
 						->paginate(env('RECORDS_PER_PAGE'));
@@ -89,13 +89,12 @@ class ChallengeController extends Controller
                 $date->addHour($input["time"]);
                 $escChallangeTemplates = EscChallengeTemplate::all();
                 if($escChallangeTemplates->count() > 0 ) {
-                    $challenges = Challenge::escChallengeByGameDateTime($date, $selectedGame->id)->whereIn('challenge_status', ['challenger-submitted', 'opponent-submitted'])->get();
+                    $challenges = Challenge::escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->whereIn('challenge_status', ['challenger-submitted', 'opponent-submitted'])->get();
                     $html = generateEscChallengeTemplate($escChallangeTemplates, $challenges, $selectedGame, $input);
                 }
             }
             
             return response()->json(['success' => true, 'challenge_html' => $html]);
-
         } else {
             $escChallangeTemplates = EscChallengeTemplate::all();
             $settings = getOptions();
