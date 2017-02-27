@@ -23,8 +23,8 @@
                     $result = "";
                     if($match->game_type == "solo")  {
                         $result = ($match->winner_id == Auth::id()) ? "Won": "Loss";
-                        $opponentUser = ($match->user_id == Auth::id()) ? $match->opponent : $match->captain;
-                        $opponent = $opponentUser->userDetails->first_name . " " . $opponentUser->userDetails->last_name;
+                        $opponentUser = ($match->user_id == Auth::id()) ? $match->opponentDetails : $match->captainDetails;
+                        $opponent = $opponentUser->first_name . " " . $opponentUser->last_name;
                     } else if($match->game_type == "team") {
                         $winnerTeam =  $match->winnerTeam();
                         $myChallengeTeams = myChallengeTeams($match, Auth::id());
