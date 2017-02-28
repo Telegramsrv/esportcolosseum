@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
 	public function index(Game $selectedGame) {
-		$matchHistory = Challenge::with(["opponentDetails"])->myChallenges(Auth::user())->pastChallenges()->paginate(env('PAGINATION_LINK_LIMIT'));
+		$matchHistory = Challenge::with(["opponentDetails"])
+							->myChallenges(Auth::user())
+							->challengeStatus('completed')
+							->paginate(env('PAGINATION_LINK_LIMIT'));
 		return view("user.dashboard.index")->with(['selectedGame' => $selectedGame, 'matchHistory' => $matchHistory]);
 	}
 }

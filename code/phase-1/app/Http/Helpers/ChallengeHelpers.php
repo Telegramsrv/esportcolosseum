@@ -87,7 +87,6 @@ function canOpponentRemovePlayerFromTeam(Challenge $challenge){
 	}
 }
 
-
 function formatChallengeSubType($challenge){
 	$formattedString = "";
 
@@ -125,7 +124,14 @@ function myChallengeTeams($challenge, $userId){
                 }
              }
         }
-        $teams['opponent_team'] = array_values($opponentTeams)[0];
+
+        if(count($opponentTeams) > 0 ){
+        	$teams['opponent_team'] = array_values($opponentTeams)[0];	
+        }
+        else{
+        	$teams['opponent_team'] = [];
+        }
+        
     }
      return $teams;
 }
