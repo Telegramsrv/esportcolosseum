@@ -35,8 +35,8 @@
 						</div>	
 					@else
 						@foreach($myCurrentChallenges as $challenge)
-						@if($challenge->challenge_type == 'esc')
-							@include('user.partials.challenge.esc-single-challenge', $challenge)
+						@if($challenge->game_type == 'solo')
+							@include('user.partials.challenge.solo-challenge', $challenge)
 						@else
 							@include('user.partials.challenge.single-challenge', $challenge)
 						@endif
@@ -54,7 +54,7 @@
 					@else
 						@foreach($myPastChallenges as $challenge)
 							@if($challenge->challenge_type == 'esc')
-								@include('user.partials.challenge.esc-single-challenge', $challenge)
+								@include('user.partials.challenge.solo-challenge', $challenge)
 							@else
 								@include('user.partials.challenge.single-challenge', $challenge)
 							@endif

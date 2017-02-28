@@ -41,7 +41,7 @@
                     <td>{{ ucfirst($match->game_type) }} {{ ($match->challenge_sub_type) ? '(' . $challengeSubType[$match->challenge_sub_type] . ')' : "" }}  </td>
                     <td>{{ $result }}</td>
                     <td class="center-align">{{ $match->coins }}</td>
-                    <td class="center-align"><a class="orange-link" href="#"><i class="material-icons white-text">launch</i></a></td>
+                    <td class="center-align"><a class="orange-link" href="{{ route('user.challenge.view', ['challengeId' => md5($match->id), 'gameSlug' => $selectedGame->slug]) }}"><i class="material-icons white-text">launch</i></a></td>
                 </tr>
             @endforeach 
         @else

@@ -229,5 +229,15 @@ class ChallengeController extends Controller
         }
     }
 
+     public function viewChallenge(Request $request, $challengeId, Game $selectedGame){
+        $input = $request->all();
+        $challenge = Challenge::with(["opponentDetails", "captainDetails", "teamsWithDetails"])->where(DB::raw('md5(id)'), $challengeId)->firstOrFail();
+
+        return view("user.challenge.view-challenge", compact('challenge', 'selectedGame'));
+        dd($challenge);
+
+     }
+    
+
     
 }

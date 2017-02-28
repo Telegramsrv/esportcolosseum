@@ -43,6 +43,6 @@
 @section('gamer-content')
 <section>
 	<div class="section-title">Match <span>History</span></div>
-	   @include('user.partials.challenge.match-history', $matchHistory)
+	   @include('user.partials.challenge.match-history', ["matchHistory" => $matchHistory, "selectedGame" => $selectedGame])
 </section>
 @endsection
