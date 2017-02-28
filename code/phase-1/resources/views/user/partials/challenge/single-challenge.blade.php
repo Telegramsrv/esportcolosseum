@@ -40,48 +40,7 @@
 
 <div class="first-challenge-section versus-image-one">
 	<div class="row">
-		<div class="row">
-			<div class="first-challenge-header">
-				<img src="{!! url(env('UPLOAD_GAME_LOGO', 'storage/games/logo/').$selectedGame->logo) !!}">	
-			</div>
-			<div class="first-challenge-header-ul">
-				<ul>
-					<li>Challenge Type</li>
-					<li>Playing As</li>
-					<li>Valid Till</li>
-					<li>Coins</li>
-				</ul>
-				<ul class="data-for-order-">
-					<li>{!! ucfirst($challenge->challenge_type) !!} Challenge</li>
-					<li>{!! ucfirst($challenge->game_type) !!}</li>
-					<li>{!! findDateDifferenceInHours($challenge->valid_upto) !!}</li>
-					<li>{!! $challenge->coins !!}</li>
-				</ul>
-			</div>
-			<div class="first-challenge-header-button">
-				@if($canChallengerCancelChallenge)
-					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
-						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
-						{!! Form::hidden('challenge_status', md5('cancelled')) !!}
-						{!! Form::submit('Cancel Challenge', ['class' => 'btn btn-default', 'id' => 'cancelChallengeBtn']) !!}
-					{!! Form::close() !!}
-				@elseif($canChallengerCompleteChallenge)
-					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
-						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
-						{!! Form::hidden('challenge_status', md5('challenger-submitted')) !!}
-						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default', 'id' => 'completeChallengeBtn']) !!}
-					{!! Form::close() !!}
-				@elseif($canOpponentCompleteChallenge)
-					{!! Form::open(['route' => 'user.challenge.change-status', 'method'=>'POST']) !!}
-						{!! Form::hidden('challenge_id', md5($challenge->id)) !!}
-						{!! Form::hidden('challenge_status', md5('opponent-submitted')) !!}
-						{!! Form::submit('Complete Challenge', ['class' => 'btn btn-default', 'id' => 'completeChallengeBtn']) !!}
-					{!! Form::close() !!}
-				@else
-					<!-- <label class="btn btn-default">COMPLETE CHALLENGE</label>	 -->
-				@endif
-			</div>
-		</div>
+		@include('user.partials.challenge.challenge-header', [$challenge, $selectedGame, $canChallengerCancelChallenge, $canChallengerCompleteChallenge, $canOpponentCompleteChallenge])
 		<div class="vs_area">
 			<div class="row">
 				<div class="first-challenge-left-blog">
