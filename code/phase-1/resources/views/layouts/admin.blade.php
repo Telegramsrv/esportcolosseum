@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="{!! asset('admin/css/buttons.dataTables.min.css') !!}">
 	<!-- Bootstrap Datatables -->
 	<link rel="stylesheet" href="{!! asset('admin/css/dataTables.bootstrap.min.css') !!}">
+	<link href="{!! asset('admin/css/bootstrap-datepicker.css') !!}" rel="stylesheet">
 	<!-- Bootstrap social button library -->
 	<link rel="stylesheet" href="{!! asset('admin/css/bootstrap-social.css') !!}">
 	<!-- Bootstrap select -->
@@ -98,6 +99,7 @@
 	<script src="{!! asset('admin/js/jquery.min.js') !!}"></script>
 	<script src="{!! asset('admin/js/bootstrap-select.min.js') !!}"></script>
 	<script src="{!! asset('admin/js/bootstrap.min.js') !!}"></script>
+	<script src="{!! asset('admin/js/bootstrap-datepicker.min.js') !!}"></script>
 	<script src="{!! asset('admin/js/jquery.dataTables.min.js') !!}"></script>
 	<script src="{!! asset('admin/js/dataTables.buttons.min.js') !!}"></script>
 	<script src="{!! asset('admin/js/jszip.min.js') !!}"></script>

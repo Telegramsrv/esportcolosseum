@@ -9,7 +9,7 @@ use App\Models\Challenge;
 class MatchController extends Controller
 {
 	public function index() {
-		$matches = Challenge::all();
+		$matches = Challenge::with(['captainDetails', 'opponentDetails', 'game'])->get();
 		return view("admin.match.index", compact('matches'));
 	}
 	

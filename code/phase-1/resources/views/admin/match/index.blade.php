@@ -8,32 +8,82 @@
 				<h2 class="page-title">Matches</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<table id="zctb"
+						<table border="0" class="display table table-striped table-bordered table-hover">
+					        <tbody>
+					        	<tr>
+						            <td>From Date: <input type="text" id="dateStart" name="dateStart"></td>
+						            <td>To Date: <input type="text" id="dateEnd" name="dateEnd"></td>
+					        	</tr>
+					        	<tr>
+						            <td>Minimum Coin: <input type="text" id="minCoin" name="minCoin"></td>
+						            <td>Maximum Coin: <input type="text" id="maxCoin" name="maxCoin"></td>
+					        	</tr>
+					    	</tbody>
+					    </table>
+    					<br>
+						<table id="match-table" 
 							class="display table table-striped table-bordered table-hover"
 							cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<th>Challenger</th>
-									<th>Game</th>
+									<th>Sr No</th>
+									<th>Game Name</th>
 									<th>Game Type</th>
-									<th>Coins</th>
+									<th>Challenge Type</th>
+									<th>Date and Time</th>
+									<th>Challenger Name</th>
+									<th>Acce pted</th>
+									<th>Opponent Name</th>
+									<th>Coin</th>
 									<th>Status</th>
-									<th>Valid Upto</th>
-									<th>Actions</th>
+									<th>Result</th>
+<!-- 									<th>Actions</th> -->
 								</tr>
 							</thead>
 							<tbody>
+								@php
+									$srNo = 1;
+								@endphp
 								@foreach ($matches as $match)
 									<tr>
-										<td>{{ $match->captain->email }}</td>
+										<td>{{ $srNo++ }}</td>
 										<td>{{ $match->game->name }}</td>
+										<td>{{ $match->challenge_type }}</td>
 										<td>{{ $match->game_type }}</td>
+										<td>
+											@if( $match->challenge_type == 'esc')
+												{{ $match->esc_date }}
+											@else
+												{{ $match->valid_upto }}
+											@endif
+										</td>
+										<td>{{ $match->captainDetails->first_name.' '.$match->captainDetails->last_name }}</td>
+										<td>
+											@if($match->opponent_id > 0)
+												Yes
+											@else
+												No
+											@endif
+										</td>
+										<td>
+											@if($match->opponent_id > 0)
+												{{ $match->opponentDetails->first_name.' '.$match->opponentDetails->last_name }}
+											@endif
+										</td>
 										<td>{{ $match->coins }}</td>
 										<td>{{ $match->challenge_status }}</td>
-										<td>{{ $match->valid_upto }}</td>
- 										<td>
- 											<a title="Edit" href="{{ url('admin/match/edit/'.$match->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a> 
- 										</td>
+										<td>
+											@if( $match->winner_id > 0)
+												@if( $match->winner_id == $match->user_id)
+													{{ $match->captainDetails->first_name.' '.$match->captainDetails->last_name }}
+												@else
+													{{ $match->opponentDetails->first_name.' '.$match->opponentDetails->last_name }}
+												@endif
+											@endif
+										</td>
+<!--  										<td> -->
+<!--  											<a title="Edit" href="{{ url('admin/match/edit/'.$match->id) }}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a>  -->
+<!--  										</td> -->
 									</tr>
 								@endforeach
 							</tbody>
