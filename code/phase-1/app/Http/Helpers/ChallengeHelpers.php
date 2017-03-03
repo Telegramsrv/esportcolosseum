@@ -139,7 +139,7 @@ function myChallengeTeams($challenge, $userId){
 
 function generateEscChallengeTemplate($escChallangeTemplates, $challenges, $selectedGame, $input){
 	$challengesArr = [];
-	$html = "";
+	$html = "<div class='row'>";
 	if($challenges->count() > 0) {
         foreach ($challenges as $key => $challenge) {
             if($challenge->challenge_status == 'challenger-submitted') {
@@ -151,13 +151,13 @@ function generateEscChallengeTemplate($escChallangeTemplates, $challenges, $sele
             }
         }
     }
+    $totalCnt = $escChallangeTemplates->count();
     foreach($escChallangeTemplates as $k => $escChallangeTemplate) {
-    	$html .= $escChallangeTemplate . ",,,";
-    	
-        // $canJoinGame = isset($challengesArr[$escChallangeTemplate->id]["canJoinGame"]) ? $challengesArr[$escChallangeTemplate->id]["canJoinGame"] : true;
-        // $currentCount = isset($challengesArr[$escChallangeTemplate->id]["currentCount"]) ? $challengesArr[$escChallangeTemplate->id]["currentCount"] : 0;
-        // $html .= view('user.partials.challenge.esc-challenge-template', ['escChallangeTemplate' => $escChallangeTemplate, 'cnt' => ($k + 1), 'canJoinGame' => $canJoinGame, 'currentCount' => $currentCount, 'selectedGame' => $selectedGame, 'date' => $input["date"] ,'time' =>$input['time']])->render();
+        $canJoinGame = isset($challengesArr[$escChallangeTemplate->id]["canJoinGame"]) ? $challengesArr[$escChallangeTemplate->id]["canJoinGame"] : true;
+        $currentCount = isset($challengesArr[$escChallangeTemplate->id]["currentCount"]) ? $challengesArr[$escChallangeTemplate->id]["currentCount"] : 0;
+        $html .= view('user.partials.challenge.esc-challenge-template', ['escChallangeTemplate' => $escChallangeTemplate, 'cnt' => ($k + 1), 'canJoinGame' => $canJoinGame, 'currentCount' => $currentCount, 'selectedGame' => $selectedGame, 'date' => $input["date"] ,'time' =>$input['time'], 'totalCnt' => $totalCnt])->render();
     }
+    $html .= "</div>";
 	return $html;
 }
 

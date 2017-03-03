@@ -27,7 +27,7 @@
         </div>
     </div>
 </div>
-@if($cnt%4 == 0)
+@if($cnt%4 == 0 && $totalCnt > $cnt)
     </div>
     <div class="row">
 @endif

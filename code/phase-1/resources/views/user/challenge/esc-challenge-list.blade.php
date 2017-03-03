@@ -63,12 +63,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" id="esc-challenge-wrapper">
-                    @php($cnt = 0)
-                    @foreach($escChallangeTemplates as $escChallangeTemplate)
-                        @php($cnt++)
-                        @include('user.partials.challenge.esc-challenge-template', [$escChallangeTemplate, $cnt])
-                    @endforeach
+                <div id="esc-challenge-wrapper">
+                    <div class="row" >
+                        @php($cnt = 0)
+                        @foreach($escChallangeTemplates as $escChallangeTemplate)
+                            @php($cnt++)
+                            @include('user.partials.challenge.esc-challenge-template', [$escChallangeTemplate, $cnt])
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
