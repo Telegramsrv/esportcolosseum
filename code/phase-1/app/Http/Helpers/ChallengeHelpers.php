@@ -151,8 +151,8 @@ function generateEscChallengeTemplate($escChallangeTemplates, $challenges, $sele
             }
         }
     }
-    dump($escChallangeTemplates);
     foreach($escChallangeTemplates as $k => $escChallangeTemplate) {
+    	
         $canJoinGame = isset($challengesArr[$escChallangeTemplate->id]["canJoinGame"]) ? $challengesArr[$escChallangeTemplate->id]["canJoinGame"] : true;
         $currentCount = isset($challengesArr[$escChallangeTemplate->id]["currentCount"]) ? $challengesArr[$escChallangeTemplate->id]["currentCount"] : 0;
         $html .= view('user.partials.challenge.esc-challenge-template', ['escChallangeTemplate' => $escChallangeTemplate, 'cnt' => ($k + 1), 'canJoinGame' => $canJoinGame, 'currentCount' => $currentCount, 'selectedGame' => $selectedGame, 'date' => $input["date"] ,'time' =>$input['time']])->render();
