@@ -823,6 +823,8 @@ function joinEscGame(_this) {
                 $(_this).remove();
                 $("#u-coin").html(data.remaining_coin);
                 //$('.join-btn').prop('disabled', false);
+            }else {
+                alert(data.message);
             }
         },
         error: function (data) {

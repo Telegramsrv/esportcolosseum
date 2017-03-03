@@ -172,55 +172,65 @@ class ChallengeController extends Controller
         $date = Carbon::parse($input["date"]);
         $date->addHour($input["time"]);
 
-        //get my esc challenges count for this date
-        $myChallengeCount = Challenge::myEscChallenges(Auth::user())->escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->currentChallenges()->count();
+        //check for open challenge
+        $myOpenChallengeCount = Challenge::myEscChallenges(Auth::user())->openChallenges()->openValidUpto($date)->count();
 
-        if($myChallengeCount <= 0) {
+        if($myOpenChallengeCount == 0) {
+            //get my esc challenges count for this date
+            $myChallengeCount = Challenge::myEscChallenges(Auth::user())->escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->currentChallenges()->count();
 
-            //get all esc challenges for this date
-            $challenge = Challenge::escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->whereIn('challenge_status', ['challenger-submitted'])->first();
-        
-            if(!empty($challenge)) {
-                //oppenent added for challenge
-                $challenge->opponent_id = Auth::id();
-                $challenge->challenge_status = 'opponent-submitted';
-                $members = "0 / 0";
+            if($myChallengeCount == 0) {
+
+                //get all esc challenges for this date
+                $challenge = Challenge::escChallenges()->challengeByDateTime($date)->challengesForGame($selectedGame)->gameType('solo')->whereIn('challenge_status', ['challenger-submitted'])->first();
+            
+                if(!empty($challenge)) {
+                    //oppenent added for challenge
+                    $challenge->opponent_id = Auth::id();
+                    $challenge->challenge_status = 'opponent-submitted';
+                    $members = "0 / 0";
+                } else {
+                    //create new challenge for this date
+                    $challenge = new Challenge($request->only(['coins', 'win_coins', 'game_type', 'esc_challenge_template_id']));
+                    $challenge->user_id = Auth::id();
+                    $challenge->game_id = $selectedGame->id;
+                    $challenge->challenge_type = 'esc';
+                    $challenge->challenge_sub_type = 'captain-pick';
+                    $challenge->challenge_status = 'challenger-submitted';
+                    $challenge->esc_date = $date;
+                    $challenge->valid_upto = $date->subMinute(30);
+                    $members = "1 / 2";
+                }
+
+                $challenge->save();
+
+                //update user coin 
+                $userDetails = Auth::user()->userDetails;
+                $userDetails->update(['coins' => ($userDetails->coins - $challenge->coins)]);
+
+                //coin transaction         
+                $coinTransections = new CoinTransections(['source_id' => 7, 'coins' => $challenge->coins, 'transaction_type' => 'Debit', 'challenge_id' => $challenge->id]);
+                Auth::user()->coinTransections()->save($coinTransections);
+
+               
+                 $res = [
+                    'success' => true,
+                    'members' => $members,
+                    'remaining_coin' => $userDetails->coins,
+                    'message' => 'You have created challenge successfully.',
+                ];
+
             } else {
-                //create new challenge for this date
-                $challenge = new Challenge($request->only(['coins', 'win_coins', 'game_type', 'esc_challenge_template_id']));
-                $challenge->user_id = Auth::id();
-                $challenge->game_id = $selectedGame->id;
-                $challenge->challenge_type = 'esc';
-                $challenge->challenge_sub_type = 'captain-pick';
-                $challenge->challenge_status = 'challenger-submitted';
-                $challenge->esc_date = $date;
-                $challenge->valid_upto = $date->subMinute(30);
-                $members = "1 / 2";
+                $res = [
+                    'success' => false,
+                    'message' => 'You can no create challenge at this time.',
+                ];
             }
-
-            $challenge->save();
-
-            //update user coin 
-            $userDetails = Auth::user()->userDetails;
-            $userDetails->update(['coins' => ($userDetails->coins - $challenge->coins)]);
-
-            //coin transaction         
-            $coinTransections = new CoinTransections(['source_id' => 7, 'coins' => $challenge->coins, 'transaction_type' => 'Debit', 'challenge_id' => $challenge->id]);
-            Auth::user()->coinTransections()->save($coinTransections);
-
-           
-             $res = [
-                'success' => true,
-                'members' => $members,
-                'remaining_coin' => $userDetails->coins,
-                'message' => 'You have created challenge successfully.',
-            ];
-
         } else {
             $res = [
-                'success' => false,
-                'message' => 'You can no create challenge at this time.',
-            ];
+                    'success' => false,
+                    'message' => 'You have open challenge at this time.',
+                ];
         }
 
         if ($request->ajax()) {

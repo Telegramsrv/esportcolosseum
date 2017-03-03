@@ -160,6 +160,18 @@ class Challenge extends Model
     public function scopeChallengeStatus($query, $status){
         return $query->where('challenge_status', '=', $status);
     }
+
+    /**
+     * Scope a query to filter a data with challenge status
+     * @param  \Illuminate\Database\Eloquent\Builder    $query  Query object
+     * @param  String                                   $status Challenge Status to filter data with
+     * @return \Illuminate\Database\Eloquent\Builder    $query  Query object
+     */
+    public function scopeOpenValidUpto($query, $date){
+        return $query->where('valid_upto', '>=' , $date->toDateTimeString());
+    }
+
+    
     /**
      * Challenge belongs to only one user who has created it.
      * @return App\User User model who has created challenge.
