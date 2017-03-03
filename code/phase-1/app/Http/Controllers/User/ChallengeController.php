@@ -95,8 +95,6 @@ class ChallengeController extends Controller
                     $html = generateEscChallengeTemplate($escChallangeTemplates, $challenges, $selectedGame, $input);
                 }
             }
-            dd($html);
-            
             return response()->json(['success' => true, 'challenge_html' => $html]);
         } else {
             $escChallangeTemplates = EscChallengeTemplate::all();

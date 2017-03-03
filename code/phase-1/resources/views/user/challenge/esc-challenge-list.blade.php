@@ -69,7 +69,7 @@
                         @php($totalCnt = $escChallangeTemplates->count())
                         @foreach($escChallangeTemplates as $escChallangeTemplate)
                             @php($cnt++)
-                            @include('user.partials.challenge.esc-challenge-template', [$escChallangeTemplate, $cnt, $totalCnt])
+                            @include('user.partials.challenge.esc-challenge-template', ['escChallangeTemplate' => $escChallangeTemplate, 'cnt' => $cnt, 'totalCnt' => $totalCnt])
                         @endforeach
                     </div>
                 </div>
