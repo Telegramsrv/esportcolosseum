@@ -66,9 +66,10 @@
                 <div id="esc-challenge-wrapper">
                     <div class="row" >
                         @php($cnt = 0)
+                        @php($totalCnt = $escChallangeTemplates->count())
                         @foreach($escChallangeTemplates as $escChallangeTemplate)
                             @php($cnt++)
-                            @include('user.partials.challenge.esc-challenge-template', [$escChallangeTemplate, $cnt])
+                            @include('user.partials.challenge.esc-challenge-template', [$escChallangeTemplate, $cnt, $totalCnt])
                         @endforeach
                     </div>
                 </div>
