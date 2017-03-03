@@ -33,7 +33,6 @@ class PassDataToLayoutsProvider extends ServiceProvider
         
         view()->composer(['layouts.user.partials.notifications'], function($view)
         {
-        	// $notifications = Notification::where('user_id', Auth::id())->get();
             $notifications = Auth::user()->notifications()->orderBy('id', 'desc')->get();
         	$view->with(['notifications' => $notifications]);
         });
