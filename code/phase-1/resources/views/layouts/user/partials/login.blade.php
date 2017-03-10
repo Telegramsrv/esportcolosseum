@@ -17,8 +17,8 @@
 	    		</div>
 	    		<div class="row">
 	    			<a id="loginSubmit" class="waves-effect waves-light btn-large btn-full deep-orange darken-4">Login</a>
-	    			<div class="progress">
-	                	<div class="indeterminate"></div>
+	    			<div class="progress deep-orange lighten-5">
+	                	<div class="indeterminate deep-orange darken-4"></div>
 	                </div>
 				                
 	    		</div>

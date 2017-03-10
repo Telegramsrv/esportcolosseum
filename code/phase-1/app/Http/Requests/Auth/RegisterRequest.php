@@ -28,8 +28,7 @@ class RegisterRequest extends FormRequest
             'last_name' => 'required|max:255',
             'gamer_name' => 'required|max:255|unique:user_details,gamer_name',
             'email' => 'required|email|max:255|unique:users,email', 
-        	'password' => 'required|min:6|confirmed|max:255',
-            'CaptchaCode' => 'required|valid_captcha'
+        	'password' => 'required|min:6|confirmed|max:255'
         ];
     }
 
@@ -37,8 +36,12 @@ class RegisterRequest extends FormRequest
     {
         return [
             'password.confirmed' => 'Confirm Password does not match',
-            'CaptchaCode.required' => 'Captcha field is required.',
-            'CaptchaCode.valid_captcha' => 'Captcha field is invalid.',
+            'password.required' => 'Please enter your Password.',
+            'first_name.required' => 'First Name is required.',
+            'last_name.required' => 'Last Name is required.',
+            'gamer_name.required' => 'Please enter your Gamer Name.',
+            'email.required' => 'Please enter your Email.',
+            'email.email' => 'Please enter a valid Email.'
         ];
     }
 }

@@ -33,6 +33,9 @@ class LoginRequest extends FormRequest
     {
     	return [
     		'email.exists' => 'Email does not exists.',
+            'email.required' => 'Please enter your Email.',
+            'email.email' => 'Please enter a valid Email.',
+            'password.required' => 'Please enter your Password.'
     	];
     }
 }

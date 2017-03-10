@@ -17,7 +17,7 @@
   		<link href="{!! asset('user/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet" />
   		<link href="{!! asset('user/css/style.css') !!}" type="text/css" rel="stylesheet" media="screen,projection" />
   		<link href="{!! asset('user/css/esportcolosseum.css') !!}" type="text/css" rel="stylesheet" />
-	
+	    <script src='https://www.google.com/recaptcha/api.js'></script>
 	    <!-- Scripts -->
 	    <script>
 	        window.Laravel = <?php echo json_encode([

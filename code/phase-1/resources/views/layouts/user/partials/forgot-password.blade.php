@@ -15,6 +15,7 @@
 	                	<div class="indeterminate"></div>
 	                </div>
         		</div>
+        		<div class="row success-message"></div>
 			</div>
 		</div>
 		<div class="modal-footer black">

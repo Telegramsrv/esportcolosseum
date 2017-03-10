@@ -1,4 +1,12 @@
 $(document).ready(function(){
+
+    $(".nav-bar").width($("body").width());
+    $(".input-field input").on("focusout",function(){ 
+        $(this).parent().find( "label" ).attr("data-error","");; 
+    });
+
+
+
     var teams = [];
 
     if($("select.no-material-select").length == 0){
@@ -48,8 +56,12 @@ $(document).ready(function(){
     $(".forgot-password-btn").on("click", function(data){
     	$('#signUpModal').closeModal();
         $('#loginModal').closeModal();
+        $("#forgotPasswordModal .modal-form-container .row").show();
+        $("#forgotPasswordModal .modal-form-container .success-message").hide();
         $('#forgotPasswordModal').openModal();	
         $('#forgotPasswordForm')[0].reset();
+        $("#retrievePasswordSubmit").off("click");
+        $("#retrievePasswordSubmit").on("click",function(){ retrievePasswordSubmit(); });
     });
 
 	$("#loginSubmit").click(function(){
@@ -631,10 +643,13 @@ var retrievePasswordSubmit = function () {
         success:function(data){
         	if(data.success == true){
         		if(data.intended != undefined && data.intended != ""){
-        			Materialize.toast(data.message, 4000,'',function(){
-        				$("#forgotPasswordForm #retrievePasswordSubmit").html("Redirecting...");
-        				window.location = data.intended;
-        			});
+        			hideLoader(forgotPasswordForm, 'retrievePasswordSubmit');
+        			$("#forgotPasswordForm #retrievePasswordSubmit").html("Retrieve Password");
+                    $("#forgotPasswordForm .modal-form-container .row").hide();
+                    $("#forgotPasswordForm .modal-form-container .success-message").html(data.message);
+                    $("#forgotPasswordForm .modal-form-container .success-message").fadeIn(300);
+        			//window.location = data.intended;
+
 	            }
         	}
         },

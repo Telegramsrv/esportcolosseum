@@ -6,7 +6,7 @@
 	@php($colCounter = 0)
 	<div class="row">			
 	@foreach ($blogs as $blog)
-        <div class="col s12 m3">
+        <div class="blog-box col s12 m3">
             <div class="card hoverable">
               	<div class="card-image waves-effect waves-block waves-light">
               		<a href="{!! route('blog-detail', ['blogSlug' => $blog->slug])!!}">
@@ -23,7 +23,7 @@
 	                <span class="card-title white-text text-darken-4">
 	                	Blog Title<i class="material-icons right">close</i>
 	                </span>
-                	<p class="grey-text">{!! str_limit($blog->description, 200) !!}</p>
+                	<div class="grey-text asd">{!! str_limit($blog->description, 140) !!} <a href="{!! route('blog-detail', ['blogSlug' => $blog->slug])!!}" target="_blank">Read more</a></div>
               	</div>
             </div>
         </div>

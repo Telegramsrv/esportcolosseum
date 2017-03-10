@@ -182,6 +182,7 @@ nav.nav-bar {
     background: rgba(0, 0, 0, .2);
 }
 
+
 .sidebar-title {
     color: #fff;
     text-align: center;
@@ -494,7 +495,7 @@ div.modal-form-container {
 }
 
 #signUpModal {
-    min-height: 520px !important;
+    min-height: 640px !important;
 }
 
 .footer-main-content {
@@ -1093,4 +1094,29 @@ div#no-team-selected {
 #editTeamNameModal .autocomplete-content{
 	    position: absolute;
     width: 100%;
+}
+.g-recaptcha div:first-child{
+    margin:0 auto;
+}
+.active-game .image-container img{
+    border-right: #f15c2f solid 5px !important;
+}
+.image-container:hover img{
+    border-right: #f15c2f solid 5px !important;
+}
+.input-field label:after{
+    top: 50px !important;
+}
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+    height: 2.3rem !important;
+    margin: 0 0 30px 0 !important;
+}
+body{
+    position: relative;
+}
+.row.success-message {
+    color: #d84c21;
+    text-align: center;
+    margin-top: 115px;
+    display: none;
 }
